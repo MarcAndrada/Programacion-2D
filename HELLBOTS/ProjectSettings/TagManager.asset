@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Bullet
   - Powerup
+  - Hellbot
   layers:
   - Default
   - TransparentFX
