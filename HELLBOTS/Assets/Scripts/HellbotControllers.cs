@@ -7,9 +7,13 @@ public class HellbotControllers : MonoBehaviour
     public BoxCollider2D Crouchbc2D;
     public BoxCollider2D Normalbc2D;
 
+    private float horizontal;
+    private bool jump;
+    private bool crouch_keyD;
+    private bool crouch_keyU;
 
-    public float runSpeed = 300f;
-    public float crouchSpeed = 150f;
+    public float runSpeed;
+
     bool crouch;
     private Rigidbody2D rb2d;
 
@@ -20,6 +24,7 @@ public class HellbotControllers : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         rb2d = GetComponent<Rigidbody2D>();
         jumpDone = 0;
         Crouchbc2D.enabled = false;
@@ -28,23 +33,31 @@ public class HellbotControllers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        horizontal = HellbotInput.Horizontal;
+        jump = HellbotInput.Jump;
+        crouch_keyD = HellbotInput.CrouchDown;
+        crouch_keyU = HellbotInput.CrouchUp;
+
         //Salto
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (jump) {
             if (jumpDone < jumpLimit) {
                 GetComponent<Rigidbody2D>().AddForce(jumpHeight, ForceMode2D.Impulse);
                 jumpDone++;
             }
         }
         //Crouch (Si presiono "S", el collider grande se desactiva)
-        if (Input.GetKeyDown(KeyCode.S))
-        {
+        if (crouch_keyD){
             Normalbc2D.enabled = false;
             Crouchbc2D.enabled = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.S))
-        {
+            transform.localScale = new Vector3(1, 0.5f, 1);
+            runSpeed -= 100;
+            jumpHeight -= new Vector2 (0,200);
+        }else if (crouch_keyU){
             Normalbc2D.enabled = true;
             Crouchbc2D.enabled = false;
+            transform.localScale = new Vector3(1, 1, 1);
+            runSpeed += 100;
+            jumpHeight += new Vector2(0, 200);
         }
 
 
@@ -58,11 +71,11 @@ public class HellbotControllers : MonoBehaviour
     void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
-        rb2d.AddForce(Vector2.right * runSpeed * h);
+        rb2d.AddForce(Vector2.right * runSpeed * horizontal);
     }
     void OnCollisionEnter2D(Collision2D obj)//Detectar si toca el suelo para reiniciar la cantidad de saltos
     {
-        if (obj.collider.tag == "Wall_Down")
+        if (obj.collider.tag == "Wall")
         {
             jumpDone = 0;
         }

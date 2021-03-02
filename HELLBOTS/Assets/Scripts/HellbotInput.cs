@@ -9,7 +9,7 @@ public class HellbotInput : MonoBehaviour
     }
     /* Para llamarlo simplemente es crear una variable e igualarlo al valor que devuelven las funciones
      *  private float vertical;
-     *  vertical = HellbotInput.Vertical;
+     *  vertical = HellbotInput.Vertical;(esto en el update)
      *  y cuando se quiera usar la variable se utilizara solo "veritcal"
      */
     public static float Horizontal
@@ -18,9 +18,14 @@ public class HellbotInput : MonoBehaviour
     }
 
 
-    public static bool Crouch
+    public static bool CrouchDown
     {
-        get { return Input.GetKey(KeyCode.S); }
+        get { return Input.GetKeyDown(KeyCode.S); }
+    }
+
+    public static bool CrouchUp
+    {
+        get { return Input.GetKeyUp(KeyCode.S); }
     }
     /*Aqui seria igual que en el de vertical solo que la variable ha de ser un booleano
      *  private bool crouch
@@ -38,7 +43,7 @@ public class HellbotInput : MonoBehaviour
 
     public static bool Jump
     {
-        get { return Input.GetKey(KeyCode.Space); }
+        get { return Input.GetKeyDown(KeyCode.Space); }
     }
 
     public static bool Melee

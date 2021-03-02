@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7970538820352166562}
   - component: {fileID: 2624178479379863822}
   - component: {fileID: 3775250912825324228}
-  - component: {fileID: 7527997869038366434}
+  - component: {fileID: -1910184506857546024}
   m_Layer: 0
   m_Name: PlayerApuntado
   m_TagString: Hellbot
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c9d6d8a77a1eb459db79277c1c9e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7527997869038366434
+--- !u!114 &-1910184506857546024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
