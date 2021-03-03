@@ -19,7 +19,7 @@ public class HellbotControllers : MonoBehaviour
 
     public Vector2 jumpHeight;
     private int jumpLimit = 2;
-    private int jumpDone;
+    public int jumpDone;
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +70,7 @@ public class HellbotControllers : MonoBehaviour
     }
     void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
+        //rb2d.velocity = new Vector2(horizontal * runSpeed, 0 );
         rb2d.AddForce(Vector2.right * runSpeed * horizontal);
     }
     void OnCollisionEnter2D(Collision2D obj)//Detectar si toca el suelo para reiniciar la cantidad de saltos
