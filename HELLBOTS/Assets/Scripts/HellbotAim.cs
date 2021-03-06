@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HellbotController : MonoBehaviour
+public class HellbotAim : MonoBehaviour
 {
     public GameObject Crosshair;
     private Vector3 mouse_pos;
     public Transform Weapon;
     private float angle;
-    
-   
+
+
     void Start()
     {
-    
+
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Cursor.visible = false;
         Crosshair.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));

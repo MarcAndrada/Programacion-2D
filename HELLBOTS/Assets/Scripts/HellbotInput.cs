@@ -14,7 +14,7 @@ public class HellbotInput : MonoBehaviour
      */
     public static float Horizontal
     {
-        get { return Input.GetAxis("Horizontal"); }
+        get { return Input.GetAxisRaw("Horizontal"); }
     }
 
 

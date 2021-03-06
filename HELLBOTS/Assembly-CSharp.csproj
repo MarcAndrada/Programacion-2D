@@ -63,9 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\HellbotController.cs" />
+    <Compile Include="Assets\Scripts\HellbotAim.cs" />
     <Compile Include="Assets\Scripts\HellbotControllers.cs" />
     <Compile Include="Assets\Scripts\HellbotInput.cs" />
+    <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Unity/2019.4.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

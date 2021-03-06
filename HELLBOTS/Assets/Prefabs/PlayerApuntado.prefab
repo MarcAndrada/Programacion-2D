@@ -44,6 +44,9 @@ GameObject:
   - component: {fileID: 8640532656698675032}
   - component: {fileID: 8640532656698675033}
   - component: {fileID: 8640532656698675034}
+  - component: {fileID: 2416785483733917711}
+  - component: {fileID: 4033986520686868203}
+  - component: {fileID: 1331561450345061789}
   m_Layer: 0
   m_Name: PlayerApuntado
   m_TagString: Hellbot
@@ -131,12 +134,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 9.8
+  m_GravityScale: 100
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &8640532656698675033
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -175,6 +178,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c9d6d8a77a1eb459db79277c1c9e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2416785483733917711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8640532656698675108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7a838ac2bfd2c458990290a25fe725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Crosshair: {fileID: 0}
+  Weapon: {fileID: 5666888527280490555}
+--- !u!114 &4033986520686868203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8640532656698675108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43da1bf69461f3642afb552607490a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Crouchbc2D: {fileID: 1331561450345061789}
+  Normalbc2D: {fileID: 8640532656698675033}
+  runSpeed: 1500
+  jumpHeight: {x: 0, y: 550}
+  jumpDone: 0
+--- !u!61 &1331561450345061789
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8640532656698675108}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 100, y: 100}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 100, y: 50}
+  m_EdgeRadius: 0
 --- !u!1001 &3674396377141294221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190,12 +250,12 @@ PrefabInstance:
     - target: {fileID: 614887083791380952, guid: 40717798414bb9a41ab0e93d0bcf5050,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 54.6
       objectReference: {fileID: 0}
     - target: {fileID: 614887083791380952, guid: 40717798414bb9a41ab0e93d0bcf5050,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 614887083791380952, guid: 40717798414bb9a41ab0e93d0bcf5050,
         type: 3}
@@ -247,7 +307,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArmaDisparo
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4540247315587939838, guid: 40717798414bb9a41ab0e93d0bcf5050, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 40717798414bb9a41ab0e93d0bcf5050, type: 3}
 --- !u!4 &4212713393651533141 stripped
 Transform:

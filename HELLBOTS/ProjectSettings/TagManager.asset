@@ -10,7 +10,8 @@ TagManager:
   - Bullet
   - Powerup
   - Hellbot
-  - SideWall
+  - Roof
+  - Floor
   layers:
   - Default
   - TransparentFX
