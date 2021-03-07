@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\HellbotControllers.cs" />
     <Compile Include="Assets\Scripts\HellbotInput.cs" />
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
+    <Compile Include="Assets\Scripts\suicideController.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Unity/2019.4.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
