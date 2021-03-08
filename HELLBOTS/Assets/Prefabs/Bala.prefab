@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5602544962098241155}
   - component: {fileID: 8149298221199093083}
   - component: {fileID: 7467209333585555490}
+  - component: {fileID: -1245882829605717738}
   m_Layer: 0
   m_Name: Bala
   m_TagString: Bullet
@@ -108,3 +109,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 100, y: 100}
   m_EdgeRadius: 0
+--- !u!114 &-1245882829605717738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387866381433273619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d37c188e7968b42a27b652654c73a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  balaSpeed: 3
