@@ -13,6 +13,8 @@ TagManager:
   - Roof
   - Floor
   - WallFloor
+  - Enemybullet
+  - Playerbullet
   layers:
   - Default
   - TransparentFX

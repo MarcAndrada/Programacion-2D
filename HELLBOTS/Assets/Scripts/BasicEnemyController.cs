@@ -93,4 +93,11 @@ public class BasicEnemyController : MonoBehaviour
             nextFire = Time.time + fireRate;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Playerbullet")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
