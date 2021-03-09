@@ -95,7 +95,7 @@ public class HellbotControllers : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemybullet"))
         {
-          //  Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
