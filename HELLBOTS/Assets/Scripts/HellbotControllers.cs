@@ -83,7 +83,14 @@ public class HellbotControllers : MonoBehaviour
             runSpeed = 1500;
         }
 
-        
+        if (obj.collider.tag == "WallFloor")
+        {
+            jumpDone = 0;
+            rb2d.drag = 3;
+            runSpeed = 1500;
+        }
+
+
     }
 
 

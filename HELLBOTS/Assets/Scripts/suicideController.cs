@@ -92,6 +92,18 @@ public class suicideController : MonoBehaviour
             }
         }
 
+        if (collision.gameObject.tag == "WallFloor")
+        {
+            if (suicideDirection == Direction.RIGHT)
+            {
+                suicideDirection = Direction.LEFT;
+            }
+            else if (suicideDirection == Direction.LEFT)
+            {
+                suicideDirection = Direction.RIGHT;
+            }
+        }
+
         if (collision.gameObject.tag == "Hellbot")
         {
             collision.gameObject.SetActive(false);

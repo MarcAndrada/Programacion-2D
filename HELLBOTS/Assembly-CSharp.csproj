@@ -63,6 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ActivateBasic.cs" />
+    <Compile Include="Assets\Scripts\ActivateSniper.cs" />
+    <Compile Include="Assets\Scripts\ActivateSuicide.cs" />
     <Compile Include="Assets\Scripts\BasicEnemyController.cs" />
     <Compile Include="Assets\Scripts\BasicWeapon.cs" />
     <Compile Include="Assets\Scripts\Fire.cs" />

@@ -12,6 +12,7 @@ TagManager:
   - Hellbot
   - Roof
   - Floor
+  - WallFloor
   layers:
   - Default
   - TransparentFX
