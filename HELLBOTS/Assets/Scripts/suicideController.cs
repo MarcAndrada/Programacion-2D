@@ -77,10 +77,12 @@ public class suicideController : MonoBehaviour
             transform.localScale = new Vector3(3,3,1);
             Explosion = true;
         }
+
         if (collision.gameObject.tag == "Playerbullet")
         {
             Destroy(gameObject);
         }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -112,6 +114,7 @@ public class suicideController : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
         }
+
         
     }
 }

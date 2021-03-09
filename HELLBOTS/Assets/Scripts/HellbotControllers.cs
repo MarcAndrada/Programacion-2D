@@ -6,24 +6,23 @@ public class HellbotControllers : MonoBehaviour
 {
     public BoxCollider2D Crouchbc2D;
     public BoxCollider2D Normalbc2D;
+    public Vector2 jumpHeight;
+    public float runSpeed;
+    public int jumpDone;
+
 
     private float horizontal;
     private bool jump;
     private bool crouch_keyD;
     private bool crouch_keyU;
-
-    public float runSpeed;
-
     private Rigidbody2D rb2d;
-
-    public Vector2 jumpHeight;
     private int jumpLimit = 2;
-    public int jumpDone;
+    private float MaxSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        MaxSpeed = runSpeed;
         rb2d = GetComponent<Rigidbody2D>();
         jumpDone = 0;
         Crouchbc2D.enabled = false;
@@ -80,14 +79,14 @@ public class HellbotControllers : MonoBehaviour
         {
             jumpDone = 0;
             rb2d.drag = 3;
-            runSpeed = 1500;
+            runSpeed = MaxSpeed;
         }
 
         if (obj.collider.tag == "WallFloor")
         {
             jumpDone = 0;
             rb2d.drag = 3;
-            runSpeed = 1500;
+            runSpeed = MaxSpeed;
         }
 
 
@@ -96,7 +95,7 @@ public class HellbotControllers : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemybullet"))
         {
-            Destroy(gameObject);
+          //  Destroy(gameObject);
         }
     }
 

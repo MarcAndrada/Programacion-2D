@@ -797,12 +797,12 @@ PrefabInstance:
     - target: {fileID: 4334518330271302779, guid: 88b1846d7411b2641bc6e8af951e24f5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1126
+      value: 687
       objectReference: {fileID: 0}
     - target: {fileID: 4334518330271302779, guid: 88b1846d7411b2641bc6e8af951e24f5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -415
+      value: -394
       objectReference: {fileID: 0}
     - target: {fileID: 4334518330271302779, guid: 88b1846d7411b2641bc6e8af951e24f5,
         type: 3}
@@ -1006,11 +1006,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 772162759, guid: d15e093310a7686428496b5de075a32b, type: 3}
+      propertyPath: Bala2
+      value: 
+      objectReference: {fileID: 5084893603349003110, guid: 13be691b2564a2a4d9bff3e6a6405c80,
+        type: 3}
+    - target: {fileID: 772162759, guid: d15e093310a7686428496b5de075a32b, type: 3}
+      propertyPath: Bala2Speed
+      value: 210000
+      objectReference: {fileID: 0}
     - target: {fileID: 2416785483733917711, guid: d15e093310a7686428496b5de075a32b,
         type: 3}
       propertyPath: Crosshair
       value: 
       objectReference: {fileID: 287713421}
+    - target: {fileID: 4033986520686868203, guid: d15e093310a7686428496b5de075a32b,
+        type: 3}
+      propertyPath: runSpeed
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 8640532655919419433, guid: d15e093310a7686428496b5de075a32b,
         type: 3}
       propertyPath: m_LocalPosition.x

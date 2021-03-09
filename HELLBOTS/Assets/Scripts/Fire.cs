@@ -6,7 +6,7 @@ public class Fire : MonoBehaviour
 {
     public Rigidbody2D Bala2;
     public Transform Barrel;
-    private float Bala2Speed = 500000f;
+    public float Bala2Speed = 500000f;
 
     private float fireRate = 1f;
     private float nextFire = 0f;

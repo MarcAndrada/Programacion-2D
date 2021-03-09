@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bala2: {fileID: 5084893603349003110, guid: 13be691b2564a2a4d9bff3e6a6405c80, type: 3}
   Barrel: {fileID: 4212713393651533141}
+  Bala2Speed: 210000
 --- !u!1 &8640532656698675108
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,8 +223,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Crouchbc2D: {fileID: 1331561450345061789}
   Normalbc2D: {fileID: 8640532656698675033}
-  runSpeed: 1500
   jumpHeight: {x: 0, y: 550}
+  runSpeed: 3000
   jumpDone: 0
 --- !u!61 &1331561450345061789
 BoxCollider2D:
