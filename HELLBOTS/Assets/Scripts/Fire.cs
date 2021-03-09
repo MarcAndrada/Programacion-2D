@@ -10,11 +10,14 @@ public class Fire : MonoBehaviour
 
     private float fireRate = 1f;
     private float nextFire = 0f;
+    private bool shoot;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
+        shoot = HellbotInput.Shoot;
+
+        if (shoot && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             var spawnedBala2 = Instantiate(Bala2, Barrel.position, Barrel.rotation);
