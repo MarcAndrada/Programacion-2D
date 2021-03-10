@@ -63,4 +63,9 @@ public class HellbotInput : MonoBehaviour
         get { return Input.GetKey(KeyCode.F); }
     }
 
+    public static bool GodMode
+    {
+        get { return Input.GetKey(KeyCode.V);  }
+    }
+
 }
