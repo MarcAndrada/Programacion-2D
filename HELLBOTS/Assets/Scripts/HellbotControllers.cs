@@ -8,7 +8,7 @@ public class HellbotControllers : MonoBehaviour
     public BoxCollider2D Normalbc2D;
     public Vector2 jumpHeight;
     public float runSpeed;
-    public int jumpDone;
+    private int jumpDone;
 
 
     private float horizontal;
@@ -42,8 +42,14 @@ public class HellbotControllers : MonoBehaviour
             rb2d.drag = 0f;
             if (jumpDone < jumpLimit)
             {
-                rb2d.AddForce(jumpHeight, ForceMode2D.Impulse);
+                if (jumpDone >= 1)
+                {
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                }
+                
+                rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
                 jumpDone++;
+                
                 runSpeed = 200;
             }
         }
@@ -73,16 +79,16 @@ public class HellbotControllers : MonoBehaviour
         rb2d.AddForce(Vector2.right * runSpeed * horizontal);
 
     }
-    void OnCollisionEnter2D(Collision2D obj)//Detectar si toca el suelo para reiniciar la cantidad de saltos
+    void OnCollisionEnter2D(Collision2D collision)//Detectar si toca el suelo para reiniciar la cantidad de saltos
     {
-        if (obj.collider.tag == "Floor")
+        if (collision.collider.tag == "Floor")
         {
             jumpDone = 0;
             rb2d.drag = 3;
             runSpeed = MaxSpeed;
         }
 
-        if (obj.collider.tag == "WallFloor")
+        if (collision.collider.tag == "WallFloor")
         {
             jumpDone = 0;
             rb2d.drag = 3;
@@ -95,7 +101,8 @@ public class HellbotControllers : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemybullet"))
         {
-            Destroy(gameObject);
+            
+            Destroy(collision.gameObject);
         }
     }
 

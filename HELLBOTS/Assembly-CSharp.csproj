@@ -624,8 +624,14 @@
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/Git/HELLBOTS/HELLBOTS/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.IK.Editor">
+      <HintPath>F:/Git/HELLBOTS/HELLBOTS/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Path.Editor">
       <HintPath>F:/Git/HELLBOTS/HELLBOTS/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.IK.Runtime">
+      <HintPath>F:/Git/HELLBOTS/HELLBOTS/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>F:/Git/HELLBOTS/HELLBOTS/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
