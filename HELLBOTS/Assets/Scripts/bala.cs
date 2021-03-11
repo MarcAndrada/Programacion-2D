@@ -25,9 +25,9 @@ public class bala : MonoBehaviour
         }
     }
 
-    void OntriggerEnter2D(Collider2D other)
+    void OntriggerEnter2D(Collider2D collider)
     {
-        if (other.CompareTag("Hellbot"))
+        if (collider.CompareTag("Hellbot"))
         {
             DestroyBala();
         }

@@ -38,7 +38,7 @@ public class HellbotInput : MonoBehaviour
 
     public static bool Heal
     {
-        get { return Input.GetKey(KeyCode.Q); }
+        get { return Input.GetKeyDown(KeyCode.Q); }
     }
 
     public static bool Jump
@@ -66,6 +66,11 @@ public class HellbotInput : MonoBehaviour
     public static bool GodMode
     {
         get { return Input.GetKey(KeyCode.V);  }
+    }
+
+    public static bool Restart
+    {
+        get { return Input.GetKey(KeyCode.R); }
     }
 
 }

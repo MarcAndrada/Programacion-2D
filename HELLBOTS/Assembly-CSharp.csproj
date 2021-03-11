@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\HellbotAim.cs" />
     <Compile Include="Assets\Scripts\HellbotControllers.cs" />
     <Compile Include="Assets\Scripts\HellbotInput.cs" />
+    <Compile Include="Assets\Scripts\HellbotRestart.cs" />
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\Sniper_Controller.cs" />
     <Compile Include="Assets\Scripts\WeaponPickUp.cs" />
