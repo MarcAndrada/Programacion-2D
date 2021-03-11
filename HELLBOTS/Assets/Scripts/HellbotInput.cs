@@ -5,7 +5,7 @@ using UnityEngine;
 public class HellbotInput : MonoBehaviour
 {
     public static float Vertical{
-        get { return Input.GetAxis("Vertical"); }
+        get { return Input.GetAxisRaw("Vertical"); }
     }
     /* Para llamarlo simplemente es crear una variable e igualarlo al valor que devuelven las funciones
      *  private float vertical;
@@ -65,7 +65,7 @@ public class HellbotInput : MonoBehaviour
 
     public static bool GodMode
     {
-        get { return Input.GetKey(KeyCode.V);  }
+        get { return Input.GetKeyDown(KeyCode.V);  }
     }
 
     public static bool Restart

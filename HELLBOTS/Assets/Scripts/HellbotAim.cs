@@ -58,7 +58,7 @@ public class HellbotAim : MonoBehaviour
     void FixedUpdate()
     {
         Cursor.visible = false;
-        Crosshair.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+        Crosshair.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5));
 
         Arm.position = Crosshair.transform.position;
 
