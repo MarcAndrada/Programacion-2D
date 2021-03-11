@@ -38,4 +38,23 @@ public class bala_Controll : MonoBehaviour
         Destroy(gameObject);
     }
 
+    void OnCollisionEnter2D (Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "Floor")
+        {
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "WallFloor")
+        {
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "Roof")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
