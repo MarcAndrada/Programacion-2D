@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HellbotControllers : MonoBehaviour
 {
@@ -8,17 +10,25 @@ public class HellbotControllers : MonoBehaviour
     public BoxCollider2D Normalbc2D;
     public Vector2 jumpHeight;
     public float runSpeed;
+    public GameObject Heart1, Heart2, Heart3;
+    public GameObject EmptyHeart1, EmptyHeart2, EmptyHeart3;
+    public int HP = 3;
+
+
     private int jumpDone;
-
-
-    private float horizontal;
-    private bool jump;
-    private bool crouch_keyD;
-    private bool crouch_keyU;
     private Rigidbody2D rb2d;
     private int jumpLimit = 2;
     private float MaxSpeed;
+    private Vector3 StarterPos;
+    private SpriteRenderer sprite;
+    private HellbotControllers Controlls;
+    private HellbotAim Aim;
 
+    private bool jump;
+    private bool crouch_keyD;
+    private bool crouch_keyU;
+    private float horizontal;
+    private bool heal;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +36,9 @@ public class HellbotControllers : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         jumpDone = 0;
         Crouchbc2D.enabled = false;
+        sprite = GetComponent<SpriteRenderer>();
+        Controlls = GetComponent<HellbotControllers>();
+        Aim = GetComponent<HellbotAim>();
     }
 
     // Update is called once per frame
@@ -35,6 +48,9 @@ public class HellbotControllers : MonoBehaviour
         jump = HellbotInput.Jump;
         crouch_keyD = HellbotInput.CrouchDown;
         crouch_keyU = HellbotInput.CrouchUp;
+        heal = HellbotInput.Heal;
+
+        
 
         //Salto
         if (jump)
@@ -71,6 +87,62 @@ public class HellbotControllers : MonoBehaviour
             jumpHeight += new Vector2(0, 200);
         }
 
+        if (HP == 3)
+        {
+            Heart3.SetActive(true);
+            EmptyHeart3.SetActive(false);
+            Heart2.SetActive(true);
+            EmptyHeart2.SetActive(false);
+            Heart1.SetActive(true);
+            EmptyHeart1.SetActive(false);
+        }
+        else if (HP == 2){
+            Heart3.SetActive(false);
+            EmptyHeart3.SetActive(true);
+            Heart2.SetActive(true);
+            EmptyHeart2.SetActive(false);
+            Heart1.SetActive(true);
+            EmptyHeart1.SetActive(false);
+        }
+        else if (HP == 1){
+            Heart3.SetActive(false);
+            EmptyHeart3.SetActive(true);
+            Heart2.SetActive(false);
+            EmptyHeart2.SetActive(true);
+            Heart1.SetActive(true);
+            EmptyHeart1.SetActive(false);
+        }
+        else if (HP == 0){
+            Heart3.SetActive(false);
+            EmptyHeart3.SetActive(true);
+            Heart2.SetActive(false);
+            EmptyHeart2.SetActive(true);
+            Heart1.SetActive(false);
+            EmptyHeart1.SetActive(true);
+        }
+
+        if (heal && Aim.Heal()){
+            Aim.ResetWeapon();
+            if (HP < 3)
+            {
+                HP++;
+            }
+            
+        }
+
+        if (HP <= 0) {
+            //Hacer Animacion de muerte o para empezar SetActive(False)
+            Aim.Dead();
+            sprite.enabled = false;
+            Controlls.enabled = false;
+            Aim.enabled = false;
+        }else{
+            sprite.enabled = true;
+            Controlls.enabled = true;
+            Aim.enabled = true;
+        }
+
+
 
     }
     void FixedUpdate()
@@ -101,9 +173,11 @@ public class HellbotControllers : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemybullet"))
         {
-            
+            PlayerHit();
             Destroy(collision.gameObject);
         }
     }
+
+    public void PlayerHit(){  HP--; }
 
 }
