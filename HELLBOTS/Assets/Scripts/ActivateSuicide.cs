@@ -5,13 +5,11 @@ using UnityEngine;
 public class ActivateSuicide : MonoBehaviour
 {
    
-    private SpriteRenderer sprite;
     private suicideController Controller;
     // Start is called before the first frame update
     void Start()
     {
-        sprite = GetComponent<SpriteRenderer>();
-        sprite.enabled = false;
+
         Controller = GetComponent<suicideController>();
         Controller.enabled = false;
     }
@@ -21,9 +19,8 @@ public class ActivateSuicide : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "MainCamera")
+        if (collision.gameObject.tag == "Activator")
         {
-            sprite.enabled = true;
             Controller.enabled = true;
         }
     }

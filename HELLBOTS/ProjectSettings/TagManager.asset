@@ -15,6 +15,9 @@ TagManager:
   - WallFloor
   - Enemybullet
   - Playerbullet
+  - Crosshair
+  - Explosion
+  - Activator
   layers:
   - Default
   - TransparentFX

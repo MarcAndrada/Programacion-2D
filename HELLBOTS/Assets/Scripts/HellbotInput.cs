@@ -46,9 +46,9 @@ public class HellbotInput : MonoBehaviour
         get { return Input.GetKeyDown(KeyCode.Space); }
     }
 
-    public static bool Melee
+    public static bool Granade
     {
-        get { return Input.GetMouseButton(1); }
+        get { return Input.GetKeyDown(KeyCode.G); }
         //esto es el click izquierdo
     }
 

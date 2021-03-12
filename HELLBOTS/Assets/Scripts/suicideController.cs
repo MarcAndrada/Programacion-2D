@@ -110,10 +110,7 @@ public class suicideController : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.tag == "Hellbot")
-        {
-            collision.gameObject.SetActive(false);
-        }
+        
 
         
     }

@@ -11,6 +11,8 @@ public class HellbotControllers : MonoBehaviour
     public BoxCollider2D Normalbc2D;
     public GameObject Heart1, Heart2, Heart3;
     public GameObject EmptyHeart1, EmptyHeart2, EmptyHeart3;
+    public GameObject granadePrefab;
+    public Transform GranadeLaunch;
     private SpriteRenderer sprite;
     private HellbotControllers Controlls;
     private HellbotAim Aim;
@@ -28,6 +30,8 @@ public class HellbotControllers : MonoBehaviour
     private int jumpLimit = 2;
     private float MaxSpeed;  
     private float NormalG;
+    private float WaitedTimeG;
+    private float AnimDurationG = 350;
 
     private bool godmode;
     private bool jump;
@@ -36,13 +40,15 @@ public class HellbotControllers : MonoBehaviour
     private float horizontal;
     private float vertical;
     private bool heal;
+    private bool granade;
+    private bool throwGranade;
 
-   private enum DirectionV { NONE, UP, DOWN };
-   private enum DirectionH { NONE, LEFT, RIGHT }
-   private DirectionV GodDirectionV = DirectionV.NONE;
-   private DirectionH GodDirectionH = DirectionH.NONE;
-   private float speedV = 30;
-   private float speedH = 500;
+    private enum DirectionV { NONE, UP, DOWN };
+    private enum DirectionH { NONE, LEFT, RIGHT }
+    private DirectionV GodDirectionV = DirectionV.NONE;
+    private DirectionH GodDirectionH = DirectionH.NONE;
+    private float speedV = 30;
+    private float speedH = 500;
     private float currentSpeedV;
     private float currentSpeedH;
 
@@ -74,7 +80,9 @@ public class HellbotControllers : MonoBehaviour
         crouch_keyU = HellbotInput.CrouchUp;
         heal = HellbotInput.Heal;
         godmode = HellbotInput.GodMode;
+        granade = HellbotInput.Granade;
 
+        float delta = Time.deltaTime * 1000;
 
         if (godmode && !GodModeOn)
         {
@@ -126,6 +134,12 @@ public class HellbotControllers : MonoBehaviour
                 transform.localScale = new Vector3(1, 1, 1);
                 runSpeed += 100;
                 jumpHeight += new Vector2(0, 200);
+            }
+
+            if (granade)
+            {
+                throwGranade = true;
+                animator.SetTrigger("GThrow");
             }
 
             if (HP == 3)
@@ -188,6 +202,20 @@ public class HellbotControllers : MonoBehaviour
                 sprite.enabled = true;
                 Controlls.enabled = true;
                 Aim.enabled = true;
+            }
+
+           
+            if (throwGranade)
+            {
+                WaitedTimeG += delta;
+                
+
+                if (WaitedTimeG >= AnimDurationG)
+                {
+                    Instantiate(granadePrefab, GranadeLaunch.position, transform.rotation);
+                    WaitedTimeG = 0;
+                    throwGranade = false;
+                }
             }
 
         }
@@ -286,6 +314,10 @@ public class HellbotControllers : MonoBehaviour
             runSpeed = MaxSpeed;
         }
 
+        if (collision.gameObject.tag == "Enemy")
+        {
+            PlayerHit();
+        }
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -294,6 +326,11 @@ public class HellbotControllers : MonoBehaviour
         {
             PlayerHit();
             Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Explosion")
+        {
+            PlayerHit();
         }
     }
 

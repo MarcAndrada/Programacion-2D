@@ -18,7 +18,9 @@ public class HellbotAim : MonoBehaviour
     private bool pick;
     private string weaponName;
     private bool OnWeapon;
+    private int Look;
     private GameObject floorWeapon;
+
     /*private float angle;
     private Vector3 mouse_pos;*/
 
@@ -28,11 +30,13 @@ public class HellbotAim : MonoBehaviour
         if (Crosshair.transform.position.x < transform.position.x)
         {
             transform.localScale = new Vector3(-1, 1, transform.localScale.z);
+            Look = 0;
         }
 
         if (Crosshair.transform.position.x > transform.position.x)
         {
             transform.localScale = new Vector3(1, 1, transform.localScale.z);
+            Look = 1;
         }
        
         if (pick && OnWeapon){
@@ -160,5 +164,10 @@ public class HellbotAim : MonoBehaviour
 
     public void ResetWeapon(){
         ActiveWeapon = WEAPON.PISTOLA;
+    }
+
+    public int LookingAt()
+    {
+        return Look;
     }
 }

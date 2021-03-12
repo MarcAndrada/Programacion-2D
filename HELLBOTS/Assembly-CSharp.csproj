@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\BasicEnemyController.cs" />
     <Compile Include="Assets\Scripts\BasicWeapon.cs" />
     <Compile Include="Assets\Scripts\Fire.cs" />
+    <Compile Include="Assets\Scripts\GranadeController.cs" />
     <Compile Include="Assets\Scripts\HellbotAim.cs" />
     <Compile Include="Assets\Scripts\HellbotControllers.cs" />
     <Compile Include="Assets\Scripts\HellbotInput.cs" />
