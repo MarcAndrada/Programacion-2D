@@ -668,5 +668,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  minCamPos: {x: -200, y: -20}
-  maxCamPos: {x: 3585, y: -20}
+  minCamPos: {x: -127, y: 23}
+  maxCamPos: {x: 3585, y: 23}

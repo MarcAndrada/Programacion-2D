@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7525298738337295350}
   - component: {fileID: 2086053977867515920}
-  - component: {fileID: 1438660310418730858}
+  - component: {fileID: -8637218435844165201}
   m_Layer: 0
   m_Name: Pistola
   m_TagString: Weapon
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1438660310418730858
+--- !u!114 &-8637218435844165201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,6 +91,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2511038788031021295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef4cdfadbfec89a41b167c62cc4dbfaa, type: 3}
+  m_Script: {fileID: 11500000, guid: f59aaff4bfc7e4c49bbe6b0a2b8cb0ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2136436556941002741, guid: 13be691b2564a2a4d9bff3e6a6405c80,
+    type: 3}
+  offsetBullet: 35
+  fireRate: 400

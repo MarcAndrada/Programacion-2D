@@ -18,6 +18,7 @@ TagManager:
   - Crosshair
   - Explosion
   - Activator
+  - PlayerSniperBullet
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Scenari
   - 
   - 
   - 

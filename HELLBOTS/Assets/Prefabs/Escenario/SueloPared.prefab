@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3961359811120181486}
   - component: {fileID: 1589918838314510062}
   - component: {fileID: 3630909534719245814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SueloPared
   m_TagString: WallFloor
   m_Icon: {fileID: 0}

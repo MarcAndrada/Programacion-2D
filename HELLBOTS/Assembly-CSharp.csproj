@@ -75,11 +75,14 @@
     <Compile Include="Assets\Scripts\Player\HellbotInput.cs" />
     <Compile Include="Assets\Scripts\Player\HellbotRestart.cs" />
     <Compile Include="Assets\Scripts\Player\MoveCamera.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Bullets\BalaPrivisional.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Bullets\BazookaBulletControllor.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullets\bala.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullets\bala_Controll.cs" />
     <Compile Include="Assets\Scripts\Weapons\Fire.cs" />
     <Compile Include="Assets\Scripts\Weapons\GranadeController.cs" />
-    <Compile Include="Assets\Scripts\Weapons\WeaponPistolController.cs" />
+    <Compile Include="Assets\Scripts\Weapons\PlayerWeapons\ShootgunController.cs" />
+    <Compile Include="Assets\Scripts\Weapons\PlayerWeapons\WeaponsController.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Unity/2019.4.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

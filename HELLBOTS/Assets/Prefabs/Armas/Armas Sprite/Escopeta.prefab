@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4938765509363817947}
   - component: {fileID: 4938765509363817944}
+  - component: {fileID: 2377029641277434531}
   m_Layer: 0
   m_Name: Escopeta
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,3 +82,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2377029641277434531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4938765509363817945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83091d5641f9b364189077843294b1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2136436556941002741, guid: 13be691b2564a2a4d9bff3e6a6405c80,
+    type: 3}
+  offsetBullet: 45
+  fireRate: 600
