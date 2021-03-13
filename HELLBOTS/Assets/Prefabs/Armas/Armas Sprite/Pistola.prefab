@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7525298738337295350}
   - component: {fileID: 2086053977867515920}
+  - component: {fileID: 1438660310418730858}
   m_Layer: 0
   m_Name: Pistola
   m_TagString: Weapon
@@ -81,3 +82,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1438660310418730858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2511038788031021295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4cdfadbfec89a41b167c62cc4dbfaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

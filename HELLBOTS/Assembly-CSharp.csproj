@@ -63,23 +63,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\ActivateBasic.cs" />
-    <Compile Include="Assets\Scripts\ActivateSniper.cs" />
-    <Compile Include="Assets\Scripts\ActivateSuicide.cs" />
-    <Compile Include="Assets\Scripts\BasicEnemyController.cs" />
-    <Compile Include="Assets\Scripts\BasicWeapon.cs" />
-    <Compile Include="Assets\Scripts\Fire.cs" />
-    <Compile Include="Assets\Scripts\GranadeController.cs" />
-    <Compile Include="Assets\Scripts\HellbotAim.cs" />
-    <Compile Include="Assets\Scripts\HellbotControllers.cs" />
-    <Compile Include="Assets\Scripts\HellbotInput.cs" />
-    <Compile Include="Assets\Scripts\HellbotRestart.cs" />
-    <Compile Include="Assets\Scripts\MoveCamera.cs" />
-    <Compile Include="Assets\Scripts\Sniper_Controller.cs" />
-    <Compile Include="Assets\Scripts\WeaponPickUp.cs" />
-    <Compile Include="Assets\Scripts\bala.cs" />
-    <Compile Include="Assets\Scripts\bala_Controll.cs" />
-    <Compile Include="Assets\Scripts\suicideController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ActivateBasic.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ActivateSniper.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ActivateSuicide.cs" />
+    <Compile Include="Assets\Scripts\Enemies\BasicEnemyController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\BasicWeapon.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Sniper_Controller.cs" />
+    <Compile Include="Assets\Scripts\Enemies\suicideController.cs" />
+    <Compile Include="Assets\Scripts\Player\HellbotAim.cs" />
+    <Compile Include="Assets\Scripts\Player\HellbotControllers.cs" />
+    <Compile Include="Assets\Scripts\Player\HellbotInput.cs" />
+    <Compile Include="Assets\Scripts\Player\HellbotRestart.cs" />
+    <Compile Include="Assets\Scripts\Player\MoveCamera.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Bullets\bala.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Bullets\bala_Controll.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Fire.cs" />
+    <Compile Include="Assets\Scripts\Weapons\GranadeController.cs" />
+    <Compile Include="Assets\Scripts\Weapons\WeaponPistolController.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Unity/2019.4.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
