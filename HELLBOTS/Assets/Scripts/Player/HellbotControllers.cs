@@ -123,6 +123,7 @@ public class HellbotControllers : MonoBehaviour
             //Crouch (Si presiono "S", el collider grande se desactiva)
             if (crouch_keyD)
             {
+                animator.SetBool("Crouch", true);
                 Normalbc2D.enabled = false;
                 Crouchbc2D.enabled = true;
                 transform.localScale = new Vector3(1, 0.5f, 1);
@@ -131,6 +132,7 @@ public class HellbotControllers : MonoBehaviour
             }
             else if (crouch_keyU)
             {
+                animator.SetBool("Crouch", false);
                 Normalbc2D.enabled = true;
                 Crouchbc2D.enabled = false;
                 transform.localScale = new Vector3(1, 1, 1);
@@ -345,10 +347,12 @@ public class HellbotControllers : MonoBehaviour
         }
     }
 
-    public void PlayerHit(){  
+    public void PlayerHit(){
         //Hacer sonido de Daño
-        HP--;
-    
+        if (!GodModeOn){
+            HP--;
+        }
+
     }
 
 }
