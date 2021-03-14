@@ -10,6 +10,10 @@ public class BasicEnemyController : MonoBehaviour
     public GameObject bala;
     public float fireRate;
     public float nextFire;
+    public float limiteWalkLeft;
+    public float limiteWalkRight;
+    public float walkSpeed = 40f;
+    int direction = 1;
 
     private int firstDir;
     private float currentSpeed;
@@ -20,16 +24,19 @@ public class BasicEnemyController : MonoBehaviour
     {
         fireRate = 1f;
         nextFire = Time.time;
-        firstDir = Random.Range(1, 2);
-        rigidB = GetComponent<Rigidbody2D>();
-        if (firstDir == 1)
+        //firstDir = Random.Range(1, 2)
+        /*if (firstDir == 1)
         {
             basicEnemyDirection = Direction.LEFT;
         }
         else if (firstDir == 2)
         {
             basicEnemyDirection = Direction.RIGHT;
-        }
+        }*/
+        //Los límites para la patrulla
+        rigidB = GetComponent<Rigidbody2D>();
+        limiteWalkLeft = transform.position.x - GetComponent<CircleCollider2D>().radius;
+        limiteWalkRight = transform.position.x + GetComponent<CircleCollider2D>().radius;
     }
 
     // Update is called once per frame
@@ -37,7 +44,7 @@ public class BasicEnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float delta = Time.fixedDeltaTime * 1000;
+        /*float delta = Time.fixedDeltaTime * 1000;
         switch (basicEnemyDirection)
         {
             default:
@@ -53,13 +60,13 @@ public class BasicEnemyController : MonoBehaviour
 
         }
 
-        rigidB.velocity = new Vector2(currentSpeed, -rigidB.gravityScale * delta);
+        rigidB.velocity = new Vector2(currentSpeed, -rigidB.gravityScale * delta);*/
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Wall")
+        /*if (collision.gameObject.tag == "Wall")
         {
             if (basicEnemyDirection == Direction.RIGHT)
             {
@@ -69,29 +76,43 @@ public class BasicEnemyController : MonoBehaviour
             {
                 basicEnemyDirection = Direction.RIGHT;
             }
-        }
+        }*/
 
-        if (collision.gameObject.tag == "Hellbot")
+        /*if (collision.gameObject.tag == "Hellbot")
         {
             collision.gameObject.SetActive(false);
-        }
-
+        }*/
+       
     }
    
 
     // Update is called once per frame
     void Update()
     {
+        rigidB = GetComponent<Rigidbody2D>();
+        rigidB.velocity = new Vector2(walkSpeed * direction, rigidB.velocity.y);
+        if (transform.position.x < limiteWalkLeft)
+        {
+            direction = 1;
+        }
+        if (transform.position.x > limiteWalkRight) 
+        {
+
+            direction = -1;
+        }
+        transform.localScale = new Vector3(0.46f * direction, 0.46f, 0.46f);
+       
         checkIfTimeToFire();
+    
     }
 
     void checkIfTimeToFire()
     {
-        if (Time.time > nextFire)
+        /*if (Time.time > nextFire)
         {
             Instantiate(bala, transform.position, Quaternion.identity);
             nextFire = Time.time + fireRate;
-        }
+        }*/
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

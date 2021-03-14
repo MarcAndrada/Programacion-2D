@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2219349920427431286}
   - component: {fileID: 4478165718449111926}
   - component: {fileID: 1897899734975715438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Techo
   m_TagString: Roof
   m_Icon: {fileID: 0}

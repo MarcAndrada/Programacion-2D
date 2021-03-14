@@ -19,14 +19,22 @@ public class HellbotAim : MonoBehaviour
     private string weaponName;
     private bool OnWeapon;
     private int Look;
+
+    private WeaponsController weapon;
+    private ShootgunController shotgunCont;
     private GameObject floorWeapon;
 
     /*private float angle;
     private Vector3 mouse_pos;*/
-
+    private void Start()
+    {
+        weapon = GetComponent<WeaponsController>();
+        shotgunCont = GetComponent<ShootgunController>();
+    }
     void Update()
     {
         pick = HellbotInput.Interact;
+
         if (Crosshair.transform.position.x < transform.position.x)
         {
             transform.localScale = new Vector3(-1, 1, transform.localScale.z);
@@ -57,7 +65,6 @@ public class HellbotAim : MonoBehaviour
         
 
     }
-
     // Update is called once per frame
     void FixedUpdate()
     {

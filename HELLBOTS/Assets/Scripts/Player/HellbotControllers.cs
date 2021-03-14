@@ -13,12 +13,13 @@ public class HellbotControllers : MonoBehaviour
     public GameObject EmptyHeart1, EmptyHeart2, EmptyHeart3;
     public GameObject granadePrefab;
     public Transform GranadeLaunch;
+
     private SpriteRenderer sprite;
     private HellbotControllers Controlls;
     private HellbotAim Aim;
     private Rigidbody2D rb2d;
     private Animator animator;
-
+    private WeaponsController weapons;
 
     public bool GodModeOn;
     public Vector2 jumpHeight;
@@ -43,6 +44,7 @@ public class HellbotControllers : MonoBehaviour
     private bool granade;
     private bool throwGranade;
 
+
     private enum DirectionV { NONE, UP, DOWN };
     private enum DirectionH { NONE, LEFT, RIGHT }
     private DirectionV GodDirectionV = DirectionV.NONE;
@@ -60,7 +62,7 @@ public class HellbotControllers : MonoBehaviour
         Controlls = GetComponent<HellbotControllers>();
         Aim = GetComponent<HellbotAim>();
         animator = GetComponent<Animator>();
-
+        weapons = GetComponent<WeaponsController>();
 
         GodModeOn = false;
         MaxSpeed = runSpeed;
@@ -103,7 +105,7 @@ public class HellbotControllers : MonoBehaviour
             if (jump && jumpDone < jumpLimit)
             {
                 
-                   
+                   //hacer sonido de salto
                 animator.SetBool("Jumping", true);
                 rb2d.drag = 0f;
                 if (jumpDone >= 1)
@@ -181,6 +183,7 @@ public class HellbotControllers : MonoBehaviour
 
             if (heal && Aim.Heal())
             {
+                //Hacer sonido de comer
                 Aim.ResetWeapon();
                 if (HP < 3)
                 {
@@ -191,14 +194,12 @@ public class HellbotControllers : MonoBehaviour
 
             if (HP <= 0)
             {
-                //Hacer Animacion de muerte o para empezar SetActive(False)
+                //Hacer Animacion de muerte o para empezar SetActive(False) y hacer sonido de muerte
                 Aim.Dead();
                 sprite.enabled = false;
                 Controlls.enabled = false;
                 Aim.enabled = false;
-            }
-            else
-            {
+            }else{
                 sprite.enabled = true;
                 Controlls.enabled = true;
                 Aim.enabled = true;
@@ -244,9 +245,10 @@ public class HellbotControllers : MonoBehaviour
             }
         }
 
+
+
     }
-    void FixedUpdate()
-    {
+    void FixedUpdate(){
 
         if (!GodModeOn)
         {
@@ -254,6 +256,7 @@ public class HellbotControllers : MonoBehaviour
             rb2d.AddForce(Vector2.right * runSpeed * horizontal);
             if (horizontal == 1 || horizontal == -1)
             {
+                //Hacer sonidos de andar
                 animator.SetBool("Walking", true);
             }
             else if (horizontal == 0)
@@ -298,6 +301,10 @@ public class HellbotControllers : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)//Detectar si toca el suelo para reiniciar la cantidad de saltos
     {
         if (collision.collider.tag == "Floor"){
+            if (jumpDone > 0)
+            {
+                //hacer sonido de tocar suelo
+            }
             animator.SetBool("Jumping", false);
             animator.SetBool("DoubleJumping", false);
 
@@ -307,6 +314,10 @@ public class HellbotControllers : MonoBehaviour
         }
 
         if (collision.collider.tag == "WallFloor"){
+            if (jumpDone > 0)
+            {
+                //hacer sonido de tocar suelo
+            }
             animator.SetBool("Jumping", false);
             animator.SetBool("DoubleJumping", false);
             jumpDone = 0;
@@ -334,11 +345,10 @@ public class HellbotControllers : MonoBehaviour
         }
     }
 
-    public void PlayerHit(){  HP--; }
-
-
-    public bool GodModeActive()
-    {
-        return GodModeOn;
+    public void PlayerHit(){  
+        //Hacer sonido de Daño
+        HP--;
+    
     }
+
 }
