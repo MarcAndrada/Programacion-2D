@@ -205,12 +205,12 @@ PrefabInstance:
     - target: {fileID: 216847386668661788, guid: e16c33ad32d5f8840aa1d5633e0b5264,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2976
+      value: 4477
       objectReference: {fileID: 0}
     - target: {fileID: 216847386668661788, guid: e16c33ad32d5f8840aa1d5633e0b5264,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -409
+      value: -415
       objectReference: {fileID: 0}
     - target: {fileID: 216847386668661788, guid: e16c33ad32d5f8840aa1d5633e0b5264,
         type: 3}
@@ -262,10 +262,20 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3775967935129586016, guid: e16c33ad32d5f8840aa1d5633e0b5264,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 5067882101055119185, guid: e16c33ad32d5f8840aa1d5633e0b5264,
         type: 3}
       propertyPath: m_Name
       value: Enemigo 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998822156274562793, guid: e16c33ad32d5f8840aa1d5633e0b5264,
+        type: 3}
+      propertyPath: m_Radius
+      value: 436.42
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e16c33ad32d5f8840aa1d5633e0b5264, type: 3}
