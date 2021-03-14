@@ -19,7 +19,7 @@ void Start()
     // Update is called once per frame
     void Update()
     {
-        
+        //Hacer sonidos de Misil Volando
     }
 
 
@@ -39,9 +39,10 @@ void Start()
 
     public void Explosion()
     {
+        //Hacer sonido de explosion
         rigidB.velocity = new Vector2(0, 0);
         CurrentExplosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-        Destroy(CurrentExplosion, 1f);
+        Destroy(CurrentExplosion, 0.2f);
         Destroy(gameObject);
     }
 

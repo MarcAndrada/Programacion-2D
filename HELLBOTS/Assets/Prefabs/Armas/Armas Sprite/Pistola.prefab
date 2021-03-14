@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2511038788031021295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 0.48961002, y: 0.18997996, z: 2}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 22928929692f41840961f8269ce55982, type: 3}
-  m_Color: {r: 0.38867447, g: 0.7264151, b: 0.37348703, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 4c4e59af4dbb8b54b85db59ccf70ad02, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -96,5 +96,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2136436556941002741, guid: 13be691b2564a2a4d9bff3e6a6405c80,
     type: 3}
-  offsetBullet: 35
+  SoporteArma: {fileID: 0}
+  MaxBulletsT: {fileID: 0}
+  CurrentBulletsT: {fileID: 0}
+  offsetBullet: 42
   fireRate: 400
+  MaxAmmo: -1
