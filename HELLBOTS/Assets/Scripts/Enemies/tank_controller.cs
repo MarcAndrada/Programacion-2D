@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemyController : MonoBehaviour
+public class tank_controller : MonoBehaviour
 {
     public GameObject bala;
     public float fireRate;
@@ -10,6 +10,8 @@ public class BasicEnemyController : MonoBehaviour
     public float limiteWalkLeft;
     public float limiteWalkRight;
     public float walkSpeed = 40f;
+    public float hitPoints;
+    public float maxHitPoints = 5;
     int direction = 1;
     //public GameObject castPoint;
     enum typeStances { passive, follow, attack }
@@ -29,7 +31,7 @@ public class BasicEnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fireRate = 1f;
+        fireRate = 50f;
         nextFire = Time.time;
 
         //Los límites para la patrulla
@@ -37,6 +39,7 @@ public class BasicEnemyController : MonoBehaviour
         rigidB = GetComponent<Rigidbody2D>();
         limiteWalkLeft = transform.position.x - GetComponent<CircleCollider2D>().radius;
         limiteWalkRight = transform.position.x + GetComponent<CircleCollider2D>().radius;
+        hitPoints = maxHitPoints;
     }
 
 
@@ -116,11 +119,14 @@ public class BasicEnemyController : MonoBehaviour
             nextFire = Time.time + fireRate;
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    public void TakeHit (float damage)
     {
-        if (collision.gameObject.tag == "Playerbullet")
+        hitPoints -= damage;
+        if(hitPoints <= 0)
         {
             Destroy(gameObject);
         }
     }
+    
 }

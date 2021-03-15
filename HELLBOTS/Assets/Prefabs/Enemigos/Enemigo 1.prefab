@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 538598713272503397}
   - component: {fileID: 7046819340896853885}
   - component: {fileID: 3775967935129586016}
-  - component: {fileID: -6228212516536892999}
   - component: {fileID: 6998822156274562793}
   m_Layer: 0
   m_Name: Enemigo 1
@@ -145,23 +144,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dfb60b0744e8b4aa50ae5dda897a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  basicEnemyDirection: 1
   bala: {fileID: 7387866381433273619, guid: 721fd35822806c3448e53f5f6fab077d, type: 3}
-  fireRate: 3
+  fireRate: 0
   nextFire: 0
---- !u!114 &-6228212516536892999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5067882101055119185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0c5a3b54b2fad04085d480ba4ac4f7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  limiteWalkLeft: 0
+  limiteWalkRight: 0
+  walkSpeed: 40
+  player: {fileID: 0}
 --- !u!58 &6998822156274562793
 CircleCollider2D:
   m_ObjectHideFlags: 0

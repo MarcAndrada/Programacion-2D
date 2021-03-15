@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sniper_Controller : MonoBehaviour
+public class turretScrip : MonoBehaviour
 {
 
     public float shootingRange;
@@ -24,7 +24,7 @@ public class Sniper_Controller : MonoBehaviour
     void Update()
     {
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
-       
+
         if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
         {
             Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
@@ -35,7 +35,7 @@ public class Sniper_Controller : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        
+
         Gizmos.DrawWireSphere(transform.position, shootingRange);
 
     }
