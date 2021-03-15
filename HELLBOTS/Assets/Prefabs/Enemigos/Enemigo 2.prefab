@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 636963532606453369}
   - component: {fileID: -3029311727603960128}
   - component: {fileID: 4988957771839509587}
-  - component: {fileID: 3801972442496446197}
   - component: {fileID: -8952471493277985589}
+  - component: {fileID: 7127101927476373731}
+  - component: {fileID: 1385780117211079133}
   m_Layer: 0
   m_Name: Enemigo 2
   m_TagString: Enemy
@@ -132,21 +133,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 100, y: 100}
   m_EdgeRadius: 0
---- !u!114 &3801972442496446197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3813562881166704296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d95b882c63c2ddb4da82beb894d6462e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bala: {fileID: 7387866381433273619, guid: 721fd35822806c3448e53f5f6fab077d, type: 3}
-  fireRate: 2
-  nextFire: 0
 --- !u!114 &-8952471493277985589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,5 +143,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd4c8f1d539af114ea3982d9642ece57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &7127101927476373731
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3813562881166704296}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 204.55
+--- !u!114 &1385780117211079133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3813562881166704296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc6fd751d0b98d44b5f87b54b6721c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

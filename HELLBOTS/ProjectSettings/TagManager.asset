@@ -19,6 +19,8 @@ TagManager:
   - Explosion
   - Activator
   - PlayerSniperBullet
+  - Caida
+  - CamUp
   layers:
   - Default
   - TransparentFX
@@ -29,7 +31,11 @@ TagManager:
   - 
   - 
   - Scenari
+<<<<<<< HEAD
   - Player
+=======
+  - Enemies
+>>>>>>> main
   - 
   - 
   - 

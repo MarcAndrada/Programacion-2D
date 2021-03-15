@@ -4,8 +4,8 @@ using UnityEngine;
 
 
 public class suicideController : MonoBehaviour
-{
-    public enum Direction { NONE, LEFT, RIGHT }
+{ 
+    /*public enum Direction { NONE, LEFT, RIGHT }
     public float speed;
     public Direction suicideDirection = Direction.NONE;
 
@@ -113,5 +113,5 @@ public class suicideController : MonoBehaviour
         
 
         
-    }
+    }*/
 }

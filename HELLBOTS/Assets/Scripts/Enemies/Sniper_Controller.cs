@@ -2,40 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sniper_Controller : MonoBehaviour {
+public class Sniper_Controller : MonoBehaviour
+{
 
+    public float shootingRange;
     public GameObject bala;
-    public float fireRate;
-    public float nextFire;
+    public float fireRate = 1f;
+    public float nextFireTime;
+    public GameObject bullet;
+    public GameObject bulletParent;
+    public Transform player;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        fireRate = 1f;
-        nextFire = Time.time;
+
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        checkIfTimeToFire();
-    }
-
-    void checkIfTimeToFire()
-    {
-        if (Time.time > nextFire)
+        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+       
+        if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
         {
-            Instantiate(bala, transform.position, Quaternion.identity);
-            nextFire = Time.time + fireRate;
+            Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
+            nextFireTime = Time.time + fireRate;
         }
+
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnDrawGizmosSelected()
     {
-        if (collision.gameObject.tag == "Playerbullet")
-        {
-            Destroy(gameObject);
-        }
+        Gizmos.color = Color.green;
+        
+        Gizmos.DrawWireSphere(transform.position, shootingRange);
+
     }
-
-
 }

@@ -97,6 +97,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6132262678748446463, guid: 34d50eebe0f1648428f4d8bf6102e77d,
     type: 3}
   SoporteArma: {fileID: 0}
+  MaxBulletsT: {fileID: 0}
+  CurrentBulletsT: {fileID: 0}
+  Infinite1: {fileID: 0}
+  Infinite2: {fileID: 0}
   offsetBullet: 72
   fireRate: 900
-  MaxAmmo: 25
+  MaxAmmo: 40

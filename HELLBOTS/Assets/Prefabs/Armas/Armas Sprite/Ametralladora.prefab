@@ -103,4 +103,4 @@ MonoBehaviour:
   Infinite2: {fileID: 0}
   offsetBullet: 90
   fireRate: 200
-  MaxAmmo: 75
+  MaxAmmo: 125

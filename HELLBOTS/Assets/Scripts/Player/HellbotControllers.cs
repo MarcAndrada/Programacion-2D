@@ -13,13 +13,13 @@ public class HellbotControllers : MonoBehaviour
     public GameObject EmptyHeart1, EmptyHeart2, EmptyHeart3;
     public GameObject granadePrefab;
     public Transform GranadeLaunch;
+    public GameObject DieText;
 
     private SpriteRenderer sprite;
     private HellbotControllers Controlls;
     private HellbotAim Aim;
     private Rigidbody2D rb2d;
     private Animator animator;
-    private WeaponsController weapons;
 
     public bool GodModeOn;
     public Vector2 jumpHeight;
@@ -51,8 +51,8 @@ public class HellbotControllers : MonoBehaviour
     private enum DirectionH { NONE, LEFT, RIGHT }
     private DirectionV GodDirectionV = DirectionV.NONE;
     private DirectionH GodDirectionH = DirectionH.NONE;
-    private float speedV = 30;
-    private float speedH = 500;
+    private float speedV = 300;
+    private float speedH = 3000;
     private float currentSpeedV;
     private float currentSpeedH;
 
@@ -64,7 +64,6 @@ public class HellbotControllers : MonoBehaviour
         Controlls = GetComponent<HellbotControllers>();
         Aim = GetComponent<HellbotAim>();
         animator = GetComponent<Animator>();
-        weapons = GetComponent<WeaponsController>();
 
         GodModeOn = false;
         MaxSpeed = runSpeed;
@@ -135,23 +134,23 @@ public class HellbotControllers : MonoBehaviour
                 rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
                 jumpDone++;
 
-                runSpeed = 200;
+             
                 
             }
             //Crouch (Si presiono "S", el collider grande se desactiva)
             if (crouch_keyD)
             {
+                animator.SetBool("Crouch", true);
                 Normalbc2D.enabled = false;
                 Crouchbc2D.enabled = true;
-                transform.localScale = new Vector3(1, 0.5f, 1);
                 runSpeed -= 100;
                 jumpHeight -= new Vector2(0, 200);
             }
             else if (crouch_keyU)
             {
+                animator.SetBool("Crouch", false);
                 Normalbc2D.enabled = true;
                 Crouchbc2D.enabled = false;
-                transform.localScale = new Vector3(1, 1, 1);
                 runSpeed += 100;
                 jumpHeight += new Vector2(0, 200);
             }
@@ -189,7 +188,7 @@ public class HellbotControllers : MonoBehaviour
                 Heart1.SetActive(true);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 0)
+            else if (HP <= 0)
             {
                 Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -202,9 +201,10 @@ public class HellbotControllers : MonoBehaviour
             if (heal && Aim.Heal())
             {
                 //Hacer sonido de comer
-                Aim.ResetWeapon();
+                
                 if (HP < 3)
                 {
+                    Aim.ResetWeapon();
                     HP++;
                 }
 
@@ -213,6 +213,7 @@ public class HellbotControllers : MonoBehaviour
             if (HP <= 0)
             {
                 //Hacer Animacion de muerte o para empezar SetActive(False) y hacer sonido de muerte
+                DieText.SetActive(true);
                 Aim.Dead();
                 sprite.enabled = false;
                 Controlls.enabled = false;
@@ -349,6 +350,21 @@ public class HellbotControllers : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Floor"){
+            animator.SetBool("Jumping", true);
+            runSpeed = 200;
+            rb2d.drag = 0f;
+        }
+
+        if (collision.collider.tag == "WallFloor"){
+            animator.SetBool("Jumping", true);
+            runSpeed = 200;
+            rb2d.drag = 0f;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemybullet"))
@@ -361,12 +377,23 @@ public class HellbotControllers : MonoBehaviour
         {
             PlayerHit();
         }
+
+        if (collision.gameObject.tag == "Caida")
+        {
+            PlayerHit();
+            PlayerHit();
+            PlayerHit();
+        }
+
+     
     }
 
-    public void PlayerHit(){  
+    public void PlayerHit(){
         //Hacer sonido de Daño
-        HP--;
-    
+        if (!GodModeOn){
+            HP--;
+        }
+
     }
 
 }

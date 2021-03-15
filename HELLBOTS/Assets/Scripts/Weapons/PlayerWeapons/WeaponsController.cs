@@ -23,6 +23,7 @@ public class WeaponsController : MonoBehaviour
     private int CurrentAmmo;
     private float TimeToShoot;
     private bool Shoot;
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,9 @@ public class WeaponsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Shoot = HellbotInput.Shoot;
+
         /* Debug.Log(SoporteArma.rotation.z);
          AnguloRotacion = SoporteArma.rotation.z * -100;
          //Debug.Log(AnguloRotacion);*/
@@ -52,7 +55,7 @@ public class WeaponsController : MonoBehaviour
         }
         else
         {
-            pos = Vector3.left * offsetBullet + transform.position;
+            pos = -transform.right * offsetBullet + transform.position;
         }
 
 
@@ -67,7 +70,7 @@ public class WeaponsController : MonoBehaviour
                 Destroy(bullet, 3);
                 TimeToShoot = 0;
                 CurrentAmmo--;
-                
+
             }
             else if (CurrentAmmo <= 0)
             {
@@ -81,7 +84,7 @@ public class WeaponsController : MonoBehaviour
             MaxBulletsT.SetActive(true);
             Infinite1.SetActive(false);
             Infinite2.SetActive(false);
-        }else if (MaxAmmo == -1){
+        } else if (MaxAmmo == -1) {
             CurrentBulletsT.SetActive(false);
             MaxBulletsT.SetActive(false);
 
@@ -94,11 +97,6 @@ public class WeaponsController : MonoBehaviour
 
     }
 
-
-    public void SetMaxAmmo()
-    {
-        CurrentAmmo = MaxAmmo;
-    }
 }
 
     
