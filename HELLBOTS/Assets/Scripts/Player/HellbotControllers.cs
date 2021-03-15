@@ -25,6 +25,8 @@ public class HellbotControllers : MonoBehaviour
     public Vector2 jumpHeight;
     public float runSpeed;
     public int HP = 3;
+    public float bostTimer;
+    private bool speedBosting;
 
     
     private int jumpDone;
@@ -85,6 +87,22 @@ public class HellbotControllers : MonoBehaviour
         granade = HellbotInput.Granade;
 
         float delta = Time.deltaTime * 1000;
+
+        if (speedBosting) {
+            bostTimer += Time.deltaTime;
+            if (bostTimer >= 10)
+            {
+                MaxSpeed = 3000;
+                runSpeed = 3000;
+                bostTimer = 0;
+                speedBosting = false;
+            }
+        }
+        if (Input.GetKey(KeyCode.F)) {
+            speedBosting = true;
+            MaxSpeed = 6000;
+            runSpeed = 6000;
+        }
 
         if (godmode && !GodModeOn)
         {
