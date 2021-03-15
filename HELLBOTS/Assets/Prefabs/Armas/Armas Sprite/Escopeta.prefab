@@ -96,6 +96,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2136436556941002741, guid: 13be691b2564a2a4d9bff3e6a6405c80,
     type: 3}
+  MaxBulletsT: {fileID: 0}
+  CurrentBulletsT: {fileID: 0}
+  Infinite1: {fileID: 0}
+  Infinite2: {fileID: 0}
   offsetBullet: 45
   fireRate: 600
-  MaxAmmo: 125
+  CurrentAmmo: 150

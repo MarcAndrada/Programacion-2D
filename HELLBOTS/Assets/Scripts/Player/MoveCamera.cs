@@ -8,10 +8,13 @@ public class MoveCamera : MonoBehaviour
     public GameObject Player;
     public Vector2 minCamPos;
     public Vector2 maxCamPos;
-
+    public float UPMinYPos;
+    public float DownMinYPos;
 
     private bool GodModeOn;
     private bool godmode;
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +35,7 @@ public class MoveCamera : MonoBehaviour
 
     }
     // Update is called once per frame
-    void FixedUpdate()
-    {
+    void FixedUpdate(){
 
         if (!GodModeOn)
         {
@@ -51,5 +53,17 @@ public class MoveCamera : MonoBehaviour
             transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, transform.position.z);
         }
        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision){
+        if (collision.gameObject.tag == "CamUp"){
+            GoUP();
+        }
+    }
+
+
+    private void GoUP()
+    {
+        minCamPos.y = UPMinYPos;
     }
 }

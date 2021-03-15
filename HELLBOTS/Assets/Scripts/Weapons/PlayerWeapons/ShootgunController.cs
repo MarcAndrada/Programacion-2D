@@ -14,7 +14,8 @@ public class ShootgunController : MonoBehaviour
 
     public float offsetBullet;
     public float fireRate;
-    public int MaxAmmo;
+    public int CurrentAmmo;
+
 
     private GameObject bullet1;
     private GameObject bullet2;
@@ -24,7 +25,7 @@ public class ShootgunController : MonoBehaviour
     private GameObject Crosshair;
     private GameObject Player;
 
-    private int CurrentAmmo;
+    private int MaxAmmo;
     private float AnguloRot1;
     private float AnguloRot2;
     private float AnguloRot3;
@@ -35,9 +36,10 @@ public class ShootgunController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MaxAmmo = CurrentAmmo;
         Crosshair = GameObject.FindGameObjectWithTag("Crosshair");
         Player = GameObject.FindGameObjectWithTag("Hellbot");
-        CurrentAmmo = MaxAmmo;
+        
 
         MaxBulletsT.GetComponent<Text>().text = MaxAmmo.ToString();
 
@@ -48,11 +50,11 @@ public class ShootgunController : MonoBehaviour
     {
         Shoot = HellbotInput.Shoot;
 
-        AnguloRot1 = transform.rotation.z - 20;
-        AnguloRot2 = transform.rotation.z - 10;
+        AnguloRot1 = transform.rotation.z + 0.2f;
+        AnguloRot2 = transform.rotation.z + 0.1f;
         AnguloRot3 = transform.rotation.z;
-        AnguloRot4 = transform.rotation.z + 10;
-        AnguloRot5 = transform.rotation.z + 20;
+        AnguloRot4 = transform.rotation.z - 0.1f;
+        AnguloRot5 = transform.rotation.z - 0.2f;
 
         float delta = Time.deltaTime * 1000;
         Vector3 pos;
@@ -62,7 +64,7 @@ public class ShootgunController : MonoBehaviour
         }
         else
         {
-            pos = Vector3.left * offsetBullet + transform.position;
+            pos = -transform.right * offsetBullet + transform.position;
         }
 
 
@@ -71,15 +73,15 @@ public class ShootgunController : MonoBehaviour
         {
             if (TimeToShoot > fireRate && CurrentAmmo > 0)
             {
-                bullet1 = Instantiate(bulletPrefab, pos, Quaternion.Euler(transform.rotation.x, transform.rotation.y, AnguloRot1));
+                bullet1 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot1));
                 Destroy(bullet1, 3);                    
-                bullet2 = Instantiate(bulletPrefab, pos, Quaternion.Euler(transform.rotation.x, transform.rotation.y, AnguloRot2));
+                bullet2 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot2));
                 Destroy(bullet2, 3);                     
-                bullet3 = Instantiate(bulletPrefab, pos, Quaternion.Euler(transform.rotation.x, transform.rotation.y, AnguloRot3));
+                bullet3 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot3));
                 Destroy(bullet3, 3);                    
-                bullet4 = Instantiate(bulletPrefab, pos, Quaternion.Euler(transform.rotation.x, transform.rotation.y, AnguloRot4));
+                bullet4 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot4));
                 Destroy(bullet4, 3);                  
-                bullet5 = Instantiate(bulletPrefab, pos, Quaternion.Euler(transform.rotation.x, transform.rotation.y, AnguloRot5));
+                bullet5 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot5));
                 Destroy(bullet5, 3);
                 TimeToShoot = 0;
 

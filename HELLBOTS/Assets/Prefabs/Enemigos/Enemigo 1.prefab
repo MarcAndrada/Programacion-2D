@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7046819340896853885}
   - component: {fileID: 3775967935129586016}
   - component: {fileID: 6998822156274562793}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemigo 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -144,12 +144,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dfb60b0744e8b4aa50ae5dda897a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bala: {fileID: 7387866381433273619, guid: 721fd35822806c3448e53f5f6fab077d, type: 3}
+  bala: {fileID: 6388760072793773378, guid: 117c895a10216cf4a9140c0b09767185, type: 3}
   fireRate: 0
   nextFire: 0
   limiteWalkLeft: 0
   limiteWalkRight: 0
-  walkSpeed: 40
+  walkSpeed: 300
   player: {fileID: 0}
 --- !u!58 &6998822156274562793
 CircleCollider2D:
@@ -166,4 +166,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 50.24
+  m_Radius: 436.42
