@@ -11,19 +11,19 @@ public class flying_enemy : MonoBehaviour
     private float nextFireTime;
     public GameObject bullet;
     public GameObject bulletParent;
-    public Transform player;
+    private GameObject player;
     void Start()
     {
-        
+        player = GameObject.FindWithTag("Hellbot");
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+        float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
         if (distanceFromPlayer < lineOfSite && distanceFromPlayer>shootingRange)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
 
         }
         else if (distanceFromPlayer <= shootingRange && nextFireTime <Time.time)
@@ -44,6 +44,11 @@ public class flying_enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Playerbullet")
+        {
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.tag == "Explosion")
         {
             Destroy(gameObject);
         }

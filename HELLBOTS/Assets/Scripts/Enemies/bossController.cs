@@ -6,10 +6,12 @@ public class bossController : MonoBehaviour
 {
     public GameObject bala;
     public float fireRate;
-    public float nextFire;
-    public float limiteWalkLeft;
-    public float limiteWalkRight;
-    public float walkSpeed = 40f;
+    private float nextFire;
+    private float limiteWalkLeft;
+    private float limiteWalkRight;
+    public float walkSpeed;
+    public float hitPoints;
+
     int direction = 1;
     //public GameObject castPoint;
     enum typeStances { passive, follow, attack }
@@ -21,15 +23,15 @@ public class bossController : MonoBehaviour
     float attackDistance = 1000f;
 
     float distancePlayer;
-    public Transform player;
 
-
+    private GameObject player;
     private Rigidbody2D rigidB;
 
     // Start is called before the first frame update
     void Start()
     {
-        fireRate = 1f;
+        player = GameObject.FindWithTag("Hellbot");
+
         nextFire = Time.time;
 
         //Los límites para la patrulla
@@ -46,7 +48,7 @@ public class bossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distancePlayer = Mathf.Abs(player.position.x - transform.position.x);
+        distancePlayer = Mathf.Abs(player.transform.position.x - transform.position.x);
         switch (stances)
         {
             case typeStances.passive:
@@ -73,11 +75,11 @@ public class bossController : MonoBehaviour
             case typeStances.follow:
                 rigidB = GetComponent<Rigidbody2D>();
                 rigidB.velocity = new Vector2(walkSpeed * 1.5f * direction, rigidB.velocity.y);
-                if (player.position.x > transform.position.x)
+                if (player.transform.position.x > transform.position.x)
                 {
                     direction = 1;
                 }
-                if (player.position.x < transform.position.x)
+                if (player.transform.position.x < transform.position.x)
                 {
 
                     direction = -1;
@@ -104,8 +106,7 @@ public class bossController : MonoBehaviour
                 break;
 
         }
-        transform.localScale = new Vector3(2f * direction, 2f, 2f);
-
+        transform.localScale = new Vector3(transform.localScale.x * direction, transform.localScale.y, transform.localScale.z);
     }
 
     void checkIfTimeToFire()
@@ -119,6 +120,22 @@ public class bossController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Playerbullet")
+        {
+            TakeHit();
+        }
+
+        if (collision.gameObject.tag == "Explosion")
+        {
+            TakeHit();
+            TakeHit();
+            TakeHit();
+        }
+    }
+
+    public void TakeHit()
+    {
+        hitPoints = hitPoints- 1;
+        if (hitPoints <= 0)
         {
             Destroy(gameObject);
         }

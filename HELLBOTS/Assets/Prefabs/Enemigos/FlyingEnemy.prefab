@@ -127,12 +127,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
-  lineOfSite: 599.43
-  shootingRange: 423.9
+  lineOfSite: 800
+  shootingRange: 425
   fireRate: 1
-  bullet: {fileID: 6388760072793773378, guid: 117c895a10216cf4a9140c0b09767185, type: 3}
+  bullet: {fileID: 1288552800543150587, guid: 33356378cedede945a03d5d4b57a094a, type: 3}
   bulletParent: {fileID: 84367837}
-  player: {fileID: 0}
 --- !u!61 &1869990457
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -10,19 +10,19 @@ public class turretScrip : MonoBehaviour
     public float nextFireTime;
     public GameObject bullet;
     public GameObject bulletParent;
-    public Transform player;
+    private GameObject player;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.FindWithTag("Hellbot");
     }
 
 
-    void Update()
+void Update()
     {
-        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+        float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
         if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
         {
@@ -41,6 +41,11 @@ public class turretScrip : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Playerbullet")
+        {
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.tag == "Explosion")
         {
             Destroy(gameObject);
         }

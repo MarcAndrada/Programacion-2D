@@ -19,15 +19,15 @@ public class newSuicideScript : MonoBehaviour
 
     float enterFollowZone = 1345f;
     float exitFollowZone = 1500f;
-    float attackDistance = 1000f;
 
     float distancePlayer;
-    public Transform player;
-
+    private GameObject player;
 
 
     void Start()
     {
+        player = GameObject.FindWithTag("Hellbot");
+
         rigidB = GetComponent<Rigidbody2D>();
         limiteWalkLeft = transform.position.x - GetComponent<CircleCollider2D>().radius;
         limiteWalkRight = transform.position.x + GetComponent<CircleCollider2D>().radius;
@@ -37,7 +37,7 @@ public class newSuicideScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distancePlayer = Mathf.Abs(player.position.x - transform.position.x);
+        distancePlayer = Mathf.Abs(player.transform.position.x - transform.position.x);
 
         switch (stances)
         {
@@ -65,11 +65,11 @@ public class newSuicideScript : MonoBehaviour
             case typeStances.follow:
                 rigidB = GetComponent<Rigidbody2D>();
                 rigidB.velocity = new Vector2(walkSpeed * 4f * direction, rigidB.velocity.y);
-                if (player.position.x > transform.position.x)
+                if (player.transform.position.x > transform.position.x)
                 {
                     direction = 1;
                 }
-                if (player.position.x < transform.position.x)
+                if (player.transform.position.x < transform.position.x)
                 {
 
                     direction = -1;
@@ -83,13 +83,26 @@ public class newSuicideScript : MonoBehaviour
                 break;
 
         }
-        transform.localScale = new Vector3(0.46f * direction, 0.46f, 0.46f);
+        transform.localScale = new Vector3(transform.localScale.x * direction, transform.localScale.y, transform.localScale.z);
 
         
     }
     void OnCollisionEnter2D(Collision2D collider)
     {
         if (collider.gameObject.tag == "Hellbot")
+        {
+            Explosion();
+        }
+
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Playerbullet")
+        {
+            Explosion();
+        }
+        if (collision.gameObject.tag == "Explosion")
         {
             Explosion();
         }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3444600665559565332}
   - component: {fileID: 8741974799615520220}
   - component: {fileID: 8741974799615520221}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bazooka
   m_TagString: Weapon
   m_Icon: {fileID: 0}

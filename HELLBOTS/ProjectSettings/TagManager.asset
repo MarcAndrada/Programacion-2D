@@ -16,7 +16,6 @@ TagManager:
   - Hellbot
   - Enemybullet
   - Playerbullet
-  - PlayerSniperBullet
   - Explosion
   layers:
   - Default
@@ -29,7 +28,7 @@ TagManager:
   - 
   - scene
   - enemy
-  - 
+  - weapon_floor
   - 
   - 
   - 

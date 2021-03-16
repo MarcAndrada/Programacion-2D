@@ -21,7 +21,7 @@ public class new_bullet : MonoBehaviour
     {
         
     }
-    void OntriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Hellbot"))
         {
@@ -30,6 +30,7 @@ public class new_bullet : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             Destroy(gameObject);
+            
         }
     }
 

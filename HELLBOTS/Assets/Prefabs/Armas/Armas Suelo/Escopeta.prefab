@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5233748349669492005}
   - component: {fileID: 4938765509181884434}
   - component: {fileID: 4938765509181884435}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Escopeta
   m_TagString: Weapon
   m_Icon: {fileID: 0}

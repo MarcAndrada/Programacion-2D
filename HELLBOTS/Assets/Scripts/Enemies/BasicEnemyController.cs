@@ -6,22 +6,22 @@ public class BasicEnemyController : MonoBehaviour
 {
     public GameObject bala;
     public float fireRate;
-    public float nextFire;
-    public float limiteWalkLeft;
-    public float limiteWalkRight;
+    private float nextFire;
+    private float limiteWalkLeft;
+    private float limiteWalkRight;
     public float walkSpeed = 40f;
-    int direction = 1;
+    private int direction = 1;
     //public GameObject castPoint;
     enum typeStances { passive, follow, attack }
 
     typeStances stances = typeStances.passive;
 
-    float enterFollowZone = 1345f;
-    float exitFollowZone = 1500f;
-    float attackDistance = 1000f;
+    public float enterFollowZone = 1345f;
+    public float exitFollowZone = 1500f;
+    public float attackDistance = 1000f;
 
     float distancePlayer;
-    private Transform player;
+    private GameObject player;
 
 
     private Rigidbody2D rigidB;
@@ -30,7 +30,7 @@ public class BasicEnemyController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
-        fireRate = 1f;
+        
         nextFire = Time.time;
 
         //Los límites para la patrulla
@@ -47,7 +47,7 @@ public class BasicEnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distancePlayer = Mathf.Abs(player.position.x - transform.position.x);
+        distancePlayer = Mathf.Abs(player.transform.position.x - transform.position.x);
         switch (stances)
         {
             case typeStances.passive:
@@ -74,11 +74,11 @@ public class BasicEnemyController : MonoBehaviour
             case typeStances.follow:
                 rigidB = GetComponent<Rigidbody2D>();
                 rigidB.velocity = new Vector2(walkSpeed * 1.5f * direction, rigidB.velocity.y);
-                if (player.position.x > transform.position.x)
+                if (player.transform.position.x > transform.position.x)
                 {
                     direction = 1;
                 }
-                if (player.position.x < transform.position.x)
+                if (player.transform.position.x < transform.position.x)
                 {
 
                     direction = -1;
@@ -105,8 +105,7 @@ public class BasicEnemyController : MonoBehaviour
                 break;
 
         }
-        transform.localScale = new Vector3(0.46f * direction, 0.46f, 0.46f);
-
+        transform.localScale = new Vector3(transform.localScale.x * direction, transform.localScale.y, transform.localScale.z);
     }
 
     void checkIfTimeToFire()
@@ -120,6 +119,10 @@ public class BasicEnemyController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Playerbullet")
+        {
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "Explosion")
         {
             Destroy(gameObject);
         }

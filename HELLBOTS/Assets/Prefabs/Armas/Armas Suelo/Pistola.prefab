@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5510551179006753927}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: -1565548065797100971}
   - component: {fileID: -8286769773428355547}
   - component: {fileID: 5433737710420337559}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pistola
   m_TagString: Weapon
   m_Icon: {fileID: 0}
