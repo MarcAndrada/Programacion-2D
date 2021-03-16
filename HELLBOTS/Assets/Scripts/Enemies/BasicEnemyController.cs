@@ -21,7 +21,7 @@ public class BasicEnemyController : MonoBehaviour
     float attackDistance = 1000f;
 
     float distancePlayer;
-    public Transform player;
+    private Transform player;
 
 
     private Rigidbody2D rigidB;
@@ -29,6 +29,7 @@ public class BasicEnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindWithTag("Hellbot");
         fireRate = 1f;
         nextFire = Time.time;
 

@@ -130,7 +130,7 @@ MonoBehaviour:
   lineOfSite: 599.43
   shootingRange: 423.9
   fireRate: 1
-  bullet: {fileID: 364847769468073710, guid: 4a8a41bdb24c6de4c9addf58e5af3c14, type: 3}
+  bullet: {fileID: 6388760072793773378, guid: 117c895a10216cf4a9140c0b09767185, type: 3}
   bulletParent: {fileID: 84367837}
   player: {fileID: 0}
 --- !u!61 &1869990457

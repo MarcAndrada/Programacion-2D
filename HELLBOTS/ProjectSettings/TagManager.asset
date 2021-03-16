@@ -4,23 +4,20 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Weapon
   - Enemy
-  - Wall
-  - Bullet
-  - Powerup
-  - Hellbot
-  - Roof
-  - Floor
+  - Crosshair
+  - CamUp
   - WallFloor
+  - Floor
+  - Wall
+  - Weapon
+  - Caida
+  - Roof
+  - Hellbot
   - Enemybullet
   - Playerbullet
-  - Crosshair
-  - Explosion
-  - Activator
   - PlayerSniperBullet
-  - Caida
-  - CamUp
+  - Explosion
   layers:
   - Default
   - TransparentFX
@@ -30,12 +27,8 @@ TagManager:
   - UI
   - 
   - 
-  - Scenari
-<<<<<<< HEAD
-  - Player
-=======
-  - Enemies
->>>>>>> main
+  - scene
+  - enemy
   - 
   - 
   - 

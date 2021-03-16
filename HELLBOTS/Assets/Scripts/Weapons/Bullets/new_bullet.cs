@@ -25,20 +25,15 @@ public class new_bullet : MonoBehaviour
     {
         if (other.CompareTag("Hellbot"))
         {
-            DestroyBala();
+            Destroy(gameObject);
         }
-    }
-
-    void DestroyBala()
-    {
-        Destroy(gameObject);
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == 8)
+        if (other.gameObject.layer == 8)
         {
-            DestroyBala();
+            Destroy(gameObject);
         }
     }
+
+    
+
+    
 }

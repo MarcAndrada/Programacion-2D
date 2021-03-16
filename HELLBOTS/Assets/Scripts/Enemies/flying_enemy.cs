@@ -40,5 +40,13 @@ public class flying_enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, shootingRange);
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Playerbullet")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
 

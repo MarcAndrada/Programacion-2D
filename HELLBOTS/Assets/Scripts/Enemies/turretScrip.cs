@@ -6,7 +6,6 @@ public class turretScrip : MonoBehaviour
 {
 
     public float shootingRange;
-    public GameObject bala;
     public float fireRate = 1f;
     public float nextFireTime;
     public GameObject bullet;
@@ -38,5 +37,12 @@ public class turretScrip : MonoBehaviour
 
         Gizmos.DrawWireSphere(transform.position, shootingRange);
 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Playerbullet")
+        {
+            Destroy(gameObject);
+        }
     }
 }

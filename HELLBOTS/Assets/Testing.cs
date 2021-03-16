@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Testing : MonoBehaviour
 {
-    [SerializedField] private Transform[] points;
+    /*[SerializedField] private Transform[] points;
     [SerializedField]private lineController line;
     private void Start()
     {
         line.SetUpLine(points);
-    }
+    }*/
 
     
 }

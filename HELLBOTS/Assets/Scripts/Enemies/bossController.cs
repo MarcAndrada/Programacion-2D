@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class newSuicideScript : MonoBehaviour
+public class bossController : MonoBehaviour
 {
-    private Rigidbody2D rigidB;
-    public GameObject ExplosionPrefab;
-
+    public GameObject bala;
+    public float fireRate;
+    public float nextFire;
     public float limiteWalkLeft;
     public float limiteWalkRight;
     public float walkSpeed = 40f;
     int direction = 1;
-    private GameObject CurrentExplosion;
+    //public GameObject castPoint;
     enum typeStances { passive, follow, attack }
 
     typeStances stances = typeStances.passive;
@@ -25,20 +24,29 @@ public class newSuicideScript : MonoBehaviour
     public Transform player;
 
 
+    private Rigidbody2D rigidB;
 
+    // Start is called before the first frame update
     void Start()
     {
+        fireRate = 1f;
+        nextFire = Time.time;
+
+        //Los límites para la patrulla
+
         rigidB = GetComponent<Rigidbody2D>();
         limiteWalkLeft = transform.position.x - GetComponent<CircleCollider2D>().radius;
         limiteWalkRight = transform.position.x + GetComponent<CircleCollider2D>().radius;
-
     }
+
+
+
+
 
     // Update is called once per frame
     void Update()
     {
         distancePlayer = Mathf.Abs(player.position.x - transform.position.x);
-
         switch (stances)
         {
             case typeStances.passive:
@@ -64,7 +72,7 @@ public class newSuicideScript : MonoBehaviour
 
             case typeStances.follow:
                 rigidB = GetComponent<Rigidbody2D>();
-                rigidB.velocity = new Vector2(walkSpeed * 4f * direction, rigidB.velocity.y);
+                rigidB.velocity = new Vector2(walkSpeed * 1.5f * direction, rigidB.velocity.y);
                 if (player.position.x > transform.position.x)
                 {
                     direction = 1;
@@ -78,28 +86,43 @@ public class newSuicideScript : MonoBehaviour
                 {
                     stances = typeStances.passive;
                 }
-                
+                if (distancePlayer < attackDistance)
+                {
+                    stances = typeStances.attack;
+                }
 
+                break;
+            case typeStances.attack:
+                rigidB = GetComponent<Rigidbody2D>();
+
+                if (distancePlayer > attackDistance)
+                {
+                    stances = typeStances.follow;
+                }
+
+                checkIfTimeToFire();
                 break;
 
         }
-        transform.localScale = new Vector3(0.46f * direction, 0.46f, 0.46f);
+        transform.localScale = new Vector3(2f * direction, 2f, 2f);
 
-        
     }
-    void OnCollisionEnter2D(Collision2D collider)
+
+    void checkIfTimeToFire()
     {
-        if (collider.gameObject.tag == "Hellbot")
+        if (Time.time > nextFire)
         {
-            Explosion();
+            Instantiate(bala, transform.position, Quaternion.identity);
+            nextFire = Time.time + fireRate;
         }
     }
-    public void Explosion()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Hacer sonido de explosion
-        rigidB.velocity = new Vector2(0, 0);
-        CurrentExplosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-        Destroy(CurrentExplosion, 0.2f);
-        Destroy(gameObject);
+        if (collision.gameObject.tag == "Playerbullet")
+        {
+            Destroy(gameObject);
+        }
     }
 }
+
+
