@@ -6,15 +6,21 @@ using UnityEngine.UI;
 
 public class HellbotControllers : MonoBehaviour
 {
-
-    public BoxCollider2D Crouchbc2D;
+        public BoxCollider2D Crouchbc2D;
     public BoxCollider2D Normalbc2D;
     public GameObject Heart1, Heart2, Heart3;
     public GameObject EmptyHeart1, EmptyHeart2, EmptyHeart3;
     public GameObject granadePrefab;
     public Transform GranadeLaunch;
     public GameObject DieText;
+    public AudioClip WalkSound;
+    public AudioClip JumpSound;
+    public AudioClip pHit;
+    public AudioClip eat;
 
+
+
+    private AudioSource audioSource;
     private SpriteRenderer sprite;
     private HellbotControllers Controlls;
     private HellbotAim Aim;
@@ -25,17 +31,17 @@ public class HellbotControllers : MonoBehaviour
     public Vector2 jumpHeight;
     public float runSpeed;
     public int HP = 3;
-    public float bostTimer;
-    private bool speedBosting;
+    //public float bostTimer;
+    public float granadeCD;
 
-    
+    //private bool speedBosting;
     private int jumpDone;
     private int jumpLimit = 2;
     private float MaxSpeed;  
     private float NormalG;
     private float WaitedTimeG;
     private float AnimDurationG = 350;
-
+    private float TimePassedGCD;
     private bool godmode;
     private bool jump;
     private bool crouch_keyD;
@@ -45,6 +51,8 @@ public class HellbotControllers : MonoBehaviour
     private bool heal;
     private bool granade;
     private bool throwGranade;
+    private float footstep;
+    private float footstepRithm = 425;
 
 
     private enum DirectionV { NONE, UP, DOWN };
@@ -55,6 +63,7 @@ public class HellbotControllers : MonoBehaviour
     private float speedH = 3000;
     private float currentSpeedV;
     private float currentSpeedH;
+    private bool onFloor;
 
     // Start is called before the first frame update
     void Start()
@@ -64,17 +73,19 @@ public class HellbotControllers : MonoBehaviour
         Controlls = GetComponent<HellbotControllers>();
         Aim = GetComponent<HellbotAim>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
 
         GodModeOn = false;
         MaxSpeed = runSpeed;
         jumpDone = 0;
         Crouchbc2D.enabled = false;
         NormalG = rb2d.gravityScale;
+        TimePassedGCD = granadeCD;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         
         horizontal = HellbotInput.Horizontal;
         vertical = HellbotInput.Vertical;
@@ -87,7 +98,10 @@ public class HellbotControllers : MonoBehaviour
 
         float delta = Time.deltaTime * 1000;
 
-        if (speedBosting) {
+
+
+       /* Power UP para Correr
+        * if (speedBosting) {
             bostTimer += Time.deltaTime;
             if (bostTimer >= 10)
             {
@@ -101,7 +115,7 @@ public class HellbotControllers : MonoBehaviour
             speedBosting = true;
             MaxSpeed = 6000;
             runSpeed = 6000;
-        }
+        }*/
 
         if (godmode && !GodModeOn)
         {
@@ -109,7 +123,8 @@ public class HellbotControllers : MonoBehaviour
             Crouchbc2D.enabled = false;
             Normalbc2D.enabled = false;
             rb2d.gravityScale = 0;
-        }else if (godmode && GodModeOn){
+        }
+        else if (godmode && GodModeOn){
             GodModeOn = false;
             Crouchbc2D.enabled = false;
             Normalbc2D.enabled = true;
@@ -121,8 +136,9 @@ public class HellbotControllers : MonoBehaviour
             //Salto
             if (jump && jumpDone < jumpLimit)
             {
-                
-                   //hacer sonido de salto
+
+                //hacer sonido de salto
+                audioSource.PlayOneShot(JumpSound);
                 animator.SetBool("Jumping", true);
                 rb2d.drag = 0f;
                 if (jumpDone >= 1)
@@ -155,11 +171,7 @@ public class HellbotControllers : MonoBehaviour
                 jumpHeight += new Vector2(0, 200);
             }
 
-            if (granade)
-            {
-                throwGranade = true;
-                animator.SetTrigger("GThrow");
-            }
+           
 
             if (HP == 3)
             {
@@ -201,10 +213,11 @@ public class HellbotControllers : MonoBehaviour
             if (heal && Aim.Heal())
             {
                 //Hacer sonido de comer
-                
+                audioSource.PlayOneShot(eat);
+                Aim.ResetWeapon();
                 if (HP < 3)
                 {
-                    Aim.ResetWeapon();
+                   
                     HP++;
                 }
 
@@ -218,28 +231,48 @@ public class HellbotControllers : MonoBehaviour
                 sprite.enabled = false;
                 Controlls.enabled = false;
                 Aim.enabled = false;
-            }else{
+            }
+            else{
                 sprite.enabled = true;
                 Controlls.enabled = true;
                 Aim.enabled = true;
             }
 
-           
+            TimePassedGCD += delta;
+
+            if (granade && TimePassedGCD > granadeCD)
+            {
+                throwGranade = true;
+                animator.SetTrigger("GThrow");
+                
+            }
+
+
             if (throwGranade)
             {
                 WaitedTimeG += delta;
-                
 
-                if (WaitedTimeG >= AnimDurationG)
+                if (WaitedTimeG >= AnimDurationG && TimePassedGCD > granadeCD)
                 {
                     Instantiate(granadePrefab, GranadeLaunch.position, transform.rotation);
                     WaitedTimeG = 0;
                     throwGranade = false;
+                    TimePassedGCD = 0;
                 }
             }
 
-        }
-        else{
+
+            if (horizontal == 1 && onFloor || horizontal == -1 && onFloor) {
+                footstep += delta;
+                if (footstep > footstepRithm)
+                {
+                    audioSource.PlayOneShot(WalkSound);
+                    footstep = 0;
+                }
+                
+            }
+
+        }else{
             
             
             GodDirectionV = DirectionV.NONE;
@@ -319,7 +352,7 @@ public class HellbotControllers : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)//Detectar si toca el suelo para reiniciar la cantidad de saltos
     {
-        if (collision.collider.tag == "Floor"){
+        if (collision.gameObject.tag == "Floor"){
             if (jumpDone > 0)
             {
                 //hacer sonido de tocar suelo
@@ -330,9 +363,10 @@ public class HellbotControllers : MonoBehaviour
             jumpDone = 0;
             rb2d.drag = 3;
             runSpeed = MaxSpeed;
+            onFloor = true;
         }
 
-        if (collision.collider.tag == "WallFloor"){
+        if (collision.gameObject.tag == "WallFloor"){
             if (jumpDone > 0)
             {
                 //hacer sonido de tocar suelo
@@ -342,6 +376,8 @@ public class HellbotControllers : MonoBehaviour
             jumpDone = 0;
             rb2d.drag = 3;
             runSpeed = MaxSpeed;
+
+            onFloor = true;
         }
 
         if (collision.gameObject.tag == "Enemy")
@@ -357,12 +393,14 @@ public class HellbotControllers : MonoBehaviour
             animator.SetBool("Jumping", true);
             runSpeed = 200;
             rb2d.drag = 0f;
+            onFloor = false;
         }
 
         if (collision.collider.tag == "WallFloor"){
             animator.SetBool("Jumping", true);
             runSpeed = 200;
             rb2d.drag = 0f;
+            onFloor = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -371,11 +409,13 @@ public class HellbotControllers : MonoBehaviour
         {
             PlayerHit();
             Destroy(collision.gameObject);
+            audioSource.PlayOneShot(pHit);
         }
 
         if (collision.gameObject.tag == "Explosion")
         {
             PlayerHit();
+            audioSource.PlayOneShot(pHit);
         }
 
         if (collision.gameObject.tag == "Caida")
@@ -383,6 +423,7 @@ public class HellbotControllers : MonoBehaviour
             PlayerHit();
             PlayerHit();
             PlayerHit();
+            audioSource.PlayOneShot(pHit);
         }
 
      

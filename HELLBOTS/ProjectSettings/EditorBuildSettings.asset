@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GreyboxMap.unity
-    guid: 7fe8eec37203b1949b74f364e7a01f10
+    path: Assets/Scenes/Map1.unity
+    guid: 76e827f1fb2a070439af5d963cfa710f
   m_configObjects: {}

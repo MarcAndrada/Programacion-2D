@@ -17,6 +17,7 @@ TagManager:
   - Enemybullet
   - Playerbullet
   - Explosion
+  - ActiveWeapon
   layers:
   - Default
   - TransparentFX

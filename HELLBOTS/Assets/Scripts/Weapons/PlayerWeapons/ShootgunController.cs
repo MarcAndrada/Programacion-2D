@@ -11,12 +11,15 @@ public class ShootgunController : MonoBehaviour
     public GameObject CurrentBulletsT;
     public GameObject Infinite1;
     public GameObject Infinite2;
+    public AudioClip soundShoot;
+    public AudioClip outOfAmmoS;
 
     public float offsetBullet;
     public float fireRate;
     public int CurrentAmmo;
+    public int MaxAmmo;
 
-
+    private AudioSource audioSource;
     private GameObject bullet1;
     private GameObject bullet2;
     private GameObject bullet3;
@@ -25,7 +28,8 @@ public class ShootgunController : MonoBehaviour
     private GameObject Crosshair;
     private GameObject Player;
 
-    private int MaxAmmo;
+
+    
     private float AnguloRot1;
     private float AnguloRot2;
     private float AnguloRot3;
@@ -36,10 +40,10 @@ public class ShootgunController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MaxAmmo = CurrentAmmo;
         Crosshair = GameObject.FindGameObjectWithTag("Crosshair");
         Player = GameObject.FindGameObjectWithTag("Hellbot");
-        
+        audioSource = GetComponent<AudioSource>();
+
 
         MaxBulletsT.GetComponent<Text>().text = MaxAmmo.ToString();
 
@@ -73,6 +77,8 @@ public class ShootgunController : MonoBehaviour
         {
             if (TimeToShoot > fireRate && CurrentAmmo > 0)
             {
+               audioSource.PlayOneShot(soundShoot);
+               // audioSource.PlayOneShot(barrelReload);
                 bullet1 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot1));
                 Destroy(bullet1, 3);                    
                 bullet2 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot2));
@@ -84,8 +90,15 @@ public class ShootgunController : MonoBehaviour
                 bullet5 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot5));
                 Destroy(bullet5, 3);
                 TimeToShoot = 0;
-
+                
                 CurrentAmmo = CurrentAmmo - 5;
+            }
+            else if (CurrentAmmo == 0 && TimeToShoot > fireRate)
+            {
+                //Hacer Soniditos de Sin municion
+                audioSource.PlayOneShot(outOfAmmoS);
+                TimeToShoot = 0;
+
             }
         }
 
@@ -103,12 +116,6 @@ public class ShootgunController : MonoBehaviour
         }
         CurrentBulletsT.GetComponent<Text>().text = CurrentAmmo.ToString();
 
-    }
-
-
-    public void SetMaxAmmo()
-    {
-        CurrentAmmo = MaxAmmo;
     }
 
 

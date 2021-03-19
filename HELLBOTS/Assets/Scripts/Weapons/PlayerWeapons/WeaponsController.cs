@@ -11,16 +11,20 @@ public class WeaponsController : MonoBehaviour
     public GameObject CurrentBulletsT;
     public GameObject Infinite1;
     public GameObject Infinite2;
+    public AudioClip soundShoot;
+    public AudioClip outOfAmmoS;
+
 
     public float offsetBullet;
     public float fireRate;
     public int MaxAmmo;
+    public int CurrentAmmo;
 
+    private AudioSource audioSource;
     private GameObject bullet;
     private GameObject Crosshair;
     private GameObject Player;
 
-    private int CurrentAmmo;
     private float TimeToShoot;
     private bool Shoot;
  
@@ -30,10 +34,12 @@ public class WeaponsController : MonoBehaviour
     {
         Crosshair = GameObject.FindGameObjectWithTag("Crosshair");
         Player = GameObject.FindGameObjectWithTag("Hellbot");
+        audioSource = GetComponent<AudioSource>();
 
         CurrentAmmo = MaxAmmo;
 
         MaxBulletsT.GetComponent<Text>().text = MaxAmmo.ToString();
+
 
     }
 
@@ -65,6 +71,7 @@ public class WeaponsController : MonoBehaviour
             if (TimeToShoot > fireRate && CurrentAmmo > 0 || TimeToShoot > fireRate && gameObject.name == "Pistola")
             {
                 //Hacer sonido de dispar
+                audioSource.PlayOneShot(soundShoot);
                 //bullet = Instantiate(bulletPrefab, pos, SoporteArma.rotation);
                 bullet = Instantiate(bulletPrefab, pos, transform.rotation);
                 Destroy(bullet, 3);
@@ -72,9 +79,12 @@ public class WeaponsController : MonoBehaviour
                 CurrentAmmo--;
 
             }
-            else if (CurrentAmmo <= 0)
+            else if (CurrentAmmo == 0 && TimeToShoot > fireRate)
             {
                 //Hacer Soniditos de Sin municion
+                audioSource.PlayOneShot(outOfAmmoS);
+                TimeToShoot = 0;
+
             }
 
         }
@@ -96,6 +106,7 @@ public class WeaponsController : MonoBehaviour
         CurrentBulletsT.GetComponent<Text>().text = CurrentAmmo.ToString();
 
     }
+
 
 }
 
