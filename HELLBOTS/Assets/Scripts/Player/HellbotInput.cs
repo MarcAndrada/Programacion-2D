@@ -74,4 +74,9 @@ public class HellbotInput : MonoBehaviour
         get { return Input.GetKey(KeyCode.R); }
     }
 
+    public static bool Menu
+    {
+        get { return Input.GetKeyDown(KeyCode.Escape);  }
+    }
+
 }

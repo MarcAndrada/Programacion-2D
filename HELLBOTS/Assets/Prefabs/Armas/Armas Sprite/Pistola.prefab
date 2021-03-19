@@ -103,7 +103,7 @@ MonoBehaviour:
   Infinite1: {fileID: 0}
   Infinite2: {fileID: 0}
   soundShoot: {fileID: 8300000, guid: c14b4ecc400dffd4b9f5656385cf90d7, type: 3}
-  outOfAmmo: {fileID: 8300000, guid: f79f66699992a354db59d8c1a1229dcb, type: 3}
+  outOfAmmoS: {fileID: 0}
   offsetBullet: 42
   fireRate: 400
   MaxAmmo: -1
@@ -120,7 +120,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
