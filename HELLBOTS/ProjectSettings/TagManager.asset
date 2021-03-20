@@ -18,6 +18,7 @@ TagManager:
   - Playerbullet
   - Explosion
   - ActiveWeapon
+  - TurnPoint
   layers:
   - Default
   - TransparentFX
