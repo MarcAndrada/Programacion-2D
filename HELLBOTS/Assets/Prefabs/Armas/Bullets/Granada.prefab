@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExplosionPrefab: {fileID: 8137288298376025161, guid: 9eae1ccce09e86e4392bfde0a2d35ad5,
     type: 3}
-  granadeSpeed: 1000
+  granadeSpeed: 1500
   TimeToExplode: 1700
 --- !u!61 &364847769468073683
 BoxCollider2D:

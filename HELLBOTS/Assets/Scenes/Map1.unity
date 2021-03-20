@@ -1937,6 +1937,11 @@ PrefabInstance:
       propertyPath: DieText
       value: 
       objectReference: {fileID: 920264885}
+    - target: {fileID: 2637472240140541201, guid: 663399d9a44c8e24fbb4c0361ab14ef7,
+        type: 3}
+      propertyPath: granadeCD
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 4660076604405104300, guid: 663399d9a44c8e24fbb4c0361ab14ef7,
         type: 3}
       propertyPath: MaxBulletsT

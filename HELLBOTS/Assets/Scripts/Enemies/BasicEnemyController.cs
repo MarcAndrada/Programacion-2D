@@ -6,11 +6,19 @@ public class BasicEnemyController : MonoBehaviour
 {
     public GameObject bala;
     public float fireRate;
+    public float walkSpeed = 40f;
+    public GameObject alert;
+    public AudioClip AlertSound;
+    public float WaitTime;
+
+    
     private float nextFire;
     private float limiteWalkLeft;
     private float limiteWalkRight;
-    public float walkSpeed = 40f;
     private int direction = 1;
+    private bool firstTimeSeen = true;
+    private float WaitedTime = 0f;
+    private AudioSource audioSource;
     //public GameObject castPoint;
     enum typeStances { passive, follow, attack }
 
@@ -38,6 +46,8 @@ public class BasicEnemyController : MonoBehaviour
         rigidB = GetComponent<Rigidbody2D>();
         limiteWalkLeft = transform.position.x - GetComponent<CircleCollider2D>().radius;
         limiteWalkRight = transform.position.x + GetComponent<CircleCollider2D>().radius;
+        audioSource = GetComponent<AudioSource>();
+
     }
 
 
@@ -47,13 +57,15 @@ public class BasicEnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float delta = Time.deltaTime * 1000;
+
         distancePlayer = Mathf.Abs(player.transform.position.x - transform.position.x);
         switch (stances)
         {
             case typeStances.passive:
 
 
-                rigidB = GetComponent<Rigidbody2D>();
+                
                 rigidB.velocity = new Vector2(walkSpeed * direction, rigidB.velocity.y);
                 if (transform.position.x < limiteWalkLeft)
                 {
@@ -72,24 +84,53 @@ public class BasicEnemyController : MonoBehaviour
                 break;
 
             case typeStances.follow:
-                rigidB = GetComponent<Rigidbody2D>();
-                rigidB.velocity = new Vector2(walkSpeed * 1.5f * direction, rigidB.velocity.y);
-                if (player.transform.position.x > transform.position.x)
-                {
-                    direction = 1;
-                }
-                if (player.transform.position.x < transform.position.x)
-                {
 
-                    direction = -1;
-                }
-                if (distancePlayer > exitFollowZone)
+                if (firstTimeSeen)
                 {
-                    stances = typeStances.passive;
+                    //hacer sonido
+                    if (WaitedTime == 0)
+                    {
+                        audioSource.PlayOneShot(AlertSound);
+                    }
+                    
+                    //empezar a contar
+                    WaitedTime += delta;
+                    
+                    //set active alerta
+                    alert.SetActive(true);
+
+                    if (WaitedTime > WaitTime)
+                    {
+                        //cuando el contador este tal poner firsttimeseen a fasle
+                        firstTimeSeen = false;
+                        //set active false alerta
+                        alert.SetActive(false);
+                        WaitedTime = 0;
+                    }
+
+                   
                 }
-                if (distancePlayer < attackDistance)
-                {
-                    stances = typeStances.attack;
+
+                if (!firstTimeSeen) {
+                    rigidB.velocity = new Vector2(walkSpeed * 1.5f * direction, rigidB.velocity.y);
+                    if (player.transform.position.x > transform.position.x)
+                    {
+                        direction = 1;
+                    }
+                    if (player.transform.position.x < transform.position.x)
+                    {
+
+                        direction = -1;
+                    }
+                    if (distancePlayer > exitFollowZone)
+                    {
+                        stances = typeStances.passive;
+                        firstTimeSeen = true;
+                    }
+                    if (distancePlayer < attackDistance)
+                    {
+                        stances = typeStances.attack;
+                    }
                 }
 
                 break;
