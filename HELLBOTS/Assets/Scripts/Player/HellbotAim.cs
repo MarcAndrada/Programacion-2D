@@ -145,6 +145,10 @@ public class HellbotAim : MonoBehaviour
 
         }
 
+        
+        Crosshair.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5));
+        Arm.position = Crosshair.transform.position;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

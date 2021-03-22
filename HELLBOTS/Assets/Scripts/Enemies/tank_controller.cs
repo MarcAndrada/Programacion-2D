@@ -13,6 +13,7 @@ public class tank_controller : MonoBehaviour
     public float hitPoints;
     public float maxHitPoints = 5;
     private int direction = 1;
+    private SpriteRenderer sprite;
     //public GameObject castPoint;
     enum typeStances { passive, follow, attack }
 
@@ -33,8 +34,8 @@ public class tank_controller : MonoBehaviour
     {
 
         player = GameObject.FindWithTag("Hellbot");
+        sprite = GetComponent<SpriteRenderer>();
 
-        
         nextFire = Time.time;
 
         //Los límites para la patrulla
@@ -60,14 +61,13 @@ public class tank_controller : MonoBehaviour
 
                 rigidB = GetComponent<Rigidbody2D>();
                 rigidB.velocity = new Vector2(walkSpeed * direction, rigidB.velocity.y);
-                if (transform.position.x < limiteWalkLeft)
+                if (transform.position.x < limiteWalkLeft && sprite.flipX)
                 {
-                    direction = 1;
+                    sprite.flipX = false;
                 }
-                if (transform.position.x > limiteWalkRight)
+                if (transform.position.x > limiteWalkRight && !sprite.flipX)
                 {
-
-                    direction = -1;
+                    sprite.flipX = true;
                 }
                 if (distancePlayer < enterFollowZone)
                 {
@@ -79,14 +79,13 @@ public class tank_controller : MonoBehaviour
             case typeStances.follow:
                 rigidB = GetComponent<Rigidbody2D>();
                 rigidB.velocity = new Vector2(walkSpeed * 1.5f * direction, rigidB.velocity.y);
-                if (player.transform.position.x > transform.position.x)
+                if (player.transform.position.x > transform.position.x && transform.position.x < 0)
                 {
                     direction = 1;
                 }
-                if (player.transform.position.x < transform.position.x)
+                if (player.transform.position.x < transform.position.x && transform.position.x > 0)
                 {
-
-                    direction = -1;
+                    
                 }
                 if (distancePlayer > exitFollowZone)
                 {
@@ -110,7 +109,7 @@ public class tank_controller : MonoBehaviour
                 break;
 
         }
-        transform.localScale = new Vector3(transform.localScale.x * direction, transform.localScale.y, transform.localScale.z);
+        
 
     }
 

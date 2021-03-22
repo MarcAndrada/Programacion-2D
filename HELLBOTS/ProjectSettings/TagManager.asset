@@ -19,6 +19,7 @@ TagManager:
   - Explosion
   - ActiveWeapon
   - TurnPoint
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -31,8 +32,8 @@ TagManager:
   - scene
   - enemy
   - weapon_floor
-  - 
-  - 
+  - Shield
+  - EnemyBullets
   - 
   - 
   - 

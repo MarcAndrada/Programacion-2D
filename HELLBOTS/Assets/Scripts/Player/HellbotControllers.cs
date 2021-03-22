@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class HellbotControllers : MonoBehaviour
 {
-        public BoxCollider2D Crouchbc2D;
+    public BoxCollider2D Crouchbc2D;
     public BoxCollider2D Normalbc2D;
     public GameObject Heart1, Heart2, Heart3;
     public GameObject EmptyHeart1, EmptyHeart2, EmptyHeart3;

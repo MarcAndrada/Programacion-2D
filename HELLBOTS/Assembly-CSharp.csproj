@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\DoorCloseController.cs" />
     <Compile Include="Assets\Scripts\Enemies\BasicEnemyController.cs" />
     <Compile Include="Assets\Scripts\Enemies\GranadeFlayerScript.cs" />
+    <Compile Include="Assets\Scripts\Enemies\TurretCanonController.cs" />
     <Compile Include="Assets\Scripts\Enemies\bossBullet.cs" />
     <Compile Include="Assets\Scripts\Enemies\bossController.cs" />
     <Compile Include="Assets\Scripts\Enemies\flying_enemy.cs" />

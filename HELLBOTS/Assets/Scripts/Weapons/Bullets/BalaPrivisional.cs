@@ -42,5 +42,15 @@ public class BalaPrivisional : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (collision.gameObject.tag == "Shield")
+        {
+            Destroy(gameObject);
+        }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision){
+        
     }
 }
