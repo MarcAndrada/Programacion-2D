@@ -2,147 +2,150 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class tank_controller : MonoBehaviour
 {
-    public GameObject bala;
-    public float fireRate;
-    private float nextFire;
-    private float limiteWalkLeft;
-    private float limiteWalkRight;
-    public float walkSpeed = 40f;
-    public float hitPoints;
-    public float maxHitPoints = 5;
-    private int direction = 1;
-    private SpriteRenderer sprite;
-    //public GameObject castPoint;
-    enum typeStances { passive, follow, attack }
-
-    typeStances stances = typeStances.passive;
-
-    float enterFollowZone = 1345f;
-    float exitFollowZone = 1500f;
-    float attackDistance = 1000f;
-
-    float distancePlayer;
+    public float speed;
+    public float lineOfSite;
+    public float shootingRange;
+    public float fireRate = 1f;
+    private float nextFireTime;
+    private GameObject bala;
+    public GameObject bulletPrefab;
     private GameObject player;
+    public bool MoveRight;
+    private Vector2 StarterPos;
+    public float hitPoints;
 
-
-    private Rigidbody2D rigidB;
-
-    // Start is called before the first frame update
+    enum typeStances { passive, follow, attack }
+    typeStances stances = typeStances.passive;
     void Start()
     {
-
         player = GameObject.FindWithTag("Hellbot");
-        sprite = GetComponent<SpriteRenderer>();
-
-        nextFire = Time.time;
-
-        //Los límites para la patrulla
-
-        rigidB = GetComponent<Rigidbody2D>();
-        limiteWalkLeft = transform.position.x - GetComponent<CircleCollider2D>().radius;
-        limiteWalkRight = transform.position.x + GetComponent<CircleCollider2D>().radius;
-        hitPoints = maxHitPoints;
+        nextFireTime = 0;
+        StarterPos = transform.position;
     }
-
-
-
-
-
-    // Update is called once per frame
     void Update()
     {
-        distancePlayer = Mathf.Abs(player.transform.position.x - transform.position.x);
+        float delta = Time.deltaTime * 1000;
+
+    }
+    private void FixedUpdate()
+    {
+        float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+
+
         switch (stances)
         {
             case typeStances.passive:
-
-
-                rigidB = GetComponent<Rigidbody2D>();
-                rigidB.velocity = new Vector2(walkSpeed * direction, rigidB.velocity.y);
-                if (transform.position.x < limiteWalkLeft && sprite.flipX)
                 {
-                    sprite.flipX = false;
+                    if (distanceFromPlayer < lineOfSite)
+                    {
+                        stances = typeStances.follow;
+                    }
+                    break;
                 }
-                if (transform.position.x > limiteWalkRight && !sprite.flipX)
-                {
-                    sprite.flipX = true;
-                }
-                if (distancePlayer < enterFollowZone)
-                {
-                    stances = typeStances.follow;
-                }
-
-                break;
-
             case typeStances.follow:
-                rigidB = GetComponent<Rigidbody2D>();
-                rigidB.velocity = new Vector2(walkSpeed * 1.5f * direction, rigidB.velocity.y);
-                if (player.transform.position.x > transform.position.x && transform.position.x < 0)
                 {
-                    direction = 1;
-                }
-                if (player.transform.position.x < transform.position.x && transform.position.x > 0)
-                {
-                    
-                }
-                if (distancePlayer > exitFollowZone)
-                {
-                    stances = typeStances.passive;
-                }
-                if (distancePlayer < attackDistance)
-                {
-                    stances = typeStances.attack;
-                }
+                    if (player.transform.position.x > transform.position.x)
+                    {
+                        MoveRight = true;
+                    }
+                    else if (player.transform.position.x < transform.position.x)
+                    {
+                        MoveRight = false;
+                    }
 
-                break;
+                    if (distanceFromPlayer > lineOfSite)
+                    {
+                        stances = typeStances.passive;
+                        transform.position = StarterPos;
+                    }
+                    if (distanceFromPlayer <= shootingRange)
+                    {
+                        stances = typeStances.attack;
+                    }
+                    break;
+                }
             case typeStances.attack:
-                rigidB = GetComponent<Rigidbody2D>();
-
-                if (distancePlayer > attackDistance)
                 {
-                    stances = typeStances.follow;
+                    checkIfTimeToFire();
+                    if (distanceFromPlayer > shootingRange)
+                    {
+                        stances = typeStances.follow;
+                    }
+                    break;
                 }
 
-                checkIfTimeToFire();
-                break;
 
         }
-        
 
+        if (MoveRight)
+        {
+            transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+            transform.localScale = new Vector2(1, 1);
+        }
+        else
+        {
+            transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+            transform.localScale = new Vector2(-1, -1);
+        }
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("TurnPoint"))
+        {
+            if (stances == typeStances.passive)
+            {
+                if (MoveRight)
+                {
+                    MoveRight = false;
+                }
+                else
+                {
+                    MoveRight = true;
+                }
+            }
+            if (collider.gameObject.tag == "Playerbullet")
+            {
+                TakeHit();
+            }
+
+            if (collider.gameObject.tag == "Explosion")
+            {
+                TakeHit();
+                TakeHit();
+                TakeHit();
+            }
+
+
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, lineOfSite);
+        Gizmos.DrawWireSphere(transform.position, shootingRange);
+
+    }
     void checkIfTimeToFire()
     {
-        if (Time.time > nextFire)
+        float delta = Time.deltaTime * 1000;
+        nextFireTime += delta;
+        if (nextFireTime > fireRate)
         {
-            Instantiate(bala, transform.position, Quaternion.identity);
-            nextFire = Time.time + fireRate;
+            bala = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Destroy(bala, 4);
+            nextFireTime = 0;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Playerbullet")
-        {
-            TakeHit();
-        }
-
-        if (collision.gameObject.tag == "Explosion")
-        {
-            TakeHit();
-            TakeHit();
-            TakeHit();
-        }
-    }
-    public void TakeHit ()
+    public void TakeHit()
     {
         hitPoints = hitPoints - 1;
-        if(hitPoints <= 0)
+        if (hitPoints <= 0)
         {
             Destroy(gameObject);
         }
     }
-    
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class flying_enemy : MonoBehaviour
 {
     public float speed;
@@ -9,29 +10,114 @@ public class flying_enemy : MonoBehaviour
     public float shootingRange;
     public float fireRate = 1f;
     private float nextFireTime;
-    public GameObject bullet;
-    public GameObject bulletParent;
+    private GameObject bala;
+    public GameObject bulletPrefab;
     private GameObject player;
+    public bool MoveRight;
+    private Vector2 StarterPos;
+
+    enum typeStances { passive, follow, attack }
+    typeStances stances = typeStances.passive;
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
+        nextFireTime = 0;
+        StarterPos = transform.position;
     }
-
-    // Update is called once per frame
     void Update()
     {
+        float delta = Time.deltaTime * 1000;
+
+    }
+    private void FixedUpdate()
+    {
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
-        if (distanceFromPlayer < lineOfSite && distanceFromPlayer>shootingRange)
+
+
+        switch (stances)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+            case typeStances.passive:
+                {
+                    if (distanceFromPlayer < lineOfSite)
+                    {
+                        stances = typeStances.follow;
+                    }
+                    break;
+                }
+            case typeStances.follow:
+                {
+                    if (player.transform.position.x > transform.position.x)
+                    {
+                        MoveRight = true;
+                    }
+                    else if (player.transform.position.x < transform.position.x)
+                    {
+                        MoveRight = false;
+                    }
+
+                    if (distanceFromPlayer > lineOfSite)
+                    {
+                        stances = typeStances.passive;
+                        transform.position = StarterPos;
+                    }
+                    if (distanceFromPlayer <= shootingRange)
+                    {
+                        stances = typeStances.attack;
+                    }
+                    break;
+                }
+            case typeStances.attack:
+                {
+                    checkIfTimeToFire();
+                    if (distanceFromPlayer > shootingRange)
+                    {
+                        stances = typeStances.follow;
+                    }
+                    break;
+                }
+
 
         }
-        else if (distanceFromPlayer <= shootingRange && nextFireTime <Time.time)
-        {
-            Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
-            nextFireTime = Time.time + fireRate;
-        }
 
+        if (MoveRight)
+        {
+            transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+            transform.localScale = new Vector2(1, 1);
+        }
+        else
+        {
+            transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+            transform.localScale = new Vector2(-1, -1);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("TurnPoint"))
+        {
+            if (stances == typeStances.passive)
+            {
+                if (MoveRight)
+                {
+                    MoveRight = false;
+                }
+                else
+                {
+                    MoveRight = true;
+                }
+            }
+            if (collider.gameObject.tag == "Playerbullet")
+            {
+                Destroy(gameObject);
+            }
+
+            if (collider.gameObject.tag == "Explosion")
+            {
+                Destroy(gameObject);
+            }
+
+
+        }
     }
     private void OnDrawGizmosSelected()
     {
@@ -40,18 +126,15 @@ public class flying_enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, shootingRange);
 
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    void checkIfTimeToFire()
     {
-        if (collision.gameObject.tag == "Playerbullet")
+        float delta = Time.deltaTime * 1000;
+        nextFireTime += delta;
+        if (nextFireTime > fireRate)
         {
-            Destroy(gameObject);
-        }
-
-        if (collision.gameObject.tag == "Explosion")
-        {
-            Destroy(gameObject);
+            bala = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Destroy(bala, 4);
+            nextFireTime = 0;
         }
     }
 }
-
