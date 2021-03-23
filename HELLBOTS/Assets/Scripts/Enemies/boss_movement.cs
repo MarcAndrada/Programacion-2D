@@ -9,14 +9,29 @@ public class boss_movement : MonoBehaviour
     public float lineOfSite;
     public float shootingRange;
     public float fireRate = 1f;
-    private float nextFireTime;
-    private GameObject bala;
-    public GameObject bulletPrefab;
-    private GameObject player;
+    public GameObject BossbulletPrefab;
+    public GameObject EnemybulletPrefab;
     public bool MoveRight;
-    private Vector2 StarterPos;
     public float hitPoints;
+    public GameObject Mouth;
+    public GameObject LEye;
+    public GameObject REye;
+    public AudioClip LaserShoot;
+    public AudioClip MisileShoot;
+
+
     private SpriteRenderer sprite;
+    private float nextFireTime;
+    private GameObject bala1;
+    private GameObject bala2;
+    private GameObject bala3;
+    private GameObject player;
+    private bool Lasers = true;
+    private float ChangeBulletType = 5000;
+    private float TimePasedForChange = 0;
+    private Animator animator;
+    private AudioSource audiosource;
+
 
 
     enum typeStances { passive, follow, attack }
@@ -25,12 +40,29 @@ public class boss_movement : MonoBehaviour
     {
         player = GameObject.FindWithTag("Hellbot");
         sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        audiosource = GetComponent<AudioSource>();
         nextFireTime = 0;
-        StarterPos = transform.position;
     }
     void Update()
     {
         float delta = Time.deltaTime * 1000;
+        TimePasedForChange+= delta;
+
+        if (ChangeBulletType < TimePasedForChange)
+        {
+            if (Lasers)
+            {
+                Lasers = false;
+            }
+            else
+            {
+                Lasers = true;
+            }
+
+            TimePasedForChange = 0;
+        }
+
 
     }
     private void FixedUpdate()
@@ -62,7 +94,6 @@ public class boss_movement : MonoBehaviour
                     if (distanceFromPlayer > lineOfSite)
                     {
                         stances = typeStances.passive;
-                        transform.position = StarterPos;
                     }
                     if (distanceFromPlayer <= shootingRange)
                     {
@@ -97,19 +128,7 @@ public class boss_movement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("TurnPoint"))
-        {
-            if (stances == typeStances.passive)
-            {
-                if (MoveRight)
-                {
-                    MoveRight = false;
-                }
-                else
-                {
-                    MoveRight = true;
-                }
-            }
+        
             if (collider.gameObject.tag == "Playerbullet")
             {
                 TakeHit();
@@ -123,7 +142,6 @@ public class boss_movement : MonoBehaviour
             }
 
 
-        }
     }
     private void OnDrawGizmosSelected()
     {
@@ -134,13 +152,30 @@ public class boss_movement : MonoBehaviour
     }
     void checkIfTimeToFire()
     {
+
         float delta = Time.deltaTime * 1000;
         nextFireTime += delta;
         if (nextFireTime > fireRate)
         {
-            bala = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            Destroy(bala, 4);
-            nextFireTime = 0;
+            if (Lasers)
+            {
+                animator.SetBool("OpenMouth",true);
+                audiosource.PlayOneShot(MisileShoot);
+                bala1 = Instantiate(BossbulletPrefab, Mouth.transform.position, Quaternion.identity);
+                Destroy(bala1, 3);
+                nextFireTime = 0;
+            }else{
+                animator.SetBool("OpenMouth", false);
+                audiosource.PlayOneShot(LaserShoot);
+                bala2 = Instantiate(EnemybulletPrefab, LEye.transform.position, Quaternion.identity);
+                Destroy(bala2, 3);
+                audiosource.PlayOneShot(LaserShoot);
+                bala3 = Instantiate(EnemybulletPrefab, REye.transform.position, Quaternion.identity);
+                Destroy(bala3, 3);
+                nextFireTime = 0;
+
+            }
+            
         }
     }
     public void TakeHit()

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84367837}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16, y: -149, z: 0}
+  m_LocalPosition: {x: -27, y: -324, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7539290010183954023}
@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: -8830977205378400569}
   - component: {fileID: 1869990457}
   - component: {fileID: 2362555492576499575}
+  - component: {fileID: 997541466}
   m_Layer: 9
   m_Name: FlyingEnemy
   m_TagString: Enemy
@@ -58,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7732327790694911250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 752, y: -288, z: -3753.464}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 84367838}
@@ -128,13 +129,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476f37a991d5f52408f4e3f880fceaab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 300
   lineOfSite: 800
-  shootingRange: 425
-  fireRate: 1
+  shootingRange: 550
+  fireRate: 1000
   bulletPrefab: {fileID: 1288552800543150587, guid: 33356378cedede945a03d5d4b57a094a,
     type: 3}
+  throwZone: {fileID: 84367837}
+  maxBorder: 600
   MoveRight: 0
+  alert: {fileID: 9117245709936404992}
+  AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
+  WaitTime: 500
 --- !u!61 &1869990457
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -182,7 +188,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 1400
+  MaxDistance: 1500
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -257,6 +263,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &997541466
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7732327790694911250}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6
 --- !u!1 &9117245709936404992
 GameObject:
   m_ObjectHideFlags: 0
