@@ -24,10 +24,13 @@ public class newSuicideScript : MonoBehaviour
     private float WaitedTime = 0f;
     private Vector2 CurrentPos;
 
+    Animator anim;
+
     enum typeStances { passive, follow, attack }
     typeStances stances = typeStances.passive;
     void Start()
     {
+        anim = GetComponent<Animator>();
         player = GameObject.FindWithTag("Hellbot");
         sprite = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
@@ -136,6 +139,14 @@ public class newSuicideScript : MonoBehaviour
 
                 break;
 
+        }
+        if (MoveRight = true)
+        {
+            anim.SetTrigger("caminar");
+        }
+        if (MoveRight = false)
+        {
+            anim.SetTrigger("caminar");
         }
     }
 

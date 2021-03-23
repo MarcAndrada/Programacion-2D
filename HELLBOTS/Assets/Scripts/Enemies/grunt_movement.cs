@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class grunt_movement : MonoBehaviour
 {
+
     public float speed;
     public float lineOfSite;
     public float shootingRange;
@@ -16,6 +17,7 @@ public class grunt_movement : MonoBehaviour
     public float WaitTime;
     public float maxBorder;
     public AudioClip EnemyShoot;
+    public Transform refManoArma;
 
     private float nextFireTime;
     private GameObject bala;
@@ -29,19 +31,25 @@ public class grunt_movement : MonoBehaviour
     private enum typeStances { passive, follow, attack }
     private typeStances stances = typeStances.passive;
 
+    Animator anim;
+
 
     void Start() {
+        anim = GetComponent<Animator>();
         player = GameObject.FindWithTag("Hellbot");
         sprite = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         nextFireTime = 0;
         CurrentPos = transform.position;
+        
     }
 
     private void FixedUpdate()
     {
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
         float delta = Time.deltaTime * 1000;
+
+
 
         switch (stances){
             case typeStances.passive:
@@ -141,8 +149,16 @@ public class grunt_movement : MonoBehaviour
 
 
         }
+        if (MoveRight = true)
+        {
+            anim.SetTrigger("caminar");
+        }
+        if (MoveRight = false)
+        {
+            anim.SetTrigger("caminar");
+        }
 
-       
+        refManoArma.position = player.transform.position;
     }
 
 
@@ -170,10 +186,10 @@ public class grunt_movement : MonoBehaviour
     void checkIfTimeToFire()
     {
         float delta = Time.deltaTime * 1000;
-        audioSource.PlayOneShot(EnemyShoot);
         nextFireTime += delta;
         if (nextFireTime > fireRate)
         {
+            audioSource.PlayOneShot(EnemyShoot);
             bala = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             Destroy(bala, 4);
             nextFireTime = 0;
