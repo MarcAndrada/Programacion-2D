@@ -408,16 +408,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  MoveRight: 0
-  bala: {fileID: 0}
+  lineOfSite: 0
+  shootingRange: 0
   fireRate: 0
-  walkSpeed: 40
-  alert: {fileID: 0}
-  AlertSound: {fileID: 0}
-  WaitTime: 0
-  enterFollowZone: 1345
-  exitFollowZone: 1500
-  attackDistance: 1000
+  bala: {fileID: 0}
+  bulletParent: {fileID: 0}
+  MoveRight: 0
 --- !u!61 &1511638906
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -793,6 +789,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NewMovementTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003039661491228073, guid: 4fe644bb5a492e74a869bb9f6aa511ea,
+        type: 3}
+      propertyPath: shootingRange
+      value: -1023.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003039661491228073, guid: 4fe644bb5a492e74a869bb9f6aa511ea,
+        type: 3}
+      propertyPath: lineOfSite
+      value: -1768.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003039661491228073, guid: 4fe644bb5a492e74a869bb9f6aa511ea,
+        type: 3}
+      propertyPath: speed
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fe644bb5a492e74a869bb9f6aa511ea, type: 3}
