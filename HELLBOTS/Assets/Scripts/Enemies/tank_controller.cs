@@ -9,44 +9,108 @@ public class tank_controller : MonoBehaviour
     public float lineOfSite;
     public float shootingRange;
     public float fireRate = 1f;
-    private float nextFireTime;
-    private GameObject bala;
     public GameObject bulletPrefab;
-    private GameObject player;
     public bool MoveRight;
-    private Vector2 StarterPos;
     public float hitPoints;
+    public GameObject alert;
+    public AudioClip AlertSound;
+    public float WaitTime;
+    public GameObject shoot;
+    public AudioClip EnemyShoot;
+    public float maxBorder;
+
+    private GameObject bala;
+    private GameObject player;
+    private Vector2 CurrentPos;
+    private SpriteRenderer sprite;
+    private AudioSource audioSource;
+    private float nextFireTime;
+    private bool firstTimeSeen = true;
+    private float WaitedTime = 0f;
 
     enum typeStances { passive, follow, attack }
     typeStances stances = typeStances.passive;
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
+        sprite = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         nextFireTime = 0;
-        StarterPos = transform.position;
-    }
-    void Update()
-    {
-        float delta = Time.deltaTime * 1000;
+        CurrentPos = transform.position;
 
     }
+
     private void FixedUpdate()
     {
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
+        float delta = Time.deltaTime * 1000;
+        
+        if (hitPoints <= 0)
+        {
+            Destroy(gameObject);
+        }
 
         switch (stances)
         {
             case typeStances.passive:
+
+                if (MoveRight)
                 {
-                    if (distanceFromPlayer < lineOfSite)
-                    {
-                        stances = typeStances.follow;
-                    }
-                    break;
+                    transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                    sprite.flipX = true;
                 }
-            case typeStances.follow:
+                else
                 {
+                    transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                }
+
+                if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
+                {
+                    MoveRight = false;
+                }
+                if (transform.position.x < CurrentPos.x - maxBorder && !MoveRight)
+                {
+                    MoveRight = true;
+                }
+
+                if (distanceFromPlayer < lineOfSite)
+                {
+                    stances = typeStances.follow;
+                }
+                break;
+
+
+            case typeStances.follow:
+
+                if (firstTimeSeen)
+                {
+                    //hacer sonido
+                    if (WaitedTime == 0)
+                    {
+                        audioSource.PlayOneShot(AlertSound);
+                    }
+
+                    //empezar a contar
+                    WaitedTime += delta;
+
+                    //set active alerta
+                    alert.SetActive(true);
+
+                    if (WaitedTime > WaitTime)
+                    {
+                        //cuando el contador este tal poner firsttimeseen a fasle
+                        firstTimeSeen = false;
+                        //set active false alerta
+                        alert.SetActive(false);
+                        WaitedTime = 0;
+                    }
+
+
+                }
+                else
+                {
+
                     if (player.transform.position.x > transform.position.x)
                     {
                         MoveRight = true;
@@ -55,71 +119,57 @@ public class tank_controller : MonoBehaviour
                     {
                         MoveRight = false;
                     }
+                    if (MoveRight)
+                    {
+                        transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                        sprite.flipX = true;
+                    }
+                    else
+                    {
+                        transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                        sprite.flipX = false;
+                    }
 
                     if (distanceFromPlayer > lineOfSite)
                     {
                         stances = typeStances.passive;
-                        transform.position = StarterPos;
+                        firstTimeSeen = true;
+                        CurrentPos = transform.position;
                     }
                     if (distanceFromPlayer <= shootingRange)
                     {
                         stances = typeStances.attack;
                     }
-                    break;
                 }
+                break;
+
             case typeStances.attack:
+
+                checkIfTimeToFire();
+                if (distanceFromPlayer > shootingRange)
                 {
-                    checkIfTimeToFire();
-                    if (distanceFromPlayer > shootingRange)
-                    {
-                        stances = typeStances.follow;
-                    }
-                    break;
+                    stances = typeStances.follow;
                 }
+                break;
 
 
-        }
 
-        if (MoveRight)
-        {
-            transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(1, 1);
-        }
-        else
-        {
-            transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(-1, -1);
         }
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("TurnPoint"))
+       
+        if (collider.gameObject.tag == "Playerbullet")
         {
-            if (stances == typeStances.passive)
-            {
-                if (MoveRight)
-                {
-                    MoveRight = false;
-                }
-                else
-                {
-                    MoveRight = true;
-                }
-            }
-            if (collider.gameObject.tag == "Playerbullet")
-            {
-                TakeHit();
-            }
+            TakeHit();
+        }
 
-            if (collider.gameObject.tag == "Explosion")
-            {
-                TakeHit();
-                TakeHit();
-                TakeHit();
-            }
-
-
+        if (collider.gameObject.tag == "Explosion")
+        {
+            TakeHit();
+            TakeHit();
+            TakeHit();
         }
     }
     private void OnDrawGizmosSelected()
@@ -135,17 +185,14 @@ public class tank_controller : MonoBehaviour
         nextFireTime += delta;
         if (nextFireTime > fireRate)
         {
-            bala = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(EnemyShoot);
+            bala = Instantiate(bulletPrefab, shoot.transform.position, Quaternion.identity);
             Destroy(bala, 4);
             nextFireTime = 0;
         }
     }
     public void TakeHit()
     {
-        hitPoints = hitPoints - 1;
-        if (hitPoints <= 0)
-        {
-            Destroy(gameObject);
-        }
+        hitPoints--;
     }
 }

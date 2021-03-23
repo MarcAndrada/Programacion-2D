@@ -16,12 +16,15 @@ public class boss_movement : MonoBehaviour
     public bool MoveRight;
     private Vector2 StarterPos;
     public float hitPoints;
+    private SpriteRenderer sprite;
+
 
     enum typeStances { passive, follow, attack }
     typeStances stances = typeStances.passive;
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
+        sprite = GetComponent<SpriteRenderer>();
         nextFireTime = 0;
         StarterPos = transform.position;
     }
@@ -83,12 +86,12 @@ public class boss_movement : MonoBehaviour
         if (MoveRight)
         {
             transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(1, 1);
+            sprite.flipX = true;
         }
         else
         {
             transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(-1, -1);
+            sprite.flipX = false;
         }
     }
 

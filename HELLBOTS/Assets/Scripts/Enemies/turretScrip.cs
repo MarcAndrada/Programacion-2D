@@ -6,17 +6,21 @@ public class turretScrip : MonoBehaviour
 {
 
     public float shootingRange;
-    public float fireRate = 1f;
-    public float nextFireTime;
-    public GameObject bullet;
-    public GameObject bulletParent;
-    private GameObject player;
+    public float fireRate;
+    public GameObject bulletPrefab;
+    public GameObject Canon;
+    public AudioClip EnemyShoot;
 
+    private float nextFireTime;
+    private GameObject player;
+    private GameObject bala;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -24,10 +28,9 @@ void Update()
     {
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
-        if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
+        if (distanceFromPlayer <= shootingRange)
         {
-            Instantiate(bullet, bulletParent.transform.position, Quaternion.identity);
-            nextFireTime = Time.time + fireRate;
+            checkIfTimeToFire();
         }
 
     }
@@ -49,5 +52,20 @@ void Update()
         {
             Destroy(gameObject);
         }
+ 
     }
+
+    void checkIfTimeToFire()
+    {
+        float delta = Time.deltaTime * 1000;
+        nextFireTime += delta;
+        if (nextFireTime > fireRate)
+        {
+            audioSource.PlayOneShot(EnemyShoot);
+            bala = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Destroy(bala, 4);
+            nextFireTime = 0;
+        }
+    }
+
 }

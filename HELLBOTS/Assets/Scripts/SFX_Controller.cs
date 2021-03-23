@@ -14,6 +14,10 @@ public class SFX_Controller : MonoBehaviour
 
     private GameObject[] Explosion;
     private GameObject[] Enemies;
+    private GameObject[] PlayerBullets;
+    private GameObject[] EnemyBullets;
+    private AudioSource PBull;
+    private AudioSource EBull;
     private AudioSource ExplosionS;
     private AudioSource EnemiesS;
     private float Volume = 0.1f;
@@ -27,8 +31,11 @@ public class SFX_Controller : MonoBehaviour
         Bazooka.volume = Volume;
         Sniper.volume = Volume;
 
+        
         Explosion = GameObject.FindGameObjectsWithTag("Explosion");
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        PlayerBullets = GameObject.FindGameObjectsWithTag("Playerbullet");
+        EnemyBullets = GameObject.FindGameObjectsWithTag("Enemybullet");
         for (int i = 0; i < Explosion.Length; i++)
         {
             ExplosionS = Explosion[i].GetComponent<AudioSource>();
@@ -41,7 +48,18 @@ public class SFX_Controller : MonoBehaviour
             EnemiesS.volume = Volume;
         }
 
-      
+        for (int i = 0; i < PlayerBullets.Length; i++)
+        {
+            PBull = PlayerBullets[i].GetComponent<AudioSource>();
+            PBull.volume = Volume;
+        }
+        for (int i = 0; i < EnemyBullets.Length; i++)
+        {
+            EBull = EnemyBullets[i].GetComponent<AudioSource>();
+            EBull.volume = Volume;
+        }
+
+
 
     }
 

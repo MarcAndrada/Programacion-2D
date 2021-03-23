@@ -9,43 +9,94 @@ public class grunt_movement : MonoBehaviour
     public float lineOfSite;
     public float shootingRange;
     public float fireRate = 1f;
+    public GameObject bulletPrefab;
+    public bool MoveRight;
+    public GameObject alert;
+    public AudioClip AlertSound;
+    public float WaitTime;
+    public float maxBorder;
+    public AudioClip EnemyShoot;
+
     private float nextFireTime;
     private GameObject bala;
-    public GameObject bulletPrefab;
     private GameObject player;
-    public bool MoveRight;
-    private Vector2 StarterPos;
+    private Vector2 CurrentPos;
+    private SpriteRenderer sprite;
+    private AudioSource audioSource;
+    private bool firstTimeSeen = true;
+    private float WaitedTime = 0f;
+   
+    private enum typeStances { passive, follow, attack }
+    private typeStances stances = typeStances.passive;
 
-    enum typeStances { passive, follow, attack }
-    typeStances stances = typeStances.passive;
-    void Start()
-    {
+
+    void Start() {
         player = GameObject.FindWithTag("Hellbot");
+        sprite = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         nextFireTime = 0;
-        StarterPos = transform.position;
+        CurrentPos = transform.position;
     }
-    void Update()
-    {
-        float delta = Time.deltaTime * 1000;
 
-    }
     private void FixedUpdate()
     {
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+        float delta = Time.deltaTime * 1000;
 
-
-        switch (stances)
-        {
+        switch (stances){
             case typeStances.passive:
+                if (MoveRight)
                 {
-                    if (distanceFromPlayer < lineOfSite)
-                    {
-                        stances = typeStances.follow;
-                    }
-                    break;
+                    transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                    sprite.flipX = true;
                 }
-            case typeStances.follow:
+                else{
+                    transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                    sprite.flipX = false;
+                }
+
+                if (transform.position.x > CurrentPos.x + maxBorder && MoveRight){
+                    MoveRight = false;
+                }
+                if (transform.position.x < CurrentPos.x - maxBorder && !MoveRight)
                 {
+                    MoveRight = true;
+                }
+
+                if (distanceFromPlayer < lineOfSite){
+                    stances = typeStances.follow;
+                }
+                break;
+
+                
+            case typeStances.follow:
+                
+                if (firstTimeSeen)
+                {
+                    //hacer sonido
+                    if (WaitedTime == 0)
+                    {
+                        audioSource.PlayOneShot(AlertSound);
+                    }
+
+                    //empezar a contar
+                    WaitedTime += delta;
+
+                    //set active alerta
+                    alert.SetActive(true);
+
+                    if (WaitedTime > WaitTime)
+                    {
+                        //cuando el contador este tal poner firsttimeseen a fasle
+                        firstTimeSeen = false;
+                        //set active false alerta
+                        alert.SetActive(false);
+                        WaitedTime = 0;
+                    }
+
+
+                }else{
+
                     if (player.transform.position.x > transform.position.x)
                     {
                         MoveRight = true;
@@ -54,70 +105,60 @@ public class grunt_movement : MonoBehaviour
                     {
                         MoveRight = false;
                     }
+                    if (MoveRight)
+                    {
+                        transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                        sprite.flipX = true;
+                    }
+                    else
+                    {
+                        transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                        sprite.flipX = false;
+                    }
 
                     if (distanceFromPlayer > lineOfSite)
                     {
                         stances = typeStances.passive;
-                        transform.position = StarterPos;
+                        firstTimeSeen = true;
+                        CurrentPos = transform.position;
                     }
                     if (distanceFromPlayer <= shootingRange)
                     {
                         stances = typeStances.attack;
                     }
-                    break;
                 }
+                break;
+                
             case typeStances.attack:
+                
+                checkIfTimeToFire();
+                if (distanceFromPlayer > shootingRange)
                 {
-                    checkIfTimeToFire();
-                    if (distanceFromPlayer > shootingRange)
-                    {
-                        stances = typeStances.follow;
-                    }
-                    break;
+                    stances = typeStances.follow;
                 }
+                break;
+                
 
 
         }
 
-        if (MoveRight)
-        {
-            transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(1, 1);
-        }
-        else
-        {
-            transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(-1, -1);
-        }
+       
     }
+
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("TurnPoint"))
+
+        if (collider.gameObject.tag == "Playerbullet")
         {
-            if (stances == typeStances.passive)
-            {
-                if (MoveRight)
-                {
-                    MoveRight = false;
-                }
-                else
-                {
-                    MoveRight = true;
-                }
-            }
-            if (collider.gameObject.tag == "Playerbullet")
-            {
-                Destroy(gameObject);
-            }
-
-            if (collider.gameObject.tag == "Explosion")
-            {
-                Destroy(gameObject);
-            }
-
-
+            Destroy(gameObject);
         }
+
+        if (collider.gameObject.tag == "Explosion")
+        {
+            Destroy(gameObject);
+        }
+
     }
     private void OnDrawGizmosSelected()
     {
@@ -129,6 +170,7 @@ public class grunt_movement : MonoBehaviour
     void checkIfTimeToFire()
     {
         float delta = Time.deltaTime * 1000;
+        audioSource.PlayOneShot(EnemyShoot);
         nextFireTime += delta;
         if (nextFireTime > fireRate)
         {

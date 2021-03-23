@@ -9,12 +9,14 @@ public class flying_enemy : MonoBehaviour
     public float lineOfSite;
     public float shootingRange;
     public float fireRate = 1f;
+    public GameObject bulletPrefab;
+    public float maxBorder;
+    public bool MoveRight;
+
     private float nextFireTime;
     private GameObject bala;
-    public GameObject bulletPrefab;
     private GameObject player;
-    public bool MoveRight;
-    private Vector2 StarterPos;
+    private Vector2 CurrentPos;
 
     enum typeStances { passive, follow, attack }
     typeStances stances = typeStances.passive;
@@ -22,12 +24,7 @@ public class flying_enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Hellbot");
         nextFireTime = 0;
-        StarterPos = transform.position;
-    }
-    void Update()
-    {
-        float delta = Time.deltaTime * 1000;
-
+        CurrentPos = transform.position;
     }
     private void FixedUpdate()
     {
@@ -37,58 +34,69 @@ public class flying_enemy : MonoBehaviour
         switch (stances)
         {
             case typeStances.passive:
+                
+                if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
                 {
-                    if (distanceFromPlayer < lineOfSite)
-                    {
-                        stances = typeStances.follow;
-                    }
-                    break;
+                    MoveRight = false;
                 }
+                if (transform.position.x < CurrentPos.x - maxBorder && !MoveRight)
+                {
+                    MoveRight = true;
+                }
+
+                if (distanceFromPlayer < lineOfSite)
+                {
+                    stances = typeStances.follow;
+                }
+
+                if (MoveRight)
+                {
+                    transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                }
+                else
+                {
+                    transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                }
+
+                break;
+
+                
             case typeStances.follow:
+               
+                if (player.transform.position.x > transform.position.x)
                 {
-                    if (player.transform.position.x > transform.position.x)
-                    {
-                        MoveRight = true;
-                    }
-                    else if (player.transform.position.x < transform.position.x)
-                    {
-                        MoveRight = false;
-                    }
-
-                    if (distanceFromPlayer > lineOfSite)
-                    {
-                        stances = typeStances.passive;
-                        transform.position = StarterPos;
-                    }
-                    if (distanceFromPlayer <= shootingRange)
-                    {
-                        stances = typeStances.attack;
-                    }
-                    break;
+                    
                 }
+                else if (player.transform.position.x < transform.position.x)
+                {
+                    MoveRight = false;
+                }
+
+                if (distanceFromPlayer > lineOfSite)
+                {
+                    stances = typeStances.passive;
+                    CurrentPos = transform.position;
+                }
+                if (distanceFromPlayer <= shootingRange)
+                {
+                    stances = typeStances.attack;
+                }
+                break;
+                
             case typeStances.attack:
+                
+                checkIfTimeToFire();
+                if (distanceFromPlayer > shootingRange)
                 {
-                    checkIfTimeToFire();
-                    if (distanceFromPlayer > shootingRange)
-                    {
-                        stances = typeStances.follow;
-                    }
-                    break;
+                    stances = typeStances.follow;
                 }
+                break;
+                
 
 
         }
 
-        if (MoveRight)
-        {
-            transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(1, 1);
-        }
-        else
-        {
-            transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(-1, -1);
-        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D collider)

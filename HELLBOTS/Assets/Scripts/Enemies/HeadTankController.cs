@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretCanonController : MonoBehaviour
+public class HeadTankController : MonoBehaviour
 {
-    public Transform Canon;
+    public Transform Head;
     private GameObject player;
     private float angle;
 
@@ -18,6 +18,6 @@ public class TurretCanonController : MonoBehaviour
 
         Vector3 aimDirection = (player.transform.position - transform.position).normalized;
         angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        Canon.eulerAngles = new Vector3(0, 0, angle + 90);
+        Head.eulerAngles = new Vector3(0, 0, angle + 180);
     }
 }

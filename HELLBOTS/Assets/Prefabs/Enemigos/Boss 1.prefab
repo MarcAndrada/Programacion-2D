@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 432525027007962801}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,6 +96,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e211b33ce1c1e419dbf3c573d51f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  lineOfSite: 0
+  shootingRange: 0
+  fireRate: 1
+  bulletPrefab: {fileID: 0}
+  MoveRight: 0
+  hitPoints: 0
 --- !u!50 &452110587772781344
 Rigidbody2D:
   serializedVersion: 4
@@ -134,7 +141,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 35.079998, y: 24.802656}
+    oldSize: {x: 3508, y: 2480.2656}
     newSize: {x: 35.079998, y: 24.802656}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
