@@ -51,46 +51,34 @@ public class new_movement : MonoBehaviour
     public float shootingRange;
     public float fireRate = 1f;
     private float nextFireTime;
-    public GameObject bala;
-    public GameObject bulletParent;
+    private GameObject bala;
+    public GameObject bulletPrefab;
     private GameObject player;
     public bool MoveRight;
+    private Vector2 StarterPos;
     
-    private float nextFire;
     enum typeStances { passive, follow, attack}
     typeStances stances = typeStances.passive;
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
+        nextFireTime = 0;
+        StarterPos = transform.position;
     }
     void Update()
     {
+        float delta = Time.deltaTime * 1000;
+       
+    }
+    private void FixedUpdate()
+    {
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
-        if (MoveRight)
-        {
-            transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(1, 1);
-        }
-        else
-        {
-            transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(-1, -1);
-        }
+       
         switch (stances)
         {
             case typeStances.passive:
                 {
-                    if (MoveRight)
-                    {
-                        transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-                        transform.localScale = new Vector2(1, 1);
-                    }
-                    else
-                    {
-                        transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-
-                    }
                     if (distanceFromPlayer < lineOfSite)
                     {
                         stances = typeStances.follow;
@@ -99,10 +87,19 @@ public class new_movement : MonoBehaviour
                 }
             case typeStances.follow:
                 {
-                    transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+                    if (player.transform.position.x > transform.position.x)
+                    {
+                        MoveRight = true;
+                    }
+                    else if (player.transform.position.x < transform.position.x)
+                    {
+                        MoveRight = false;
+                    }
+                    
                     if (distanceFromPlayer > lineOfSite)
                     {
                         stances = typeStances.passive;
+                        transform.position = StarterPos;
                     }
                     if (distanceFromPlayer <= shootingRange)
                     {
@@ -119,20 +116,36 @@ public class new_movement : MonoBehaviour
                     }
                     break;
                 }
+
+
+        }
+
+        if (MoveRight)
+        {
+            transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+            transform.localScale = new Vector2(1, 1);
+        }else{
+            transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+            transform.localScale = new Vector2(-1, -1);
         }
     }
+
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.CompareTag("TurnPoint"))
         {
-            if (MoveRight)
+            if (stances == typeStances.passive)
             {
-                MoveRight = false;
+                if (MoveRight)
+                {
+                    MoveRight = false;
+                }
+                else
+                {
+                    MoveRight = true;
+                }
             }
-            else
-            {
-                MoveRight = true;
-            }
+            
 
         }
     }
@@ -145,10 +158,13 @@ public class new_movement : MonoBehaviour
     }
     void checkIfTimeToFire()
     {
-        if (Time.time > nextFire)
+        float delta = Time.deltaTime * 1000;
+        nextFireTime += delta;
+        if (nextFireTime > fireRate)
         {
-            Instantiate(bala, transform.position, Quaternion.identity);
-            nextFire = Time.time + fireRate;
+            bala = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Destroy(bala, 4);
+            nextFireTime = 0;
         }
     }
 }
