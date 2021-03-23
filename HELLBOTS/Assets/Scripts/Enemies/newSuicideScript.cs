@@ -24,7 +24,7 @@ public class newSuicideScript : MonoBehaviour
     private float WaitedTime = 0f;
     private Vector2 CurrentPos;
 
-    Animator anim;
+    private Animator anim;
 
     enum typeStances { passive, follow, attack }
     typeStances stances = typeStances.passive;
@@ -140,12 +140,10 @@ public class newSuicideScript : MonoBehaviour
                 break;
 
         }
-        if (MoveRight = true)
+        if (MoveRight == true)
         {
             anim.SetTrigger("caminar");
-        }
-        if (MoveRight = false)
-        {
+        }else{
             anim.SetTrigger("caminar");
         }
     }

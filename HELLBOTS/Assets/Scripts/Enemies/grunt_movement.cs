@@ -18,6 +18,7 @@ public class grunt_movement : MonoBehaviour
     public float maxBorder;
     public AudioClip EnemyShoot;
     public Transform refManoArma;
+    public float hitPoints;
 
     private float nextFireTime;
     private GameObject bala;
@@ -44,6 +45,8 @@ public class grunt_movement : MonoBehaviour
         
     }
 
+
+
     private void FixedUpdate()
     {
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
@@ -63,7 +66,8 @@ public class grunt_movement : MonoBehaviour
                     sprite.flipX = false;
                 }
 
-                if (transform.position.x > CurrentPos.x + maxBorder && MoveRight){
+                if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
+                {
                     MoveRight = false;
                 }
                 if (transform.position.x < CurrentPos.x - maxBorder && !MoveRight)
@@ -149,16 +153,14 @@ public class grunt_movement : MonoBehaviour
 
 
         }
-        if (MoveRight = true)
+        if (MoveRight == true)
         {
             anim.SetTrigger("caminar");
-        }
-        if (MoveRight = false)
-        {
+        }else{
             anim.SetTrigger("caminar");
         }
 
-        refManoArma.position = player.transform.position;
+        
     }
 
 
@@ -167,12 +169,14 @@ public class grunt_movement : MonoBehaviour
 
         if (collider.gameObject.tag == "Playerbullet")
         {
-            Destroy(gameObject);
+            TakeHit();
         }
 
         if (collider.gameObject.tag == "Explosion")
         {
-            Destroy(gameObject);
+            TakeHit();
+            TakeHit();
+            TakeHit();
         }
 
     }
@@ -193,6 +197,15 @@ public class grunt_movement : MonoBehaviour
             bala = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             Destroy(bala, 4);
             nextFireTime = 0;
+        }
+    }
+
+    public void TakeHit()
+    {
+        hitPoints = hitPoints - 1;
+        if (hitPoints <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 } 

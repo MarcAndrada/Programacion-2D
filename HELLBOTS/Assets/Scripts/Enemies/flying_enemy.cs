@@ -16,6 +16,7 @@ public class flying_enemy : MonoBehaviour
     public GameObject alert;
     public AudioClip AlertSound;
     public float WaitTime;
+    public float hitPoints;
 
     private float nextFireTime;
     private GameObject bala;
@@ -115,12 +116,15 @@ public class flying_enemy : MonoBehaviour
         
             if (collider.gameObject.tag == "Playerbullet")
             {
-                Destroy(gameObject);
+                TakeHit();
             }
 
             if (collider.gameObject.tag == "Explosion")
             {
-                Destroy(gameObject);
+                TakeHit();
+                TakeHit();
+                TakeHit();
+
             }
 
     }
@@ -140,6 +144,15 @@ public class flying_enemy : MonoBehaviour
             bala = Instantiate(bulletPrefab, throwZone.transform.position, Quaternion.identity);
             Destroy(bala, 4);
             nextFireTime = 0;
+        }
+    }
+
+    public void TakeHit()
+    {
+        hitPoints = hitPoints - 1;
+        if (hitPoints <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

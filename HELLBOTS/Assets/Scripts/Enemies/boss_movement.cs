@@ -18,7 +18,7 @@ public class boss_movement : MonoBehaviour
     public GameObject REye;
     public AudioClip LaserShoot;
     public AudioClip MisileShoot;
-
+    public float maxBorder;
 
     private SpriteRenderer sprite;
     private float nextFireTime;
@@ -31,7 +31,7 @@ public class boss_movement : MonoBehaviour
     private float TimePasedForChange = 0;
     private Animator animator;
     private AudioSource audiosource;
-
+    private Vector3 CurrentPos;
 
 
     enum typeStances { passive, follow, attack }
@@ -43,6 +43,7 @@ public class boss_movement : MonoBehaviour
         animator = GetComponent<Animator>();
         audiosource = GetComponent<AudioSource>();
         nextFireTime = 0;
+        CurrentPos = transform.position;
     }
     void Update()
     {
@@ -73,13 +74,37 @@ public class boss_movement : MonoBehaviour
         switch (stances)
         {
             case typeStances.passive:
+                
+                if (MoveRight)
                 {
-                    if (distanceFromPlayer < lineOfSite)
-                    {
-                        stances = typeStances.follow;
-                    }
-                    break;
+                    transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+
                 }
+                else
+                {
+                    transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                }
+
+                if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
+                {
+                    MoveRight = false;
+                }
+                if (transform.position.x < CurrentPos.x - maxBorder && !MoveRight)
+                {
+                    MoveRight = true;
+                }
+
+                if (distanceFromPlayer < lineOfSite)
+                {
+                    stances = typeStances.follow;
+                }
+                else
+                {
+                    stances = typeStances.passive;
+                }
+                break;
+
+        
             case typeStances.follow:
                 {
                     if (player.transform.position.x > transform.position.x)
@@ -110,8 +135,6 @@ public class boss_movement : MonoBehaviour
                     }
                     break;
                 }
-
-
         }
 
         if (MoveRight)

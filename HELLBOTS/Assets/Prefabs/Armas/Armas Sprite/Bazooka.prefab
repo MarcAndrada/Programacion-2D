@@ -106,7 +106,7 @@ MonoBehaviour:
   outOfAmmoS: {fileID: 8300000, guid: f79f66699992a354db59d8c1a1229dcb, type: 3}
   offsetBullet: 50
   fireRate: 1250
-  MaxAmmo: 25
+  MaxAmmo: 20
   CurrentAmmo: 0
 --- !u!82 &-476372072195980215
 AudioSource:

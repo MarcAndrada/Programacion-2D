@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 300
-  lineOfSite: 800
-  shootingRange: 550
+  lineOfSite: 1500
+  shootingRange: 1000
   fireRate: 1000
   bulletPrefab: {fileID: 1288552800543150587, guid: 33356378cedede945a03d5d4b57a094a,
     type: 3}
@@ -140,7 +140,8 @@ MonoBehaviour:
   MoveRight: 0
   alert: {fileID: 9117245709936404992}
   AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
-  WaitTime: 500
+  WaitTime: 200
+  hitPoints: 4
 --- !u!61 &1869990457
 BoxCollider2D:
   m_ObjectHideFlags: 0

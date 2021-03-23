@@ -10,6 +10,8 @@ public class turretScrip : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject Canon;
     public AudioClip EnemyShoot;
+    public float hitPoints;
+
 
     private float nextFireTime;
     private GameObject player;
@@ -45,12 +47,14 @@ void Update()
     {
         if (collision.gameObject.tag == "Playerbullet")
         {
-            Destroy(gameObject);
+            TakeHit();
         }
 
         if (collision.gameObject.tag == "Explosion")
         {
-            Destroy(gameObject);
+            TakeHit();
+            TakeHit();
+            TakeHit();
         }
  
     }
@@ -68,4 +72,12 @@ void Update()
         }
     }
 
+    public void TakeHit()
+    {
+        hitPoints = hitPoints - 1;
+        if (hitPoints <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

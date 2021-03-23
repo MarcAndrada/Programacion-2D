@@ -339,9 +339,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  lineOfSite: 1200
-  shootingRange: 1000
-  resetLine: 1500
+  lineOfSite: 1500
+  shootingRange: 1200
   fireRate: 500
   bulletPrefab: {fileID: 6388760072793773378, guid: 117c895a10216cf4a9140c0b09767185,
     type: 3}
@@ -349,9 +348,10 @@ MonoBehaviour:
   hitPoints: 10
   alert: {fileID: 768611350997881220}
   AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
-  WaitTime: 1000
+  WaitTime: 150
   shoot: {fileID: 5026781133531544835}
-  EnemyShoot: {fileID: 0}
+  EnemyShoot: {fileID: 8300000, guid: fc4024f09fc085d4c88325874b056c23, type: 3}
+  maxBorder: 300
 --- !u!82 &1412194954
 AudioSource:
   m_ObjectHideFlags: 0

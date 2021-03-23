@@ -58,7 +58,7 @@ public class tank_controller : MonoBehaviour
                 if (MoveRight)
                 {
                     transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-                    sprite.flipX = true;
+                    
                 }
                 else
                 {

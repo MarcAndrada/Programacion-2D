@@ -36,6 +36,7 @@ public class MoveCamera : MonoBehaviour
           
             if (Time.timeScale == 1)
             {    //si la velocidad es 1
+                Cursor.visible = true;
                 Time.timeScale = 0;
                 optionMenu.SetActive(true);
                 
@@ -45,6 +46,7 @@ public class MoveCamera : MonoBehaviour
             {   // si la velocidad es 0
                 Time.timeScale = 1;
                 optionMenu.SetActive(false);// que la velocidad del juego regrese a 1
+                Cursor.visible = false;
             }
         }
 
