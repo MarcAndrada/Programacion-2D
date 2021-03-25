@@ -18,11 +18,11 @@ public class tank_controller : MonoBehaviour
     public GameObject shoot;
     public AudioClip EnemyShoot;
     public float maxBorder;
+    public GameObject Parent;
 
     private GameObject bala;
     private GameObject player;
     private Vector2 CurrentPos;
-    private SpriteRenderer sprite;
     private AudioSource audioSource;
     private float nextFireTime;
     private bool firstTimeSeen = true;
@@ -33,7 +33,6 @@ public class tank_controller : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
-        sprite = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         nextFireTime = 0;
         CurrentPos = transform.position;
@@ -57,12 +56,12 @@ public class tank_controller : MonoBehaviour
 
                 if (MoveRight)
                 {
-                    transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                    Parent.transform.Translate(2 * Time.deltaTime * speed, 0, 0);
                     
                 }
                 else
                 {
-                    transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                    Parent.transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
                 }
 
                 if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
@@ -121,13 +120,11 @@ public class tank_controller : MonoBehaviour
                     }
                     if (MoveRight)
                     {
-                        transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-                        sprite.flipX = true;
+                        Parent.transform.Translate(2 * Time.deltaTime * speed, 0, 0);
                     }
                     else
                     {
-                        transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-                        sprite.flipX = false;
+                        Parent.transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
                     }
 
                     if (distanceFromPlayer > lineOfSite)
@@ -155,15 +152,19 @@ public class tank_controller : MonoBehaviour
 
 
         }
+
+        
+
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
-    {
+    void OnTriggerEnter2D(Collider2D collider){
        
         if (collider.gameObject.tag == "Playerbullet")
         {
             TakeHit();
         }
+        //hacer sonidito
+        
 
         if (collider.gameObject.tag == "Explosion")
         {
@@ -187,7 +188,7 @@ public class tank_controller : MonoBehaviour
         {
             audioSource.PlayOneShot(EnemyShoot);
             bala = Instantiate(bulletPrefab, shoot.transform.position, Quaternion.identity);
-            Destroy(bala, 4);
+            Destroy(bala, 2);
             nextFireTime = 0;
         }
     }

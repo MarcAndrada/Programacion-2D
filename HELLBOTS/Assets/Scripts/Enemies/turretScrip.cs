@@ -9,6 +9,7 @@ public class turretScrip : MonoBehaviour
     public float fireRate;
     public GameObject bulletPrefab;
     public GameObject Canon;
+    public GameObject CanonRotated;
     public AudioClip EnemyShoot;
     public float hitPoints;
 
@@ -30,9 +31,24 @@ void Update()
     {
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
-        if (distanceFromPlayer <= shootingRange)
+        if (distanceFromPlayer <= shootingRange )
         {
-            checkIfTimeToFire();
+            if (transform.localRotation.z == 0)
+            {
+                if (player.transform.position.y < transform.position.y)
+                {
+                    checkIfTimeToFire();
+                }
+            }else if (transform.localRotation.z < 0){
+                if (player.transform.position.x < transform.position.x){
+                    checkIfTimeToFire();
+                }
+            }
+            else if (transform.localRotation.z > 0){
+                if (player.transform.position.x > transform.position.x){
+                    checkIfTimeToFire();
+                }
+            }
         }
 
     }
@@ -66,7 +82,7 @@ void Update()
         if (nextFireTime > fireRate)
         {
             audioSource.PlayOneShot(EnemyShoot);
-            bala = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            bala = Instantiate(bulletPrefab, Canon.transform.position, Quaternion.identity);
             Destroy(bala, 4);
             nextFireTime = 0;
         }
