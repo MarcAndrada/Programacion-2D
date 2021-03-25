@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4357906269850275810}
   m_Layer: 0
   m_Name: SniperBala
-  m_TagString: Playerbullet
+  m_TagString: SniperBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4f97af081a97e4982cadc27a556876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3500
+  speed: 3800
   ScenariHit: {fileID: 8300000, guid: 75376ea498253ee4da6e61b24c67d569, type: 3}
   ShieldHit: {fileID: 8300000, guid: c01cb27301ae602459775d2af59683c9, type: 3}
   EnemyHit: {fileID: 0}

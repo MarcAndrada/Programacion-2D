@@ -20,6 +20,7 @@ TagManager:
   - ActiveWeapon
   - TurnPoint
   - Shield
+  - SniperBullet
   layers:
   - Default
   - TransparentFX

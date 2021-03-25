@@ -156,6 +156,10 @@ public class newSuicideScript : MonoBehaviour
         if (collider.gameObject.tag == "Explosion"){
             Explosion();
         }
+        if (collider.gameObject.tag == "SniperBullet")
+        {
+            Explosion();
+        }
     }
     private void OnDrawGizmosSelected()
     {

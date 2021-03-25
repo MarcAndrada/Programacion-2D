@@ -66,13 +66,22 @@ void Update()
             TakeHit();
         }
 
-        if (collision.gameObject.tag == "Explosion")
+        if (collision.gameObject.tag == "SniperBullet")
         {
             TakeHit();
             TakeHit();
             TakeHit();
         }
- 
+
+        if (collision.gameObject.tag == "Explosion")
+        {
+            TakeHit();
+            TakeHit();
+            TakeHit();
+            TakeHit();
+
+        }
+
     }
 
     void checkIfTimeToFire()

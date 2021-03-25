@@ -163,14 +163,21 @@ public class tank_controller : MonoBehaviour
         {
             TakeHit();
         }
-        
-        
+
+        if (collider.gameObject.tag == "SniperBullet")
+        {
+            TakeHit();
+            TakeHit();
+            TakeHit();
+        }
 
         if (collider.gameObject.tag == "Explosion")
         {
             TakeHit();
             TakeHit();
             TakeHit();
+            TakeHit();
+
         }
     }
     private void OnDrawGizmosSelected()

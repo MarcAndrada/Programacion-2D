@@ -172,11 +172,20 @@ public class grunt_movement : MonoBehaviour
             TakeHit();
         }
 
+        if (collider.gameObject.tag == "SniperBullet")
+        {
+            TakeHit();
+            TakeHit();
+            TakeHit();
+        }
+
         if (collider.gameObject.tag == "Explosion")
         {
             TakeHit();
             TakeHit();
             TakeHit();
+            TakeHit();
+
         }
 
     }

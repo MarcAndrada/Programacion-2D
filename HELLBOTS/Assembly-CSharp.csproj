@@ -65,16 +65,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\DoorCloseController.cs" />
-    <Compile Include="Assets\Scripts\Enemies\BasicEnemyController.cs" />
     <Compile Include="Assets\Scripts\Enemies\GranadeFlayerScript.cs" />
     <Compile Include="Assets\Scripts\Enemies\HeadTankController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ScriptsAntiguos\BasicEnemyController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ScriptsAntiguos\bossController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ScriptsAntiguos\new_movement.cs" />
     <Compile Include="Assets\Scripts\Enemies\TurretCanonController.cs" />
-    <Compile Include="Assets\Scripts\Enemies\bossController.cs" />
     <Compile Include="Assets\Scripts\Enemies\boss_movement.cs" />
     <Compile Include="Assets\Scripts\Enemies\flying_enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\grunt_movement.cs" />
     <Compile Include="Assets\Scripts\Enemies\newSuicideScript.cs" />
-    <Compile Include="Assets\Scripts\Enemies\new_movement.cs" />
     <Compile Include="Assets\Scripts\Enemies\tank_controller.cs" />
     <Compile Include="Assets\Scripts\Enemies\turretScrip.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />

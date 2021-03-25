@@ -40,7 +40,7 @@ public class HellbotControllers : MonoBehaviour
     private float MaxSpeed;  
     private float NormalG;
     private float WaitedTimeG;
-    private float AnimDurationG = 350;
+    private float AnimDurationG = 800;
     private float TimePassedGCD;
     private bool godmode;
     private bool jump;
@@ -52,7 +52,7 @@ public class HellbotControllers : MonoBehaviour
     private bool granade;
     private bool throwGranade;
     private float footstep;
-    private float footstepRithm = 425;
+    private float footstepRithm = 375;
 
 
     private enum DirectionV { NONE, UP, DOWN };

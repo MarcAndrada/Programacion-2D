@@ -113,19 +113,27 @@ public class flying_enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        
-            if (collider.gameObject.tag == "Playerbullet")
-            {
-                TakeHit();
-            }
+       
+        if (collider.gameObject.tag == "Playerbullet")
+        {
+            TakeHit();
+        }
 
-            if (collider.gameObject.tag == "Explosion")
-            {
-                TakeHit();
-                TakeHit();
-                TakeHit();
+        if (collider.gameObject.tag == "SniperBullet")
+        {
+            TakeHit();
+            TakeHit();
+            TakeHit();
+        }
 
-            }
+        if (collider.gameObject.tag == "Explosion")
+        {
+            TakeHit();
+            TakeHit();
+            TakeHit();
+            TakeHit();
+
+        }
 
     }
     private void OnDrawGizmosSelected()
