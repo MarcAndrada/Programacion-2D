@@ -47,7 +47,7 @@ public class tank_controller : MonoBehaviour
         
         if (hitPoints <= 0)
         {
-            Destroy(gameObject);
+            Destroy(Parent);
         }
 
         switch (stances)
@@ -163,7 +163,7 @@ public class tank_controller : MonoBehaviour
         {
             TakeHit();
         }
-        //hacer sonidito
+        
         
 
         if (collider.gameObject.tag == "Explosion")
@@ -195,5 +195,6 @@ public class tank_controller : MonoBehaviour
     public void TakeHit()
     {
         hitPoints--;
+        //hacer sonidito
     }
 }
