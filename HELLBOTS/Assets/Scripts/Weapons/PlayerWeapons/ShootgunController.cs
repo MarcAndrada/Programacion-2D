@@ -30,11 +30,11 @@ public class ShootgunController : MonoBehaviour
 
 
     
-    private float AnguloRot1;
-    private float AnguloRot2;
-    private float AnguloRot3;
-    private float AnguloRot4;
-    private float AnguloRot5;
+    private Quaternion AnguloRot1;
+    private Quaternion AnguloRot2;
+    private Quaternion AnguloRot3;
+    private Quaternion AnguloRot4;
+    private Quaternion AnguloRot5;
     private float TimeToShoot;
     private bool Shoot;
     // Start is called before the first frame update
@@ -47,18 +47,19 @@ public class ShootgunController : MonoBehaviour
 
         MaxBulletsT.GetComponent<Text>().text = MaxAmmo.ToString();
 
+        CurrentAmmo = MaxAmmo;
     }
 
     // Update is called once per frame
     void Update()
     {
         Shoot = HellbotInput.Shoot;
-
-        AnguloRot1 = transform.rotation.z + 0.2f;
-        AnguloRot2 = transform.rotation.z + 0.1f;
-        AnguloRot3 = transform.rotation.z;
-        AnguloRot4 = transform.rotation.z - 0.1f;
-        AnguloRot5 = transform.rotation.z - 0.2f;
+        
+        AnguloRot1 = transform.rotation * Quaternion.Euler(0,0, 20);
+        AnguloRot2 = transform.rotation * Quaternion.Euler(0, 0, 10);
+        AnguloRot3 = transform.rotation;
+        AnguloRot4 = transform.rotation * Quaternion.Euler(0, 0, -10);
+        AnguloRot5 = transform.rotation * Quaternion.Euler(0, 0, -20);
 
         float delta = Time.deltaTime * 1000;
         Vector3 pos;
@@ -78,17 +79,18 @@ public class ShootgunController : MonoBehaviour
             if (TimeToShoot > fireRate && CurrentAmmo > 0)
             {
                audioSource.PlayOneShot(soundShoot);
-               // audioSource.PlayOneShot(barrelReload);
-                bullet1 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot1));
-                Destroy(bullet1, 3);                    
-                bullet2 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot2));
-                Destroy(bullet2, 3);                     
-                bullet3 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot3));
-                Destroy(bullet3, 3);                    
-                bullet4 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot4));
-                Destroy(bullet4, 3);                  
-                bullet5 = Instantiate(bulletPrefab, pos, Quaternion.EulerAngles(transform.rotation.x, transform.rotation.y, -AnguloRot5));
-                Destroy(bullet5, 3);
+                // audioSource.PlayOneShot(barrelReload);
+                Quaternion rot = transform.rotation;
+                bullet1 =  Instantiate(bulletPrefab, pos, AnguloRot1);
+                Destroy(bullet1, 2);                    
+                bullet2 = Instantiate(bulletPrefab, pos, AnguloRot2);
+                Destroy(bullet2, 2);                     
+                bullet3 = Instantiate(bulletPrefab, pos, AnguloRot3);
+                Destroy(bullet3, 2);                    
+                bullet4 = Instantiate(bulletPrefab, pos, AnguloRot4);
+                Destroy(bullet4, 2);                  
+                bullet5 = Instantiate(bulletPrefab, pos, AnguloRot5);
+                Destroy(bullet5, 2);
                 TimeToShoot = 0;
                 
                 CurrentAmmo = CurrentAmmo - 5;

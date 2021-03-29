@@ -74,7 +74,7 @@ public class WeaponsController : MonoBehaviour
                 audioSource.PlayOneShot(soundShoot);
                 //bullet = Instantiate(bulletPrefab, pos, SoporteArma.rotation);
                 bullet = Instantiate(bulletPrefab, pos, transform.rotation);
-                Destroy(bullet, 3);
+                Destroy(bullet, 2);
                 TimeToShoot = 0;
                 CurrentAmmo--;
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7765556024678747385
+--- !u!1 &9142346901091164165
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2652774198577393680}
-  - component: {fileID: 5940216414112650539}
-  - component: {fileID: -4438096441876963732}
-  - component: {fileID: -476372072195980215}
+  - component: {fileID: 3599612000268147948}
+  - component: {fileID: 5137212194526640599}
+  - component: {fileID: 6290507036174987920}
+  - component: {fileID: 7802343423232846005}
   m_Layer: 0
   m_Name: Bazooka
   m_TagString: ActiveWeapon
@@ -19,27 +19,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2652774198577393680
+--- !u!4 &3599612000268147948
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7765556024678747385}
+  m_GameObject: {fileID: 9142346901091164165}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: -503, y: -300, z: -1}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5940216414112650539
+--- !u!212 &5137212194526640599
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7765556024678747385}
+  m_GameObject: {fileID: 9142346901091164165}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,9 +72,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a6875880cd898b143b7d56d2cf7f7dea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 836ebe1cd8f491b4f85f6702877ca4d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 100, y: 100}
@@ -83,13 +83,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-4438096441876963732
+--- !u!114 &6290507036174987920
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7765556024678747385}
+  m_GameObject: {fileID: 9142346901091164165}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f59aaff4bfc7e4c49bbe6b0a2b8cb0ec, type: 3}
@@ -108,13 +108,13 @@ MonoBehaviour:
   fireRate: 1250
   MaxAmmo: 20
   CurrentAmmo: 0
---- !u!82 &-476372072195980215
+--- !u!82 &7802343423232846005
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7765556024678747385}
+  m_GameObject: {fileID: 9142346901091164165}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6775615673996947055}
+  - component: {fileID: 3742920186828902072}
   m_Layer: 0
   m_Name: TankShielded
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3742920186828902072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6775615673996947054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d132d2e6be59f324b856bc61646f666a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tank: {fileID: 5399882202701547940}
 --- !u!1 &6775615674590892512
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +174,22 @@ PrefabInstance:
       propertyPath: WaitTime
       value: 350
       objectReference: {fileID: 0}
+    - target: {fileID: 937203688, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
+      propertyPath: lineOfSite
+      value: 1300
+      objectReference: {fileID: 0}
+    - target: {fileID: 937203688, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
+      propertyPath: shootingRange
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 937203691, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
+      propertyPath: m_Offset.y
+      value: 17.797241
+      objectReference: {fileID: 0}
+    - target: {fileID: 937203691, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
+      propertyPath: m_Size.y
+      value: 649.83105
+      objectReference: {fileID: 0}
     - target: {fileID: 768611350997881220, guid: fba2908de3397264b91cf9fc9588d39c,
         type: 3}
       propertyPath: m_IsActive
@@ -237,6 +267,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
+--- !u!1 &5399882202701547940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 969564099958870061, guid: fba2908de3397264b91cf9fc9588d39c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5153429869828233609}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4114518267289945482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9123481104325778435, guid: fba2908de3397264b91cf9fc9588d39c,

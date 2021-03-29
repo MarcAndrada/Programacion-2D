@@ -5,8 +5,13 @@ using UnityEngine;
 public class VolumeController : MonoBehaviour
 {
     private AudioSource audiosouce;
-    private float musicVolume = 0.1f;
-    
+    private float musicVolume;
+
+    private void Awake()
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +22,7 @@ public class VolumeController : MonoBehaviour
     void Update()
     {
         audiosouce.volume = musicVolume;
+        
     }
 
     public void SetVolume(float vol)

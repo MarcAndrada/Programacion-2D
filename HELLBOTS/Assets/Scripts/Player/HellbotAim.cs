@@ -40,15 +40,15 @@ public class HellbotAim : MonoBehaviour
 
         
 
-        if (Crosshair.transform.position.x < transform.position.x)
+        if (Crosshair.transform.position.x < transform.position.x && transform.localScale.x > 0)
         {
-            transform.localScale = new Vector3(-1, 1, transform.localScale.z);
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             Look = 0;
         }
 
-        if (Crosshair.transform.position.x > transform.position.x)
+        if (Crosshair.transform.position.x > transform.position.x && transform.localScale.x < 0)
         {
-            transform.localScale = new Vector3(1, 1, transform.localScale.z);
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             Look = 1;
         }
 

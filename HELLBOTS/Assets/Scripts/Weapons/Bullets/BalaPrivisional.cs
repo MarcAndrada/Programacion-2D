@@ -12,6 +12,12 @@ public class BalaPrivisional : MonoBehaviour
     private GameObject Crosshair;
     private GameObject Player;
     private AudioSource audiosource;
+    private SpriteRenderer Sprite;
+    private BoxCollider2D bc2D;
+    
+    private bool Hit = false;
+    private float TimeToWait = 0;
+    private float SoundTime = 300;
     
     private Vector3 dir;
     // Start is called before the first frame update
@@ -19,6 +25,10 @@ public class BalaPrivisional : MonoBehaviour
         Crosshair = GameObject.FindGameObjectWithTag("Crosshair");
         Player = GameObject.FindGameObjectWithTag("Hellbot");
         audiosource = GetComponent<AudioSource>();
+        Sprite = GetComponent<SpriteRenderer>();
+        bc2D = GetComponent<BoxCollider2D>();
+
+
         if (Crosshair.transform.position.x > Player.transform.position.x)
         {
             dir = transform.right;
@@ -32,30 +42,40 @@ public class BalaPrivisional : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        float delta = Time.deltaTime * 1000;
         transform.position += dir * speed * Time.deltaTime;
+
+        if (Hit)
+        {
+            TimeToWait += delta;
+            if (TimeToWait > SoundTime){
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy"){
-            audiosource.PlayOneShot(EnemyHit);
             Destroy(gameObject);
         }
 
         if (collision.gameObject.layer == 8){
+            Hit = true;
             audiosource.PlayOneShot(ScenariHit);
-            Destroy(gameObject);
+            gameObject.tag = "Untagged";
+            Sprite.enabled = false;
+            bc2D.enabled = false;
+
         }
 
         if (collision.gameObject.tag == "Shield"){
+            Hit = true;
             audiosource.PlayOneShot(ShieldHit);
-            Destroy(gameObject);
+            gameObject.tag = "Untagged";
+            Sprite.enabled = false;
+            bc2D.enabled = false;
         }
 
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision){
-        
     }
 }

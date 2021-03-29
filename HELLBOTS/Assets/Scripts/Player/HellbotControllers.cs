@@ -143,7 +143,6 @@ public class HellbotControllers : MonoBehaviour
                 rb2d.drag = 0f;
                 if (jumpDone >= 1)
                 {
-                    animator.SetBool("DoubleJumping", true);
                     rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 }
 
@@ -156,18 +155,21 @@ public class HellbotControllers : MonoBehaviour
             //Crouch (Si presiono "S", el collider grande se desactiva)
             if (crouch_keyD)
             {
+                if (onFloor)
+                {
+                    transform.position = new Vector3(transform.position.x, transform.position.y - 75, transform.position.z);
+                }
                 animator.SetBool("Crouch", true);
                 Normalbc2D.enabled = false;
                 Crouchbc2D.enabled = true;
-                runSpeed -= 100;
                 jumpHeight -= new Vector2(0, 200);
+
             }
             else if (crouch_keyU)
             {
                 animator.SetBool("Crouch", false);
                 Normalbc2D.enabled = true;
                 Crouchbc2D.enabled = false;
-                runSpeed += 100;
                 jumpHeight += new Vector2(0, 200);
             }
 
@@ -380,6 +382,18 @@ public class HellbotControllers : MonoBehaviour
             onFloor = true;
         }
 
+        if (collision.gameObject.tag == "Weapon")
+        {
+            animator.SetBool("Jumping", false);
+            animator.SetBool("DoubleJumping", false);
+
+            jumpDone = 0;
+            rb2d.drag = 3;
+            runSpeed = MaxSpeed;
+            onFloor = true;
+        }
+
+
         if (collision.gameObject.tag == "Enemy")
         {
             PlayerHit();
@@ -397,6 +411,14 @@ public class HellbotControllers : MonoBehaviour
         }
 
         if (collision.collider.tag == "WallFloor"){
+            animator.SetBool("Jumping", true);
+            runSpeed = 200;
+            rb2d.drag = 0f;
+            onFloor = false;
+        }
+
+        if (collision.gameObject.tag == "Weapon")
+        {
             animator.SetBool("Jumping", true);
             runSpeed = 200;
             rb2d.drag = 0f;
