@@ -54,6 +54,11 @@ public class GranadeController : MonoBehaviour
         {
             Explosion();
         }
+        if (collision.gameObject.tag == "Shield")
+        {
+            Explosion();
+        }
+
     }
 
     public void Explosion(){

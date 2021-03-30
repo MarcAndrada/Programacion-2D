@@ -28,7 +28,7 @@ public class grunt_movement : MonoBehaviour
     private AudioSource audioSource;
     private bool firstTimeSeen = true;
     private float WaitedTime = 0f;
-   
+
     private enum typeStances { passive, follow, attack }
     private typeStances stances = typeStances.passive;
 
@@ -42,7 +42,7 @@ public class grunt_movement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         nextFireTime = 0;
         CurrentPos = transform.position;
-        
+
     }
 
 
@@ -52,8 +52,7 @@ public class grunt_movement : MonoBehaviour
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
         float delta = Time.deltaTime * 1000;
 
-
-
+       
         switch (stances){
             case typeStances.passive:
                 if (MoveRight)
@@ -214,7 +213,9 @@ public class grunt_movement : MonoBehaviour
         hitPoints = hitPoints - 1;
         if (hitPoints <= 0)
         {
-            Destroy(gameObject);
+            
+            gameObject.SetActive(false);
         }
     }
+
 } 

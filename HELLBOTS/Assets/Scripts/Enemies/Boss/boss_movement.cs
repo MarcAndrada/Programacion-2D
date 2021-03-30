@@ -19,6 +19,7 @@ public class boss_movement : MonoBehaviour
     public AudioClip LaserShoot;
     public AudioClip MisileShoot;
     public float maxBorder;
+    public GameObject portal;
 
     private SpriteRenderer sprite;
     private float nextFireTime;
@@ -32,6 +33,7 @@ public class boss_movement : MonoBehaviour
     private Animator animator;
     private AudioSource audiosource;
     private Vector3 CurrentPos;
+    private float MaxHP;
 
 
     enum typeStances { passive, follow, attack }
@@ -44,6 +46,8 @@ public class boss_movement : MonoBehaviour
         audiosource = GetComponent<AudioSource>();
         nextFireTime = 0;
         CurrentPos = transform.position;
+
+        MaxHP = hitPoints;
     }
     void Update()
     {
@@ -214,7 +218,9 @@ public class boss_movement : MonoBehaviour
         hitPoints = hitPoints - 1;
         if (hitPoints <= 0)
         {
+            Instantiate(portal, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
+
 }

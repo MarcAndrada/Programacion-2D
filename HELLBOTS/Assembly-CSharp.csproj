@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\PowerUps\Inmunidad.cs" />
     <Compile Include="Assets\Scripts\PowerUps\LaserBeam.cs" />
     <Compile Include="Assets\Scripts\PowerUps\lineController.cs" />
+    <Compile Include="Assets\Scripts\TeleportController.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullets\BalaPrivisional.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullets\BazookaBulletControllor.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullets\GranadeController.cs" />

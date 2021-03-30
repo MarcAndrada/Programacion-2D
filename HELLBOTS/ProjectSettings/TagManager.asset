@@ -21,6 +21,7 @@ TagManager:
   - TurnPoint
   - Shield
   - SniperBullet
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

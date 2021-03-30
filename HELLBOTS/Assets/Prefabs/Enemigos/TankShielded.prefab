@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: shootingRange
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 937203690, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 937203691, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
       propertyPath: m_Offset.y
       value: 17.797241

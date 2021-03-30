@@ -59,11 +59,6 @@ public class HellbotInput : MonoBehaviour
         
     }
 
-    public static bool PowerUp
-    {
-        get { return Input.GetKey(KeyCode.F); }
-    }
-
     public static bool GodMode
     {
         get { return Input.GetKeyDown(KeyCode.V);  }

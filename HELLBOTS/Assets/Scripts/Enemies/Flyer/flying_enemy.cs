@@ -27,8 +27,8 @@ public class flying_enemy : MonoBehaviour
     private bool firstTimeSeen = true;
     private float WaitedTime = 0f;
     private int direction = 1;
-    enum typeStances { passive, follow, attack }
-    typeStances stances = typeStances.passive;
+    private float MaxHP;
+
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
@@ -36,6 +36,8 @@ public class flying_enemy : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         nextFireTime = 0;
         CurrentPos = transform.position;
+        MaxHP = hitPoints;
+
     }
 
     void FixedUpdate(){
@@ -93,10 +95,7 @@ public class flying_enemy : MonoBehaviour
                 MoveRight = true;
             }
 
-            if (distanceFromPlayer < lineOfSite)
-            {
-                stances = typeStances.follow;
-            }
+          
 
             if (MoveRight)
             {
@@ -160,7 +159,8 @@ public class flying_enemy : MonoBehaviour
         hitPoints = hitPoints - 1;
         if (hitPoints <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
+
 }

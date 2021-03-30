@@ -9,6 +9,7 @@ public class HellbotControllers : MonoBehaviour
     public BoxCollider2D Crouchbc2D;
     public BoxCollider2D Normalbc2D;
     public GameObject Heart1, Heart2, Heart3;
+    public GameObject M_Heart1, M_Heart2, M_Heart3;
     public GameObject EmptyHeart1, EmptyHeart2, EmptyHeart3;
     public GameObject granadePrefab;
     public Transform GranadeLaunch;
@@ -31,10 +32,9 @@ public class HellbotControllers : MonoBehaviour
     public Vector2 jumpHeight;
     public float runSpeed;
     public int HP = 3;
-    //public float bostTimer;
     public float granadeCD;
+    public bool crouch = false;
 
-    //private bool speedBosting;
     private int jumpDone;
     private int jumpLimit = 2;
     private float MaxSpeed;  
@@ -53,7 +53,7 @@ public class HellbotControllers : MonoBehaviour
     private bool throwGranade;
     private float footstep;
     private float footstepRithm = 375;
-
+    private bool onFloor;
 
     private enum DirectionV { NONE, UP, DOWN };
     private enum DirectionH { NONE, LEFT, RIGHT }
@@ -63,7 +63,7 @@ public class HellbotControllers : MonoBehaviour
     private float speedH = 3000;
     private float currentSpeedV;
     private float currentSpeedH;
-    private bool onFloor;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -133,6 +133,14 @@ public class HellbotControllers : MonoBehaviour
 
         if (!GodModeOn){
 
+            if (crouch)
+            {
+                if (onFloor)
+                {
+                    runSpeed = 2000;    
+                }
+                
+            }
             //Salto
             if (jump && jumpDone < jumpLimit)
             {
@@ -148,6 +156,10 @@ public class HellbotControllers : MonoBehaviour
 
                 rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
                 jumpDone++;
+                if (crouch)
+                {
+                    jumpDone++;
+                }
 
              
                 
@@ -157,58 +169,99 @@ public class HellbotControllers : MonoBehaviour
             {
                 if (onFloor)
                 {
-                    transform.position = new Vector3(transform.position.x, transform.position.y - 75, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, transform.position.y - 80, transform.position.z);
                 }
                 animator.SetBool("Crouch", true);
                 Normalbc2D.enabled = false;
                 Crouchbc2D.enabled = true;
-                jumpHeight -= new Vector2(0, 200);
-
+                jumpHeight += new Vector2(0, 600);
+                crouch = true;
             }
             else if (crouch_keyU)
             {
                 animator.SetBool("Crouch", false);
                 Normalbc2D.enabled = true;
                 Crouchbc2D.enabled = false;
-                jumpHeight += new Vector2(0, 200);
+                jumpHeight -= new Vector2(0, 600);
+                crouch = false;
             }
 
-           
 
-            if (HP == 3)
-            {
+            if (HP == 6){
                 Heart3.SetActive(true);
+                M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(false);
                 Heart2.SetActive(true);
+                M_Heart2.SetActive(false);
                 EmptyHeart2.SetActive(false);
                 Heart1.SetActive(true);
+                M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 2)
-            {
+            else if (HP == 5){
                 Heart3.SetActive(false);
+                M_Heart3.SetActive(true);
+                EmptyHeart3.SetActive(false);
+                Heart2.SetActive(true);
+                M_Heart2.SetActive(false);
+                EmptyHeart2.SetActive(false);
+                Heart1.SetActive(true);
+                M_Heart1.SetActive(false);
+                EmptyHeart1.SetActive(false);
+            }
+            else if (HP == 4){
+                Heart3.SetActive(false);
+                M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
                 Heart2.SetActive(true);
+                M_Heart2.SetActive(false);
                 EmptyHeart2.SetActive(false);
                 Heart1.SetActive(true);
+                M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 1)
-            {
+            else if (HP == 3){
                 Heart3.SetActive(false);
+                M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
                 Heart2.SetActive(false);
+                M_Heart2.SetActive(true);
+                EmptyHeart2.SetActive(false);
+                Heart1.SetActive(true);
+                M_Heart1.SetActive(false);
+                EmptyHeart1.SetActive(false);
+            }
+            else if (HP == 2){
+                Heart3.SetActive(false);
+                M_Heart3.SetActive(false);
+                EmptyHeart3.SetActive(true);
+                Heart2.SetActive(false);
+                M_Heart2.SetActive(false);
                 EmptyHeart2.SetActive(true);
                 Heart1.SetActive(true);
+                M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP <= 0)
-            {
+            else if (HP == 1){
                 Heart3.SetActive(false);
+                M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
                 Heart2.SetActive(false);
+                M_Heart2.SetActive(false);
                 EmptyHeart2.SetActive(true);
                 Heart1.SetActive(false);
+                M_Heart1.SetActive(true);
+                EmptyHeart1.SetActive(false);
+            }
+            else if (HP <= 0){
+                Heart3.SetActive(false);
+                M_Heart3.SetActive(false);
+                EmptyHeart3.SetActive(true);
+                Heart2.SetActive(false);
+                M_Heart2.SetActive(false);
+                EmptyHeart2.SetActive(true);
+                Heart1.SetActive(false);
+                M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(true);
             }
 
@@ -217,10 +270,14 @@ public class HellbotControllers : MonoBehaviour
                 //Hacer sonido de comer
                 audioSource.PlayOneShot(eat);
                 Aim.ResetWeapon();
-                if (HP < 3)
+                if (HP < 6)
                 {
-                   
                     HP++;
+                    HP++;
+                }
+                if (HP > 6)
+                {
+                    HP = 6;
                 }
 
             }
@@ -233,11 +290,13 @@ public class HellbotControllers : MonoBehaviour
                 sprite.enabled = false;
                 Controlls.enabled = false;
                 Aim.enabled = false;
+                Cursor.visible = true;
             }
             else{
                 sprite.enabled = true;
                 Controlls.enabled = true;
                 Aim.enabled = true;
+                Cursor.visible = false;
             }
 
             TimePassedGCD += delta;
@@ -274,7 +333,11 @@ public class HellbotControllers : MonoBehaviour
                 
             }
 
-        }else{
+            
+            
+
+        }
+        else{
             
             
             GodDirectionV = DirectionV.NONE;
@@ -360,7 +423,6 @@ public class HellbotControllers : MonoBehaviour
                 //hacer sonido de tocar suelo
             }
             animator.SetBool("Jumping", false);
-            animator.SetBool("DoubleJumping", false);
 
             jumpDone = 0;
             rb2d.drag = 3;
@@ -374,7 +436,6 @@ public class HellbotControllers : MonoBehaviour
                 //hacer sonido de tocar suelo
             }
             animator.SetBool("Jumping", false);
-            animator.SetBool("DoubleJumping", false);
             jumpDone = 0;
             rb2d.drag = 3;
             runSpeed = MaxSpeed;
@@ -385,8 +446,6 @@ public class HellbotControllers : MonoBehaviour
         if (collision.gameObject.tag == "Weapon")
         {
             animator.SetBool("Jumping", false);
-            animator.SetBool("DoubleJumping", false);
-
             jumpDone = 0;
             rb2d.drag = 3;
             runSpeed = MaxSpeed;
@@ -399,6 +458,7 @@ public class HellbotControllers : MonoBehaviour
             PlayerHit();
         }
 
+       
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -442,6 +502,9 @@ public class HellbotControllers : MonoBehaviour
 
         if (collision.gameObject.tag == "Caida")
         {
+            PlayerHit();
+            PlayerHit();
+            PlayerHit();
             PlayerHit();
             PlayerHit();
             PlayerHit();

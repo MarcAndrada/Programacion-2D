@@ -28,6 +28,7 @@ public class tank_controller : MonoBehaviour
     private bool firstTimeSeen = true;
     private float WaitedTime = 0f;
 
+
     enum typeStances { passive, follow, attack }
     typeStances stances = typeStances.passive;
     void Start()
@@ -37,17 +38,20 @@ public class tank_controller : MonoBehaviour
         nextFireTime = 0;
         CurrentPos = transform.position;
 
+
     }
 
     private void FixedUpdate()
     {
+       
+
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
         float delta = Time.deltaTime * 1000;
         
         if (hitPoints <= 0)
         {
-            Destroy(Parent);
+            Parent.SetActive(false);
         }
 
         switch (stances)
@@ -204,4 +208,6 @@ public class tank_controller : MonoBehaviour
         hitPoints--;
         //hacer sonidito
     }
+
+
 }

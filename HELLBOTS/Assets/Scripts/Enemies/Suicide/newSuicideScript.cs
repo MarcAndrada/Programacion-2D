@@ -16,8 +16,6 @@ public class newSuicideScript : MonoBehaviour
 
     private GameObject CurrentExplosion;
     private GameObject player;
-    private Rigidbody2D rigidB;
-    private Vector2 StarterPos;
     private SpriteRenderer sprite;
     private AudioSource audioSource;
     private bool firstTimeSeen = true;
@@ -184,6 +182,6 @@ public class newSuicideScript : MonoBehaviour
         //Hacer sonido de explosion
         CurrentExplosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
         Destroy(CurrentExplosion, 1f);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

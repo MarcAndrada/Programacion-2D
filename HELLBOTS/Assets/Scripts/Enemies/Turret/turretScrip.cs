@@ -19,16 +19,18 @@ public class turretScrip : MonoBehaviour
     private GameObject bala;
     private AudioSource audioSource;
 
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
         audioSource = GetComponent<AudioSource>();
+
     }
 
 
-void Update()
-    {
+void Update(){
+
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
         if (distanceFromPlayer <= shootingRange )
@@ -102,7 +104,9 @@ void Update()
         hitPoints = hitPoints - 1;
         if (hitPoints <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
+
+
 }

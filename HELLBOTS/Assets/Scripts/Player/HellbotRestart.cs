@@ -17,9 +17,14 @@ public class HellbotRestart : MonoBehaviour
         if (restart) {
             //Application.LoadLevel(Application.loadedLevel);
             //Hacer sonidito Celestial
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            RestartGame();
         }
     }
 
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
 }
