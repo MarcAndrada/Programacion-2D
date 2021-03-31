@@ -173,7 +173,20 @@ public class newSuicideScript : MonoBehaviour
             Explosion();
         }
 
-
+      
+       
+        if (collider.gameObject.layer == 8)
+        {
+            if (MoveRight)
+            {
+                MoveRight = false;
+            }
+            else
+            {
+                MoveRight = true;
+            }
+        }
+       
     }
 
 

@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
         sound = GetComponent<SoundManager>();
     }
     public void goGame(){
-        SceneManager.LoadScene("Map1");
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void goOptions()

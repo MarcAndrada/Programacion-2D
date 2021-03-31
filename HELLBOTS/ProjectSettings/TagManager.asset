@@ -22,6 +22,7 @@ TagManager:
   - Shield
   - SniperBullet
   - CheckPoint
+  - Door
   layers:
   - Default
   - TransparentFX

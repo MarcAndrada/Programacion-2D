@@ -207,6 +207,8 @@ MonoBehaviour:
   LaserShoot: {fileID: 8300000, guid: fc4024f09fc085d4c88325874b056c23, type: 3}
   MisileShoot: {fileID: 8300000, guid: e95503bf4a53478408171ad1a505f606, type: 3}
   maxBorder: 600
+  portal: {fileID: 2209680629127160331, guid: 4a95eda8b57ffe7429a84dc7d5c571f9, type: 3}
+  laught: {fileID: 8300000, guid: 7296338d120df534987f8d3840024916, type: 3}
 --- !u!50 &452110587772781344
 Rigidbody2D:
   serializedVersion: 4
@@ -294,9 +296,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 3000
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -311,6 +313,15 @@ AudioSource:
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.95904666
+      value: 0.0018032193
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
@@ -329,7 +340,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

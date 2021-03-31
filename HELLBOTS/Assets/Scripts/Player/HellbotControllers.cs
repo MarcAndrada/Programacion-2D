@@ -18,6 +18,7 @@ public class HellbotControllers : MonoBehaviour
     public AudioClip JumpSound;
     public AudioClip pHit;
     public AudioClip eat;
+    public AudioClip lowHP;
 
 
 
@@ -63,6 +64,8 @@ public class HellbotControllers : MonoBehaviour
     private float speedH = 3000;
     private float currentSpeedV;
     private float currentSpeedH;
+    private float lowHPDuration = 1000f;
+    private float TimePassed;
     
 
     // Start is called before the first frame update
@@ -79,6 +82,7 @@ public class HellbotControllers : MonoBehaviour
         GodModeOn = false;
         MaxSpeed = runSpeed;
         jumpDone = 0;
+        TimePassed = 0;
         Crouchbc2D.enabled = false;
         NormalG = rb2d.gravityScale;
         TimePassedGCD = granadeCD;
@@ -241,6 +245,7 @@ public class HellbotControllers : MonoBehaviour
                 Heart1.SetActive(true);
                 M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
+                
             }
             else if (HP == 1){
                 Heart3.SetActive(false);
@@ -265,6 +270,13 @@ public class HellbotControllers : MonoBehaviour
                 EmptyHeart1.SetActive(true);
             }
 
+            TimePassed += delta;
+
+            if(HP < 3 && lowHPDuration < TimePassed)
+            {
+                audioSource.PlayOneShot(lowHP);
+                TimePassed = 0;
+            }
             if (heal && Aim.Heal())
             {
                 //Hacer sonido de comer
@@ -292,7 +304,8 @@ public class HellbotControllers : MonoBehaviour
                 Aim.enabled = false;
                 Cursor.visible = true;
             }
-            else{
+            else if(HP >=1 && Time.timeScale == 1)
+            {
                 sprite.enabled = true;
                 Controlls.enabled = true;
                 Aim.enabled = true;

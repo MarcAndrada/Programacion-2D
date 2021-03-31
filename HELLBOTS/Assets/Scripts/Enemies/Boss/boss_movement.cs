@@ -20,6 +20,7 @@ public class boss_movement : MonoBehaviour
     public AudioClip MisileShoot;
     public float maxBorder;
     public GameObject portal;
+    public AudioClip laught;
 
     private SpriteRenderer sprite;
     private float nextFireTime;
@@ -28,13 +29,12 @@ public class boss_movement : MonoBehaviour
     private GameObject bala3;
     private GameObject player;
     private bool Lasers = true;
-    private float ChangeBulletType = 5000;
+    private float ChangeBulletType = 10000;
     private float TimePasedForChange = 0;
     private Animator animator;
     private AudioSource audiosource;
     private Vector3 CurrentPos;
-    private float MaxHP;
-
+    private bool playerClose;
 
     enum typeStances { passive, follow, attack }
     typeStances stances = typeStances.passive;
@@ -47,7 +47,6 @@ public class boss_movement : MonoBehaviour
         nextFireTime = 0;
         CurrentPos = transform.position;
 
-        MaxHP = hitPoints;
     }
     void Update()
     {
@@ -59,10 +58,18 @@ public class boss_movement : MonoBehaviour
             if (Lasers)
             {
                 Lasers = false;
+                if (playerClose)
+                {
+                    audiosource.PlayOneShot(laught);
+                }
             }
             else
             {
                 Lasers = true;
+                if (playerClose)
+                {
+                    audiosource.PlayOneShot(laught);
+                }
             }
 
             TimePasedForChange = 0;
@@ -101,10 +108,12 @@ public class boss_movement : MonoBehaviour
                 if (distanceFromPlayer < lineOfSite)
                 {
                     stances = typeStances.follow;
+                    playerClose = true;
                 }
                 else
                 {
                     stances = typeStances.passive;
+                    playerClose = false;
                 }
                 break;
 
@@ -177,6 +186,21 @@ public class boss_movement : MonoBehaviour
 
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+            if (MoveRight)
+            {
+                MoveRight = false;
+            }
+            else
+            {
+                MoveRight = true;
+            }
+        }
     }
     private void OnDrawGizmosSelected()
     {

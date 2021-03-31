@@ -147,7 +147,7 @@ MonoBehaviour:
   speed: 1500
   ScenariHit: {fileID: 8300000, guid: 75376ea498253ee4da6e61b24c67d569, type: 3}
   ShieldHit: {fileID: 8300000, guid: c01cb27301ae602459775d2af59683c9, type: 3}
-  EnemyHit: {fileID: 0}
+  EnemyHit: {fileID: 8300000, guid: 983423dc31aeeca42a1c44cf10f6a350, type: 3}
 --- !u!82 &7800251002393104798
 AudioSource:
   m_ObjectHideFlags: 0

@@ -61,7 +61,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 800
+  orthographic size: 700
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  minCamPos: {x: 382, y: 220}
+  minCamPos: {x: 223, y: 154}
   maxCamPos: {x: 47852, y: 2000}
   UPMinYPos: 1210
   DownMinYPos: -20
@@ -113,17 +113,17 @@ PrefabInstance:
     - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1218.0728
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -510.22626
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -345
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
         type: 3}
@@ -179,6 +179,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AudioManagers
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061178558695551280, guid: b99182946ba884449b02a138254d23ba,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b99182946ba884449b02a138254d23ba, type: 3}

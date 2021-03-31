@@ -57,7 +57,11 @@ public class BalaPrivisional : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy"){
-            Destroy(gameObject);
+            Hit = true;
+            audiosource.PlayOneShot(EnemyHit);
+            //gameObject.tag = "Untagged";
+            Sprite.enabled = false;
+            bc2D.enabled = false;
         }
 
         if (collision.gameObject.layer == 8){

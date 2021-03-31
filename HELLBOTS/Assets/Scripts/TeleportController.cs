@@ -5,8 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class TeleportController : MonoBehaviour
 {
-    public string NextScene;
+    private string NextScene;
+    private string CurrentScene;
+    private void Start()
+    {
+        CurrentScene = SceneManager.GetActiveScene().name;
+        if ( CurrentScene == "Tutorial")
+        {
+            NextScene = "Map1";
+        }
+        if (CurrentScene == "Map1")
+        {
+            NextScene = "Map2";
+        }
+        if (CurrentScene == "Map2")
+        {
+            NextScene = "WinScene";
+        }
 
+    }
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D collision)
     {
