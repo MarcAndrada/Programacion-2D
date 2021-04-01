@@ -1205,6 +1205,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5075103815241325029}
+        m_MethodName: SaveValues
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1778599598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1536,3 +1547,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b99182946ba884449b02a138254d23ba, type: 3}
+--- !u!114 &5075103815241325029 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4330449124519138115, guid: b99182946ba884449b02a138254d23ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 5075103815241325028}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db306d1b18c1c64a8de4fbf10e67cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

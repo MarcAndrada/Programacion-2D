@@ -14,19 +14,19 @@ public class MoveCamera : MonoBehaviour
     private bool GodModeOn;
     private bool godmode;
     private bool Menu;
-
+    private SoundManager sound;
 
     // Start is called before the first frame update
     void Start()
     {
         GodModeOn = false;
         optionMenu.SetActive(false);
+        sound = GetComponentInChildren<SoundManager>();
     }
 
     private void Update()
     {
         godmode = HellbotInput.GodMode;
-
         Menu = HellbotInput.Menu;
 
         if (Menu)
@@ -39,12 +39,12 @@ public class MoveCamera : MonoBehaviour
                 optionMenu.SetActive(true);
                 
                 //que la velocidad del juego sea 0
-            }
-            else if (Time.timeScale == 0)
-            {   // si la velocidad es 0
+            }else if (Time.timeScale == 0){
+                // si la velocidad es 0
                 Time.timeScale = 1;
                 optionMenu.SetActive(false);// que la velocidad del juego regrese a 1
                 Cursor.visible = false;
+                sound.SaveValues();
             }
         }
 

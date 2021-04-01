@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -18,43 +18,39 @@ public class SoundManager : MonoBehaviour
     private float SFX = 0.1f;
 
 
-    private void Awake() {
+    // Start is called before the first frame update
+    void Start(){
         BinaryReader reader;
         if (File.Exists("sound.sav"))
         {
-            reader = new BinaryReader(File.Open("save.sav", FileMode.Open));
+            reader = new BinaryReader(File.Open("sound.sav", FileMode.Open));
+            Music = reader.ReadInt32();
+            SFX = reader.ReadInt32();
+            reader.Close();
         }
-        else { return;  }
+        else { return; }
 
-        Music = reader.ReadInt32();
-        SFX = reader.ReadInt32();
-        reader.Close();
-
-
-    }
-
-    // Start is called before the first frame update
-    void Start(){
-
-        MusicSlider = MusicSlider.GetComponent<Slider>();
-        SFXSlider = SFXSlider.GetComponent<Slider>();
-        Music_Cont = GetComponent<VolumeController>();
+        Music_Cont = GetComponentInChildren<VolumeController>();
         SFX_Cont = GetComponent<SFX_Controller>();
 
-        if (MusicSlider != null){
+        if (MusicSlider != null)
+        {
+            MusicSlider = MusicSlider.GetComponent<Slider>();
             MusicSlider.value = Music;
-
         }else{
             Music_Cont.SetVolume(Music);
         }
-
         if (SFXSlider != null)
         {
+            SFXSlider = SFXSlider.GetComponent<Slider>();
             SFXSlider.value = SFX;
-
-        }else{
+        }
+        else
+        {
             SFX_Cont.SetVolume(SFX);
         }
+       
+
 
     }
 
@@ -80,5 +76,13 @@ public class SoundManager : MonoBehaviour
     public float GetSFXVol()
     {
        return SFX;
+    }
+
+
+    public void SaveValues()
+    {
+        BinaryWriter writer = new BinaryWriter(File.Open("sound.sav", FileMode.Create));
+        writer.Write(Music);
+        writer.Write(SFX);
     }
 }

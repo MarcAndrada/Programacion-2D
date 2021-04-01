@@ -228,6 +228,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -24.729002
       objectReference: {fileID: 0}
+    - target: {fileID: 8249591238958039490, guid: ad2ecb09451eaee41969da7de7c7c2ff,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0107680205
+      objectReference: {fileID: 0}
     - target: {fileID: 8249591238971837278, guid: ad2ecb09451eaee41969da7de7c7c2ff,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -407,6 +412,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9686965
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249591240763520025, guid: ad2ecb09451eaee41969da7de7c7c2ff,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00001171138
       objectReference: {fileID: 0}
     - target: {fileID: 8386280702312034529, guid: ad2ecb09451eaee41969da7de7c7c2ff,
         type: 3}
@@ -1246,6 +1256,18 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 719340190}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &719340192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1928590751859692068, guid: 51a3bf41cc703634c8de123919ea81d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 719340190}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db306d1b18c1c64a8de4fbf10e67cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &799572039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1497,6 +1519,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1127969761, guid: c482ea2f1bfcad445894cb76c87d9df4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 719340192}
+    - target: {fileID: 1127969761, guid: c482ea2f1bfcad445894cb76c87d9df4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SaveValues
+      objectReference: {fileID: 0}
     - target: {fileID: 1933044014, guid: c482ea2f1bfcad445894cb76c87d9df4, type: 3}
       propertyPath: m_textInfo.characterCount
       value: 4

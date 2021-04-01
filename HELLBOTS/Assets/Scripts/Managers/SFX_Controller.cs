@@ -23,7 +23,10 @@ public class SFX_Controller : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Hellbot");
-        playerS = player.GetComponent<AudioSource>();
+        if (player != null)
+        {
+            playerS = player.GetComponent<AudioSource>();
+        }
          Door = GameObject.FindGameObjectWithTag("Door");
         if (Door != null)
         {
@@ -65,9 +68,10 @@ public class SFX_Controller : MonoBehaviour
             WeaponsS = Weapons[i].GetComponent<AudioSource>();
             WeaponsS.volume = Volume;
         }
-
-        playerS.volume = Volume;
-        
+        if (player != null)
+        {
+            playerS.volume = Volume;
+        }
         
 
         
