@@ -9,8 +9,6 @@ public class MoveCamera : MonoBehaviour
     public GameObject Player;
     public Vector2 minCamPos;
     public Vector2 maxCamPos;
-    public float UPMinYPos;
-    public float DownMinYPos;
     public GameObject optionMenu;
 
     private bool GodModeOn;
@@ -79,16 +77,22 @@ public class MoveCamera : MonoBehaviour
        
     }
 
-    private void OnTriggerEnter2D(Collider2D collision){
-        if (collision.gameObject.tag == "CamUp"){
-            GoUP();
-        }
-    }
 
-
-    private void GoUP()
+    public void SetMaxCamX(float MaxX)
     {
-        minCamPos.y = UPMinYPos;
+        maxCamPos.x = MaxX;
+    }
+    public void SetMaxCamY(float MaxY)
+    {
+        maxCamPos.y = MaxY;
+    }
+    public void SetMinCamX(float MinX)
+    {
+        minCamPos.x = MinX;
+    }
+    public void SetMinCamY(float MinY)
+    {
+        minCamPos.y = MinY;
     }
 
 

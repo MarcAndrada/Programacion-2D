@@ -6,14 +6,26 @@ using UnityEngine.UI;
 
 public class HellbotControllers : MonoBehaviour
 {
+
     public BoxCollider2D Crouchbc2D;
     public BoxCollider2D Normalbc2D;
-    public GameObject Heart1, Heart2, Heart3;
-    public GameObject M_Heart1, M_Heart2, M_Heart3;
-    public GameObject EmptyHeart1, EmptyHeart2, EmptyHeart3;
     public GameObject granadePrefab;
     public Transform GranadeLaunch;
     public GameObject DieText;
+    [Header("Corazones Llenos")]
+    public GameObject Heart1;
+    public GameObject Heart2;
+    public GameObject Heart3;
+    [Header("Corazones Mitad")]
+    public GameObject M_Heart1;
+    public GameObject M_Heart2;
+    public GameObject M_Heart3;
+    [Header("Corazones Vacios")]
+    public GameObject EmptyHeart1;
+    public GameObject EmptyHeart2;
+    public GameObject EmptyHeart3;
+    
+    [Header("Audios")]
     public AudioClip WalkSound;
     public AudioClip JumpSound;
     public AudioClip pHit;
@@ -29,6 +41,7 @@ public class HellbotControllers : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator animator;
 
+    [Header("Config Player")]
     public bool GodModeOn;
     public Vector2 jumpHeight;
     public float runSpeed;
