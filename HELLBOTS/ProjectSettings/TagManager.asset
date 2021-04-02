@@ -23,6 +23,7 @@ TagManager:
   - SniperBullet
   - CheckPoint
   - Door
+  - Ramp
   layers:
   - Default
   - TransparentFX

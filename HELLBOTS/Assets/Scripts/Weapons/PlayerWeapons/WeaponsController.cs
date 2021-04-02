@@ -71,8 +71,7 @@ public class WeaponsController : MonoBehaviour
         TimeToShoot += delta;
         if (Shoot)
         {
-            if (TimeToShoot > fireRate && CurrentAmmo > 0 || TimeToShoot > fireRate && gameObject.name == "Pistola")
-            {
+            if (TimeToShoot > fireRate && CurrentAmmo > 0 || TimeToShoot > fireRate && gameObject.name == "Pistola"){
                 //Hacer sonido de dispar
                 audioSource.PlayOneShot(soundShoot);
                 //bullet = Instantiate(bulletPrefab, pos, SoporteArma.rotation);

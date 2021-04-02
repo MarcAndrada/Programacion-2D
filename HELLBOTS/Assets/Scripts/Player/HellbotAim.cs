@@ -37,7 +37,6 @@ public class HellbotAim : MonoBehaviour
     {
         pick = HellbotInput.Interact;
 
-        
 
         if (Crosshair.transform.position.x < transform.position.x && transform.localScale.x > 0)
         {

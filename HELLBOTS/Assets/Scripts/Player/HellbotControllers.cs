@@ -49,9 +49,9 @@ public class HellbotControllers : MonoBehaviour
     public float granadeCD;
     public bool crouch = false;
 
-    private int jumpDone;
+    public int jumpDone;
     private int jumpLimit = 2;
-    private float MaxSpeed;  
+    private float CurrentRunSpeed;  
     private float NormalG;
     private float WaitedTimeG;
     private float AnimDurationG = 800;
@@ -79,7 +79,7 @@ public class HellbotControllers : MonoBehaviour
     private float currentSpeedH;
     private float lowHPDuration = 1000f;
     private float TimePassed;
-    
+    private Vector2 MaxSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -93,7 +93,7 @@ public class HellbotControllers : MonoBehaviour
 
 
         GodModeOn = false;
-        MaxSpeed = runSpeed;
+        CurrentRunSpeed = runSpeed;
         jumpDone = 0;
         TimePassed = 0;
         Crouchbc2D.enabled = false;
@@ -161,8 +161,12 @@ public class HellbotControllers : MonoBehaviour
             //Salto
             if (jump && jumpDone < jumpLimit)
             {
-
+                if (crouch)
+                {
+                    jumpDone++;
+                }
                 //hacer sonido de salto
+                jumpDone++;
                 audioSource.PlayOneShot(JumpSound);
                 animator.SetBool("Jumping", true);
                 rb2d.drag = 0f;
@@ -172,11 +176,6 @@ public class HellbotControllers : MonoBehaviour
                 }
 
                 rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-                jumpDone++;
-                if (crouch)
-                {
-                    jumpDone++;
-                }
 
              
                 
@@ -186,12 +185,12 @@ public class HellbotControllers : MonoBehaviour
             {
                 if (onFloor)
                 {
-                    transform.position = new Vector3(transform.position.x, transform.position.y - 80, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, transform.position.y - 70, transform.position.z);
                 }
                 animator.SetBool("Crouch", true);
                 Normalbc2D.enabled = false;
                 Crouchbc2D.enabled = true;
-                jumpHeight += new Vector2(0, 600);
+                jumpHeight += new Vector2(0, 700);
                 crouch = true;
             }
             else if (crouch_keyU)
@@ -199,7 +198,7 @@ public class HellbotControllers : MonoBehaviour
                 animator.SetBool("Crouch", false);
                 Normalbc2D.enabled = true;
                 Crouchbc2D.enabled = false;
-                jumpHeight -= new Vector2(0, 600);
+                jumpHeight -= new Vector2(0, 700);
                 crouch = false;
             }
 
@@ -406,6 +405,7 @@ public class HellbotControllers : MonoBehaviour
             {
                 animator.SetBool("Walking", false);
             }
+
         }else{
             float delta = Time.fixedDeltaTime * 1000;
             currentSpeedV = 0;
@@ -443,38 +443,17 @@ public class HellbotControllers : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)//Detectar si toca el suelo para reiniciar la cantidad de saltos
     {
-        if (collision.gameObject.tag == "Floor"){
-            if (jumpDone > 0)
-            {
-                //hacer sonido de tocar suelo
-            }
-            animator.SetBool("Jumping", false);
-
-            jumpDone = 0;
-            rb2d.drag = 3;
-            runSpeed = MaxSpeed;
-            onFloor = true;
-        }
-
-        if (collision.gameObject.tag == "WallFloor"){
-            if (jumpDone > 0)
-            {
-                //hacer sonido de tocar suelo
-            }
-            animator.SetBool("Jumping", false);
-            jumpDone = 0;
-            rb2d.drag = 3;
-            runSpeed = MaxSpeed;
-
-            onFloor = true;
-        }
-
-        if (collision.gameObject.tag == "Weapon")
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp")
         {
+            if (jumpDone > 0)
+            {
+                //hacer sonido de tocar suelo
+            }
             animator.SetBool("Jumping", false);
+
             jumpDone = 0;
             rb2d.drag = 3;
-            runSpeed = MaxSpeed;
+            runSpeed = CurrentRunSpeed;
             onFloor = true;
         }
 
@@ -486,30 +465,36 @@ public class HellbotControllers : MonoBehaviour
 
        
     }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp")
+        {
+            
+            animator.SetBool("Jumping", false);         
+            rb2d.drag = 3;
+            runSpeed = CurrentRunSpeed;
+            onFloor = true;
+        }
+
+        if (collision.gameObject.tag == "Ramp")
+        {
+            runSpeed = CurrentRunSpeed + 700;
+        }
+
+    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Floor"){
-            animator.SetBool("Jumping", true);
-            runSpeed = 200;
-            rb2d.drag = 0f;
-            onFloor = false;
-        }
 
-        if (collision.collider.tag == "WallFloor"){
-            animator.SetBool("Jumping", true);
-            runSpeed = 200;
-            rb2d.drag = 0f;
-            onFloor = false;
-        }
-
-        if (collision.gameObject.tag == "Weapon")
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp")
         {
             animator.SetBool("Jumping", true);
-            runSpeed = 200;
+            runSpeed = CurrentRunSpeed - 2800;
             rb2d.drag = 0f;
             onFloor = false;
         }
+
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

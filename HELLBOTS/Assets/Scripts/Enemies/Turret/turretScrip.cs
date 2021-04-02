@@ -60,8 +60,6 @@ void Update(){
                 }
             }
 
-            Debug.Log(transform.localRotation.z);
-
         }
 
     }
@@ -72,7 +70,7 @@ void Update(){
         Gizmos.DrawWireSphere(transform.position, shootingRange);
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Playerbullet")
         {
@@ -91,10 +89,14 @@ void Update(){
             TakeHit();
             TakeHit();
             TakeHit();
-            TakeHit();
 
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 
     void checkIfTimeToFire()

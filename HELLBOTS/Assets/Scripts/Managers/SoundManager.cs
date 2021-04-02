@@ -24,8 +24,8 @@ public class SoundManager : MonoBehaviour
         if (File.Exists("sound.sav"))
         {
             reader = new BinaryReader(File.Open("sound.sav", FileMode.Open));
-            Music = reader.ReadInt32();
-            SFX = reader.ReadInt32();
+            Music = reader.ReadSingle();
+            SFX = reader.ReadSingle();
             reader.Close();
         }
         else { return; }
