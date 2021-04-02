@@ -25,7 +25,6 @@ public class HellbotAim : MonoBehaviour
     private AudioSource audioSource;
     private GameObject floorWeapon;
     private WeaponsController weapon;
-    private ShootgunController Shotgun;
 
 
     private void Start() {
@@ -81,11 +80,6 @@ public class HellbotAim : MonoBehaviour
             OnWeapon = false;
             Destroy(floorWeapon);
 
-           /* if (ActiveWeapon == WEAPON.ESCOPETA)
-            {
-                Shotgun = GetComponentInChildren<ShootgunController>();
-                Shotgun.CurrentAmmo = Shotgun.MaxAmmo;
-            }*/
         }
 
 
@@ -146,7 +140,7 @@ public class HellbotAim : MonoBehaviour
         }
 
         
-        Crosshair.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5));
+        Crosshair.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
         Arm.position = Crosshair.transform.position;
 
     }

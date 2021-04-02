@@ -6,18 +6,23 @@ using UnityEngine.UI;
 
 public class ShootgunController : MonoBehaviour
 {
+    [Header("Extern References")]
     public GameObject bulletPrefab;
+    public Transform SoporteArma;
+    [Header("Textos")]
     public GameObject MaxBulletsT;
     public GameObject CurrentBulletsT;
     public GameObject Infinite1;
     public GameObject Infinite2;
+    [Header("Audios")]
     public AudioClip soundShoot;
     public AudioClip outOfAmmoS;
 
+    [Header("Weapon Config")]
     public float offsetBullet;
     public float fireRate;
-    public int CurrentAmmo;
     public int MaxAmmo;
+    public int CurrentAmmo;
 
     private AudioSource audioSource;
     private GameObject bullet1;

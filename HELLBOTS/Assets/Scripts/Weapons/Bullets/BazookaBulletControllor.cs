@@ -10,23 +10,17 @@ public class BazookaBulletControllor : MonoBehaviour{
     private Rigidbody2D rigidB;
 
 // Start is called before the first frame update
-void Start()
-    {
+    void Start(){
         rigidB = GetComponent<Rigidbody2D>();
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Hacer sonidos de Misil Volando
-    }
 
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.layer == 8 || collision.gameObject.tag == "Shield" )
         {
             Explosion();
         }

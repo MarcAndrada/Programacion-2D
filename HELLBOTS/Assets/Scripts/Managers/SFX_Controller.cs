@@ -4,45 +4,43 @@ using UnityEngine;
 
 public class SFX_Controller : MonoBehaviour
 {
-    public AudioSource player;
-    public AudioSource Pistola;
-    public AudioSource Ametralladora;
-    public AudioSource Escopeta;
-    public AudioSource Bazooka;
-    public AudioSource Sniper;
-
-
+    private GameObject player;
+    private AudioSource playerS;
     private GameObject[] Explosion;
     private GameObject[] Enemies;
     private GameObject[] PlayerBullets;
     private GameObject[] EnemyBullets;
+    private GameObject[] Weapons;
     private AudioSource PBull;
     private AudioSource EBull;
     private AudioSource ExplosionS;
     private AudioSource EnemiesS;
+    private AudioSource WeaponsS;
     private GameObject Door;
     private AudioSource DoorS;
     private float Volume = 0.1f;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Hellbot");
+        if (player != null)
+        {
+            playerS = player.GetComponent<AudioSource>();
+        }
          Door = GameObject.FindGameObjectWithTag("Door");
-         DoorS = Door.GetComponent<AudioSource>();
+        if (Door != null)
+        {
+            DoorS = Door.GetComponent<AudioSource>();
+        }
     }
     void Update()
     {
-        player.volume = Volume;
-        Pistola.volume = Volume;
-        Ametralladora.volume = Volume;
-        Escopeta.volume = Volume;
-        Bazooka.volume = Volume;
-        Sniper.volume = Volume;
-        
 
         Explosion = GameObject.FindGameObjectsWithTag("Explosion");
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         PlayerBullets = GameObject.FindGameObjectsWithTag("Playerbullet");
         EnemyBullets = GameObject.FindGameObjectsWithTag("Enemybullet");
+        Weapons = GameObject.FindGameObjectsWithTag("ActiveWeapon");
         for (int i = 0; i < Explosion.Length; i++)
         {
             ExplosionS = Explosion[i].GetComponent<AudioSource>();
@@ -65,8 +63,24 @@ public class SFX_Controller : MonoBehaviour
             EBull = EnemyBullets[i].GetComponent<AudioSource>();
             EBull.volume = Volume;
         }
+        for (int i = 0; i < Weapons.Length; i++)
+        {
+            WeaponsS = Weapons[i].GetComponent<AudioSource>();
+            WeaponsS.volume = Volume;
+        }
+        if (player != null)
+        {
+            playerS.volume = Volume;
+        }
+        
 
-        DoorS.volume = Volume;
+        
+
+        if (Door != null)
+        {
+            DoorS.volume = Volume;
+        }
+        
 
     }
 

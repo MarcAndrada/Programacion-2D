@@ -9,26 +9,24 @@ public class MoveCamera : MonoBehaviour
     public GameObject Player;
     public Vector2 minCamPos;
     public Vector2 maxCamPos;
-    public float UPMinYPos;
-    public float DownMinYPos;
     public GameObject optionMenu;
 
     private bool GodModeOn;
     private bool godmode;
     private bool Menu;
-
+    private SoundManager sound;
 
     // Start is called before the first frame update
     void Start()
     {
         GodModeOn = false;
         optionMenu.SetActive(false);
+        sound = GetComponentInChildren<SoundManager>();
     }
 
     private void Update()
     {
         godmode = HellbotInput.GodMode;
-
         Menu = HellbotInput.Menu;
 
         if (Menu)
@@ -41,12 +39,12 @@ public class MoveCamera : MonoBehaviour
                 optionMenu.SetActive(true);
                 
                 //que la velocidad del juego sea 0
-            }
-            else if (Time.timeScale == 0)
-            {   // si la velocidad es 0
+            }else if (Time.timeScale == 0){
+                // si la velocidad es 0
                 Time.timeScale = 1;
                 optionMenu.SetActive(false);// que la velocidad del juego regrese a 1
                 Cursor.visible = false;
+                sound.SaveValues();
             }
         }
 
@@ -79,16 +77,22 @@ public class MoveCamera : MonoBehaviour
        
     }
 
-    private void OnTriggerEnter2D(Collider2D collision){
-        if (collision.gameObject.tag == "CamUp"){
-            GoUP();
-        }
-    }
 
-
-    private void GoUP()
+    public void SetMaxCamX(float MaxX)
     {
-        minCamPos.y = UPMinYPos;
+        maxCamPos.x = MaxX;
+    }
+    public void SetMaxCamY(float MaxY)
+    {
+        maxCamPos.y = MaxY;
+    }
+    public void SetMinCamX(float MinX)
+    {
+        minCamPos.x = MinX;
+    }
+    public void SetMinCamY(float MinY)
+    {
+        minCamPos.y = MinY;
     }
 
 

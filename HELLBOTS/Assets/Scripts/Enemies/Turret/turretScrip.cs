@@ -46,11 +46,22 @@ void Update(){
                     checkIfTimeToFire();
                 }
             }
-            else if (transform.localRotation.z > 0){
+            else if (transform.localRotation.z > 0 && transform.localRotation.z < 1)
+            {
                 if (player.transform.position.x > transform.position.x){
                     checkIfTimeToFire();
                 }
             }
+            else if (transform.localRotation.z == 1)
+            {
+                if (player.transform.position.y > transform.position.y)
+                {
+                    checkIfTimeToFire();
+                }
+            }
+
+            Debug.Log(transform.localRotation.z);
+
         }
 
     }

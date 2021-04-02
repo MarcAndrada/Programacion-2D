@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\Player\HellbotInput.cs" />
     <Compile Include="Assets\Scripts\Player\HellbotRestart.cs" />
     <Compile Include="Assets\Scripts\Player\MoveCamera.cs" />
+    <Compile Include="Assets\Scripts\Player\SetCamPosController.cs" />
     <Compile Include="Assets\Scripts\PowerUps\CargadorExtendido.cs" />
     <Compile Include="Assets\Scripts\PowerUps\Inmunidad.cs" />
     <Compile Include="Assets\Scripts\PowerUps\LaserBeam.cs" />
