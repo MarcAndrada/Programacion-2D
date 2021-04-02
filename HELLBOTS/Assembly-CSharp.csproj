@@ -46,20 +46,6 @@
     <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
-<<<<<<< Updated upstream
-  <PropertyGroup>
-    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>4.9.1.0</UnityProjectGeneratorVersion>
-    <UnityProjectType>Game:1</UnityProjectType>
-    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
-    <UnityVersion>2019.4.0f1</UnityVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-=======
->>>>>>> Stashed changes
   <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.4.0f1\Editor\Data\Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -69,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\Enemies\Boss\boss_movement.cs" />
     <Compile Include="Assets\Scripts\Enemies\Flyer\GranadeFlayerScript.cs" />
@@ -754,6 +741,26 @@
      <Compile Include="Assets\Scripts\Enemies\tank_controller.cs" />
      <Compile Include="Assets\Scripts\Enemies\turretScrip.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
+=======
+     <Compile Include="Assets\Scripts\Enemies\Boss\boss_movement.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Flyer\GranadeFlayerScript.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Flyer\flying_enemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Grunt\grunt_movement.cs" />
+     <Compile Include="Assets\Scripts\Enemies\ScriptsAntiguos\BasicEnemyController.cs" />
+     <Compile Include="Assets\Scripts\Enemies\ScriptsAntiguos\bossController.cs" />
+     <Compile Include="Assets\Scripts\Enemies\ScriptsAntiguos\new_movement.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Suicide\newSuicideScript.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Turret\TurretCanonController.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Turret\turretScrip.cs" />
+     <Compile Include="Assets\Scripts\Enemies\tank\FollowTank.cs" />
+     <Compile Include="Assets\Scripts\Enemies\tank\HeadTankController.cs" />
+     <Compile Include="Assets\Scripts\Enemies\tank\tank_controller.cs" />
+     <Compile Include="Assets\Scripts\Managers\DoorCloseController.cs" />
+     <Compile Include="Assets\Scripts\Managers\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\Managers\SFX_Controller.cs" />
+     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\VolumeController.cs" />
+>>>>>>> Stashed changes
      <Compile Include="Assets\Scripts\Player\HellbotAim.cs" />
      <Compile Include="Assets\Scripts\Player\HellbotControllers.cs" />
      <Compile Include="Assets\Scripts\Player\HellbotInput.cs" />
@@ -763,8 +770,7 @@
      <Compile Include="Assets\Scripts\PowerUps\Inmunidad.cs" />
      <Compile Include="Assets\Scripts\PowerUps\LaserBeam.cs" />
      <Compile Include="Assets\Scripts\PowerUps\lineController.cs" />
-     <Compile Include="Assets\Scripts\SFX_Controller.cs" />
-     <Compile Include="Assets\Scripts\VolumeController.cs" />
+     <Compile Include="Assets\Scripts\TeleportController.cs" />
      <Compile Include="Assets\Scripts\Weapons\Bullets\BalaPrivisional.cs" />
      <Compile Include="Assets\Scripts\Weapons\Bullets\BazookaBulletControllor.cs" />
      <Compile Include="Assets\Scripts\Weapons\Bullets\GranadeController.cs" />
@@ -1405,7 +1411,6 @@
  <Reference Include="UnityEditor.UI">
  <HintPath>F:/Proyecto_primero/Programacion-2D/HELLBOTS/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.2D.Animation.Samples.Dependency.csproj">
