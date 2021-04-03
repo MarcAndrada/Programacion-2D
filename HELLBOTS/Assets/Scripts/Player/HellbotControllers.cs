@@ -185,7 +185,7 @@ public class HellbotControllers : MonoBehaviour
             {
                 if (onFloor)
                 {
-                    transform.position = new Vector3(transform.position.x, transform.position.y - 70, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, transform.position.y - 55, transform.position.z);
                 }
                 animator.SetBool("Crouch", true);
                 Normalbc2D.enabled = false;
@@ -195,6 +195,10 @@ public class HellbotControllers : MonoBehaviour
             }
             else if (crouch_keyU)
             {
+                if (onFloor)
+                {
+                    transform.position = new Vector3(transform.position.x, transform.position.y + 55, transform.position.z);
+                }
                 animator.SetBool("Crouch", false);
                 Normalbc2D.enabled = true;
                 Crouchbc2D.enabled = false;

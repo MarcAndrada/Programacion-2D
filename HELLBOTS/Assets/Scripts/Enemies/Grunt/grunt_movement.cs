@@ -51,8 +51,8 @@ public class grunt_movement : MonoBehaviour
     {
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
         float delta = Time.deltaTime * 1000;
+        nextFireTime += delta;
 
-       
         switch (stances){
             case typeStances.passive:
                 if (MoveRight)
@@ -197,8 +197,7 @@ public class grunt_movement : MonoBehaviour
     }
     void checkIfTimeToFire()
     {
-        float delta = Time.deltaTime * 1000;
-        nextFireTime += delta;
+        
         if (nextFireTime > fireRate)
         {
             audioSource.PlayOneShot(EnemyShoot);

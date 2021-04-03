@@ -40,10 +40,6 @@ public class WeaponsController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         CurrentAmmo = MaxAmmo;
-
-        MaxBulletsT.GetComponent<Text>().text = MaxAmmo.ToString();
-
-
     }
 
     // Update is called once per frame
@@ -106,10 +102,13 @@ public class WeaponsController : MonoBehaviour
 
         }
         CurrentBulletsT.GetComponent<Text>().text = CurrentAmmo.ToString();
-
+        MaxBulletsT.GetComponent<Text>().text = MaxAmmo.ToString();
     }
 
-
+    public void Reload()
+    {
+        CurrentAmmo = MaxAmmo;
+    }
 }
 
     

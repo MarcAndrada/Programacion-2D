@@ -48,7 +48,8 @@ public class tank_controller : MonoBehaviour
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
         float delta = Time.deltaTime * 1000;
-        
+        nextFireTime += delta;
+
         if (hitPoints <= 0)
         {
             Parent.SetActive(false);
@@ -193,8 +194,7 @@ public class tank_controller : MonoBehaviour
     }
     void checkIfTimeToFire()
     {
-        float delta = Time.deltaTime * 1000;
-        nextFireTime += delta;
+
         if (nextFireTime > fireRate)
         {
             audioSource.PlayOneShot(EnemyShoot);

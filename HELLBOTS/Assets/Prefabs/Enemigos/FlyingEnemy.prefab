@@ -140,7 +140,7 @@ MonoBehaviour:
   MoveRight: 0
   alert: {fileID: 9117245709936404992}
   AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
-  WaitTime: 200
+  WaitTime: 300
   hitPoints: 4
 --- !u!61 &1869990457
 BoxCollider2D:

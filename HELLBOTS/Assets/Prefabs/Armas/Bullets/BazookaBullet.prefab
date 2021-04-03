@@ -144,7 +144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4f97af081a97e4982cadc27a556876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
+  speed: 1250
+  ScenariHit: {fileID: 0}
+  ShieldHit: {fileID: 0}
+  EnemyHit: {fileID: 0}
 --- !u!114 &151306173181512408
 MonoBehaviour:
   m_ObjectHideFlags: 0

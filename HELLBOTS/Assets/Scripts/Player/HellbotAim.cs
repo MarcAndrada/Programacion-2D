@@ -25,6 +25,7 @@ public class HellbotAim : MonoBehaviour
     private AudioSource audioSource;
     private GameObject floorWeapon;
     private WeaponsController weapon;
+    private ShootgunController ShotgunCont;
 
 
     private void Start() {
@@ -68,17 +69,23 @@ public class HellbotAim : MonoBehaviour
             {
                 ActiveWeapon = WEAPON.SNIPER;
             }
-            weapon.CurrentAmmo = weapon.MaxAmmo;
 
+            if (ActiveWeapon != WEAPON.ESCOPETA && Escopeta.activeInHierarchy == false)
+            {
+                weapon.Reload();
+                OnWeapon = false;
+                Destroy(floorWeapon);
+            }
+            
 
-            OnWeapon = false;
-            Destroy(floorWeapon);
+           
+
         }else if (pick && OnWeapon && weaponName == "Escopeta"){
             audioSource.PlayOneShot(GrabWeapon);
             ActiveWeapon = WEAPON.ESCOPETA;
+            ShotgunCont.Reload(); 
             OnWeapon = false;
-            Destroy(floorWeapon);
-
+            Destroy(floorWeapon);            
         }
 
 
@@ -117,7 +124,7 @@ public class HellbotAim : MonoBehaviour
                 Bazooka.SetActive(false);
                 Sniper.SetActive(false);
                 Escopeta.SetActive(true);
-                weapon = GetComponentInChildren<WeaponsController>();
+                ShotgunCont = Escopeta.GetComponentInChildren<ShootgunController>();
                 break;
             case WEAPON.BAZOOKA:
                 Pistola.SetActive(false);

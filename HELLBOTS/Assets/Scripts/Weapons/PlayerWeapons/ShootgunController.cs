@@ -50,7 +50,7 @@ public class ShootgunController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
 
-        MaxBulletsT.GetComponent<Text>().text = MaxAmmo.ToString();
+       
 
         CurrentAmmo = MaxAmmo;
     }
@@ -122,8 +122,14 @@ public class ShootgunController : MonoBehaviour
             MaxBulletsT.SetActive(false);
         }
         CurrentBulletsT.GetComponent<Text>().text = CurrentAmmo.ToString();
+        MaxBulletsT.GetComponent<Text>().text = MaxAmmo.ToString();
 
     }
 
 
+
+    public void Reload()
+    {
+        CurrentAmmo = MaxAmmo;
+    }
 }

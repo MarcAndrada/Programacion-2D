@@ -58,15 +58,21 @@ public class BalaPrivisional : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy"){
             Hit = true;
-            audiosource.PlayOneShot(EnemyHit);
-            //gameObject.tag = "Untagged";
+            if (EnemyHit != null)
+            {
+                audiosource.PlayOneShot(EnemyHit);
+            }
             Sprite.enabled = false;
             bc2D.enabled = false;
         }
 
         if (collision.gameObject.layer == 8){
             Hit = true;
-            audiosource.PlayOneShot(ScenariHit);
+            if (ScenariHit != null)
+            {
+                audiosource.PlayOneShot(ScenariHit);
+            }
+            
             gameObject.tag = "Untagged";
             Sprite.enabled = false;
             bc2D.enabled = false;
@@ -75,7 +81,10 @@ public class BalaPrivisional : MonoBehaviour
 
         if (collision.gameObject.tag == "Shield"){
             Hit = true;
-            audiosource.PlayOneShot(ShieldHit);
+            if (ShieldHit != null)
+            {
+                audiosource.PlayOneShot(ShieldHit);
+            }
             gameObject.tag = "Untagged";
             Sprite.enabled = false;
             bc2D.enabled = false;

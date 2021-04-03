@@ -314,7 +314,7 @@ MonoBehaviour:
   lineOfSite: 1500
   alert: {fileID: 8488050174116498482}
   AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
-  WaitTime: 100
+  WaitTime: 200
   maxBorder: 300
 --- !u!82 &8129096714596236819
 AudioSource:
