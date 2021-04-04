@@ -36,6 +36,7 @@ public class BalaPrivisional : MonoBehaviour
         else
         {
             dir = -transform.right;
+            Sprite.flipX = true;
         }
     }
 

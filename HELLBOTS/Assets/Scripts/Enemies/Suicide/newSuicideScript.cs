@@ -54,6 +54,7 @@ public class newSuicideScript : MonoBehaviour
 
                 if (MoveRight)
                 {
+                    anim.SetBool("Walking", true);
                     transform.Translate(2 * Time.deltaTime * speed, 0, 0);
                     sprite.flipX = true;
                 }
@@ -78,7 +79,6 @@ public class newSuicideScript : MonoBehaviour
 
 
             case typeStances.follow:
-
                 if (firstTimeSeen)
                 {
                     //hacer sonido
@@ -138,12 +138,7 @@ public class newSuicideScript : MonoBehaviour
                 break;
 
         }
-        if (MoveRight == true)
-        {
-            anim.SetTrigger("caminar");
-        }else{
-            anim.SetTrigger("caminar");
-        }
+
     }
 
     void OnTriggerEnter2D(Collider2D collider)

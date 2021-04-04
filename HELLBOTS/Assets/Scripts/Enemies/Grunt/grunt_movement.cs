@@ -55,6 +55,7 @@ public class grunt_movement : MonoBehaviour
 
         switch (stances){
             case typeStances.passive:
+                anim.SetBool("Walking", true);
                 if (MoveRight)
                 {
                     transform.Translate(2 * Time.deltaTime * speed, 0, 0);
@@ -81,7 +82,7 @@ public class grunt_movement : MonoBehaviour
 
                 
             case typeStances.follow:
-                
+                anim.SetBool("Walking", true);
                 if (firstTimeSeen)
                 {
                     //hacer sonido
@@ -141,7 +142,7 @@ public class grunt_movement : MonoBehaviour
                 break;
                 
             case typeStances.attack:
-                
+                anim.SetBool("Walking", false);
                 checkIfTimeToFire();
                 if (distanceFromPlayer > shootingRange)
                 {
@@ -152,12 +153,7 @@ public class grunt_movement : MonoBehaviour
 
 
         }
-        if (MoveRight == true)
-        {
-            anim.SetTrigger("caminar");
-        }else{
-            anim.SetTrigger("caminar");
-        }
+        
 
         
     }
