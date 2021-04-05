@@ -190,7 +190,11 @@ public class HellbotControllers : MonoBehaviour
                 animator.SetBool("Crouch", true);
                 Normalbc2D.enabled = false;
                 Crouchbc2D.enabled = true;
-                jumpHeight += new Vector2(0, 700);
+                if (jumpDone < 1 && jumpHeight.y < 1000)
+                {
+                    jumpHeight += new Vector2(0, 700);
+                    
+                }
                 crouch = true;
             }
             else if (crouch_keyU)
@@ -202,8 +206,13 @@ public class HellbotControllers : MonoBehaviour
                 animator.SetBool("Crouch", false);
                 Normalbc2D.enabled = true;
                 Crouchbc2D.enabled = false;
-                jumpHeight -= new Vector2(0, 700);
-                crouch = false;
+                if (jumpHeight.y > 1000)
+                {
+                    jumpHeight -= new Vector2(0, 700);
+                    
+                }
+
+                    crouch = false;
             }
 
 

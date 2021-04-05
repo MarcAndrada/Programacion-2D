@@ -33,18 +33,12 @@ public class MoveCamera : MonoBehaviour
         {
           
             if (Time.timeScale == 1)
-            {    //si la velocidad es 1
-                Cursor.visible = true;
-                Time.timeScale = 0;
-                optionMenu.SetActive(true);
-                
-                //que la velocidad del juego sea 0
-            }else if (Time.timeScale == 0){
+            {
+                PauseGame();
+            }
+            else if (Time.timeScale == 0){
                 // si la velocidad es 0
-                Time.timeScale = 1;
-                optionMenu.SetActive(false);// que la velocidad del juego regrese a 1
-                Cursor.visible = false;
-                sound.SaveValues();
+                ResumeGame();
             }
         }
 
@@ -95,6 +89,19 @@ public class MoveCamera : MonoBehaviour
         minCamPos.y = MinY;
     }
 
+    public void PauseGame() {
+        Cursor.visible = true;
+        Time.timeScale = 0;
+        optionMenu.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        optionMenu.SetActive(false);// que la velocidad del juego regrese a 1
+        Cursor.visible = false;
+        sound.SaveValues();
+    }
 
     public void returnToGame()
     {

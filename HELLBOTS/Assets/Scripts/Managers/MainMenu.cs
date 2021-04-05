@@ -22,7 +22,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-
+    public void goCredits()
+    {
+        SceneManager.LoadScene("WinScene");
+    }
     public void ExitGame()
     {
 
