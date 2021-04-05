@@ -29,6 +29,7 @@ public class TeleportController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Hellbot")
         {
+           
             SceneManager.LoadScene(NextScene);
 
         }

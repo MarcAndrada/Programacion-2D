@@ -79,8 +79,10 @@
     <Compile Include="Assets\Scripts\Enemies\tank\tank_controller.cs" />
     <Compile Include="Assets\Scripts\Managers\DoorCloseController.cs" />
     <Compile Include="Assets\Scripts\Managers\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Managers\MenuSceneController.cs" />
     <Compile Include="Assets\Scripts\Managers\SFX_Controller.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\TeleportController.cs" />
     <Compile Include="Assets\Scripts\Managers\VolumeController.cs" />
     <Compile Include="Assets\Scripts\Player\HellbotAim.cs" />
     <Compile Include="Assets\Scripts\Player\HellbotControllers.cs" />
@@ -92,7 +94,6 @@
     <Compile Include="Assets\Scripts\PowerUps\Inmunidad.cs" />
     <Compile Include="Assets\Scripts\PowerUps\LaserBeam.cs" />
     <Compile Include="Assets\Scripts\PowerUps\lineController.cs" />
-    <Compile Include="Assets\Scripts\TeleportController.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullets\BalaPrivisional.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullets\BazookaBulletControllor.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullets\ExplosionController.cs" />

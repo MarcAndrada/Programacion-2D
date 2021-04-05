@@ -22,6 +22,7 @@ public class MoveCamera : MonoBehaviour
         GodModeOn = false;
         optionMenu.SetActive(false);
         sound = GetComponentInChildren<SoundManager>();
+        Time.timeScale = 1;
     }
 
     private void Update()
