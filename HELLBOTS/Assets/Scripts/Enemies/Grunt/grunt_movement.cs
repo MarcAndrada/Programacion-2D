@@ -29,6 +29,7 @@ public class grunt_movement : MonoBehaviour
     private bool firstTimeSeen = true;
     private float WaitedTime = 0f;
 
+
     private enum typeStances { passive, follow, attack }
     private typeStances stances = typeStances.passive;
 
@@ -193,11 +194,12 @@ public class grunt_movement : MonoBehaviour
     }
     void checkIfTimeToFire()
     {
-        
+
+
         if (nextFireTime > fireRate)
         {
             audioSource.PlayOneShot(EnemyShoot);
-            bala = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            bala = Instantiate(bulletPrefab, refManoArma.transform.position, Quaternion.identity);
             Destroy(bala, 4);
             nextFireTime = 0;
         }

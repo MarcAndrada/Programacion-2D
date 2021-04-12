@@ -92,7 +92,7 @@ public class WeaponsController : MonoBehaviour
             MaxBulletsT.SetActive(true);
             Infinite1.SetActive(false);
             Infinite2.SetActive(false);
-        } else if (MaxAmmo == -1) {
+        }else if (MaxAmmo == -1) {
             CurrentBulletsT.SetActive(false);
             MaxBulletsT.SetActive(false);
 

@@ -6,14 +6,19 @@ public class new_bullet : MonoBehaviour
 {
 
     public AudioClip ScenariHit;
-    private GameObject target;
     public float speed;
+
+    private GameObject target;
     private Rigidbody2D bulletRB;
+    private float randAngleY;
+    private float randAngleX;
     void Start()
     {
         bulletRB = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Hellbot");
-        Vector2 moveDir = (target.transform.position - transform.position).normalized * speed;
+        randAngleY = Random.Range(-130, 130);
+        randAngleX = Random.Range(-130, 130);
+        Vector2 moveDir = (new Vector3 (target.transform.position.x + randAngleX, target.transform.position.y + randAngleY, target.transform.position.z) - transform.position).normalized * speed;
         bulletRB.velocity = new Vector2(moveDir.x, moveDir.y);
         
     }
