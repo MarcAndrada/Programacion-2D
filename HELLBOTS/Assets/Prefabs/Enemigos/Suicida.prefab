@@ -218,10 +218,10 @@ MonoBehaviour:
     type: 3}
   MoveRight: 1
   speed: 250
-  lineOfSite: 1500
+  lineOfSite: 1650
   alert: {fileID: 4240645077970003620}
   AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
-  WaitTime: 200
+  WaitTime: 350
   maxBorder: 300
 --- !u!82 &4083637019000761341
 AudioSource:

@@ -189,7 +189,7 @@ public class newSuicideScript : MonoBehaviour
     {
         //Hacer sonido de explosion
         CurrentExplosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-        Destroy(CurrentExplosion, 1f);
+        Destroy(CurrentExplosion, 1.5f);
         gameObject.SetActive(false);
     }
 }

@@ -39,7 +39,7 @@ public class bossBullet : MonoBehaviour
     {
         //Hacer sonido de explosion
         CurrentExplosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-        Destroy(CurrentExplosion, 0.2f);
+        Destroy(CurrentExplosion, 1.5f);
         Destroy(gameObject);
     }
 

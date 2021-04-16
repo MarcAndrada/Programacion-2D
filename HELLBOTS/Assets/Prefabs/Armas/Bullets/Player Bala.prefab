@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4f97af081a97e4982cadc27a556876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1500
+  speed: 1800
   ScenariHit: {fileID: 8300000, guid: 75376ea498253ee4da6e61b24c67d569, type: 3}
   ShieldHit: {fileID: 8300000, guid: c01cb27301ae602459775d2af59683c9, type: 3}
   EnemyHit: {fileID: 8300000, guid: 983423dc31aeeca42a1c44cf10f6a350, type: 3}

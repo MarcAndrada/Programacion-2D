@@ -36,7 +36,7 @@ public class BazookaBulletControllor : MonoBehaviour{
         //Hacer sonido de explosion
         rigidB.velocity = new Vector2(0, 0);
         CurrentExplosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-        Destroy(CurrentExplosion, 1f);
+        Destroy(CurrentExplosion, 1.5f);
         Destroy(gameObject);
     }
 

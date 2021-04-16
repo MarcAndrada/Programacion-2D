@@ -221,7 +221,7 @@ public class boss_movement : MonoBehaviour
                 animator.SetBool("OpenMouth",true);
                 audiosource.PlayOneShot(MisileShoot);
                 bala1 = Instantiate(BossbulletPrefab, Mouth.transform.position, Quaternion.identity);
-                Destroy(bala1, 3);
+                Destroy(bala1, 5);
                 nextFireTime = 0;
             }else{
                 animator.SetBool("OpenMouth", false);

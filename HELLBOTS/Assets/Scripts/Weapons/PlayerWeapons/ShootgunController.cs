@@ -87,15 +87,15 @@ public class ShootgunController : MonoBehaviour
                 // audioSource.PlayOneShot(barrelReload);
                 Quaternion rot = transform.rotation;
                 bullet1 =  Instantiate(bulletPrefab, pos, AnguloRot1);
-                Destroy(bullet1, 2);                    
+                Destroy(bullet1, 1.3f);                    
                 bullet2 = Instantiate(bulletPrefab, pos, AnguloRot2);
-                Destroy(bullet2, 2);                     
+                Destroy(bullet2, 1.3f);                     
                 bullet3 = Instantiate(bulletPrefab, pos, AnguloRot3);
-                Destroy(bullet3, 2);                    
+                Destroy(bullet3, 1.3f);                    
                 bullet4 = Instantiate(bulletPrefab, pos, AnguloRot4);
-                Destroy(bullet4, 2);                  
+                Destroy(bullet4, 1.3f);                  
                 bullet5 = Instantiate(bulletPrefab, pos, AnguloRot5);
-                Destroy(bullet5, 2);
+                Destroy(bullet5, 1.3f);
                 TimeToShoot = 0;
                 
                 CurrentAmmo = CurrentAmmo - 5;

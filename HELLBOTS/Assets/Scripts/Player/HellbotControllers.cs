@@ -68,6 +68,10 @@ public class HellbotControllers : MonoBehaviour
     private float footstep;
     private float footstepRithm = 375;
     private bool onFloor;
+    private Vector3 lastpos;
+    private Vector3 CheckpointPos;
+
+
 
     private enum DirectionV { NONE, UP, DOWN };
     private enum DirectionH { NONE, LEFT, RIGHT }
@@ -79,7 +83,6 @@ public class HellbotControllers : MonoBehaviour
     private float currentSpeedH;
     private float lowHPDuration = 1000f;
     private float TimePassed;
-    private Vector2 MaxSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -90,7 +93,7 @@ public class HellbotControllers : MonoBehaviour
         Aim = GetComponent<HellbotAim>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-
+        CheckpointPos = transform.position;
 
         GodModeOn = false;
         CurrentRunSpeed = runSpeed;
@@ -117,22 +120,6 @@ public class HellbotControllers : MonoBehaviour
 
 
 
-       /* Power UP para Correr
-        * if (speedBosting) {
-            bostTimer += Time.deltaTime;
-            if (bostTimer >= 10)
-            {
-                MaxSpeed = 3000;
-                runSpeed = 3000;
-                bostTimer = 0;
-                speedBosting = false;
-            }
-        }
-        if (Input.GetKey(KeyCode.F)) {
-            speedBosting = true;
-            MaxSpeed = 6000;
-            runSpeed = 6000;
-        }*/
 
         if (godmode && !GodModeOn)
         {
@@ -161,24 +148,58 @@ public class HellbotControllers : MonoBehaviour
             //Salto
             if (jump && jumpDone < jumpLimit)
             {
+                
+                if (jumpDone >= 1)
+                {
+                    jumpHeight.y += 50;
+                    if (horizontal == 0)
+                    {
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, 100);
+
+                    }
+                    else if (horizontal == 1)
+                    {
+                        if (rb2d.velocity.x > 0)
+                        {
+                            rb2d.velocity = new Vector2(rb2d.velocity.x + 75, 0);
+                        }
+                        else
+                        {
+                            rb2d.velocity = new Vector2(rb2d.velocity.x + 600, 0);
+                        }
+                        
+
+
+                    }
+                    else
+                    {
+                        if (rb2d.velocity.x < 0)
+                        {
+                            rb2d.velocity = new Vector2(rb2d.velocity.x - 75 , 0);
+                        }
+                        else
+                        {
+                            rb2d.velocity = new Vector2(rb2d.velocity.x - 600, 0);
+                        }
+                    }
+                }
                 if (crouch)
                 {
-                    jumpDone++;
+                    jumpDone = 3;
                 }
                 //hacer sonido de salto
                 jumpDone++;
                 audioSource.PlayOneShot(JumpSound);
                 animator.SetBool("Jumping", true);
                 rb2d.drag = 0f;
-                if (jumpDone >= 1)
-                {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-                }
+                
 
                 rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+                if (jumpDone == 2)
+                {
+                   jumpHeight.y -= 50;
+                }
 
-             
-                
             }
             //Crouch (Si presiono "S", el collider grande se desactiva)
             if (crouch_keyD)
@@ -456,7 +477,7 @@ public class HellbotControllers : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)//Detectar si toca el suelo para reiniciar la cantidad de saltos
     {
-        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp")
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp" || collision.gameObject.tag == "CheckPoint")
         {
             if (jumpDone > 0)
             {
@@ -471,42 +492,53 @@ public class HellbotControllers : MonoBehaviour
         }
 
 
-        if (collision.gameObject.tag == "Enemy")
-        {
-            PlayerHit();
-        }
-
        
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp")
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp" || collision.gameObject.tag == "CheckPoint")
         {
             
             animator.SetBool("Jumping", false);         
             rb2d.drag = 3;
-            runSpeed = CurrentRunSpeed;
+            if (collision.gameObject.tag == "Ramp" || collision.gameObject.tag == "CheckPoint")
+            {
+                runSpeed = CurrentRunSpeed + 400;
+                if (collision.gameObject.tag == "CheckPoint")
+                {
+                   runSpeed = CurrentRunSpeed + 1500;
+                }
+            }
+            else
+            {
+                runSpeed = CurrentRunSpeed;
+            }
+            
             onFloor = true;
         }
 
-        if (collision.gameObject.tag == "Ramp")
-        {
-            runSpeed = CurrentRunSpeed + 700;
-        }
-
+        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
 
-        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp")
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp" || collision.gameObject.tag == "CheckPoint")
         {
-            animator.SetBool("Jumping", true);
-            runSpeed = CurrentRunSpeed - 2800;
+            if (collision.gameObject.tag != "CheckPoint")
+            {
+                animator.SetBool("Jumping", true);
+            }
+            runSpeed = CurrentRunSpeed - 2600;
             rb2d.drag = 0f;
             onFloor = false;
         }
 
+        if (collision.gameObject.tag == "Floor")
+        {
+            //coger posicion para checkpont
+            lastpos = transform.position;
+        }
         
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -527,15 +559,15 @@ public class HellbotControllers : MonoBehaviour
         if (collision.gameObject.tag == "Caida")
         {
             PlayerHit();
-            PlayerHit();
-            PlayerHit();
-            PlayerHit();
-            PlayerHit();
-            PlayerHit();
             audioSource.PlayOneShot(pHit);
+            ReturnLastJump();
         }
 
-     
+        if (collision.gameObject.tag == "CheckPoint")
+        {
+            CheckpointPos = transform.position;
+        }
+
     }
 
     public void PlayerHit(){
@@ -544,6 +576,24 @@ public class HellbotControllers : MonoBehaviour
             HP--;
         }
 
+    }
+
+
+    public void ReturnLastJump()
+    {
+        //volver a la posicion del checkpoint
+        transform.position = lastpos;
+    }
+
+    public void returnLastCheckPoint()
+    {
+        transform.position = CheckpointPos;
+        HP = 4;
+        DieText.SetActive(false);
+        sprite.enabled = true;
+        Controlls.enabled = true;
+        Aim.enabled = true;
+        Cursor.visible = false;
     }
 
 }

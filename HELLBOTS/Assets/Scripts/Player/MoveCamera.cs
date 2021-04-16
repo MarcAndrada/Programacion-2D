@@ -10,12 +10,15 @@ public class MoveCamera : MonoBehaviour
     public Vector2 minCamPos;
     public Vector2 maxCamPos;
     public GameObject optionMenu;
+    public float camSpeed;
 
     private bool GodModeOn;
     private bool godmode;
     private bool Menu;
     private SoundManager sound;
-
+    private float timeToWait = 5000;
+    private float TimeWaited;
+    private float lastPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +26,12 @@ public class MoveCamera : MonoBehaviour
         optionMenu.SetActive(false);
         sound = GetComponentInChildren<SoundManager>();
         Time.timeScale = 1;
+        lastPos = transform.position.x;
     }
 
     private void Update()
     {
+        float delta = Time.deltaTime * 1000;
         godmode = HellbotInput.GodMode;
         Menu = HellbotInput.Menu;
 
@@ -43,6 +48,12 @@ public class MoveCamera : MonoBehaviour
             }
         }
 
+        TimeWaited += delta;
+        if (timeToWait < TimeWaited)
+        {
+            lastPos = transform.position.x;
+        }
+
         if (godmode && !GodModeOn)
         {
             GodModeOn = true;
@@ -56,14 +67,16 @@ public class MoveCamera : MonoBehaviour
 
         if (!GodModeOn)
         {
-            float posX = Player.transform.position.x;
-            float posY = Player.transform.position.y;
 
-            transform.position =
-                new Vector3(
-                    Mathf.Clamp(posX, minCamPos.x, maxCamPos.x),
-                    Mathf.Clamp(posY, minCamPos.y, maxCamPos.y),
-                    transform.position.z);
+            float posX = Player.transform.position.x + 275;
+            float posY = Player.transform.position.y;
+           
+            
+
+            transform.position = Vector3.MoveTowards(
+                transform.position, 
+                new Vector3(Mathf.Clamp(posX, minCamPos.x, maxCamPos.x), Mathf.Clamp(posY, minCamPos.y, maxCamPos.y),transform.position.z),
+                camSpeed * Time.deltaTime);
         }
         else
         {

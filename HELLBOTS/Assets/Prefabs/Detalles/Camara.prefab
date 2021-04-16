@@ -100,9 +100,8 @@ MonoBehaviour:
   Player: {fileID: 0}
   minCamPos: {x: 223, y: 154}
   maxCamPos: {x: 47852, y: 2000}
-  UPMinYPos: 1210
-  DownMinYPos: -20
   optionMenu: {fileID: 0}
+  camSpeed: 2000
 --- !u!1001 &2799941110199091559
 PrefabInstance:
   m_ObjectHideFlags: 0
