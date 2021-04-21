@@ -15,8 +15,13 @@ public class HeadTankController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 aimDirection = new Vector3(-99999, 9999);
 
-        Vector3 aimDirection = (player.transform.position - transform.position).normalized;
+        if (player != null)
+        {
+            aimDirection = (player.transform.position - transform.position).normalized;
+
+        }
         angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
         Head.eulerAngles = new Vector3(0, 0, angle + 180);
     }

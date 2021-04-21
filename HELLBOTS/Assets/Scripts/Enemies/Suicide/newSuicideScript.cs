@@ -37,15 +37,23 @@ public class newSuicideScript : MonoBehaviour
     }
     void Update()
     {
-        if (transform.position.x <= player.transform.position.x +25 && transform.position.x >= player.transform.position.x - 25)
+        if (player != null)
         {
-            Explosion();
+            if (transform.position.x <= player.transform.position.x + 25 && transform.position.x >= player.transform.position.x - 25)
+            {
+                Explosion();
+            }
         }
+        
     }
     private void FixedUpdate()
     {
-        float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+        float distanceFromPlayer = 9999999999;
 
+        if (player != null)
+        {
+            distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+        }
         float delta = Time.deltaTime * 1000;
 
         switch (stances)

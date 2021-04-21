@@ -204,10 +204,7 @@ public class HellbotControllers : MonoBehaviour
             //Crouch (Si presiono "S", el collider grande se desactiva)
             if (crouch_keyD)
             {
-                if (onFloor)
-                {
-                    transform.position = new Vector3(transform.position.x, transform.position.y - 55, transform.position.z);
-                }
+                
                 animator.SetBool("Crouch", true);
                 Normalbc2D.enabled = false;
                 Crouchbc2D.enabled = true;
@@ -216,13 +213,18 @@ public class HellbotControllers : MonoBehaviour
                     jumpHeight += new Vector2(0, 700);
                     
                 }
+                if (onFloor)
+                {
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, -150);
+                }
                 crouch = true;
             }
             else if (crouch_keyU)
             {
+
                 if (onFloor)
                 {
-                    transform.position = new Vector3(transform.position.x, transform.position.y + 55, transform.position.z);
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, 400);
                 }
                 animator.SetBool("Crouch", false);
                 Normalbc2D.enabled = true;
@@ -232,8 +234,8 @@ public class HellbotControllers : MonoBehaviour
                     jumpHeight -= new Vector2(0, 700);
                     
                 }
-
-                    crouch = false;
+                
+                crouch = false;
             }
 
 

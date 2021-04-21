@@ -50,7 +50,12 @@ public class grunt_movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+        float distanceFromPlayer = 100000;
+        if (player != null)
+        {
+        distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+        }
+
         float delta = Time.deltaTime * 1000;
         nextFireTime += delta;
 

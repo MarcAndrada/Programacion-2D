@@ -43,10 +43,11 @@ public class tank_controller : MonoBehaviour
 
     private void FixedUpdate()
     {
-       
-
-        float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
-
+        float distanceFromPlayer = 99999;
+        if (player != null)
+        {
+            distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+        }
         float delta = Time.deltaTime * 1000;
         nextFireTime += delta;
 

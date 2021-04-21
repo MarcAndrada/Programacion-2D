@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1288552800543150532}
   - component: {fileID: 1288552800543150534}
   - component: {fileID: 4755860188669461224}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GranadaFlyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
