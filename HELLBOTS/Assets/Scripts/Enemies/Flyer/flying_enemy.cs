@@ -24,20 +24,46 @@ public class flying_enemy : MonoBehaviour
     private Vector2 CurrentPos;
     private AudioSource audioSource;
     private Rigidbody2D rb2d;
+    private SpriteRenderer sprite;
     private bool firstTimeSeen = true;
     private float WaitedTime = 0f;
     private int direction = 1;
-    private float MaxHP;
+    private bool damaged = false;
+    private float TimeSinceDmg;
+    private float changeSprite = 150;
 
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
         audioSource = GetComponent<AudioSource>();
         rb2d = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+
         nextFireTime = 0;
         CurrentPos = transform.position;
-        MaxHP = hitPoints;
 
+    }
+
+    private void Update()
+    {
+
+        float delta = Time.deltaTime * 1000;
+
+        if (damaged)
+        {
+            TimeSinceDmg += delta;
+            sprite.color = Color.red;
+            if (TimeSinceDmg > changeSprite)
+            {
+                sprite.color = Color.white;
+                damaged = false;
+                TimeSinceDmg = 0;
+            }
+
+
+
+
+        }
     }
 
     void FixedUpdate(){
@@ -156,6 +182,8 @@ public class flying_enemy : MonoBehaviour
 
     public void TakeHit()
     {
+
+        damaged = true;
         hitPoints = hitPoints - 1;
         if (hitPoints <= 0)
         {

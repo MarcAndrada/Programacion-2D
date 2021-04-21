@@ -30,7 +30,11 @@ public class new_bullet : MonoBehaviour
         }
         if (other.gameObject.layer == 8)
         {
-            Destroy(gameObject);
+            if (other.gameObject.tag != "WallFloor")
+            {
+                Destroy(gameObject);
+            }
+            
         }
     }
 

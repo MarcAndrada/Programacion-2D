@@ -37,7 +37,6 @@ public class GranadeFlayerScript : MonoBehaviour
     {
         rigidB.velocity = new Vector2(0, 0);
         CurrentExplosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-        Destroy(CurrentExplosion, 1f);
         Destroy(gameObject);
     }
 

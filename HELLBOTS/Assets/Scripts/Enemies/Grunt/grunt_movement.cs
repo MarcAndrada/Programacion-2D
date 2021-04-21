@@ -28,7 +28,9 @@ public class grunt_movement : MonoBehaviour
     private AudioSource audioSource;
     private bool firstTimeSeen = true;
     private float WaitedTime = 0f;
-
+    private bool damaged = false;
+    private float TimeSinceDmg;
+    private float changeSprite = 150;
 
     private enum typeStances { passive, follow, attack }
     private typeStances stances = typeStances.passive;
@@ -47,7 +49,27 @@ public class grunt_movement : MonoBehaviour
     }
 
 
+    private void Update()
+    {
 
+        float delta = Time.deltaTime * 1000;
+
+        if (damaged)
+        {
+            TimeSinceDmg += delta;
+            sprite.color = Color.red;
+            if (TimeSinceDmg > changeSprite)
+            {
+                sprite.color = Color.white;
+                damaged = false;
+                TimeSinceDmg = 0;
+            }
+
+            
+                
+            
+        }
+    }
     private void FixedUpdate()
     {
         float distanceFromPlayer = 100000;
@@ -213,9 +235,10 @@ public class grunt_movement : MonoBehaviour
     public void TakeHit()
     {
         hitPoints = hitPoints - 1;
+        damaged = true;
+
         if (hitPoints <= 0)
-        {
-            
+        { 
             gameObject.SetActive(false);
         }
     }

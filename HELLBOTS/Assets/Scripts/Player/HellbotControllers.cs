@@ -24,7 +24,10 @@ public class HellbotControllers : MonoBehaviour
     public GameObject EmptyHeart1;
     public GameObject EmptyHeart2;
     public GameObject EmptyHeart3;
-    
+    [Header("Particulas")]
+    public GameObject Particulas;
+    public GameObject HealParticles;
+    public Transform barraHP;
     [Header("Audios")]
     public AudioClip WalkSound;
     public AudioClip JumpSound;
@@ -40,6 +43,7 @@ public class HellbotControllers : MonoBehaviour
     private HellbotAim Aim;
     private Rigidbody2D rb2d;
     private Animator animator;
+    private BoxCollider2D box2d;
 
     [Header("Config Player")]
     public bool GodModeOn;
@@ -51,7 +55,7 @@ public class HellbotControllers : MonoBehaviour
 
     public int jumpDone;
     private int jumpLimit = 2;
-    private float CurrentRunSpeed;  
+    private float CurrentRunSpeed;
     private float NormalG;
     private float WaitedTimeG;
     private float AnimDurationG = 800;
@@ -70,7 +74,10 @@ public class HellbotControllers : MonoBehaviour
     private bool onFloor;
     private Vector3 lastpos;
     private Vector3 CheckpointPos;
-
+    private bool damaged = false;
+    private float TimeSinceDmg;
+    private float immortalTime = 1000;
+    private float changeSprite = 150;
 
 
     private enum DirectionV { NONE, UP, DOWN };
@@ -83,7 +90,8 @@ public class HellbotControllers : MonoBehaviour
     private float currentSpeedH;
     private float lowHPDuration = 1000f;
     private float TimePassed;
-
+    private float TimeToWaitForHeal = 450;
+    private float TimeHealWaited = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +101,7 @@ public class HellbotControllers : MonoBehaviour
         Aim = GetComponent<HellbotAim>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        box2d = GetComponent<BoxCollider2D>();
         CheckpointPos = transform.position;
 
         GodModeOn = false;
@@ -105,8 +114,8 @@ public class HellbotControllers : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update(){
-        
+    void Update() {
+
         horizontal = HellbotInput.Horizontal;
         vertical = HellbotInput.Vertical;
         jump = HellbotInput.Jump;
@@ -125,30 +134,30 @@ public class HellbotControllers : MonoBehaviour
         {
             GodModeOn = true;
             Crouchbc2D.enabled = false;
-            Normalbc2D.enabled = false;
+            Normalbc2D.enabled = true;
             rb2d.gravityScale = 0;
         }
-        else if (godmode && GodModeOn){
+        else if (godmode && GodModeOn) {
             GodModeOn = false;
             Crouchbc2D.enabled = false;
             Normalbc2D.enabled = true;
             rb2d.gravityScale = NormalG;
         }
 
-        if (!GodModeOn){
+        if (!GodModeOn) {
 
             if (crouch)
             {
                 if (onFloor)
                 {
-                    runSpeed = 2000;    
+                    runSpeed = 2000;
                 }
-                
+
             }
             //Salto
             if (jump && jumpDone < jumpLimit)
             {
-                
+
                 if (jumpDone >= 1)
                 {
                     jumpHeight.y += 50;
@@ -167,7 +176,7 @@ public class HellbotControllers : MonoBehaviour
                         {
                             rb2d.velocity = new Vector2(rb2d.velocity.x + 600, 0);
                         }
-                        
+
 
 
                     }
@@ -175,7 +184,7 @@ public class HellbotControllers : MonoBehaviour
                     {
                         if (rb2d.velocity.x < 0)
                         {
-                            rb2d.velocity = new Vector2(rb2d.velocity.x - 75 , 0);
+                            rb2d.velocity = new Vector2(rb2d.velocity.x - 75, 0);
                         }
                         else
                         {
@@ -192,26 +201,26 @@ public class HellbotControllers : MonoBehaviour
                 audioSource.PlayOneShot(JumpSound);
                 animator.SetBool("Jumping", true);
                 rb2d.drag = 0f;
-                
+
 
                 rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
                 if (jumpDone == 2)
                 {
-                   jumpHeight.y -= 50;
+                    jumpHeight.y -= 50;
                 }
 
             }
             //Crouch (Si presiono "S", el collider grande se desactiva)
             if (crouch_keyD)
             {
-                
+
                 animator.SetBool("Crouch", true);
                 Normalbc2D.enabled = false;
                 Crouchbc2D.enabled = true;
                 if (jumpDone < 1 && jumpHeight.y < 1000)
                 {
                     jumpHeight += new Vector2(0, 700);
-                    
+
                 }
                 if (onFloor)
                 {
@@ -232,14 +241,14 @@ public class HellbotControllers : MonoBehaviour
                 if (jumpHeight.y > 1000)
                 {
                     jumpHeight -= new Vector2(0, 700);
-                    
+
                 }
-                
+
                 crouch = false;
             }
 
 
-            if (HP == 6){
+            if (HP == 6) {
                 Heart3.SetActive(true);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(false);
@@ -250,7 +259,7 @@ public class HellbotControllers : MonoBehaviour
                 M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 5){
+            else if (HP == 5) {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(true);
                 EmptyHeart3.SetActive(false);
@@ -261,7 +270,7 @@ public class HellbotControllers : MonoBehaviour
                 M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 4){
+            else if (HP == 4) {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -272,7 +281,7 @@ public class HellbotControllers : MonoBehaviour
                 M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 3){
+            else if (HP == 3) {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -283,7 +292,7 @@ public class HellbotControllers : MonoBehaviour
                 M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 2){
+            else if (HP == 2) {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -293,9 +302,9 @@ public class HellbotControllers : MonoBehaviour
                 Heart1.SetActive(true);
                 M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
-                
+
             }
-            else if (HP == 1){
+            else if (HP == 1) {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -306,7 +315,7 @@ public class HellbotControllers : MonoBehaviour
                 M_Heart1.SetActive(true);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP <= 0){
+            else if (HP <= 0) {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -320,7 +329,7 @@ public class HellbotControllers : MonoBehaviour
 
             TimePassed += delta;
 
-            if(HP < 3 && lowHPDuration < TimePassed)
+            if (HP < 3 && lowHPDuration < TimePassed)
             {
                 audioSource.PlayOneShot(lowHP);
                 TimePassed = 0;
@@ -330,6 +339,7 @@ public class HellbotControllers : MonoBehaviour
                 //Hacer sonido de comer
                 audioSource.PlayOneShot(eat);
                 Aim.ResetWeapon();
+                Instantiate(HealParticles, new Vector3(barraHP.position.x + 100, barraHP.position.y, barraHP.position.z), Quaternion.identity);
                 if (HP < 6)
                 {
                     HP++;
@@ -352,7 +362,7 @@ public class HellbotControllers : MonoBehaviour
                 Aim.enabled = false;
                 Cursor.visible = true;
             }
-            else if(HP >=1 && Time.timeScale == 1)
+            else if (HP >= 1 && Time.timeScale == 1)
             {
                 sprite.enabled = true;
                 Controlls.enabled = true;
@@ -366,7 +376,7 @@ public class HellbotControllers : MonoBehaviour
             {
                 throwGranade = true;
                 animator.SetTrigger("GThrow");
-                
+
             }
 
 
@@ -391,16 +401,30 @@ public class HellbotControllers : MonoBehaviour
                     audioSource.PlayOneShot(WalkSound);
                     footstep = 0;
                 }
-                
+
             }
 
-            
-            
+            if (damaged)
+            {
+                TimeSinceDmg += delta;
+                sprite.color = Color.red;
+                if (TimeSinceDmg > changeSprite)
+                {
+                    sprite.color = Color.white;
+                }
+
+                if (TimeSinceDmg > immortalTime)
+                {
+                    damaged = false;
+                    TimeSinceDmg = 0;
+                }
+            }
+
 
         }
-        else{
-            
-            
+        else {
+
+
             GodDirectionV = DirectionV.NONE;
             GodDirectionH = DirectionH.NONE;
 
@@ -426,7 +450,7 @@ public class HellbotControllers : MonoBehaviour
 
 
     }
-    void FixedUpdate(){
+    void FixedUpdate() {
 
         if (!GodModeOn)
         {
@@ -442,7 +466,7 @@ public class HellbotControllers : MonoBehaviour
                 animator.SetBool("Walking", false);
             }
 
-        }else{
+        } else {
             float delta = Time.fixedDeltaTime * 1000;
             currentSpeedV = 0;
             currentSpeedH = 0;
@@ -479,7 +503,7 @@ public class HellbotControllers : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)//Detectar si toca el suelo para reiniciar la cantidad de saltos
     {
-        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp" || collision.gameObject.tag == "CheckPoint")
+        /*if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp" || collision.gameObject.tag == "CheckPoint")
         {
             if (jumpDone > 0)
             {
@@ -487,45 +511,69 @@ public class HellbotControllers : MonoBehaviour
             }
             animator.SetBool("Jumping", false);
 
-            jumpDone = 0;
             rb2d.drag = 3;
             runSpeed = CurrentRunSpeed;
             onFloor = true;
-        }
+        }*/
 
 
-       
+
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp" || collision.gameObject.tag == "CheckPoint")
+
+        if (collision.gameObject.layer == 8 || collision.gameObject.tag == "Weapon")
         {
-            
-            animator.SetBool("Jumping", false);         
-            rb2d.drag = 3;
-            if (collision.gameObject.tag == "Ramp" || collision.gameObject.tag == "CheckPoint")
+            if (!onFloor)
             {
-                runSpeed = CurrentRunSpeed + 400;
-                if (collision.gameObject.tag == "CheckPoint")
+                bool col1 = false;
+                bool col2 = false;
+                bool col3 = false;
+                float center_x = (box2d.bounds.min.x + box2d.bounds.max.x) / 2;
+                Vector2 centerPosition = new Vector2(center_x, box2d.bounds.min.y);
+                Vector2 leftPosition = new Vector2(box2d.bounds.min.x, box2d.bounds.min.y);
+                Vector2 RightPosition = new Vector2(box2d.bounds.max.x, box2d.bounds.min.y);
+
+                RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, -Vector2.up, 20);
+                if (checkRaycastWithScenario(hits)) { col1 = true; }
+
+                hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, 20);
+                if (checkRaycastWithScenario(hits)) { col2 = true; }
+
+                hits = Physics2D.RaycastAll(RightPosition, -Vector2.up, 20);
+                if (checkRaycastWithScenario(hits)) { col3 = true; }
+
+                if (col1 || col2 || col3)
                 {
-                   runSpeed = CurrentRunSpeed + 1500;
+
+                    animator.SetBool("Jumping", false);
+                    rb2d.drag = 3;
+                    jumpDone = 0;
+
+                    if (collision.gameObject.tag == "Ramp" )
+                    {
+                        runSpeed = CurrentRunSpeed + 400;
+
+                    }
+                    else
+                    {
+                        runSpeed = CurrentRunSpeed;
+                    }
+
+                    onFloor = true;
+
                 }
             }
-            else
-            {
-                runSpeed = CurrentRunSpeed;
-            }
-            
-            onFloor = true;
+
         }
 
-        
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
 
-        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp" || collision.gameObject.tag == "CheckPoint")
+        if (collision.gameObject.layer == 8 || collision.gameObject.tag == "Weapon")
         {
             if (collision.gameObject.tag != "CheckPoint")
             {
@@ -541,27 +589,25 @@ public class HellbotControllers : MonoBehaviour
             //coger posicion para checkpont
             lastpos = transform.position;
         }
-        
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemybullet"))
+        if (collision.gameObject.tag == "Enemybullet")
         {
             PlayerHit();
             Destroy(collision.gameObject);
-            audioSource.PlayOneShot(pHit);
+
         }
 
         if (collision.gameObject.tag == "Explosion")
         {
             PlayerHit();
-            audioSource.PlayOneShot(pHit);
         }
 
         if (collision.gameObject.tag == "Caida")
         {
             PlayerHit();
-            audioSource.PlayOneShot(pHit);
             ReturnLastJump();
         }
 
@@ -572,10 +618,37 @@ public class HellbotControllers : MonoBehaviour
 
     }
 
-    public void PlayerHit(){
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "CheckPoint")
+        {
+            float delta = Time.deltaTime * 1000;
+            
+
+            TimeHealWaited += delta;
+
+            if (TimeHealWaited > TimeToWaitForHeal && HP < 4)
+            {
+                HP++;
+                TimeHealWaited = 0;
+            }
+        } 
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "CheckPoint")
+        {
+            TimeHealWaited = 0;
+        }
+    }
+
+    public void PlayerHit() {
         //Hacer sonido de Daño
-        if (!GodModeOn){
+        if (!GodModeOn && !damaged) {
+            damaged = true;
             HP--;
+            Instantiate(Particulas, transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(pHit);
         }
 
     }
@@ -596,6 +669,22 @@ public class HellbotControllers : MonoBehaviour
         Controlls.enabled = true;
         Aim.enabled = true;
         Cursor.visible = false;
+    }
+
+
+    private bool checkRaycastWithScenario(RaycastHit2D[] hits)
+    {
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.layer == 8 || hit.collider.gameObject.tag == "Weapon")
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

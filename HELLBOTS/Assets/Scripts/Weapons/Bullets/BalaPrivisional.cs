@@ -8,13 +8,15 @@ public class BalaPrivisional : MonoBehaviour
     public AudioClip ScenariHit;
     public AudioClip ShieldHit;
     public AudioClip EnemyHit;
+    public GameObject EnemyParticles;
+    public GameObject ShieldParticles;
 
     private GameObject Crosshair;
     private GameObject Player;
     private AudioSource audiosource;
     private SpriteRenderer Sprite;
     private BoxCollider2D bc2D;
-    
+    private GameObject HittedSurface;
     private bool Hit = false;
     private float TimeToWait = 0;
     private float SoundTime = 300;
@@ -46,11 +48,13 @@ public class BalaPrivisional : MonoBehaviour
         float delta = Time.deltaTime * 1000;
         transform.position += dir * speed * Time.deltaTime;
 
-        if (Hit)
+        if (Hit && HittedSurface.tag != "WallFloor")
         {
             TimeToWait += delta;
             if (TimeToWait > SoundTime){
+                
                 Destroy(gameObject);
+                
             }
         }
     }
@@ -65,18 +69,27 @@ public class BalaPrivisional : MonoBehaviour
             }
             Sprite.enabled = false;
             bc2D.enabled = false;
+            Instantiate(EnemyParticles, transform.position, Quaternion.identity);
+
         }
 
         if (collision.gameObject.layer == 8){
             Hit = true;
-            if (ScenariHit != null)
+            HittedSurface = collision.gameObject;
+            if (collision.gameObject.tag != "WallFloor")
             {
-                audiosource.PlayOneShot(ScenariHit);
+                gameObject.tag = "Untagged";
+                Sprite.enabled = false;
+                bc2D.enabled = false;
+                if (ScenariHit != null)
+                {
+                    audiosource.PlayOneShot(ScenariHit);
+                }
             }
+
             
-            gameObject.tag = "Untagged";
-            Sprite.enabled = false;
-            bc2D.enabled = false;
+            
+            
 
         }
 
@@ -86,6 +99,7 @@ public class BalaPrivisional : MonoBehaviour
             {
                 audiosource.PlayOneShot(ShieldHit);
             }
+            Instantiate(ShieldParticles, transform.position, Quaternion.identity);
             gameObject.tag = "Untagged";
             Sprite.enabled = false;
             bc2D.enabled = false;

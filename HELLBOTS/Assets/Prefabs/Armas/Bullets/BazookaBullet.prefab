@@ -148,6 +148,10 @@ MonoBehaviour:
   ScenariHit: {fileID: 0}
   ShieldHit: {fileID: 0}
   EnemyHit: {fileID: 0}
+  EnemyParticles: {fileID: 1494119312345194764, guid: dab34adfe50b1fa4b8b2807ac7aff157,
+    type: 3}
+  ShieldParticles: {fileID: 3659241328441128516, guid: 946cb5d28ea859a489c3bcb776d63edd,
+    type: 3}
 --- !u!114 &151306173181512408
 MonoBehaviour:
   m_ObjectHideFlags: 0

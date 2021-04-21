@@ -155,7 +155,7 @@ public class newSuicideScript : MonoBehaviour
             Explosion();
         }
         if (collider.gameObject.tag == "Explosion"){
-            Explosion();
+            gameObject.SetActive(false);
         }
         if (collider.gameObject.tag == "SniperBullet")
         {
@@ -197,7 +197,6 @@ public class newSuicideScript : MonoBehaviour
     {
         //Hacer sonido de explosion
         CurrentExplosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-        Destroy(CurrentExplosion, 1.5f);
         gameObject.SetActive(false);
     }
 }

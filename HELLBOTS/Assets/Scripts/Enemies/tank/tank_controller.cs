@@ -19,15 +19,20 @@ public class tank_controller : MonoBehaviour
     public AudioClip EnemyShoot;
     public float maxBorder;
     public GameObject Parent;
-
+    public GameObject Head;
+    
     private GameObject bala;
     private GameObject player;
     private Vector2 CurrentPos;
     private AudioSource audioSource;
+    private SpriteRenderer sprite;
+    private SpriteRenderer headSprite;
     private float nextFireTime;
     private bool firstTimeSeen = true;
     private float WaitedTime = 0f;
-
+    private bool damaged = false;
+    private float TimeSinceDmg;
+    private float changeSprite = 150;
 
     enum typeStances { passive, follow, attack }
     typeStances stances = typeStances.passive;
@@ -35,11 +40,38 @@ public class tank_controller : MonoBehaviour
     {
         player = GameObject.FindWithTag("Hellbot");
         audioSource = GetComponent<AudioSource>();
+        sprite = GetComponent<SpriteRenderer>();
+        headSprite = Head.GetComponent<SpriteRenderer>();
         nextFireTime = 0;
         CurrentPos = transform.position;
 
 
     }
+
+    private void Update()
+    {
+
+        float delta = Time.deltaTime * 1000;
+
+        if (damaged)
+        {
+            TimeSinceDmg += delta;
+            sprite.color = Color.red;
+            headSprite.color = Color.red;
+            if (TimeSinceDmg > changeSprite)
+            {
+                sprite.color = Color.white;
+                headSprite.color = Color.white;
+                damaged = false;
+                TimeSinceDmg = 0;
+            }
+
+
+
+
+        }
+    }
+
 
     private void FixedUpdate()
     {
@@ -206,8 +238,8 @@ public class tank_controller : MonoBehaviour
     }
     public void TakeHit()
     {
+        damaged = true;
         hitPoints--;
-        //hacer sonidito
     }
 
 

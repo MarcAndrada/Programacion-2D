@@ -155,9 +155,11 @@ public class HellbotAim : MonoBehaviour
     {
         if (collision.gameObject.tag == "Weapon")
         {
+            Transform childGO;
             weaponName = collision.gameObject.name;
             OnWeapon = true;
-
+            childGO = collision.gameObject.transform.GetChild(0);
+            childGO.gameObject.SetActive(true);
             floorWeapon = collision.gameObject;
 
         }
@@ -166,7 +168,11 @@ public class HellbotAim : MonoBehaviour
     {
         if (collision.gameObject.tag == "Weapon")
         {
+            Transform childGO;
+            childGO = collision.gameObject.transform.GetChild(0);
             OnWeapon = false;
+            childGO.gameObject.SetActive(false);
+
         }
 
     }

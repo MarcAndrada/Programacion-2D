@@ -11,11 +11,13 @@ public class SFX_Controller : MonoBehaviour
     private GameObject[] PlayerBullets;
     private GameObject[] EnemyBullets;
     private GameObject[] Weapons;
+    private GameObject[] CheckPoints;
     private AudioSource PBull;
     private AudioSource EBull;
     private AudioSource ExplosionS;
     private AudioSource EnemiesS;
     private AudioSource WeaponsS;
+    private AudioSource CheckPointsS;
     private GameObject Door;
     private AudioSource DoorS;
     private float Volume = 0.1f;
@@ -41,6 +43,7 @@ public class SFX_Controller : MonoBehaviour
         PlayerBullets = GameObject.FindGameObjectsWithTag("Playerbullet");
         EnemyBullets = GameObject.FindGameObjectsWithTag("Enemybullet");
         Weapons = GameObject.FindGameObjectsWithTag("ActiveWeapon");
+        CheckPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
         for (int i = 0; i < Explosion.Length; i++)
         {
             ExplosionS = Explosion[i].GetComponent<AudioSource>();
@@ -67,6 +70,11 @@ public class SFX_Controller : MonoBehaviour
         {
             WeaponsS = Weapons[i].GetComponent<AudioSource>();
             WeaponsS.volume = Volume;
+        }
+        for (int i = 0; i < CheckPoints.Length; i++)
+        {
+            CheckPointsS = CheckPoints[i].GetComponent<AudioSource>();
+            CheckPointsS.volume = Volume;
         }
         if (player != null)
         {
