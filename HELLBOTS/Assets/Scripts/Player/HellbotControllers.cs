@@ -12,6 +12,7 @@ public class HellbotControllers : MonoBehaviour
     public GameObject granadePrefab;
     public Transform GranadeLaunch;
     public GameObject DieText;
+    public GameObject BossHPBar;
     [Header("Corazones Llenos")]
     public GameObject Heart1;
     public GameObject Heart2;
@@ -552,7 +553,7 @@ public class HellbotControllers : MonoBehaviour
 
                     if (collision.gameObject.tag == "Ramp" )
                     {
-                        runSpeed = CurrentRunSpeed + 400;
+                        runSpeed = CurrentRunSpeed + 500;
 
                     }
                     else
@@ -616,6 +617,10 @@ public class HellbotControllers : MonoBehaviour
             CheckpointPos = transform.position;
         }
 
+        if (collision.gameObject.tag == "BossActivator")
+        {
+            BossHPBar.SetActive(true);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

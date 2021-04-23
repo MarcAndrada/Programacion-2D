@@ -936,6 +936,9 @@ MonoBehaviour:
   EmptyHeart1: {fileID: 0}
   EmptyHeart2: {fileID: 0}
   EmptyHeart3: {fileID: 0}
+  Particulas: {fileID: 0}
+  HealParticles: {fileID: 0}
+  barraHP: {fileID: 0}
   WalkSound: {fileID: 8300000, guid: c5b3c12186444034ba12b0146fb6b3ed, type: 3}
   JumpSound: {fileID: 8300000, guid: dbdb12a83aa94184db95980527027bed, type: 3}
   pHit: {fileID: 8300000, guid: d806190db66a32444a02a9543673fe91, type: 3}
@@ -966,6 +969,11 @@ MonoBehaviour:
   Escopeta: {fileID: 8303930792898834229}
   Bazooka: {fileID: 7688779385207527956}
   Sniper: {fileID: 5499225914590087903}
+  PistolaHUD: {fileID: 0}
+  AmetralladoraHUD: {fileID: 0}
+  EscopetaHUD: {fileID: 0}
+  BazookaHUD: {fileID: 0}
+  SniperHUD: {fileID: 0}
   Arm: {fileID: 7085937018859230447}
   GrabWeapon: {fileID: 8300000, guid: bfca878ed8811a54d857abc86b36bc4f, type: 3}
   ActiveWeapon: 0

@@ -212,6 +212,7 @@ MonoBehaviour:
   maxBorder: 600
   portal: {fileID: 2209680629127160331, guid: 4a95eda8b57ffe7429a84dc7d5c571f9, type: 3}
   laught: {fileID: 8300000, guid: 7296338d120df534987f8d3840024916, type: 3}
+  HP_Bar: {fileID: 0}
 --- !u!50 &3452400175526998315
 Rigidbody2D:
   serializedVersion: 4

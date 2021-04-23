@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class boss_movement : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public class boss_movement : MonoBehaviour
     public float maxBorder;
     public GameObject portal;
     public AudioClip laught;
+    public Slider HP_Bar;
 
     private SpriteRenderer sprite;
     private float nextFireTime;
@@ -35,6 +36,9 @@ public class boss_movement : MonoBehaviour
     private AudioSource audiosource;
     private Vector3 CurrentPos;
     private bool playerClose;
+    private bool damaged = false;
+    private float TimeSinceDmg;
+    private float changeSprite = 150;
 
     enum typeStances { passive, follow, attack }
     typeStances stances = typeStances.passive;
@@ -73,6 +77,22 @@ public class boss_movement : MonoBehaviour
             }
 
             TimePasedForChange = 0;
+        }
+
+        if (damaged)
+        {
+            TimeSinceDmg += delta;
+            sprite.color = Color.red;
+            if (TimeSinceDmg > changeSprite)
+            {
+                sprite.color = Color.white;
+                damaged = false;
+                TimeSinceDmg = 0;
+            }
+
+
+
+
         }
 
 
@@ -240,11 +260,18 @@ public class boss_movement : MonoBehaviour
     public void TakeHit()
     {
         hitPoints = hitPoints - 1;
+        damaged = true;
+        SetSliderValue();
         if (hitPoints <= 0)
         {
             Instantiate(portal, transform.position, transform.rotation);
             Destroy(gameObject);
         }
+    }
+
+    public void SetSliderValue()
+    {
+        HP_Bar.value = hitPoints;
     }
 
 }

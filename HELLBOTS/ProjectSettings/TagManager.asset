@@ -12,18 +12,17 @@ TagManager:
   - Wall
   - Weapon
   - Caida
-  - Roof
   - Hellbot
   - Enemybullet
   - Playerbullet
   - Explosion
   - ActiveWeapon
-  - TurnPoint
   - Shield
   - SniperBullet
   - CheckPoint
   - Door
   - Ramp
+  - BossActivator
   layers:
   - Default
   - TransparentFX
@@ -39,7 +38,7 @@ TagManager:
   - Shield
   - EnemyBullets
   - Player
-  - Particles
+  - 
   - 
   - 
   - 

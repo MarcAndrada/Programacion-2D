@@ -33,7 +33,7 @@ public class HellbotInput : MonoBehaviour
      */
     public static bool Interact
     {
-        get { return Input.GetKey(KeyCode.E); }
+        get { return Input.GetKeyDown(KeyCode.E); }
     }
 
     public static bool Heal

@@ -171,8 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a063a701d7707b4b8978dc7a4dd82d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingRange: 1100
-  fireRate: 850
+  shootingRange: 1300
+  fireRate: 550
   bulletPrefab: {fileID: 6388760072793773378, guid: 117c895a10216cf4a9140c0b09767185,
     type: 3}
   Canon: {fileID: 2375394855284232933}

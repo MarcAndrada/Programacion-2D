@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  minCamPos: {x: 160, y: 175}
-  maxCamPos: {x: 47852, y: 175}
+  minCamPos: {x: -34, y: 106}
+  maxCamPos: {x: 59716, y: 108}
   optionMenu: {fileID: 0}
   camSpeed: 1500
 --- !u!1001 &2799941110199091559

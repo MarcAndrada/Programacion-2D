@@ -48,7 +48,7 @@ public class BalaPrivisional : MonoBehaviour
         float delta = Time.deltaTime * 1000;
         transform.position += dir * speed * Time.deltaTime;
 
-        if (Hit && HittedSurface.tag != "WallFloor")
+        if (HittedSurface != null && Hit && HittedSurface.tag != "WallFloor")
         {
             TimeToWait += delta;
             if (TimeToWait > SoundTime){
@@ -61,7 +61,7 @@ public class BalaPrivisional : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy"){
+        if (collision.gameObject.tag == "Enemy" && gameObject.tag != "Untagged"){
             Hit = true;
             if (EnemyHit != null)
             {
@@ -99,6 +99,7 @@ public class BalaPrivisional : MonoBehaviour
             {
                 audiosource.PlayOneShot(ShieldHit);
             }
+            speed = 0;
             Instantiate(ShieldParticles, transform.position, Quaternion.identity);
             gameObject.tag = "Untagged";
             Sprite.enabled = false;

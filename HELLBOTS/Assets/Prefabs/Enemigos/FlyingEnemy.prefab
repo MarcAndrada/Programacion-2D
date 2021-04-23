@@ -129,10 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476f37a991d5f52408f4e3f880fceaab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
+  speed: 450
   lineOfSite: 1600
-  shootingRange: 1000
-  fireRate: 1000
+  shootingRange: 1100
+  fireRate: 800
   bulletPrefab: {fileID: 1288552800543150587, guid: 33356378cedede945a03d5d4b57a094a,
     type: 3}
   throwZone: {fileID: 84367837}
