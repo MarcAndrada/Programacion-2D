@@ -166,69 +166,14 @@ PrefabInstance:
       propertyPath: Parent
       value: 
       objectReference: {fileID: 6775615673996947054}
-    - target: {fileID: 937203688, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
-      propertyPath: hitPoints
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 937203688, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
-      propertyPath: WaitTime
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 937203688, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
-      propertyPath: lineOfSite
-      value: 1400
-      objectReference: {fileID: 0}
-    - target: {fileID: 937203688, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
-      propertyPath: shootingRange
-      value: 1200
-      objectReference: {fileID: 0}
-    - target: {fileID: 937203688, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
-      propertyPath: fireRate
-      value: 850
-      objectReference: {fileID: 0}
-    - target: {fileID: 937203688, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
-      propertyPath: Head
-      value: 
-      objectReference: {fileID: 8575047766685963858}
     - target: {fileID: 937203690, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
       propertyPath: m_Mass
-      value: 90000
-      objectReference: {fileID: 0}
-    - target: {fileID: 937203690, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
-      propertyPath: m_Constraints
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 937203690, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
-      propertyPath: m_GravityScale
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 937203691, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
-      propertyPath: m_Offset.y
-      value: 17.797241
-      objectReference: {fileID: 0}
-    - target: {fileID: 937203691, guid: fba2908de3397264b91cf9fc9588d39c, type: 3}
-      propertyPath: m_Size.y
-      value: 649.83105
-      objectReference: {fileID: 0}
-    - target: {fileID: 768611350997881220, guid: fba2908de3397264b91cf9fc9588d39c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 969564099958870061, guid: fba2908de3397264b91cf9fc9588d39c,
         type: 3}
       propertyPath: m_Name
       value: Tank
-      objectReference: {fileID: 0}
-    - target: {fileID: 3218918013769151802, guid: fba2908de3397264b91cf9fc9588d39c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 38
-      objectReference: {fileID: 0}
-    - target: {fileID: 3218918013769151802, guid: fba2908de3397264b91cf9fc9588d39c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 455
       objectReference: {fileID: 0}
     - target: {fileID: 9123481104325778435, guid: fba2908de3397264b91cf9fc9588d39c,
         type: 3}
@@ -296,12 +241,6 @@ GameObject:
 --- !u!4 &4114518267289945482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9123481104325778435, guid: fba2908de3397264b91cf9fc9588d39c,
-    type: 3}
-  m_PrefabInstance: {fileID: 5153429869828233609}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8575047766685963858 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3495947435068166107, guid: fba2908de3397264b91cf9fc9588d39c,
     type: 3}
   m_PrefabInstance: {fileID: 5153429869828233609}
   m_PrefabAsset: {fileID: 0}

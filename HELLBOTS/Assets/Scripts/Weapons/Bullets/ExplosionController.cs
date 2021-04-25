@@ -8,9 +8,13 @@ public class ExplosionController : MonoBehaviour
     private BoxCollider2D BC2D;
     private float TimePassed;
     private float ExplosionTime = 100;
+    private float TimeDespawn = 4000;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start(){
         BC2D = GetComponent<BoxCollider2D>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.enabled = false;
     }
 
     // Update is called once per frame
@@ -21,8 +25,16 @@ public class ExplosionController : MonoBehaviour
 
         if (TimePassed > ExplosionTime)
         {
+            audioSource.enabled = true;
             BC2D.enabled = false;
         }
+
+
+        if (TimePassed > TimeDespawn)
+        {
+            Destroy(gameObject);
+        }
+
 
     }
 }

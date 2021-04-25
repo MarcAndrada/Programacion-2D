@@ -5,15 +5,15 @@ using UnityEngine;
 public class DoorCloseController : MonoBehaviour
 {
     
-    public BoxCollider2D Door;
+    static BoxCollider2D Door;
     public AudioClip DoorCloseClip;
 
     private AudioSource audiosource;
-    private SpriteRenderer Sprite;
-    private bool DoorClosed = false;
+    static private SpriteRenderer Sprite;
+    static private bool DoorClosed = false;
     void Start()
     {
-        
+        Door = GetComponent<BoxCollider2D>();
         Sprite = GetComponent<SpriteRenderer>();
         Sprite.enabled = false;
         Door.enabled = false;
@@ -32,5 +32,13 @@ public class DoorCloseController : MonoBehaviour
             }
             
         }
+    }
+
+
+    public static void OpenDoor()
+    {
+        Sprite.enabled = false;
+        Door.enabled = false;
+        DoorClosed = false;
     }
 }

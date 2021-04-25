@@ -11,14 +11,13 @@ public class MoveCamera : MonoBehaviour
     public Vector2 maxCamPos;
     public GameObject optionMenu;
     public float camSpeed;
+    public bool LookingUp = false;
 
     private bool GodModeOn;
     private bool godmode;
     private bool Menu;
     private SoundManager sound;
-    private float timeToWait = 5000;
-    private float TimeWaited;
-    private float lastPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +25,6 @@ public class MoveCamera : MonoBehaviour
         optionMenu.SetActive(false);
         sound = GetComponentInChildren<SoundManager>();
         Time.timeScale = 1;
-        lastPos = transform.position.x;
     }
 
     private void Update()
@@ -48,11 +46,7 @@ public class MoveCamera : MonoBehaviour
             }
         }
 
-        TimeWaited += delta;
-        if (timeToWait < TimeWaited)
-        {
-            lastPos = transform.position.x;
-        }
+
 
         if (godmode && !GodModeOn)
         {
@@ -68,8 +62,20 @@ public class MoveCamera : MonoBehaviour
         if (!GodModeOn)
         {
 
-            float posX = Player.transform.position.x + 275;
-            float posY = Player.transform.position.y;
+            float posX;
+            float posY;
+
+            if (!LookingUp)
+            {
+                posX = Player.transform.position.x + 275;
+                posY = Player.transform.position.y;
+            }
+            else
+            {
+                posX = Player.transform.position.x;
+                posY = Player.transform.position.y + 275;
+            }
+            
            
             
 
@@ -101,6 +107,10 @@ public class MoveCamera : MonoBehaviour
     public void SetMinCamY(float MinY)
     {
         minCamPos.y = MinY;
+    }
+    public void SetLookUp(bool whereLook)
+    {
+        LookingUp = whereLook;
     }
 
     public void PauseGame() {

@@ -18,6 +18,7 @@ public class grunt_movement : MonoBehaviour
     public float maxBorder;
     public AudioClip EnemyShoot;
     public Transform refManoArma;
+    public GameObject LimbSolverMano;
     public float hitPoints;
 
     private float nextFireTime;
@@ -31,6 +32,8 @@ public class grunt_movement : MonoBehaviour
     private bool damaged = false;
     private float TimeSinceDmg;
     private float changeSprite = 150;
+    private Rigidbody2D rb2d;
+    
 
     private enum typeStances { passive, follow, attack }
     private typeStances stances = typeStances.passive;
@@ -43,6 +46,7 @@ public class grunt_movement : MonoBehaviour
         player = GameObject.FindWithTag("Hellbot");
         sprite = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        rb2d = GetComponent<Rigidbody2D>();
         nextFireTime = 0;
         CurrentPos = transform.position;
 
@@ -69,6 +73,13 @@ public class grunt_movement : MonoBehaviour
                 
             
         }
+
+        if (stances == typeStances.follow || stances == typeStances.attack)
+        {
+            LimbSolverMano.transform.position = player.transform.position;
+        }
+        
+
     }
     private void FixedUpdate()
     {
@@ -86,12 +97,22 @@ public class grunt_movement : MonoBehaviour
                 anim.SetBool("Walking", true);
                 if (MoveRight)
                 {
-                    transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-                    sprite.flipX = true;
+                    rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+                    //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                    //rb2d.AddForce(Vector2.right * speed * 1);
+                    if (transform.localScale.x > 0)
+                    {
+                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    }
                 }
                 else{
-                    transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-                    sprite.flipX = false;
+                    rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
+                    //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                    //rb2d.AddForce(Vector2.right * speed * -1);
+                    if (transform.localScale.x < 0)
+                    {
+                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    }
                 }
 
                 if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
@@ -147,13 +168,24 @@ public class grunt_movement : MonoBehaviour
                     }
                     if (MoveRight)
                     {
-                        transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-                        sprite.flipX = true;
+                        rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+                        //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                        //rb2d.AddForce(Vector2.right * speed * 1);
+                        if (transform.localScale.x > 0)
+                        {
+                            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                        }
                     }
                     else
                     {
-                        transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-                        sprite.flipX = false;
+                        rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
+                        //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                        //rb2d.AddForce(Vector2.right * speed * -1);
+                        if (transform.localScale.x < 0)
+                        {
+                            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                        }
+
                     }
 
                     if (distanceFromPlayer > lineOfSite)
@@ -172,6 +204,16 @@ public class grunt_movement : MonoBehaviour
             case typeStances.attack:
                 anim.SetBool("Walking", false);
                 checkIfTimeToFire();
+
+                if (transform.localScale.x < 0 && player.transform.position.x < transform.position.x)
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
+                }
+                else if (transform.localScale.x > 0 && player.transform.position.x > transform.position.x)
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                }
                 if (distanceFromPlayer > shootingRange)
                 {
                     stances = typeStances.follow;

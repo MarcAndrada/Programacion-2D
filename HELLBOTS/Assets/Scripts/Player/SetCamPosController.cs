@@ -8,6 +8,7 @@ public class SetCamPosController : MonoBehaviour
     public float NewMaxX = 0;
     public float NewMinY = 0;
     public float NewMinX = 0;
+    public bool LookUp = false;
 
     private GameObject Cam;
     private MoveCamera CamController;
@@ -45,6 +46,7 @@ public class SetCamPosController : MonoBehaviour
                 CamController.SetMinCamX(NewMinX);
             }
 
+            CamController.SetLookUp(LookUp);
 
         }
     }

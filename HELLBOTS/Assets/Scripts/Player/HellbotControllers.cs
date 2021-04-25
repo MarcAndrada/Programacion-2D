@@ -13,6 +13,7 @@ public class HellbotControllers : MonoBehaviour
     public Transform GranadeLaunch;
     public GameObject DieText;
     public GameObject BossHPBar;
+    public GameObject GranadeAnim;
     [Header("Corazones Llenos")]
     public GameObject Heart1;
     public GameObject Heart2;
@@ -45,6 +46,8 @@ public class HellbotControllers : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator animator;
     private BoxCollider2D box2d;
+    private Image BombOpacityCont;
+
 
     [Header("Config Player")]
     public bool GodModeOn;
@@ -79,7 +82,9 @@ public class HellbotControllers : MonoBehaviour
     private float TimeSinceDmg;
     private float immortalTime = 1000;
     private float changeSprite = 150;
-
+    private float alpha = 0;
+    private float timetoPassAlpha = 100;
+    private float timePassedAlpha = 0;
 
     private enum DirectionV { NONE, UP, DOWN };
     private enum DirectionH { NONE, LEFT, RIGHT }
@@ -103,6 +108,8 @@ public class HellbotControllers : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         box2d = GetComponent<BoxCollider2D>();
+        BombOpacityCont = GranadeAnim.GetComponent<Image>();
+
         CheckpointPos = transform.position;
 
         GodModeOn = false;
@@ -340,16 +347,8 @@ public class HellbotControllers : MonoBehaviour
                 //Hacer sonido de comer
                 audioSource.PlayOneShot(eat);
                 Aim.ResetWeapon();
-                Instantiate(HealParticles, new Vector3(barraHP.position.x + 100, barraHP.position.y, barraHP.position.z), Quaternion.identity);
-                if (HP < 6)
-                {
-                    HP++;
-                    HP++;
-                }
-                if (HP > 6)
-                {
-                    HP = 6;
-                }
+                healing();
+                healing();
 
             }
 
@@ -377,13 +376,29 @@ public class HellbotControllers : MonoBehaviour
             {
                 throwGranade = true;
                 animator.SetTrigger("GThrow");
+                if (WaitedTimeG == 0)
+                {
+                    alpha = 1;
+                }
+            }
+
+            timePassedAlpha += delta;
+            if (timePassedAlpha > timetoPassAlpha)
+            {
+                alpha -= 0.01f;
+                timePassedAlpha = 0;
 
             }
 
+            BombOpacityCont.color = new Color(BombOpacityCont.color.r, BombOpacityCont.color.g, BombOpacityCont.color.b, alpha);
 
             if (throwGranade)
             {
                 WaitedTimeG += delta;
+
+                
+
+                
 
                 if (WaitedTimeG >= AnimDurationG && TimePassedGCD > granadeCD)
                 {
@@ -634,8 +649,9 @@ public class HellbotControllers : MonoBehaviour
 
             if (TimeHealWaited > TimeToWaitForHeal && HP < 4)
             {
-                HP++;
+                healing();
                 TimeHealWaited = 0;
+
             }
         } 
     }
@@ -674,6 +690,8 @@ public class HellbotControllers : MonoBehaviour
         Controlls.enabled = true;
         Aim.enabled = true;
         Cursor.visible = false;
+        DoorCloseController.OpenDoor();
+        BossHPBar.SetActive(false);
     }
 
 
@@ -690,6 +708,19 @@ public class HellbotControllers : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void healing()
+    {
+        Instantiate(HealParticles, new Vector3(barraHP.position.x + 100, barraHP.position.y, barraHP.position.z), Quaternion.identity);
+        if (HP < 6)
+        {
+            HP++;
+        }
+        if (HP > 6)
+        {
+            HP = 6;
+        }
     }
 
 }

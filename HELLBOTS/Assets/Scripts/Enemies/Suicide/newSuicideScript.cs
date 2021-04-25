@@ -21,7 +21,7 @@ public class newSuicideScript : MonoBehaviour
     private bool firstTimeSeen = true;
     private float WaitedTime = 0f;
     private Vector2 CurrentPos;
-
+    private Rigidbody2D rb2d;
     private Animator anim;
 
     enum typeStances { passive, follow, attack }
@@ -32,6 +32,7 @@ public class newSuicideScript : MonoBehaviour
         player = GameObject.FindWithTag("Hellbot");
         sprite = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        rb2d = GetComponent<Rigidbody2D>();
         CurrentPos = transform.position;
 
     }
@@ -62,13 +63,16 @@ public class newSuicideScript : MonoBehaviour
 
                 if (MoveRight)
                 {
-                    anim.SetBool("Walking", true);
-                    transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                    rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+                    //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                    //rb2d.AddForce(Vector2.right * speed * 1);
                     sprite.flipX = true;
                 }
                 else
                 {
-                    transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                    rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
+                    //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                    //rb2d.AddForce(Vector2.right * speed * -1);
                     sprite.flipX = false;
                 }
 
@@ -125,12 +129,16 @@ public class newSuicideScript : MonoBehaviour
                     }
                     if (MoveRight)
                     {
-                        transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                        rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+                        //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                        //rb2d.AddForce(Vector2.right * speed * 1);
                         sprite.flipX = true;
                     }
                     else
                     {
-                        transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                        rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
+                        //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                        //rb2d.AddForce(Vector2.right * speed * -1);
                         sprite.flipX = false;
                     }
 
@@ -180,19 +188,38 @@ public class newSuicideScript : MonoBehaviour
        
         if (collider.gameObject.layer == 8)
         {
+            
             if (MoveRight)
             {
-                MoveRight = false;
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.right, 20);
+                if (checkRaycastWithScenario(hits)) { MoveRight = false; }
+               
             }
             else
             {
-                MoveRight = true;
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, -Vector2.right, 20);
+                if (checkRaycastWithScenario(hits)) { MoveRight = true; }
+                
+
             }
         }
        
     }
 
-
+    private bool checkRaycastWithScenario(RaycastHit2D[] hits)
+    {
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.layer == 8)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public void Explosion()
     {
         //Hacer sonido de explosion
