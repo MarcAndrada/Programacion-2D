@@ -12,18 +12,24 @@ public class MoveCamera : MonoBehaviour
     public GameObject optionMenu;
     public float camSpeed;
     public bool LookingUp = false;
+    public bool Right = false;
 
     private bool GodModeOn;
     private bool godmode;
     private bool Menu;
+    private GameObject Managers;
     private SoundManager sound;
 
     // Start is called before the first frame update
     void Start()
     {
+        Managers = GameObject.Find("AudioManagers");
         GodModeOn = false;
         optionMenu.SetActive(false);
-        sound = GetComponentInChildren<SoundManager>();
+        if (Managers != null)
+        {
+            sound = Managers.GetComponent<SoundManager>();
+        }
         Time.timeScale = 1;
     }
 
@@ -67,11 +73,18 @@ public class MoveCamera : MonoBehaviour
 
             if (!LookingUp)
             {
-                posX = Player.transform.position.x + 275;
-                posY = Player.transform.position.y;
+                if (Right)
+                {
+                    posX = Player.transform.position.x + 275;
+                    posY = Player.transform.position.y;
+                }
+                else{
+                    posX = Player.transform.position.x - 275;
+                    posY = Player.transform.position.y;
+                }
+                
             }
-            else
-            {
+            else{
                 posX = Player.transform.position.x;
                 posY = Player.transform.position.y + 275;
             }
@@ -117,6 +130,7 @@ public class MoveCamera : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 0;
         optionMenu.SetActive(true);
+        sound.Reload();
     }
 
     public void ResumeGame()
@@ -124,7 +138,7 @@ public class MoveCamera : MonoBehaviour
         Time.timeScale = 1;
         optionMenu.SetActive(false);// que la velocidad del juego regrese a 1
         Cursor.visible = false;
-        sound.SaveValues();
+        //sound.SaveValues();
     }
 
     public void returnToGame()

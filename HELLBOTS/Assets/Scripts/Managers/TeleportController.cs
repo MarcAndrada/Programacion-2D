@@ -25,7 +25,7 @@ public class TeleportController : MonoBehaviour
         }
         if (CurrentScene == "Map2")
         {
-            NextScene = "WinScene";
+            NextScene = "Map3";
         }
         transform.position = new Vector3(transform.position.x, transform.position.y, 65);
     }

@@ -1122,15 +1122,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 500
-  lineOfSite: 1600
-  shootingRange: 1300
-  fireRate: 650
+  lineOfSite: 1500
+  shootingRange: 1100
+  fireRate: 800
   bulletPrefab: {fileID: 6388760072793773378, guid: 117c895a10216cf4a9140c0b09767185,
     type: 3}
   MoveRight: 0
   alert: {fileID: 1711494317}
   AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
-  WaitTime: 600
+  WaitTime: 800
   maxBorder: 300
   EnemyShoot: {fileID: 8300000, guid: fc4024f09fc085d4c88325874b056c23, type: 3}
   refManoArma: {fileID: 630357954413332378}

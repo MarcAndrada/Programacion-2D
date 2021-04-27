@@ -23,6 +23,9 @@ TagManager:
   - Door
   - Ramp
   - BossActivator
+  - TurnPoint
+  - Music_Slider
+  - SFX_Slider
   layers:
   - Default
   - TransparentFX
@@ -57,6 +60,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1498688419
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particles
+    uniqueID: 927535217
     locked: 0

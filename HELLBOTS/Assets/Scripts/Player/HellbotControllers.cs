@@ -107,7 +107,6 @@ public class HellbotControllers : MonoBehaviour
         Aim = GetComponent<HellbotAim>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        box2d = GetComponent<BoxCollider2D>();
         BombOpacityCont = GranadeAnim.GetComponent<Image>();
 
         CheckpointPos = transform.position;
@@ -160,7 +159,11 @@ public class HellbotControllers : MonoBehaviour
                 {
                     runSpeed = 2000;
                 }
-
+                box2d = Crouchbc2D;
+            }
+            else
+            {
+                box2d = Normalbc2D;
             }
             //Salto
             if (jump && jumpDone < jumpLimit)
@@ -519,18 +522,50 @@ public class HellbotControllers : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)//Detectar si toca el suelo para reiniciar la cantidad de saltos
     {
-        /*if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "WallFloor" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Ramp" || collision.gameObject.tag == "CheckPoint")
+        if (collision.gameObject.layer == 8 || collision.gameObject.tag == "Weapon")
         {
-            if (jumpDone > 0)
+            if (!onFloor)
             {
-                //hacer sonido de tocar suelo
-            }
-            animator.SetBool("Jumping", false);
+                bool col1 = false;
+                bool col2 = false;
+                bool col3 = false;
+                float center_x = (box2d.bounds.min.x + box2d.bounds.max.x) / 2;
+                Vector2 centerPosition = new Vector2(center_x, box2d.bounds.min.y);
+                Vector2 leftPosition = new Vector2(box2d.bounds.min.x, box2d.bounds.min.y);
+                Vector2 RightPosition = new Vector2(box2d.bounds.max.x, box2d.bounds.min.y);
 
-            rb2d.drag = 3;
-            runSpeed = CurrentRunSpeed;
-            onFloor = true;
-        }*/
+                RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, -Vector2.up, 70);
+                if (checkRaycastWithScenario(hits)) { col1 = true; }
+
+                hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, 70);
+                if (checkRaycastWithScenario(hits)) { col2 = true; }
+
+                hits = Physics2D.RaycastAll(RightPosition, -Vector2.up, 70);
+                if (checkRaycastWithScenario(hits)) { col3 = true; }
+
+                if (col1 || col2 || col3)
+                {
+
+                    animator.SetBool("Jumping", false);
+                    rb2d.drag = 3;
+                    jumpDone = 0;
+
+                    if (collision.gameObject.tag == "Ramp")
+                    {
+                        runSpeed = CurrentRunSpeed + 500;
+
+                    }
+                    else
+                    {
+                        runSpeed = CurrentRunSpeed;
+                    }
+
+                    onFloor = true;
+
+                }
+            }
+
+        }
 
 
 

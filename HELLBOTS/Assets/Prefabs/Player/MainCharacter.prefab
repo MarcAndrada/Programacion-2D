@@ -833,6 +833,8 @@ MonoBehaviour:
     type: 3}
   GranadeLaunch: {fileID: 233648103}
   DieText: {fileID: 0}
+  BossHPBar: {fileID: 0}
+  GranadeAnim: {fileID: 0}
   Heart1: {fileID: 0}
   Heart2: {fileID: 0}
   Heart3: {fileID: 0}
@@ -1684,12 +1686,12 @@ PrefabInstance:
     - target: {fileID: 2323229473732530313, guid: 3cfe2cf63067c0244ad025a7a3959e06,
         type: 3}
       propertyPath: CurrentAmmo
-      value: 150
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 2323229473732530313, guid: 3cfe2cf63067c0244ad025a7a3959e06,
         type: 3}
       propertyPath: MaxAmmo
-      value: 150
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 2323229473732530313, guid: 3cfe2cf63067c0244ad025a7a3959e06,
         type: 3}

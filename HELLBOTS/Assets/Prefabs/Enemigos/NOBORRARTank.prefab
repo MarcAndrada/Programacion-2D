@@ -181,7 +181,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 90000
+  m_Mass: 4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 120
@@ -231,14 +231,14 @@ MonoBehaviour:
   speed: 50
   lineOfSite: 1400
   shootingRange: 1200
-  fireRate: 850
+  fireRate: 1050
   bulletPrefab: {fileID: 6388760072793773378, guid: 117c895a10216cf4a9140c0b09767185,
     type: 3}
   MoveRight: 0
   hitPoints: 3
   alert: {fileID: 768611350997881220}
   AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
-  WaitTime: 500
+  WaitTime: 800
   shoot: {fileID: 5026781133531544835}
   EnemyShoot: {fileID: 8300000, guid: fc4024f09fc085d4c88325874b056c23, type: 3}
   maxBorder: 300

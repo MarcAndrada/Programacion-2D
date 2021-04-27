@@ -499,11 +499,11 @@ MonoBehaviour:
   ExplosionPrefab: {fileID: 7262620615142031964, guid: 5002d5755bdbc9046a4f371ef00d839d,
     type: 3}
   MoveRight: 1
-  speed: 1050
+  speed: 800
   lineOfSite: 1650
   alert: {fileID: 980896163813042047}
   AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
-  WaitTime: 350
+  WaitTime: 600
   maxBorder: 300
 --- !u!82 &4570873152344500761
 AudioSource:

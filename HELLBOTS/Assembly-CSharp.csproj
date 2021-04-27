@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Managers\CheckPointController.cs" />
     <Compile Include="Assets\Scripts\Managers\DoorCloseController.cs" />
     <Compile Include="Assets\Scripts\Managers\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Managers\ManagersControllers.cs" />
     <Compile Include="Assets\Scripts\Managers\MenuSceneController.cs" />
     <Compile Include="Assets\Scripts\Managers\SFX_Controller.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />

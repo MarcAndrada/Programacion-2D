@@ -300,7 +300,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 846835310}
-        m_MethodName: goGame
+        m_MethodName: goTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -309,7 +309,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &116964023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,8 +440,8 @@ RectTransform:
   - {fileID: 1374189245}
   - {fileID: 116964021}
   - {fileID: 782420044}
-  - {fileID: 1778599596}
   - {fileID: 366210629}
+  - {fileID: 1778599596}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -482,7 +482,7 @@ RectTransform:
   m_Children:
   - {fileID: 1657598182}
   m_Father: {fileID: 319966789}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -542,7 +542,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &366210631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,7 +672,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &782420046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,7 +1444,7 @@ RectTransform:
   m_Children:
   - {fileID: 1109933758}
   m_Father: {fileID: 319966789}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1504,8 +1504,8 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5075103815241325029}
+        m_CallState: 1
+      - m_Target: {fileID: 846835310}
         m_MethodName: SaveValues
         m_Mode: 1
         m_Arguments:
@@ -1515,7 +1515,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &1778599598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1778,84 +1778,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f95ac35ea9543d544a834e822abebb02, type: 3}
---- !u!1001 &5075103815241325028
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -806.0728
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -290.22626
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -355
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6065632849507521560, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_Name
-      value: AudioManagers
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b99182946ba884449b02a138254d23ba, type: 3}
---- !u!114 &5075103815241325029 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4330449124519138115, guid: b99182946ba884449b02a138254d23ba,
-    type: 3}
-  m_PrefabInstance: {fileID: 5075103815241325028}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6db306d1b18c1c64a8de4fbf10e67cf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
