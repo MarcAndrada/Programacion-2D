@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6739339543383285910}
   - component: {fileID: 6739339543383285911}
   - component: {fileID: 6739339543383285907}
+  - component: {fileID: 171966497}
   m_Layer: 0
   m_Name: Camara
   m_TagString: MainCamera
@@ -43,7 +44,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 0}
+  m_BackGroundColor: {r: 0.16981131, g: 0.15619436, b: 0.15619436, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -97,8 +98,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  minCamPos: {x: -34, y: 106}
-  maxCamPos: {x: 59716, y: 108}
+  minCamPos: {x: -38, y: -232}
+  maxCamPos: {x: 47860, y: 200}
   optionMenu: {fileID: 0}
-  camSpeed: 1500
+  camSpeed: 1750
   LookingUp: 0
+  Right: 1
+--- !u!61 &171966497
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6739339543383285912}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 349.9038, y: 118.7113}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6084.579, y: 2413.698}
+  m_EdgeRadius: 0

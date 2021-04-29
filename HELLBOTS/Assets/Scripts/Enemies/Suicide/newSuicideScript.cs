@@ -14,7 +14,6 @@ public class newSuicideScript : MonoBehaviour
     public float WaitTime;
     public float maxBorder;
 
-    private GameObject CurrentExplosion;
     private GameObject player;
     private SpriteRenderer sprite;
     private AudioSource audioSource;
@@ -23,6 +22,7 @@ public class newSuicideScript : MonoBehaviour
     private Vector2 CurrentPos;
     private Rigidbody2D rb2d;
     private Animator anim;
+    private bool DontMove  = false;
 
     enum typeStances { passive, follow, attack }
     typeStances stances = typeStances.passive;
@@ -40,15 +40,12 @@ public class newSuicideScript : MonoBehaviour
     {
         if (player != null)
         {
-            if (transform.position.x <= player.transform.position.x + 25 && transform.position.x >= player.transform.position.x - 25)
+            if (transform.position.x <= player.transform.position.x + 25 && transform.position.x >= player.transform.position.x - 25 && stances == typeStances.follow)
             {
                 Explosion();
             }
         }
-        
-    }
-    private void FixedUpdate()
-    {
+
         float distanceFromPlayer = 9999999999;
 
         if (player != null)
@@ -61,28 +58,15 @@ public class newSuicideScript : MonoBehaviour
         {
             case typeStances.passive:
 
-                if (MoveRight)
+                if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
                 {
-                    rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
-                    //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-                    //rb2d.AddForce(Vector2.right * speed * 1);
-                    sprite.flipX = true;
-                }
-                else
-                {
-                    rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
-                    //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-                    //rb2d.AddForce(Vector2.right * speed * -1);
-                    sprite.flipX = false;
-                }
-
-                if (transform.position.x > CurrentPos.x + maxBorder && MoveRight){
                     MoveRight = false;
                 }
-                if (transform.position.x < CurrentPos.x - maxBorder && !MoveRight){
+                if (transform.position.x < CurrentPos.x - maxBorder && !MoveRight)
+                {
                     MoveRight = true;
                 }
-                
+
                 if (distanceFromPlayer < lineOfSite)
                 {
                     stances = typeStances.follow;
@@ -93,6 +77,8 @@ public class newSuicideScript : MonoBehaviour
             case typeStances.follow:
                 if (firstTimeSeen)
                 {
+
+                    DontMove = false;
                     //hacer sonido
                     if (WaitedTime == 0)
                     {
@@ -126,21 +112,7 @@ public class newSuicideScript : MonoBehaviour
                     else if (player.transform.position.x < transform.position.x)
                     {
                         MoveRight = false;
-                    }
-                    if (MoveRight)
-                    {
-                        rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
-                        //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-                        //rb2d.AddForce(Vector2.right * speed * 1);
-                        sprite.flipX = true;
-                    }
-                    else
-                    {
-                        rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
-                        //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-                        //rb2d.AddForce(Vector2.right * speed * -1);
-                        sprite.flipX = false;
-                    }
+                    }                   
 
                     if (distanceFromPlayer > lineOfSite)
                     {
@@ -154,6 +126,34 @@ public class newSuicideScript : MonoBehaviour
                 break;
 
         }
+
+
+
+    }
+    private void FixedUpdate()
+    {
+        if (!DontMove)
+        {
+            if (MoveRight)
+            {
+                rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+                //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                //rb2d.AddForce(Vector2.right * speed * 1);
+                sprite.flipX = true;
+            }
+            else
+            {
+                rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
+                //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                //rb2d.AddForce(Vector2.right * speed * -1);
+                sprite.flipX = false;
+            }
+        } else {
+            anim.SetBool("Walking", false);
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+
+        }
+
 
     }
 
@@ -223,7 +223,7 @@ public class newSuicideScript : MonoBehaviour
     public void Explosion()
     {
         //Hacer sonido de explosion
-        CurrentExplosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
+        Instantiate(ExplosionPrefab, transform.position, transform.rotation);
         gameObject.SetActive(false);
     }
 }

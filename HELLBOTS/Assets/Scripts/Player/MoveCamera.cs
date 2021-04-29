@@ -19,6 +19,7 @@ public class MoveCamera : MonoBehaviour
     private bool Menu;
     private GameObject Managers;
     private SoundManager sound;
+    private EnemyActivator Activator;
 
     // Start is called before the first frame update
     void Start()
@@ -104,6 +105,26 @@ public class MoveCamera : MonoBehaviour
        
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+
+            Activator = collision.gameObject.GetComponent<EnemyActivator>();
+
+            Activator.ActivateEnemy();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Activator = collision.gameObject.GetComponent<EnemyActivator>();
+            Activator.DefuseEnemy();
+        }
+    }
 
     public void SetMaxCamX(float MaxX)
     {

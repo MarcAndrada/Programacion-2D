@@ -27,11 +27,13 @@ public class flying_enemy : MonoBehaviour
     private SpriteRenderer sprite;
     private bool firstTimeSeen = true;
     private float WaitedTime = 0f;
-    private int direction = 1;
     private bool damaged = false;
     private float TimeSinceDmg;
     private float changeSprite = 150;
-
+    private float distanceFromPlayer;
+    private bool dontMove = false;
+    enum typeStances { passive, follow, attack }
+    typeStances stances = typeStances.passive;
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
@@ -59,16 +61,115 @@ public class flying_enemy : MonoBehaviour
                 damaged = false;
                 TimeSinceDmg = 0;
             }
+        }
+
+        distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+
+        switch (stances)
+        {
+            case typeStances.passive:
+
+                if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
+                {
+                    MoveRight = false;
+                }
+                if (transform.position.x < CurrentPos.x - maxBorder && !MoveRight)
+                {
+                    MoveRight = true;
+                }
+
+                if (distanceFromPlayer < lineOfSite)
+                {
+                    stances = typeStances.follow;
+                }
+                break;
 
 
+            case typeStances.follow:
 
+                if (firstTimeSeen)
+                {
+                    dontMove = true;
+                    //hacer sonido
+                    if (WaitedTime == 0)
+                    {
+                        audioSource.PlayOneShot(AlertSound);
+                    }
+
+                    //empezar a contar
+                    WaitedTime += delta;
+
+                    //set active alerta
+                    alert.SetActive(true);
+
+                    if (WaitedTime > WaitTime)
+                    {
+                        //cuando el contador este tal poner firsttimeseen a fasle
+                        firstTimeSeen = false;
+                        //set active false alerta
+                        alert.SetActive(false);
+                        WaitedTime = 0;
+                        dontMove = false;
+                    }
+
+
+                }else{
+                    
+                    if (player.transform.position.x > transform.position.x)
+                    {
+                        MoveRight = true;
+                    }
+                    else if (player.transform.position.x < transform.position.x)
+                    {
+                        MoveRight = false;
+                    }
+                     
+
+                    if (distanceFromPlayer > lineOfSite)
+                    {
+                        stances = typeStances.passive;
+                        CurrentPos = transform.position;
+                        firstTimeSeen = true;
+
+                    }
+                    if (distanceFromPlayer <= shootingRange)
+                    {
+                        stances = typeStances.attack;
+                    }
+                }
+
+                break;
+
+            case typeStances.attack:
+
+                checkIfTimeToFire();
+                if (player.transform.position.x + 100 > transform.position.x && player.transform.position.x - 100 < transform.position.x)
+                {
+                    dontMove = true;
+                }else if (player.transform.position.x > transform.position.x){
+                    dontMove = false;
+                    MoveRight = true;
+                }
+                else if (player.transform.position.x < transform.position.x){
+                    dontMove = false;
+                    MoveRight = false;
+                }
+
+                if (distanceFromPlayer > shootingRange)
+                {
+                    stances = typeStances.follow;
+                    dontMove = false;
+                }
+                break;
 
         }
+
+
+
     }
 
-    void FixedUpdate(){
-        float delta = Time.deltaTime * 1000;
-        float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+
+    /* distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
         if (distanceFromPlayer < lineOfSite && distanceFromPlayer > shootingRange)
         {
             if (firstTimeSeen)
@@ -99,18 +200,22 @@ public class flying_enemy : MonoBehaviour
             if (player.transform.position.x > transform.position.x)
             {
                 direction = 1;
+                MoveRight = true;
             }
             if (player.transform.position.x < transform.position.x)
             {
-
+                MoveRight = false;
                 direction = -1;
             }
-            rb2d.velocity = new Vector2(speed * 1.5f * direction, rb2d.velocity.y);
             //transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
 
-        } else if (distanceFromPlayer <= shootingRange){
+        }
+        else if (distanceFromPlayer <= shootingRange)
+        {
             checkIfTimeToFire();
-        }else{
+        }
+        else
+        {
 
             if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
             {
@@ -119,19 +224,36 @@ public class flying_enemy : MonoBehaviour
             if (transform.position.x < CurrentPos.x - maxBorder && !MoveRight)
             {
                 MoveRight = true;
+                direction = -1;
+
             }
 
-          
+        }
+        */
+    
 
+    void FixedUpdate(){
+
+        if (!dontMove)
+        {
             if (MoveRight)
             {
-                transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+                //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                //rb2d.AddForce(Vector2.right * speed * 1);
             }
             else
             {
-                transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
+                //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                //rb2d.AddForce(Vector2.right * speed * -1);
             }
         }
+        else
+        {
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+        }
+
 
     }
 

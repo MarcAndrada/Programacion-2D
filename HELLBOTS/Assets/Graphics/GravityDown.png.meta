@@ -1,19 +1,7 @@
 fileFormatVersion: 2
-guid: 0332d971c010c7848a8f665689cd7a36
+guid: 77290dd3bbafa8349b74fc6f3623c6c1
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -2663453762533702744
-    second: chispas_0
-  - first:
-      213: 2818764788633577704
-    second: chispas_1
-  - first:
-      213: 1416685368504512520
-    second: chispas_2
-  - first:
-      213: 4873901167897417780
-    second: chispas_3
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -52,7 +40,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -109,91 +97,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: chispas_0
-      rect:
-        serializedVersion: 2
-        x: 454
-        y: 421
-        width: 618
-        height: 358
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8a340802ae2890bd0800000000000000
-      internalID: -2663453762533702744
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chispas_1
-      rect:
-        serializedVersion: 2
-        x: 1843
-        y: 401
-        width: 832
-        height: 398
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e822eb04a34e1720800000000000000
-      internalID: 2818764788633577704
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chispas_2
-      rect:
-        serializedVersion: 2
-        x: 3422
-        y: 357
-        width: 814
-        height: 503
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 800743436d319a310800000000000000
-      internalID: 1416685368504512520
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chispas_3
-      rect:
-        serializedVersion: 2
-        x: 4603
-        y: 158
-        width: 1142
-        height: 881
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 43813e60a4393a340800000000000000
-      internalID: 4873901167897417780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

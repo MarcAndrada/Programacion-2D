@@ -26,6 +26,8 @@ TagManager:
   - TurnPoint
   - Music_Slider
   - SFX_Slider
+  - GravityUp
+  - GravityDown
   layers:
   - Default
   - TransparentFX

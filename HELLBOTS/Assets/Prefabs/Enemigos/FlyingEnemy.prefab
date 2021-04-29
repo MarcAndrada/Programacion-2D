@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1869990457}
   - component: {fileID: 2362555492576499575}
   - component: {fileID: 997541466}
+  - component: {fileID: 845420837387787824}
   m_Layer: 9
   m_Name: FlyingEnemy
   m_TagString: Enemy
@@ -124,15 +125,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7732327790694911250}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 476f37a991d5f52408f4e3f880fceaab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 400
-  lineOfSite: 1600
-  shootingRange: 1100
-  fireRate: 900
+  speed: 300
+  lineOfSite: 1500
+  shootingRange: 800
+  fireRate: 1200
   bulletPrefab: {fileID: 1288552800543150587, guid: 33356378cedede945a03d5d4b57a094a,
     type: 3}
   throwZone: {fileID: 84367837}
@@ -140,7 +141,7 @@ MonoBehaviour:
   MoveRight: 0
   alert: {fileID: 9117245709936404992}
   AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
-  WaitTime: 800
+  WaitTime: 1200
   hitPoints: 4
 --- !u!61 &1869990457
 BoxCollider2D:
@@ -285,6 +286,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
+--- !u!114 &845420837387787824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7732327790694911250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc321addf2a21d4b8667e6904bb60fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9117245709936404992
 GameObject:
   m_ObjectHideFlags: 0

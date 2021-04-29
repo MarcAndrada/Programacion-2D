@@ -85,6 +85,7 @@ public class HellbotControllers : MonoBehaviour
     private float alpha = 0;
     private float timetoPassAlpha = 100;
     private float timePassedAlpha = 0;
+    private bool InvertedGravity = false;
 
     private enum DirectionV { NONE, UP, DOWN };
     private enum DirectionH { NONE, LEFT, RIGHT }
@@ -148,116 +149,250 @@ public class HellbotControllers : MonoBehaviour
             GodModeOn = false;
             Crouchbc2D.enabled = false;
             Normalbc2D.enabled = true;
-            rb2d.gravityScale = NormalG;
-        }
-
-        if (!GodModeOn) {
-
-            if (crouch)
+            if (!InvertedGravity)
             {
-                if (onFloor)
-                {
-                    runSpeed = 2000;
-                }
-                box2d = Crouchbc2D;
+                rb2d.gravityScale = NormalG;
             }
             else
             {
-                box2d = Normalbc2D;
+                rb2d.gravityScale = -NormalG;
             }
-            //Salto
-            if (jump && jumpDone < jumpLimit)
+        }
+
+        if (!GodModeOn) {
+            if (!InvertedGravity)
             {
 
-                if (jumpDone >= 1)
-                {
-                    jumpHeight.y += 50;
-                    if (horizontal == 0)
-                    {
-                        rb2d.velocity = new Vector2(rb2d.velocity.x, 100);
 
-                    }
-                    else if (horizontal == 1)
+                if (crouch)
+                {
+                    if (onFloor)
                     {
-                        if (rb2d.velocity.x > 0)
+                        runSpeed = 2000;
+                    }
+                    box2d = Crouchbc2D;
+                }
+                else
+                {
+                    box2d = Normalbc2D;
+                }
+                //Salto
+                if (jump && jumpDone < jumpLimit)
+                {
+
+                    if (jumpDone >= 1)
+                    {
+                        jumpHeight.y += 50;
+                        if (horizontal == 0)
                         {
-                            rb2d.velocity = new Vector2(rb2d.velocity.x + 75, 0);
+                            rb2d.velocity = new Vector2(rb2d.velocity.x, 100);
+
+                        }
+                        else if (horizontal == 1)
+                        {
+                            if (rb2d.velocity.x > 0)
+                            {
+                                rb2d.velocity = new Vector2(rb2d.velocity.x + 75, 0);
+                            }
+                            else
+                            {
+                                rb2d.velocity = new Vector2(rb2d.velocity.x + 600, 0);
+                            }
+
+
+
                         }
                         else
                         {
-                            rb2d.velocity = new Vector2(rb2d.velocity.x + 600, 0);
+                            if (rb2d.velocity.x < 0)
+                            {
+                                rb2d.velocity = new Vector2(rb2d.velocity.x - 75, 0);
+                            }
+                            else
+                            {
+                                rb2d.velocity = new Vector2(rb2d.velocity.x - 600, 0);
+                            }
                         }
+                    }
+                    if (crouch)
+                    {
+                        jumpDone = 3;
+                    }
+                    //hacer sonido de salto
+                    jumpDone++;
+                    audioSource.PlayOneShot(JumpSound);
+                    animator.SetBool("Jumping", true);
+                    rb2d.drag = 0f;
 
 
+                    rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+                    if (jumpDone == 2)
+                    {
+                        jumpHeight.y -= 50;
+                    }
 
+                }
+                //Crouch (Si presiono "S", el collider grande se desactiva)
+                if (crouch_keyD)
+                {
+                    bool GoDown;
+                    if (onFloor)
+                    {
+                        GoDown = true;
                     }
                     else
                     {
-                        if (rb2d.velocity.x < 0)
+                        GoDown = false;
+                    }
+                    animator.SetBool("Crouch", true);
+                    Normalbc2D.enabled = false;
+                    Crouchbc2D.enabled = true;
+                    if (jumpDone < 1 && jumpHeight.y < 1000)
+                    {
+                        jumpHeight += new Vector2(0, 700);
+
+                    }
+                    if (GoDown)
+                    {
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, -1000);
+                    }
+                    crouch = true;
+                }
+                else if (crouch_keyU)
+                {
+
+                    if (onFloor)
+                    {
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, 400);
+                    }
+                    animator.SetBool("Crouch", false);
+                    Normalbc2D.enabled = true;
+                    Crouchbc2D.enabled = false;
+                    if (jumpHeight.y > 1000)
+                    {
+                        jumpHeight -= new Vector2(0, 700);
+
+                    }
+
+                    crouch = false;
+                }
+
+            }
+            else
+            {
+                if (crouch)
+                {
+                    if (onFloor)
+                    {
+                        runSpeed = 2000;
+                    }
+                    box2d = Crouchbc2D;
+                }
+                else
+                {
+                    box2d = Normalbc2D;
+                }
+                //Salto
+                if (jump && jumpDone < jumpLimit)
+                {
+
+                    if (jumpDone >= 1)
+                    {
+                        jumpHeight.y -= 50;
+                        if (horizontal == 0)
                         {
-                            rb2d.velocity = new Vector2(rb2d.velocity.x - 75, 0);
+                            rb2d.velocity = new Vector2(rb2d.velocity.x, 100);
+
+                        }
+                        else if (horizontal == 1)
+                        {
+                            if (rb2d.velocity.x > 0)
+                            {
+                                rb2d.velocity = new Vector2(rb2d.velocity.x + 75, 0);
+                            }
+                            else
+                            {
+                                rb2d.velocity = new Vector2(rb2d.velocity.x + 600, 0);
+                            }
+
+
+
                         }
                         else
                         {
-                            rb2d.velocity = new Vector2(rb2d.velocity.x - 600, 0);
+                            if (rb2d.velocity.x < 0)
+                            {
+                                rb2d.velocity = new Vector2(rb2d.velocity.x - 75, 0);
+                            }
+                            else
+                            {
+                                rb2d.velocity = new Vector2(rb2d.velocity.x - 600, 0);
+                            }
                         }
                     }
+                    if (crouch)
+                    {
+                        jumpDone = 3;
+                    }
+                    //hacer sonido de salto
+                    jumpDone++;
+                    audioSource.PlayOneShot(JumpSound);
+                    animator.SetBool("Jumping", true);
+                    rb2d.drag = 0f;
+
+
+                    rb2d.AddForce(Vector2.up * -jumpHeight, ForceMode2D.Impulse);
+                    if (jumpDone == 2)
+                    {
+                        jumpHeight.y += 50;
+                    }
+
                 }
-                if (crouch)
+                //Crouch (Si presiono "S", el collider grande se desactiva)
+                if (crouch_keyD)
                 {
-                    jumpDone = 3;
+                    bool GoDown;
+                    if (onFloor)
+                    {
+                        GoDown = true;
+                    }
+                    else
+                    {
+                        GoDown = false;
+                    }
+                    animator.SetBool("Crouch", true);
+                    Normalbc2D.enabled = false;
+                    Crouchbc2D.enabled = true;
+                    if (jumpDone < 1 && jumpHeight.y < 1000)
+                    {
+                        jumpHeight += new Vector2(0, 700);
+
+                    }
+                    if (GoDown)
+                    {
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, 1000);
+                    }
+                    crouch = true;
                 }
-                //hacer sonido de salto
-                jumpDone++;
-                audioSource.PlayOneShot(JumpSound);
-                animator.SetBool("Jumping", true);
-                rb2d.drag = 0f;
-
-
-                rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-                if (jumpDone == 2)
+                else if (crouch_keyU)
                 {
-                    jumpHeight.y -= 50;
-                }
 
+                    if (onFloor)
+                    {
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, -400);
+                    }
+                    animator.SetBool("Crouch", false);
+                    Normalbc2D.enabled = true;
+                    Crouchbc2D.enabled = false;
+                    if (jumpHeight.y > 1000)
+                    {
+                        jumpHeight -= new Vector2(0, 700);
+
+                    }
+
+                    crouch = false;
+                }
             }
-            //Crouch (Si presiono "S", el collider grande se desactiva)
-            if (crouch_keyD)
-            {
-
-                animator.SetBool("Crouch", true);
-                Normalbc2D.enabled = false;
-                Crouchbc2D.enabled = true;
-                if (jumpDone < 1 && jumpHeight.y < 1000)
-                {
-                    jumpHeight += new Vector2(0, 700);
-
-                }
-                if (onFloor)
-                {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, -150);
-                }
-                crouch = true;
-            }
-            else if (crouch_keyU)
-            {
-
-                if (onFloor)
-                {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, 400);
-                }
-                animator.SetBool("Crouch", false);
-                Normalbc2D.enabled = true;
-                Crouchbc2D.enabled = false;
-                if (jumpHeight.y > 1000)
-                {
-                    jumpHeight -= new Vector2(0, 700);
-
-                }
-
-                crouch = false;
-            }
-
 
             if (HP == 6) {
                 Heart3.SetActive(true);
@@ -522,50 +657,6 @@ public class HellbotControllers : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)//Detectar si toca el suelo para reiniciar la cantidad de saltos
     {
-        if (collision.gameObject.layer == 8 || collision.gameObject.tag == "Weapon")
-        {
-            if (!onFloor)
-            {
-                bool col1 = false;
-                bool col2 = false;
-                bool col3 = false;
-                float center_x = (box2d.bounds.min.x + box2d.bounds.max.x) / 2;
-                Vector2 centerPosition = new Vector2(center_x, box2d.bounds.min.y);
-                Vector2 leftPosition = new Vector2(box2d.bounds.min.x, box2d.bounds.min.y);
-                Vector2 RightPosition = new Vector2(box2d.bounds.max.x, box2d.bounds.min.y);
-
-                RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, -Vector2.up, 70);
-                if (checkRaycastWithScenario(hits)) { col1 = true; }
-
-                hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, 70);
-                if (checkRaycastWithScenario(hits)) { col2 = true; }
-
-                hits = Physics2D.RaycastAll(RightPosition, -Vector2.up, 70);
-                if (checkRaycastWithScenario(hits)) { col3 = true; }
-
-                if (col1 || col2 || col3)
-                {
-
-                    animator.SetBool("Jumping", false);
-                    rb2d.drag = 3;
-                    jumpDone = 0;
-
-                    if (collision.gameObject.tag == "Ramp")
-                    {
-                        runSpeed = CurrentRunSpeed + 500;
-
-                    }
-                    else
-                    {
-                        runSpeed = CurrentRunSpeed;
-                    }
-
-                    onFloor = true;
-
-                }
-            }
-
-        }
 
 
 
@@ -577,22 +668,43 @@ public class HellbotControllers : MonoBehaviour
         {
             if (!onFloor)
             {
+
+                int RayRange = 20;
+
                 bool col1 = false;
                 bool col2 = false;
                 bool col3 = false;
                 float center_x = (box2d.bounds.min.x + box2d.bounds.max.x) / 2;
-                Vector2 centerPosition = new Vector2(center_x, box2d.bounds.min.y);
-                Vector2 leftPosition = new Vector2(box2d.bounds.min.x, box2d.bounds.min.y);
-                Vector2 RightPosition = new Vector2(box2d.bounds.max.x, box2d.bounds.min.y);
+                
 
-                RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, -Vector2.up, 20);
-                if (checkRaycastWithScenario(hits)) { col1 = true; }
+                if (!InvertedGravity)
+                {
+                    Vector2 centerPosition = new Vector2(center_x, box2d.bounds.min.y);
+                    Vector2 leftPosition = new Vector2(box2d.bounds.min.x, box2d.bounds.min.y);
+                    Vector2 RightPosition = new Vector2(box2d.bounds.max.x, box2d.bounds.min.y);
+                    RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, -Vector2.up, RayRange);
+                    if (checkRaycastWithScenario(hits)) { col1 = true; }
 
-                hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, 20);
-                if (checkRaycastWithScenario(hits)) { col2 = true; }
+                    hits = Physics2D.RaycastAll(leftPosition, -Vector2.up, RayRange);
+                    if (checkRaycastWithScenario(hits)) { col2 = true; }
 
-                hits = Physics2D.RaycastAll(RightPosition, -Vector2.up, 20);
-                if (checkRaycastWithScenario(hits)) { col3 = true; }
+                    hits = Physics2D.RaycastAll(RightPosition, -Vector2.up, RayRange);
+                    if (checkRaycastWithScenario(hits)) { col3 = true; }
+                }
+                else{
+                    Vector2 centerPosition = new Vector2(center_x, box2d.bounds.max.y);
+                    Vector2 leftPosition = new Vector2(box2d.bounds.min.x, box2d.bounds.max.y);
+                    Vector2 RightPosition = new Vector2(box2d.bounds.max.x, box2d.bounds.max.y);
+                    RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, Vector2.up, RayRange);
+                    if (checkRaycastWithScenario(hits)) { col1 = true; }
+
+                    hits = Physics2D.RaycastAll(leftPosition, Vector2.up, RayRange);
+                    if (checkRaycastWithScenario(hits)) { col2 = true; }
+
+                    hits = Physics2D.RaycastAll(RightPosition, Vector2.up, RayRange);
+                    if (checkRaycastWithScenario(hits)) { col3 = true; }
+                }
+                
 
                 if (col1 || col2 || col3)
                 {
@@ -609,6 +721,12 @@ public class HellbotControllers : MonoBehaviour
                     else
                     {
                         runSpeed = CurrentRunSpeed;
+                    }
+
+                    if (collision.gameObject.tag == "Floor")
+                    {
+                        //coger posicion para checkpont
+                        lastpos = transform.position;
                     }
 
                     onFloor = true;
@@ -635,11 +753,7 @@ public class HellbotControllers : MonoBehaviour
             onFloor = false;
         }
 
-        if (collision.gameObject.tag == "Floor")
-        {
-            //coger posicion para checkpont
-            lastpos = transform.position;
-        }
+        
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -671,6 +785,27 @@ public class HellbotControllers : MonoBehaviour
         {
             BossHPBar.SetActive(true);
         }
+
+        if (collision.gameObject.tag == "GravityUp")
+        {
+           rb2d.gravityScale = -NormalG;
+            if (transform.localScale.y > 0 )
+            {
+                transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+            }
+            InvertedGravity = true;
+        }
+
+        if (collision.gameObject.tag == "GravityDown")
+        {
+            rb2d.gravityScale = NormalG;
+            if (transform.localScale.y < 0)
+            {
+                transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+            }
+            InvertedGravity = false;
+        }
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)

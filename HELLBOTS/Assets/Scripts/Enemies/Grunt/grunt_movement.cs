@@ -33,7 +33,7 @@ public class grunt_movement : MonoBehaviour
     private float TimeSinceDmg;
     private float changeSprite = 150;
     private Rigidbody2D rb2d;
-    
+    private bool DontMove = false;
 
     private enum typeStances { passive, follow, attack }
     private typeStances stances = typeStances.passive;
@@ -57,6 +57,11 @@ public class grunt_movement : MonoBehaviour
     {
 
         float delta = Time.deltaTime * 1000;
+        float distanceFromPlayer = 100000;
+        if (player != null)
+        {
+            distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+        }
 
         if (damaged)
         {
@@ -74,46 +79,13 @@ public class grunt_movement : MonoBehaviour
             
         }
 
-        if (stances == typeStances.follow || stances == typeStances.attack)
-        {
-            LimbSolverMano.transform.position = player.transform.position;
-        }
-        
-
-    }
-    private void FixedUpdate()
-    {
-        float distanceFromPlayer = 100000;
-        if (player != null)
-        {
-        distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
-        }
-
-        float delta = Time.deltaTime * 1000;
         nextFireTime += delta;
 
-        switch (stances){
+        switch (stances)
+        {
             case typeStances.passive:
                 anim.SetBool("Walking", true);
-                if (MoveRight)
-                {
-                    rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
-                    //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-                    //rb2d.AddForce(Vector2.right * speed * 1);
-                    if (transform.localScale.x > 0)
-                    {
-                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                    }
-                }
-                else{
-                    rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
-                    //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-                    //rb2d.AddForce(Vector2.right * speed * -1);
-                    if (transform.localScale.x < 0)
-                    {
-                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                    }
-                }
+                
 
                 if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
                 {
@@ -124,16 +96,36 @@ public class grunt_movement : MonoBehaviour
                     MoveRight = true;
                 }
 
-                if (distanceFromPlayer < lineOfSite){
+                if (MoveRight)
+                {
+
+                    if (transform.localScale.x > 0)
+                    {
+                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    }
+                }
+                else
+                {
+
+                    if (transform.localScale.x < 0)
+                    {
+                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    }
+
+                }
+
+                if (distanceFromPlayer < lineOfSite)
+                {
                     stances = typeStances.follow;
                 }
                 break;
 
-                
+
             case typeStances.follow:
                 anim.SetBool("Walking", true);
                 if (firstTimeSeen)
                 {
+                    DontMove = true;
                     //hacer sonido
                     if (WaitedTime == 0)
                     {
@@ -153,10 +145,13 @@ public class grunt_movement : MonoBehaviour
                         //set active false alerta
                         alert.SetActive(false);
                         WaitedTime = 0;
+                        DontMove = false;
                     }
 
 
-                }else{
+                }
+                else
+                {
 
                     if (player.transform.position.x > transform.position.x)
                     {
@@ -168,9 +163,7 @@ public class grunt_movement : MonoBehaviour
                     }
                     if (MoveRight)
                     {
-                        rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
-                        //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-                        //rb2d.AddForce(Vector2.right * speed * 1);
+                       
                         if (transform.localScale.x > 0)
                         {
                             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -178,9 +171,7 @@ public class grunt_movement : MonoBehaviour
                     }
                     else
                     {
-                        rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
-                        //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-                        //rb2d.AddForce(Vector2.right * speed * -1);
+                        
                         if (transform.localScale.x < 0)
                         {
                             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -200,11 +191,11 @@ public class grunt_movement : MonoBehaviour
                     }
                 }
                 break;
-                
+
             case typeStances.attack:
                 anim.SetBool("Walking", false);
                 checkIfTimeToFire();
-
+                DontMove = true;
                 if (transform.localScale.x < 0 && player.transform.position.x < transform.position.x)
                 {
                     transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -217,15 +208,47 @@ public class grunt_movement : MonoBehaviour
                 if (distanceFromPlayer > shootingRange)
                 {
                     stances = typeStances.follow;
+                    DontMove = false;
                 }
                 break;
-                
+
 
 
         }
+
+
+        if (stances == typeStances.follow || stances == typeStances.attack)
+        {
+            LimbSolverMano.transform.position = player.transform.position;
+        }
         
 
-        
+    }
+    private void FixedUpdate()
+    {
+
+        if (!DontMove){
+
+
+            if (MoveRight){
+                rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+                //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                //rb2d.AddForce(Vector2.right * speed * 1);
+
+            }
+            else{
+                rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
+                //transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                //rb2d.AddForce(Vector2.right * speed * -1);
+            }
+        }
+        else{
+            anim.SetBool("Walking", false);
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+        }
+
+
+
     }
 
 

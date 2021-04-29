@@ -33,7 +33,7 @@ public class GranadeController : MonoBehaviour
         }
 
 
-        rigidB.AddTorque(Random.Range(-10, 10), ForceMode2D.Impulse);
+        rigidB.AddTorque(Random.Range(-5000, -500), ForceMode2D.Impulse);
     }
 
     private void Update()
