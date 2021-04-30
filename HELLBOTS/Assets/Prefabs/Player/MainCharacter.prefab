@@ -301,7 +301,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8249591238958039517}
-  m_LocalRotation: {x: -0, y: 0, z: 0.010771542, w: -0.999942}
+  m_LocalRotation: {x: -0, y: 0, z: 0.010768025, w: -0.99994206}
   m_LocalPosition: {x: 96.758965, y: -0.24558663, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -363,7 +363,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8249591239056819574}
-  m_LocalRotation: {x: -0, y: -0, z: -0.0000054538236, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0000048577767, w: 1}
   m_LocalPosition: {x: 69.4, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -453,7 +453,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8249591239732178925}
-  m_LocalRotation: {x: 0, y: 0, z: -0.08436902, w: 0.99643457}
+  m_LocalRotation: {x: 0, y: 0, z: -0.08437011, w: 0.99643457}
   m_LocalPosition: {x: 93.80381, y: -3.420925, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -484,7 +484,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8249591239755734538}
-  m_LocalRotation: {x: 0, y: 0, z: -0.9954546, w: 0.09523706}
+  m_LocalRotation: {x: 0, y: 0, z: -0.9954546, w: 0.095237546}
   m_LocalPosition: {x: 9.804131, y: -8.789445, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -711,8 +711,8 @@ MonoBehaviour:
   - {fileID: 8249591239755734539}
   - {fileID: 8249591239732178898}
   m_Bounds:
-    m_Center: {x: 35.687584, y: -28.658432, z: 0}
-    m_Extent: {x: 107.223854, y: 221.45476, z: 0}
+    m_Center: {x: 35.687584, y: -28.658371, z: 0}
+    m_Extent: {x: 107.223854, y: 221.4547, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &8249591239883331836
@@ -785,7 +785,7 @@ BoxCollider2D:
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_AutoTiling: 1
   serializedVersion: 2
   m_Size: {x: 55.34903, y: 370.40674}
   m_EdgeRadius: 0
@@ -1131,7 +1131,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8249591240256848679}
-  m_LocalRotation: {x: 0, y: 0, z: 0.9999906, w: 0.0043573994}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9999905, w: 0.0043588923}
   m_LocalPosition: {x: 10.461656, y: 19.874779, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1322,7 +1322,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8249591240763520024}
-  m_LocalRotation: {x: -0, y: -0, z: -0.000009682027, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.000011706723, w: 1}
   m_LocalPosition: {x: 71, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1653,6 +1653,11 @@ PrefabInstance:
       propertyPath: SoporteArma
       value: 
       objectReference: {fileID: 6807957655773451370}
+    - target: {fileID: 6290507036174987920, guid: 233ff5cb9854b0c4d88619d7ce475856,
+        type: 3}
+      propertyPath: MaxAmmo
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 9142346901091164165, guid: 233ff5cb9854b0c4d88619d7ce475856,
         type: 3}
       propertyPath: m_Name
@@ -1691,7 +1696,7 @@ PrefabInstance:
     - target: {fileID: 2323229473732530313, guid: 3cfe2cf63067c0244ad025a7a3959e06,
         type: 3}
       propertyPath: MaxAmmo
-      value: 85
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 2323229473732530313, guid: 3cfe2cf63067c0244ad025a7a3959e06,
         type: 3}
@@ -1807,6 +1812,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Infinite2
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -6592126119215429312, guid: ad749348820761b4fad615ff484a0490,
+        type: 3}
+      propertyPath: MaxAmmo
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 755330195238536173, guid: ad749348820761b4fad615ff484a0490,
         type: 3}
@@ -1938,6 +1948,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Infinite2
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -6306679828979340906, guid: 8f365cceb07006e48ab709400de373c5,
+        type: 3}
+      propertyPath: MaxAmmo
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1166567458515945021, guid: 8f365cceb07006e48ab709400de373c5,
         type: 3}

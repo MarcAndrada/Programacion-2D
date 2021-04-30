@@ -28,6 +28,7 @@ TagManager:
   - SFX_Slider
   - GravityUp
   - GravityDown
+  - InverseDoor
   layers:
   - Default
   - TransparentFX

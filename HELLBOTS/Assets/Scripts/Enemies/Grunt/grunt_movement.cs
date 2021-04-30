@@ -122,9 +122,9 @@ public class grunt_movement : MonoBehaviour
 
 
             case typeStances.follow:
-                anim.SetBool("Walking", true);
                 if (firstTimeSeen)
                 {
+                    anim.SetBool("Walking", false);
                     DontMove = true;
                     //hacer sonido
                     if (WaitedTime == 0)
@@ -147,11 +147,22 @@ public class grunt_movement : MonoBehaviour
                         WaitedTime = 0;
                         DontMove = false;
                     }
+                    if (transform.localScale.x > 0 && player.transform.position.x > transform.position.x)
+                    {
+                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    }
+                
+
+                    if (transform.localScale.x < 0 && player.transform.position.x < transform.position.x)
+                    {
+                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    }
 
 
                 }
                 else
                 {
+                    anim.SetBool("Walking", true);
 
                     if (player.transform.position.x > transform.position.x)
                     {

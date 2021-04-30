@@ -76,7 +76,7 @@ public class BalaPrivisional : MonoBehaviour
         if (collision.gameObject.layer == 8){
             Hit = true;
             HittedSurface = collision.gameObject;
-            if (collision.gameObject.tag != "WallFloor")
+            if (collision.gameObject.tag != "WallFloor" && collision.gameObject.tag != "Door" && collision.gameObject.tag != "InverseDoor")
             {
                 gameObject.tag = "Untagged";
                 Sprite.enabled = false;

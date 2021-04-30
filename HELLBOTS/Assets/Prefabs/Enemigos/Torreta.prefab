@@ -179,7 +179,7 @@ MonoBehaviour:
   Canon: {fileID: 2375394855284232933}
   CanonRotated: {fileID: 8536326449434691122}
   EnemyShoot: {fileID: 8300000, guid: fc4024f09fc085d4c88325874b056c23, type: 3}
-  hitPoints: 3
+  hitPoints: 2
 --- !u!82 &-2759959374892777304
 AudioSource:
   m_ObjectHideFlags: 0

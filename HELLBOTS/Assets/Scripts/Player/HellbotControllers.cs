@@ -86,6 +86,9 @@ public class HellbotControllers : MonoBehaviour
     private float timetoPassAlpha = 100;
     private float timePassedAlpha = 0;
     private bool InvertedGravity = false;
+    private bool GravityIsInverted;
+    private string CurrentScene;
+
 
     private enum DirectionV { NONE, UP, DOWN };
     private enum DirectionH { NONE, LEFT, RIGHT }
@@ -109,6 +112,8 @@ public class HellbotControllers : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         BombOpacityCont = GranadeAnim.GetComponent<Image>();
+
+        CurrentScene = SceneManager.GetActiveScene().name;
 
         CheckpointPos = transform.position;
 
@@ -179,10 +184,14 @@ public class HellbotControllers : MonoBehaviour
                 //Salto
                 if (jump && jumpDone < jumpLimit)
                 {
-
+                    if (!onFloor)
+                    {
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                    }
                     if (jumpDone >= 1)
                     {
                         jumpHeight.y += 50;
+                        
                         if (horizontal == 0)
                         {
                             rb2d.velocity = new Vector2(rb2d.velocity.x, 100);
@@ -224,7 +233,7 @@ public class HellbotControllers : MonoBehaviour
                     animator.SetBool("Jumping", true);
                     rb2d.drag = 0f;
 
-
+                    
                     rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
                     if (jumpDone == 2)
                     {
@@ -254,7 +263,7 @@ public class HellbotControllers : MonoBehaviour
                     }
                     if (GoDown)
                     {
-                        rb2d.velocity = new Vector2(rb2d.velocity.x, -1000);
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, -950);
                     }
                     crouch = true;
                 }
@@ -669,7 +678,7 @@ public class HellbotControllers : MonoBehaviour
             if (!onFloor)
             {
 
-                int RayRange = 20;
+                int RayRange = 10;
 
                 bool col1 = false;
                 bool col2 = false;
@@ -723,11 +732,7 @@ public class HellbotControllers : MonoBehaviour
                         runSpeed = CurrentRunSpeed;
                     }
 
-                    if (collision.gameObject.tag == "Floor")
-                    {
-                        //coger posicion para checkpont
-                        lastpos = transform.position;
-                    }
+                    
 
                     onFloor = true;
 
@@ -753,7 +758,22 @@ public class HellbotControllers : MonoBehaviour
             onFloor = false;
         }
 
-        
+        if (collision.gameObject.tag == "Floor")
+        {
+            //coger posicion para checkpont
+            if (CurrentScene != "Map3")
+            {
+                lastpos = new Vector3(transform.position.x - 100, transform.position.y, transform.position.z);
+
+            }
+            else
+            {
+                lastpos = new Vector3(transform.position.x + 100, transform.position.y, transform.position.z);
+            }
+            GravityIsInverted = InvertedGravity;
+        }
+
+
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -788,22 +808,12 @@ public class HellbotControllers : MonoBehaviour
 
         if (collision.gameObject.tag == "GravityUp")
         {
-           rb2d.gravityScale = -NormalG;
-            if (transform.localScale.y > 0 )
-            {
-                transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
-            }
-            InvertedGravity = true;
+            GravityUp();
         }
 
         if (collision.gameObject.tag == "GravityDown")
         {
-            rb2d.gravityScale = NormalG;
-            if (transform.localScale.y < 0)
-            {
-                transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
-            }
-            InvertedGravity = false;
+            GravityDown();
         }
 
     }
@@ -848,7 +858,17 @@ public class HellbotControllers : MonoBehaviour
     public void ReturnLastJump()
     {
         //volver a la posicion del checkpoint
+        if (GravityIsInverted)
+        {
+            GravityUp();
+        }
+        else
+        {
+            GravityDown();
+        }
+
         transform.position = lastpos;
+        rb2d.velocity = new Vector2(0,0);
     }
 
     public void returnLastCheckPoint()
@@ -893,4 +913,24 @@ public class HellbotControllers : MonoBehaviour
         }
     }
 
+    private void GravityDown()
+    {
+        rb2d.gravityScale = NormalG;
+        if (transform.localScale.y < 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+        }
+        InvertedGravity = false;
+    }
+
+
+    private void GravityUp()
+    {
+        rb2d.gravityScale = -NormalG;
+        if (transform.localScale.y > 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+        }
+        InvertedGravity = true;
+    }
 }

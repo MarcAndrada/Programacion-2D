@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 500
-  lineOfSite: 1500
+  lineOfSite: 1350
   shootingRange: 1100
   fireRate: 800
   bulletPrefab: {fileID: 6388760072793773378, guid: 117c895a10216cf4a9140c0b09767185,
