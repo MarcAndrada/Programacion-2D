@@ -5,87 +5,82 @@ using UnityEngine.UI;
 
 public class boss_movement : MonoBehaviour
 {
-    public float speed;
-    public float lineOfSite;
+    public float HandSpeed;
     public float shootingRange;
     public float fireRate = 1f;
     public GameObject BossbulletPrefab;
     public GameObject EnemybulletPrefab;
-    public bool MoveRight;
     public float hitPoints;
-    public GameObject Mouth;
     public GameObject LEye;
     public GameObject REye;
+    public GameObject RHand;
+    public GameObject LHand;
     public AudioClip LaserShoot;
-    public AudioClip MisileShoot;
-    public float maxBorder;
     public GameObject portal;
     public AudioClip laught;
     public Slider HP_Bar;
 
     private SpriteRenderer sprite;
-    private float nextFireTime;
+    private SpriteRenderer LHandSprite;
+    private SpriteRenderer RHandSprite;
+    private Rigidbody2D LHandRB2D;
+    private Rigidbody2D RHandRB2D;
     private GameObject bala1;
     private GameObject bala2;
-    private GameObject bala3;
+    private float nextFireTime;
     private GameObject player;
     private bool Lasers = true;
-    private float ChangeBulletType = 10000;
-    private float TimePasedForChange = 0;
-    private Animator animator;
     private AudioSource audiosource;
-    private Vector3 CurrentPos;
-    private bool playerClose;
     private bool damaged = false;
     private float TimeSinceDmg;
     private float changeSprite = 150;
+    private float HandOnTheFloorTime = 1500;
+    private float TimePassedHandOnFloor;
+    private float HandAbovePlayer = 2000;
+    private float TimeAbovePlayer;
+    private bool HitFloor;
 
-    enum typeStances { passive, follow, attack }
-    typeStances stances = typeStances.passive;
+
     void Start()
     {
         player = GameObject.FindWithTag("Hellbot");
         sprite = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        LHandSprite = LHand.GetComponent<SpriteRenderer>();
+        RHandSprite = RHand.GetComponent<SpriteRenderer>();
+        LHandRB2D = LHand.GetComponent<Rigidbody2D>();
+        RHandRB2D = RHand.GetComponent<Rigidbody2D>();
         audiosource = GetComponent<AudioSource>();
         nextFireTime = 0;
-        CurrentPos = transform.position;
 
     }
     void Update()
     {
         float delta = Time.deltaTime * 1000;
-        TimePasedForChange+= delta;
 
-        if (ChangeBulletType < TimePasedForChange)
+        if (player.transform.position.y < transform.position.y)
         {
-            if (Lasers)
-            {
-                Lasers = false;
-                if (playerClose)
-                {
-                    audiosource.PlayOneShot(laught);
-                }
-            }
-            else
-            {
-                Lasers = true;
-                if (playerClose)
-                {
-                    audiosource.PlayOneShot(laught);
-                }
-            }
+            Lasers = false;
+            audiosource.PlayOneShot(laught);
+                
 
-            TimePasedForChange = 0;
+        }
+        else
+        {
+            Lasers = true;
+            audiosource.PlayOneShot(laught);
         }
 
         if (damaged)
         {
             TimeSinceDmg += delta;
             sprite.color = Color.red;
+            LHandSprite.color = Color.red;
+            RHandSprite.color = Color.red;
             if (TimeSinceDmg > changeSprite)
             {
                 sprite.color = Color.white;
+                LHandSprite.color = Color.white;
+                RHandSprite.color = Color.white;
                 damaged = false;
                 TimeSinceDmg = 0;
             }
@@ -97,90 +92,19 @@ public class boss_movement : MonoBehaviour
 
 
     }
+
+
     private void FixedUpdate()
     {
         float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
 
-
-        switch (stances)
+        if (distanceFromPlayer <= shootingRange)
         {
-            case typeStances.passive:
-                
-                if (MoveRight)
-                {
-                    transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-
-                }
-                else
-                {
-                    transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-                }
-
-                if (transform.position.x > CurrentPos.x + maxBorder && MoveRight)
-                {
-                    MoveRight = false;
-                }
-                if (transform.position.x < CurrentPos.x - maxBorder && !MoveRight)
-                {
-                    MoveRight = true;
-                }
-
-                if (distanceFromPlayer < lineOfSite)
-                {
-                    stances = typeStances.follow;
-                    playerClose = true;
-                }
-                else
-                {
-                    stances = typeStances.passive;
-                    playerClose = false;
-                }
-                break;
-
-        
-            case typeStances.follow:
-                {
-                    if (player.transform.position.x > transform.position.x)
-                    {
-                        MoveRight = true;
-                    }
-                    else if (player.transform.position.x < transform.position.x)
-                    {
-                        MoveRight = false;
-                    }
-
-                    if (distanceFromPlayer > lineOfSite)
-                    {
-                        stances = typeStances.passive;
-                    }
-                    if (distanceFromPlayer <= shootingRange)
-                    {
-                        stances = typeStances.attack;
-                    }
-                    break;
-                }
-            case typeStances.attack:
-                {
-                    checkIfTimeToFire();
-                    if (distanceFromPlayer > shootingRange)
-                    {
-                        stances = typeStances.follow;
-                    }
-                    break;
-                }
+            checkIfTimeToFire();
         }
-
-        if (MoveRight)
-        {
-            transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-            sprite.flipX = true;
-        }
-        else
-        {
-            transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-            sprite.flipX = false;
-        }
+            
     }
+
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -206,26 +130,32 @@ public class boss_movement : MonoBehaviour
 
         }
 
+        if (collider.gameObject.layer == 8)
+        {
+            if (collider.gameObject.tag != "WallFloor")
+            {
+                HitFloor = false;
+            }
+
+        }
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 8)
         {
-            if (MoveRight)
+            if (collision.gameObject.tag != "WallFloor")
             {
-                MoveRight = false;
+                HitFloor = false;
             }
-            else
-            {
-                MoveRight = true;
-            }
+
         }
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, lineOfSite);
         Gizmos.DrawWireSphere(transform.position, shootingRange);
 
     }
@@ -233,29 +163,100 @@ public class boss_movement : MonoBehaviour
     {
 
         float delta = Time.deltaTime * 1000;
-        nextFireTime += delta;
-        if (nextFireTime > fireRate)
+        
+        if (Lasers)
         {
-            if (Lasers)
+            nextFireTime += delta;
+            if (nextFireTime > fireRate)
             {
-                animator.SetBool("OpenMouth",true);
-                audiosource.PlayOneShot(MisileShoot);
-                bala1 = Instantiate(BossbulletPrefab, Mouth.transform.position, Quaternion.identity);
+                audiosource.PlayOneShot(LaserShoot);
+                bala1 = Instantiate(EnemybulletPrefab, LEye.transform.position, Quaternion.identity);
                 Destroy(bala1, 5);
-                nextFireTime = 0;
-            }else{
-                animator.SetBool("OpenMouth", false);
+
                 audiosource.PlayOneShot(LaserShoot);
-                bala2 = Instantiate(EnemybulletPrefab, LEye.transform.position, Quaternion.identity);
-                Destroy(bala2, 3);
-                audiosource.PlayOneShot(LaserShoot);
-                bala3 = Instantiate(EnemybulletPrefab, REye.transform.position, Quaternion.identity);
-                Destroy(bala3, 3);
+                bala2 = Instantiate(EnemybulletPrefab, REye.transform.position, Quaternion.identity);
+                Destroy(bala2, 5);
+
                 nextFireTime = 0;
+            }
+        }
+        else{
+            if (player.transform.position.x > transform.position.x)
+            {
+                TimePassedHandOnFloor += delta;
+                if (HandOnTheFloorTime < TimePassedHandOnFloor)
+                {
+                    TimeAbovePlayer += delta;
+                    if (player.transform.position.y + 400 >= RHand.transform.position.y && player.transform.position.y + 400 >= RHand.transform.position.y && TimeAbovePlayer < HandAbovePlayer - 500)
+                    {
+                        RHand.transform.position = Vector3.MoveTowards(RHand.transform.position, new Vector3(player.transform.position.x, player.transform.position.y + 400, transform.position.z), HandSpeed * Time.deltaTime);
+                        LHand.transform.position = Vector3.MoveTowards(LHand.transform.position, new Vector3(LHand.transform.position.x, player.transform.position.y + 400, transform.position.z), HandSpeed * Time.deltaTime);
+                    }
+                    if (TimeAbovePlayer > HandAbovePlayer - 500)
+                    {
+                        LHandRB2D.velocity = new Vector2(0,200);
+                        RHandRB2D.velocity = new Vector2(0,200);
+                    }
+                    if (TimeAbovePlayer > HandAbovePlayer)
+                    {
+                        LHandRB2D.velocity = new Vector2(0, 0);
+                        RHandRB2D.velocity = new Vector2(0, 0);
+                        HitFloor = true;
+                    }
+                }
+
+                if (HitFloor)
+                {
+                    TimePassedHandOnFloor = 0;
+                    TimeAbovePlayer = 0;
+                    
+                }
 
             }
-            
+            else
+            {
+                TimePassedHandOnFloor += delta;
+                if (HandOnTheFloorTime < TimePassedHandOnFloor)
+                {
+                    TimeAbovePlayer += delta;
+                    if (player.transform.position.y + 400 >= RHand.transform.position.y && player.transform.position.y + 400 >= RHand.transform.position.y && TimeAbovePlayer < HandAbovePlayer - 500)
+                    {
+                        RHand.transform.position = Vector3.MoveTowards(RHand.transform.position, new Vector3(RHand.transform.position.x, player.transform.position.y + 400, transform.position.z), HandSpeed * Time.deltaTime);
+                        LHand.transform.position = Vector3.MoveTowards(LHand.transform.position, new Vector3(player.transform.position.x, player.transform.position.y + 400, transform.position.z), HandSpeed * Time.deltaTime);
+                    }
+                   
+                    if (TimeAbovePlayer > HandAbovePlayer - 500)
+                    {
+                        LHandRB2D.velocity = new Vector2(0, 200);
+                        RHandRB2D.velocity = new Vector2(0, 200);
+                    }
+                    if (TimeAbovePlayer > HandAbovePlayer)
+                    {
+                        LHandRB2D.velocity = new Vector2(0, 0);
+                        RHandRB2D.velocity = new Vector2(0, 0);
+                        HitFloor = true;
+                    }
+                }
+
+            }
+
+
+            if (HitFloor)
+            {
+                TimePassedHandOnFloor = 0;
+                TimeAbovePlayer = 0;
+                LHand.transform.position = Vector3.MoveTowards(LHand.transform.position, new Vector3(LHand.transform.position.x, player.transform.position.y - 100, transform.position.z), HandSpeed * Time.deltaTime);
+                RHand.transform.position = Vector3.MoveTowards(RHand.transform.position, new Vector3(RHand.transform.position.x, player.transform.position.y - 100, transform.position.z), HandSpeed * Time.deltaTime);
+                if (RHand.transform.position.y <= player.transform.position.y - 100 && LHand.transform.position.y <= player.transform.position.y - 100)
+                {
+                    HitFloor = false;
+                }
+              
+            }
+
         }
+            
+        
     }
     public void TakeHit()
     {

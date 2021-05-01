@@ -79,7 +79,7 @@ public class ShootgunController : MonoBehaviour
 
 
         TimeToShoot += delta;
-        if (Shoot)
+        if (Shoot && Time.timeScale == 1)
         {
             if (TimeToShoot > fireRate && CurrentAmmo > 0)
             {

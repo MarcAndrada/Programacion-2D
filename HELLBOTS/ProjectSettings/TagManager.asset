@@ -29,6 +29,7 @@ TagManager:
   - GravityUp
   - GravityDown
   - InverseDoor
+  - SkeletonHand
   layers:
   - Default
   - TransparentFX

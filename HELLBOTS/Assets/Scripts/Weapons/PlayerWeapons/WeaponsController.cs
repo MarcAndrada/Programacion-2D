@@ -65,7 +65,7 @@ public class WeaponsController : MonoBehaviour
 
 
         TimeToShoot += delta;
-        if (Shoot)
+        if (Shoot && Time.timeScale == 1)
         {
             if (TimeToShoot > fireRate && CurrentAmmo > 0 || TimeToShoot > fireRate && gameObject.name == "Pistola"){
                 //Hacer sonido de dispar

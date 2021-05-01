@@ -667,8 +667,6 @@ public class HellbotControllers : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)//Detectar si toca el suelo para reiniciar la cantidad de saltos
     {
 
-
-
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -786,6 +784,11 @@ public class HellbotControllers : MonoBehaviour
         }
 
         if (collision.gameObject.tag == "Explosion")
+        {
+            PlayerHit();
+        }
+
+        if (collision.gameObject.tag == "SkeletonHand")
         {
             PlayerHit();
         }
