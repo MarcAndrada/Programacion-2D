@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class tank_controller : MonoBehaviour
@@ -158,11 +159,28 @@ public class tank_controller : MonoBehaviour
                     }
                     if (MoveRight)
                     {
-                        Parent.transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                        if (SceneManager.GetActiveScene().name != "Map3")
+                        {
+                            Parent.transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                        }
+                        else
+                        {
+                            Parent.transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+
+                        }
+
                     }
                     else
                     {
-                        Parent.transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                        if (SceneManager.GetActiveScene().name != "Map3")
+                        {
+                            Parent.transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                        }
+                        else
+                        {
+                            Parent.transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+
+                        }
                     }
 
                     if (distanceFromPlayer > lineOfSite)

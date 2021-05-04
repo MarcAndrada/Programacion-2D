@@ -21,6 +21,11 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    public void goLevelManager()
+    {
+        SceneManager.LoadScene("LevelManager");
+        soundCont.Restart();
+    }
     public void goTutorial(){
 
         SceneManager.LoadScene("Tutorial");

@@ -101,7 +101,7 @@ MonoBehaviour:
   minCamPos: {x: -38, y: -232}
   maxCamPos: {x: 47860, y: 200}
   optionMenu: {fileID: 0}
-  camSpeed: 1750
+  camSpeed: 2000
   LookingUp: 0
   Right: 1
 --- !u!61 &171966497
