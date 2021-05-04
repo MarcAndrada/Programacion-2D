@@ -42,7 +42,7 @@ public class boss_movement : MonoBehaviour
     private float LaughtTime = 5000;
     private float LaughtTimePassed;
     private Color SkullDamagedColor = new Color (0.81f, 0.18f, 0.18f);
-    private Color SkullColor = new Color(0.58f, 0.58f, 0.58f);
+    private Color SkullColor = new Color(0.66f, 0.66f, 0.66f);
 
     void Start()
     {
