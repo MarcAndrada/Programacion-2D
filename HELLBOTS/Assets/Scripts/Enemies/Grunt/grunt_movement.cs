@@ -228,6 +228,11 @@ public class grunt_movement : MonoBehaviour
         }
 
 
+        if (speed == 0)
+        {
+            anim.SetBool("Walking", false);
+        }
+
         if (stances == typeStances.follow || stances == typeStances.attack)
         {
             LimbSolverMano.transform.position = player.transform.position;

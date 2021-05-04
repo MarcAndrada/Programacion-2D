@@ -884,7 +884,11 @@ public class HellbotControllers : MonoBehaviour
         Aim.enabled = true;
         Cursor.visible = false;
         DoorCloseController.OpenDoor();
-        BossHPBar.SetActive(false);
+        if (BossHPBar != null)
+        {
+            BossHPBar.SetActive(false);
+        }
+        
     }
 
 

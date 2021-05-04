@@ -29,19 +29,30 @@ public class SFX_Controller : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Hellbot");
         if (player != null)
         {
+            
             playerS = player.GetComponent<AudioSource>();
         }
-        Door = GameObject.FindGameObjectWithTag("Door");
-        if (Door != null)
-        {
-            DoorS = Door.GetComponent<AudioSource>();
-        }
-
         Volume = sound.GetSFXVol();
 
     }
     void Update()
     {
+        
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Hellbot");
+            if (player != null)
+            {
+                playerS = player.GetComponent<AudioSource>();
+            }
+            
+        }
+
+        Door = GameObject.FindGameObjectWithTag("Door");
+        if (Door != null)
+        {
+            DoorS = Door.GetComponent<AudioSource>();
+        }
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         CheckPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
         Explosion = GameObject.FindGameObjectsWithTag("Explosion");

@@ -41,6 +41,8 @@ public class boss_movement : MonoBehaviour
     private bool HitFloor;
     private float LaughtTime = 5000;
     private float LaughtTimePassed;
+    private Color SkullDamagedColor = new Color (0.81f, 0.18f, 0.18f);
+    private Color SkullColor = new Color(0.58f, 0.58f, 0.58f);
 
     void Start()
     {
@@ -80,14 +82,14 @@ public class boss_movement : MonoBehaviour
         if (damaged)
         {
             TimeSinceDmg += delta;
-            sprite.color = Color.red;
-            LHandSprite.color = Color.red;
-            RHandSprite.color = Color.red;
+            sprite.color = SkullDamagedColor; 
+            LHandSprite.color = SkullDamagedColor;
+            RHandSprite.color = SkullDamagedColor;
             if (TimeSinceDmg > changeSprite)
             {
-                sprite.color = Color.white;
-                LHandSprite.color = Color.white;
-                RHandSprite.color = Color.white;
+                sprite.color = SkullColor;
+                LHandSprite.color = SkullColor;
+                RHandSprite.color = SkullColor;
                 damaged = false;
                 TimeSinceDmg = 0;
             }
