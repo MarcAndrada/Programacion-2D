@@ -32,6 +32,22 @@ public class TeleportController : MonoBehaviour
 
     private void Update()
     {
+
+        if (HellbotInput.GoLevel1)
+        {
+            SceneManager.LoadScene("Map1");
+        }
+
+        if (HellbotInput.GoLevel2)
+        {
+            SceneManager.LoadScene("Map2");
+        }
+
+        if (HellbotInput.GoLevel3)
+        {
+            SceneManager.LoadScene("Map3");
+        }
+
         float delta = Time.deltaTime * 1000;
         WaitedTime += delta;
         if (WaitTime < WaitedTime)

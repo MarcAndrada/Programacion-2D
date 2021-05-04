@@ -74,4 +74,18 @@ public class HellbotInput : MonoBehaviour
         get { return Input.GetKeyDown(KeyCode.Escape);  }
     }
 
+    public static bool GoLevel1
+    {
+        get { return Input.GetKeyDown(KeyCode.Alpha1); }
+    }
+
+    public static bool GoLevel2
+    {
+        get { return Input.GetKeyDown(KeyCode.Alpha2); }
+    }
+
+    public static bool GoLevel3
+    {
+        get { return Input.GetKeyDown(KeyCode.Alpha3); }
+    }
 }

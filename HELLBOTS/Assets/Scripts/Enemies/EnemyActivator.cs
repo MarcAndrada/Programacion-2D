@@ -10,11 +10,12 @@ public class EnemyActivator : MonoBehaviour
     private turretScrip turretController;
     private tank_controller tankController;
     private flying_enemy flyerController;
+    private boss_movement SkullController;
 
     private SpriteRenderer Sprite;
     private Animator animator;
 
-    private enum Enemy_Type { GRUNT, SUICIDE, TURRET, TANK, FLYER};
+    private enum Enemy_Type { GRUNT, SUICIDE, TURRET, TANK, FLYER, SKULL};
     private Enemy_Type CurrentEnemy;
 
     // Start is called before the first frame update
@@ -25,12 +26,13 @@ public class EnemyActivator : MonoBehaviour
         turretController = GetComponent<turretScrip>();
         tankController = GetComponent<tank_controller>();
         flyerController = GetComponent<flying_enemy>();
+        SkullController = GetComponent<boss_movement>();
 
         if (GruntController != null)
         {
             CurrentEnemy = Enemy_Type.GRUNT;
         }
-        else if(SuicideController != null)
+        else if (SuicideController != null)
         {
             CurrentEnemy = Enemy_Type.SUICIDE;
         }
@@ -46,29 +48,32 @@ public class EnemyActivator : MonoBehaviour
         {
             CurrentEnemy = Enemy_Type.FLYER;
         }
+        else if (SkullController != null)
+        {
+            CurrentEnemy = Enemy_Type.SKULL;
+        }
 
         switch (CurrentEnemy)
         {
             case Enemy_Type.GRUNT:
-                Sprite = GetComponent<SpriteRenderer>();
                 animator = GetComponent<Animator>();
                 break;
             case Enemy_Type.SUICIDE:
-                Sprite = GetComponent<SpriteRenderer>();
                 animator = GetComponent<Animator>();
                 break;
             case Enemy_Type.TURRET:
-                Sprite = GetComponent<SpriteRenderer>();
                 break;
             case Enemy_Type.TANK:
-                Sprite = GetComponent<SpriteRenderer>();
                 break;
             case Enemy_Type.FLYER:
-                Sprite = GetComponent<SpriteRenderer>();
+                break;
+            case Enemy_Type.SKULL:
                 break;
             default:
                 break;
         }
+
+        Sprite = GetComponent<SpriteRenderer>();
 
 
         Sprite.enabled = false;
@@ -100,6 +105,10 @@ public class EnemyActivator : MonoBehaviour
                 Sprite.enabled = true;
                 flyerController.enabled = true;
                 break;
+            case Enemy_Type.SKULL:
+                Sprite.enabled = true;
+                SkullController.enabled = true;
+                break;
             default:
                 break;
         }
@@ -121,10 +130,20 @@ public class EnemyActivator : MonoBehaviour
                 SuicideController.enabled = false;
                 break;
             case Enemy_Type.TURRET:
+                Sprite.enabled = false;
+                turretController.enabled = false;
                 break;
             case Enemy_Type.TANK:
+                Sprite.enabled = false;
+                tankController.enabled = false;
                 break;
             case Enemy_Type.FLYER:
+                Sprite.enabled = false;
+                flyerController.enabled = false;
+                break;
+            case Enemy_Type.SKULL:
+                Sprite.enabled = false;
+                SkullController.enabled = false;
                 break;
             default:
                 break;

@@ -39,7 +39,8 @@ public class boss_movement : MonoBehaviour
     private float HandAbovePlayer = 2000;
     private float TimeAbovePlayer;
     private bool HitFloor;
-
+    private float LaughtTime = 5000;
+    private float LaughtTimePassed;
 
     void Start()
     {
@@ -56,19 +57,25 @@ public class boss_movement : MonoBehaviour
     void Update()
     {
         float delta = Time.deltaTime * 1000;
+        LaughtTimePassed += delta;
 
+        if (LaughtTimePassed >= LaughtTime)
+        {
+            audiosource.PlayOneShot(laught);
+            LaughtTimePassed = 0;
+        }
         if (player.transform.position.y < transform.position.y)
         {
             Lasers = false;
-            audiosource.PlayOneShot(laught);
                 
 
         }
         else
         {
             Lasers = true;
-            audiosource.PlayOneShot(laught);
         }
+
+
 
         if (damaged)
         {
