@@ -60,9 +60,15 @@ public class DoorCloseController : MonoBehaviour
 
     public static void OpenDoor()
     {
-        SpritePublic.enabled = false;
-        PublicDoor.enabled = false;
-        DoorClosed = false;
+        if (SpritePublic != null)
+        {
+            SpritePublic.enabled = false;
+            if (PublicDoor != null)
+            {
+                PublicDoor.enabled = false;
+                DoorClosed = false;
+            }
+        }
 
     }
 }

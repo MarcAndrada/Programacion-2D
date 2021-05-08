@@ -86,6 +86,7 @@ public class HellbotControllers : MonoBehaviour
     private float timePassedAlpha = 0;
     private bool InvertedGravity = false;
     private bool GravityIsInverted;
+    private bool GravityInvertedCheckpoint;
     private string CurrentScene;
 
 
@@ -115,7 +116,7 @@ public class HellbotControllers : MonoBehaviour
         CurrentScene = SceneManager.GetActiveScene().name;
 
         CheckpointPos = transform.position;
-
+        GravityInvertedCheckpoint = GravityIsInverted;
         GodModeOn = false;
         CurrentRunSpeed = runSpeed;
         jumpDone = 0;
@@ -875,6 +876,11 @@ public class HellbotControllers : MonoBehaviour
         if (collision.gameObject.tag == "CheckPoint")
         {
             CheckpointPos = transform.position;
+            if (HP > 0)
+            {
+
+            }
+
         }
 
         if (collision.gameObject.tag == "BossActivator")
@@ -916,6 +922,8 @@ public class HellbotControllers : MonoBehaviour
         if (collision.gameObject.tag == "CheckPoint")
         {
             TimeHealWaited = 0;
+            GravityInvertedCheckpoint = GravityIsInverted;
+
         }
     }
 
@@ -1009,6 +1017,16 @@ public class HellbotControllers : MonoBehaviour
         if (BossHPBar != null)
         {
             BossHPBar.SetActive(false);
+        }
+        GravityIsInverted = GravityInvertedCheckpoint;
+
+        if (GravityIsInverted)
+        {
+            GravityUp();
+        }
+        else
+        {
+            GravityDown();
         }
 
     }
