@@ -227,6 +227,12 @@ PrefabInstance:
       propertyPath: barraHP
       value: 
       objectReference: {fileID: 4321592827938997262}
+    - target: {fileID: 8249591239883331837, guid: ad2ecb09451eaee41969da7de7c7c2ff,
+        type: 3}
+      propertyPath: BlueHealParticles
+      value: 
+      objectReference: {fileID: 545939829939484369, guid: aedad2959c3cef7498ef86014421e3af,
+        type: 3}
     - target: {fileID: 8249591239883331839, guid: ad2ecb09451eaee41969da7de7c7c2ff,
         type: 3}
       propertyPath: m_LocalPosition.x

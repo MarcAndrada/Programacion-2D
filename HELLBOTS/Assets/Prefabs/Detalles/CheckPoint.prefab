@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6859915654824847101}
   - component: {fileID: 291417827826589788}
   - component: {fileID: 2045408601911878572}
-  - component: {fileID: 8714486285045677895}
   m_Layer: 11
   m_Name: CheckPoint
   m_TagString: CheckPoint
@@ -98,7 +97,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.071289, y: 259.81934}
+  m_Offset: {x: -4.173523, y: 259.81934}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -109,7 +108,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 83.56055, y: 895.3362}
+  m_Size: {x: 134.03235, y: 895.3362}
   m_EdgeRadius: 0
 --- !u!114 &291417827826589788
 MonoBehaviour:
@@ -222,22 +221,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!251 &8714486285045677895
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6859915654824847073}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 0
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 1
-  m_SideArc: 1

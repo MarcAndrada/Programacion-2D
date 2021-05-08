@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -29,6 +27,7 @@ public class HellbotControllers : MonoBehaviour
     [Header("Particulas")]
     public GameObject Particulas;
     public GameObject HealParticles;
+    public GameObject BlueHealParticles;
     public Transform barraHP;
     [Header("Audios")]
     public AudioClip WalkSound;
@@ -127,7 +126,8 @@ public class HellbotControllers : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
 
         horizontal = HellbotInput.Horizontal;
         vertical = HellbotInput.Vertical;
@@ -150,7 +150,8 @@ public class HellbotControllers : MonoBehaviour
             Normalbc2D.enabled = true;
             rb2d.gravityScale = 0;
         }
-        else if (godmode && GodModeOn) {
+        else if (godmode && GodModeOn)
+        {
             GodModeOn = false;
             Crouchbc2D.enabled = false;
             Normalbc2D.enabled = true;
@@ -164,7 +165,9 @@ public class HellbotControllers : MonoBehaviour
             }
         }
 
-        if (!GodModeOn) {
+        if (!GodModeOn)
+        {
+            
             if (!InvertedGravity)
             {
 
@@ -191,7 +194,7 @@ public class HellbotControllers : MonoBehaviour
                     if (jumpDone >= 1)
                     {
                         jumpHeight.y += 50;
-                        
+
                         if (horizontal == 0)
                         {
                             rb2d.velocity = new Vector2(rb2d.velocity.x, 100);
@@ -233,7 +236,7 @@ public class HellbotControllers : MonoBehaviour
                     animator.SetBool("Jumping", true);
                     rb2d.drag = 0f;
 
-                    
+
                     rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
                     if (jumpDone == 2)
                     {
@@ -403,7 +406,8 @@ public class HellbotControllers : MonoBehaviour
                 }
             }
 
-            if (HP == 6) {
+            if (HP == 6)
+            {
                 Heart3.SetActive(true);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(false);
@@ -414,7 +418,8 @@ public class HellbotControllers : MonoBehaviour
                 M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 5) {
+            else if (HP == 5)
+            {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(true);
                 EmptyHeart3.SetActive(false);
@@ -425,7 +430,8 @@ public class HellbotControllers : MonoBehaviour
                 M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 4) {
+            else if (HP == 4)
+            {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -436,7 +442,8 @@ public class HellbotControllers : MonoBehaviour
                 M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 3) {
+            else if (HP == 3)
+            {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -447,7 +454,8 @@ public class HellbotControllers : MonoBehaviour
                 M_Heart1.SetActive(false);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP == 2) {
+            else if (HP == 2)
+            {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -459,7 +467,8 @@ public class HellbotControllers : MonoBehaviour
                 EmptyHeart1.SetActive(false);
 
             }
-            else if (HP == 1) {
+            else if (HP == 1)
+            {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -470,7 +479,8 @@ public class HellbotControllers : MonoBehaviour
                 M_Heart1.SetActive(true);
                 EmptyHeart1.SetActive(false);
             }
-            else if (HP <= 0) {
+            else if (HP <= 0)
+            {
                 Heart3.SetActive(false);
                 M_Heart3.SetActive(false);
                 EmptyHeart3.SetActive(true);
@@ -543,9 +553,9 @@ public class HellbotControllers : MonoBehaviour
             {
                 WaitedTimeG += delta;
 
-                
 
-                
+
+
 
                 if (WaitedTimeG >= AnimDurationG && TimePassedGCD > granadeCD)
                 {
@@ -557,7 +567,8 @@ public class HellbotControllers : MonoBehaviour
             }
 
 
-            if (horizontal == 1 && onFloor || horizontal == -1 && onFloor) {
+            if (horizontal == 1 && onFloor || horizontal == -1 && onFloor)
+            {
                 footstep += delta;
                 if (footstep > footstepRithm)
                 {
@@ -585,7 +596,8 @@ public class HellbotControllers : MonoBehaviour
 
 
         }
-        else {
+        else
+        {
 
 
             GodDirectionV = DirectionV.NONE;
@@ -613,23 +625,65 @@ public class HellbotControllers : MonoBehaviour
 
 
     }
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
 
         if (!GodModeOn)
         {
             //rb2d.velocity = new Vector2(horizontal * runSpeed, 0 );
             rb2d.AddForce(Vector2.right * runSpeed * horizontal);
+
             if (horizontal == 1 || horizontal == -1)
             {
                 //Hacer sonidos de andar
                 animator.SetBool("Walking", true);
+                if (!onFloor)
+                {
+                    if (horizontal == -1 && rb2d.velocity.x > 400)
+                    {
+                        rb2d.velocity = new Vector2(400, rb2d.velocity.y);
+                    }
+                    else if (horizontal == 1 && rb2d.velocity.x < -400)
+                    {
+                        rb2d.velocity = new Vector2(-400, rb2d.velocity.y);
+                    }
+
+                    if (horizontal == 1)
+                    {
+                        if (rb2d.velocity.x < 600)
+                        {
+                            runSpeed = CurrentRunSpeed - 1000;
+                        }
+                        else
+                        {
+                            runSpeed = CurrentRunSpeed - 2600;
+
+                        }
+                    }
+                    else if (horizontal == -1)
+                    {
+                        if (rb2d.velocity.x > -600)
+                        {
+                            runSpeed = CurrentRunSpeed - 1000;
+
+                        }
+                        else
+                        {
+                            runSpeed = CurrentRunSpeed - 2600;
+                        }
+                    }
+                }
+
+
             }
             else if (horizontal == 0)
             {
                 animator.SetBool("Walking", false);
             }
 
-        } else {
+        }
+        else
+        {
             float delta = Time.fixedDeltaTime * 1000;
             currentSpeedV = 0;
             currentSpeedH = 0;
@@ -682,7 +736,7 @@ public class HellbotControllers : MonoBehaviour
                 bool col2 = false;
                 bool col3 = false;
                 float center_x = (box2d.bounds.min.x + box2d.bounds.max.x) / 2;
-                
+
 
                 if (!InvertedGravity)
                 {
@@ -698,7 +752,8 @@ public class HellbotControllers : MonoBehaviour
                     hits = Physics2D.RaycastAll(RightPosition, -Vector2.up, RayRange);
                     if (checkRaycastWithScenario(hits)) { col3 = true; }
                 }
-                else{
+                else
+                {
                     Vector2 centerPosition = new Vector2(center_x, box2d.bounds.max.y);
                     Vector2 leftPosition = new Vector2(box2d.bounds.min.x, box2d.bounds.max.y);
                     Vector2 RightPosition = new Vector2(box2d.bounds.max.x, box2d.bounds.max.y);
@@ -711,7 +766,7 @@ public class HellbotControllers : MonoBehaviour
                     hits = Physics2D.RaycastAll(RightPosition, Vector2.up, RayRange);
                     if (checkRaycastWithScenario(hits)) { col3 = true; }
                 }
-                
+
 
                 if (col1 || col2 || col3)
                 {
@@ -720,7 +775,7 @@ public class HellbotControllers : MonoBehaviour
                     rb2d.drag = 3;
                     jumpDone = 0;
 
-                    if (collision.gameObject.tag == "Ramp" )
+                    if (collision.gameObject.tag == "Ramp")
                     {
                         runSpeed = CurrentRunSpeed + 500;
 
@@ -730,7 +785,21 @@ public class HellbotControllers : MonoBehaviour
                         runSpeed = CurrentRunSpeed;
                     }
 
-                    
+                    if (collision.gameObject.tag == "Floor")
+                    {
+                        //coger posicion para checkpont
+                        if (CurrentScene != "Map3")
+                        {
+                            lastpos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+                        }
+                        else
+                        {
+                            lastpos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                        }
+                        GravityIsInverted = InvertedGravity;
+                    }
+
 
                     onFloor = true;
 
@@ -744,6 +813,24 @@ public class HellbotControllers : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Floor")
+        {
+            if (onFloor)
+            {
+                if (CurrentScene != "Map3")
+                {
+                    lastpos = transform.position;
+
+                }
+                else
+                {
+                    lastpos = transform.position;
+                }
+                GravityIsInverted = InvertedGravity;
+            }
+            //coger posicion para checkpont
+            
+        }
 
         if (collision.gameObject.layer == 8 || collision.gameObject.tag == "Weapon")
         {
@@ -751,25 +838,11 @@ public class HellbotControllers : MonoBehaviour
             {
                 animator.SetBool("Jumping", true);
             }
-            runSpeed = CurrentRunSpeed - 2600;
             rb2d.drag = 0f;
             onFloor = false;
         }
 
-        if (collision.gameObject.tag == "Floor")
-        {
-            //coger posicion para checkpont
-            if (CurrentScene != "Map3")
-            {
-                lastpos = new Vector3(transform.position.x - 100, transform.position.y, transform.position.z);
-
-            }
-            else
-            {
-                lastpos = new Vector3(transform.position.x + 100, transform.position.y, transform.position.z);
-            }
-            GravityIsInverted = InvertedGravity;
-        }
+       
 
 
 
@@ -793,7 +866,7 @@ public class HellbotControllers : MonoBehaviour
             PlayerHit();
         }
 
-        if (collision.gameObject.tag == "Caida")
+        if (collision.gameObject.tag == "Caida" && !godmode)
         {
             PlayerHit();
             ReturnLastJump();
@@ -826,7 +899,7 @@ public class HellbotControllers : MonoBehaviour
         if (collision.gameObject.tag == "CheckPoint")
         {
             float delta = Time.deltaTime * 1000;
-            
+
 
             TimeHealWaited += delta;
 
@@ -836,7 +909,7 @@ public class HellbotControllers : MonoBehaviour
                 TimeHealWaited = 0;
 
             }
-        } 
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -846,9 +919,11 @@ public class HellbotControllers : MonoBehaviour
         }
     }
 
-    public void PlayerHit() {
+    public void PlayerHit()
+    {
         //Hacer sonido de Daño
-        if (!GodModeOn && !damaged) {
+        if (!GodModeOn && !damaged)
+        {
             damaged = true;
             HP--;
             Instantiate(Particulas, transform.position, Quaternion.identity);
@@ -860,6 +935,52 @@ public class HellbotControllers : MonoBehaviour
 
     public void ReturnLastJump()
     {
+        int RayRange = 500;
+
+        bool col1 = false;
+        if (!InvertedGravity)
+        {
+            Vector2 centerPosition = new Vector2(lastpos.x, lastpos.y);
+           
+            RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, -Vector2.up, RayRange);
+            if (checkRaycastWithScenarioFloor(hits)) { col1 = true; }
+            
+        }
+        else
+        {
+            Vector2 centerPosition = new Vector2(lastpos.x, lastpos.y);
+
+            RaycastHit2D[] hits = Physics2D.RaycastAll(centerPosition, Vector2.up, RayRange);
+            if (checkRaycastWithScenarioFloor(hits)) { col1 = true; }
+
+        }
+
+        if (!col1)
+        {
+            if (CurrentScene != "Map3")
+            {
+                if (transform.position.x >= lastpos.x)
+                {
+                    lastpos = new Vector3(lastpos.x - 200, lastpos.y, lastpos.z);
+
+                }else{
+                    lastpos = new Vector3(lastpos.x + 200, lastpos.y, lastpos.z);
+                }
+            }
+            else
+            {
+                if (transform.position.x <= lastpos.x)
+                {
+                    lastpos = new Vector3(lastpos.x + 200, lastpos.y, lastpos.z);
+
+                }
+                else
+                {
+                    lastpos = new Vector3(lastpos.x - 200, lastpos.y, lastpos.z);
+                }
+
+            }
+        }
         //volver a la posicion del checkpoint
         if (GravityIsInverted)
         {
@@ -871,11 +992,12 @@ public class HellbotControllers : MonoBehaviour
         }
 
         transform.position = lastpos;
-        rb2d.velocity = new Vector2(0,0);
+        rb2d.velocity = new Vector2(0, 0);
     }
 
     public void returnLastCheckPoint()
     {
+
         transform.position = CheckpointPos;
         HP = 4;
         DieText.SetActive(false);
@@ -888,7 +1010,7 @@ public class HellbotControllers : MonoBehaviour
         {
             BossHPBar.SetActive(false);
         }
-        
+
     }
 
 
@@ -907,9 +1029,33 @@ public class HellbotControllers : MonoBehaviour
         return false;
     }
 
+    private bool checkRaycastWithScenarioFloor(RaycastHit2D[] hits)
+    {
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.tag == "Floor")
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
     private void healing()
     {
-        Instantiate(HealParticles, new Vector3(barraHP.position.x + 100, barraHP.position.y, barraHP.position.z), Quaternion.identity);
+        if (HP < 4)
+        {
+            Instantiate(HealParticles, new Vector3(barraHP.position.x + 100, barraHP.position.y, barraHP.position.z), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(BlueHealParticles, new Vector3(barraHP.position.x + 100, barraHP.position.y, barraHP.position.z), Quaternion.identity);
+
+        }
         if (HP < 6)
         {
             HP++;
@@ -940,4 +1086,6 @@ public class HellbotControllers : MonoBehaviour
         }
         InvertedGravity = true;
     }
+
+
 }
