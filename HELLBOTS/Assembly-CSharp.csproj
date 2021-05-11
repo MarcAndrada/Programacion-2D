@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Managers\SFX_Controller.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Managers\TeleportController.cs" />
+    <Compile Include="Assets\Scripts\Managers\TransitionController.cs" />
     <Compile Include="Assets\Scripts\Managers\VolumeController.cs" />
     <Compile Include="Assets\Scripts\Player\HellbotAim.cs" />
     <Compile Include="Assets\Scripts\Player\HellbotControllers.cs" />

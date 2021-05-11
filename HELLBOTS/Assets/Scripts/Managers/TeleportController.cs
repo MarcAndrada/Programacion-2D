@@ -10,6 +10,9 @@ public class TeleportController : MonoBehaviour
     private float WaitTime = 75;
     private float WaitedTime;
     private int rot = 13;
+    private bool getDark = false;
+    private float TimeToWait = 1500;
+    private float TimeWaited;
 
 
     private void Start()
@@ -36,23 +39,44 @@ public class TeleportController : MonoBehaviour
 
     private void Update()
     {
+        float delta = Time.deltaTime * 1000;
+
+        if (getDark)
+        {
+            TimeWaited += delta;
+        }
+
+        if (TimeWaited >= TimeToWait)
+        {
+
+            SceneManager.LoadScene(NextScene);
+            getDark = false;
+            TimeWaited = 0;
+
+        }
 
         if (HellbotInput.GoLevel1)
         {
-            SceneManager.LoadScene("Map1");
+            TransitionController.ChangeScene();
+            getDark = true;
+            NextScene = "Map1";
         }
 
         if (HellbotInput.GoLevel2)
         {
-            SceneManager.LoadScene("Map2");
+            TransitionController.ChangeScene();
+            getDark = true;
+            NextScene = "Map2";
+            
         }
 
         if (HellbotInput.GoLevel3)
         {
-            SceneManager.LoadScene("Map3");
+            TransitionController.ChangeScene();
+            getDark = true;
+            NextScene = "Map3";
         }
 
-        float delta = Time.deltaTime * 1000;
         WaitedTime += delta;
         if (WaitTime < WaitedTime)
         {
@@ -85,8 +109,10 @@ public class TeleportController : MonoBehaviour
 
         if (collision.gameObject.tag == "Hellbot")
         {
-           
-            SceneManager.LoadScene(NextScene);
+
+            TransitionController.ChangeScene();
+            getDark = true;
+
 
         }
     }

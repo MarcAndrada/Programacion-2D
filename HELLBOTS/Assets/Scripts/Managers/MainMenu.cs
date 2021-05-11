@@ -11,7 +11,10 @@ public class MainMenu : MonoBehaviour
     private SoundManager soundCont;
     private VolumeController MusicCont;
     private SFX_Controller SFXCont;
-
+    private bool getDark = false;
+    private float TimeToWait = 1500;
+    private float TimeWaited;
+    private string nextScene;
     private void Start()
     {
         AudioManagers = GameObject.Find("Managers");
@@ -20,63 +23,107 @@ public class MainMenu : MonoBehaviour
         SFXCont = AudioManagers.GetComponentInChildren<SFX_Controller>();
 
     }
+    private void Update()
+    {
+        float delta = Time.deltaTime * 1000;
+
+        if (getDark)
+        {
+            TimeWaited += delta;
+        }
+
+        if (TimeWaited >= TimeToWait)
+        {
+            SceneManager.LoadScene(nextScene);
+            getDark = false;
+            TimeWaited = 0;
+
+        }
+
+
+
+        
+
+    }
 
     public void goLevelManager()
     {
-        SceneManager.LoadScene("LevelManager");
+        TransitionController.ChangeScene();
+        getDark = true;
+        nextScene = "LevelManager";
         soundCont.Restart();
     }
     public void goTutorial(){
-
-        SceneManager.LoadScene("Tutorial");
+        TransitionController.ChangeScene();
+        getDark = true;
+        nextScene = "Tutorial";
         soundCont.Restart();
+        TransitionController.ActiveLoadIcon();
+
     }
 
     public void goMap1()
     {
-
-        SceneManager.LoadScene("Map1");
+        TransitionController.ChangeScene();
+        getDark = true;
+        nextScene = "Map1";
         soundCont.Restart();
+        TransitionController.ActiveLoadIcon();
+
     }
 
     public void goMap2()
     {
-
-        SceneManager.LoadScene("Map2");
+        TransitionController.ChangeScene();
+        getDark = true;
+        nextScene = "Map2";
         soundCont.Restart();
+        TransitionController.ActiveLoadIcon();
+
     }
 
     public void goMap3()
     {
-
-        SceneManager.LoadScene("Map3");
+        TransitionController.ChangeScene();
+        getDark = true;
+        nextScene = "Map3";
         soundCont.Restart();
+        TransitionController.ActiveLoadIcon();
     }
 
     public void goOptions()
     {
-        SceneManager.LoadScene("OptionMenu");
+        TransitionController.ChangeScene();
+        getDark = true;
+        nextScene = "OptionMenu";
         soundCont.Restart();
     }
 
     public void goMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        TransitionController.ChangeScene();
+        getDark = true;
+        nextScene = "MainMenu";
         soundCont.Restart();
     }
 
     public void goCredits()
     {
-        SceneManager.LoadScene("WinScene");
+        TransitionController.ChangeScene();
+        getDark = true;
+        nextScene = "WinScene";
     }
     public void ExitGame()
     {
+
         Application.Quit();
     }
 
     public void SaveValues()
     {
         soundCont.SaveValues();
+        TransitionController.ActiveLoadIcon();
+
     }
 
     public void SetVolumeMusic(float vol)
