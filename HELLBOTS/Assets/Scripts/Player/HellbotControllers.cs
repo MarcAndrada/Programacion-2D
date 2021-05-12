@@ -12,6 +12,7 @@ public class HellbotControllers : MonoBehaviour
     public GameObject DieText;
     public GameObject BossHPBar;
     public GameObject GranadeAnim;
+    public GameObject HPAnim;
     [Header("Corazones Llenos")]
     public GameObject Heart1;
     public GameObject Heart2;
@@ -27,7 +28,6 @@ public class HellbotControllers : MonoBehaviour
     [Header("Particulas")]
     public GameObject Particulas;
     public GameObject HealParticles;
-    public GameObject BlueHealParticles;
     public Transform barraHP;
     [Header("Audios")]
     public AudioClip WalkSound;
@@ -46,6 +46,7 @@ public class HellbotControllers : MonoBehaviour
     private Animator animator;
     private BoxCollider2D box2d;
     private Image BombOpacityCont;
+    private Image HPOpacity;
 
 
     [Header("Config Player")]
@@ -82,12 +83,16 @@ public class HellbotControllers : MonoBehaviour
     private float immortalTime = 1000;
     private float changeSprite = 150;
     private float alpha = 0;
+    private float HPAlpha = 0;
     private float timetoPassAlpha = 100;
     private float timePassedAlpha = 0;
+    private float HPTimeAlpha = 50;
+    private float HPTimePassedAlpha = 0;
     private bool InvertedGravity = false;
     private bool GravityIsInverted;
     private bool GravityInvertedCheckpoint;
     private string CurrentScene;
+    private bool TurnRed = true;
 
 
     private enum DirectionV { NONE, UP, DOWN };
@@ -112,6 +117,7 @@ public class HellbotControllers : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         BombOpacityCont = GranadeAnim.GetComponent<Image>();
+        HPOpacity = HPAnim.GetComponent<Image>();
 
         CurrentScene = SceneManager.GetActiveScene().name;
 
@@ -499,7 +505,47 @@ public class HellbotControllers : MonoBehaviour
             {
                 audioSource.PlayOneShot(lowHP);
                 TimePassed = 0;
+                
+
+
             }
+
+            if (HP < 3)
+            {
+                HPTimePassedAlpha += delta;
+
+                if (TurnRed)
+                {
+                    if (HPTimePassedAlpha >= HPTimeAlpha)
+                    {
+                        HPAlpha += 0.1f;
+                        HPTimePassedAlpha = 0;
+                    }
+
+                    if (HPAlpha >= 0.6f)
+                    {
+                        TurnRed = false;
+                    }
+                }
+                else
+                {
+                    if (HPTimePassedAlpha >= HPTimeAlpha)
+                    {
+                        HPAlpha -= 0.1f;
+                        HPTimePassedAlpha = 0;
+                    }
+                    if (HPAlpha <= 0)
+                    {
+                        TurnRed = true;
+                    }
+                }
+            }
+            else
+            {
+                HPAlpha = 0;
+            }
+            HPOpacity.color = new Color(HPOpacity.color.r, HPOpacity.color.g, HPOpacity.color.b, HPAlpha);
+
             if (heal && Aim.Heal())
             {
                 //Hacer sonido de comer
@@ -632,7 +678,6 @@ public class HellbotControllers : MonoBehaviour
         if (!GodModeOn)
         {
             //rb2d.velocity = new Vector2(horizontal * runSpeed, 0 );
-            rb2d.AddForce(Vector2.right * runSpeed * horizontal);
 
             if (horizontal == 1 || horizontal == -1)
             {
@@ -640,20 +685,20 @@ public class HellbotControllers : MonoBehaviour
                 animator.SetBool("Walking", true);
                 if (!onFloor)
                 {
-                    if (horizontal == -1 && rb2d.velocity.x > 400)
+                    if (horizontal == -1 && rb2d.velocity.x > 500)
                     {
-                        rb2d.velocity = new Vector2(400, rb2d.velocity.y);
+                        rb2d.velocity = new Vector2(500, rb2d.velocity.y);
                     }
-                    else if (horizontal == 1 && rb2d.velocity.x < -400)
+                    else if (horizontal == 1 && rb2d.velocity.x < -500)
                     {
-                        rb2d.velocity = new Vector2(-400, rb2d.velocity.y);
+                        rb2d.velocity = new Vector2(-500, rb2d.velocity.y);
                     }
 
                     if (horizontal == 1)
                     {
                         if (rb2d.velocity.x < 600)
                         {
-                            runSpeed = CurrentRunSpeed - 1000;
+                            runSpeed = CurrentRunSpeed - 1400;
                         }
                         else
                         {
@@ -665,7 +710,7 @@ public class HellbotControllers : MonoBehaviour
                     {
                         if (rb2d.velocity.x > -600)
                         {
-                            runSpeed = CurrentRunSpeed - 1000;
+                            runSpeed = CurrentRunSpeed - 1400;
 
                         }
                         else
@@ -681,6 +726,8 @@ public class HellbotControllers : MonoBehaviour
             {
                 animator.SetBool("Walking", false);
             }
+
+            rb2d.AddForce(Vector2.right * runSpeed * horizontal);
 
         }
         else
@@ -876,10 +923,6 @@ public class HellbotControllers : MonoBehaviour
         if (collision.gameObject.tag == "CheckPoint")
         {
             CheckpointPos = transform.position;
-            if (HP > 0)
-            {
-
-            }
 
         }
 
@@ -909,7 +952,7 @@ public class HellbotControllers : MonoBehaviour
 
             TimeHealWaited += delta;
 
-            if (TimeHealWaited > TimeToWaitForHeal && HP < 4)
+            if (TimeHealWaited > TimeToWaitForHeal && HP < 6)
             {
                 healing();
                 TimeHealWaited = 0;
@@ -1065,17 +1108,10 @@ public class HellbotControllers : MonoBehaviour
 
     private void healing()
     {
-        if (HP < 4)
-        {
-            Instantiate(HealParticles, new Vector3(barraHP.position.x + 100, barraHP.position.y, barraHP.position.z), Quaternion.identity);
-        }
-        else
-        {
-            Instantiate(BlueHealParticles, new Vector3(barraHP.position.x + 100, barraHP.position.y, barraHP.position.z), Quaternion.identity);
+        Instantiate(HealParticles, new Vector3(barraHP.position.x + 100, barraHP.position.y, barraHP.position.z), Quaternion.identity);
 
-        }
         if (HP < 6)
-        {
+        { 
             HP++;
         }
         if (HP > 6)

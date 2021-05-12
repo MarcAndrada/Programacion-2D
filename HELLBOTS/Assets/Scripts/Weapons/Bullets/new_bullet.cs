@@ -16,7 +16,7 @@ public class new_bullet : MonoBehaviour
     {
         bulletRB = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Hellbot");
-        randAngleY = Random.Range(-200, 200);
+        randAngleY = Random.Range(-150, 150);
         randAngleX = Random.Range(-150, 150);
         Vector2 moveDir = (new Vector3 (target.transform.position.x + randAngleX, target.transform.position.y + randAngleY, target.transform.position.z) - transform.position).normalized * speed;
         bulletRB.velocity = new Vector2(moveDir.x, moveDir.y);

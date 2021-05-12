@@ -58,6 +58,7 @@ public class TeleportController : MonoBehaviour
         if (HellbotInput.GoLevel1)
         {
             TransitionController.ChangeScene();
+            TransitionController.ActiveLoadIcon();
             getDark = true;
             NextScene = "Map1";
         }
@@ -67,7 +68,7 @@ public class TeleportController : MonoBehaviour
             TransitionController.ChangeScene();
             getDark = true;
             NextScene = "Map2";
-            
+            TransitionController.ActiveLoadIcon();
         }
 
         if (HellbotInput.GoLevel3)
@@ -75,6 +76,7 @@ public class TeleportController : MonoBehaviour
             TransitionController.ChangeScene();
             getDark = true;
             NextScene = "Map3";
+            TransitionController.ActiveLoadIcon();
         }
 
         WaitedTime += delta;
@@ -112,7 +114,7 @@ public class TeleportController : MonoBehaviour
 
             TransitionController.ChangeScene();
             getDark = true;
-
+            TransitionController.ActiveLoadIcon();
 
         }
     }

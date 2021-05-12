@@ -1163,6 +1163,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetCamPos
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1171,7 +1181,7 @@ PrefabInstance:
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 403
+      value: 598
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -4052,15 +4062,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetCamPos (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22888
+      value: -22945
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -573
+      value: -478
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -5409,12 +5429,17 @@ PrefabInstance:
     - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_Offset.y
-      value: 231.36609
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_Size.y
       value: 914.08325
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -5424,7 +5449,7 @@ PrefabInstance:
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -377
+      value: -125
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -8106,15 +8131,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetCamPos (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10222
+      value: -10294
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -590
+      value: -470
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -8648,15 +8683,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetCamPos (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10056
+      value: -10075
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1526
+      value: -1431
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -10421,22 +10466,27 @@ PrefabInstance:
     - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_Offset.x
-      value: 250.39648
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_Size.x
       value: 1730.7227
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21795
+      value: -21539
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1360
+      value: -1237
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -13264,15 +13314,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetCamPos (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33381
+      value: -33313
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -590
+      value: -476
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -14911,6 +14971,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetCamPos (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14919,7 +14989,7 @@ PrefabInstance:
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4102
+      value: 4186
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -21022,15 +21092,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetCamPos (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -78453
+      value: -78538
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2900
+      value: 3014
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -21648,15 +21728,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetCamPos
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -79408
+      value: -79465
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1589
+      value: 1674
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -23440,15 +23530,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetCamPos (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -37733
+      value: -37961
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1569
+      value: 1660
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -24647,22 +24747,27 @@ PrefabInstance:
     - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_Offset.x
-      value: -655.0807
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_Size.x
       value: 2748.4763
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3980.3018
+      value: -4032
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -228.22102
+      value: -163
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
@@ -32726,12 +32831,12 @@ PrefabInstance:
     - target: {fileID: 6859915654824847102, guid: 320013add3bea7d498085980190c653f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -78523.23
+      value: -78522.9
       objectReference: {fileID: 0}
     - target: {fileID: 6859915654824847102, guid: 320013add3bea7d498085980190c653f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2893
+      value: 2897.3
       objectReference: {fileID: 0}
     - target: {fileID: 6859915654824847102, guid: 320013add3bea7d498085980190c653f,
         type: 3}
@@ -34035,15 +34140,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SetCamPos (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133684845736424387, guid: 41c051194a9c33a4dad35acfa52ac484,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -36281.027
+      value: -36555
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1252.9894
+      value: 1527
       objectReference: {fileID: 0}
     - target: {fileID: 1133684845736424388, guid: 41c051194a9c33a4dad35acfa52ac484,
         type: 3}
