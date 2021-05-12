@@ -11,7 +11,8 @@ public class HellbotControllers : MonoBehaviour
     public Transform GranadeLaunch;
     public GameObject DieText;
     public GameObject BossHPBar;
-    public GameObject GranadeAnim;
+    public Image GranadeAnim;
+    public GameObject GranadeBackground;
     public GameObject HPAnim;
     [Header("Corazones Llenos")]
     public GameObject Heart1;
@@ -45,7 +46,6 @@ public class HellbotControllers : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator animator;
     private BoxCollider2D box2d;
-    private Image BombOpacityCont;
     private Image HPOpacity;
 
 
@@ -82,10 +82,10 @@ public class HellbotControllers : MonoBehaviour
     private float TimeSinceDmg;
     private float immortalTime = 1000;
     private float changeSprite = 150;
-    private float alpha = 0;
+    private float circleValue = 0;
     private float HPAlpha = 0;
-    private float timetoPassAlpha = 100;
-    private float timePassedAlpha = 0;
+    private float timetoPassCircle = 40;
+    private float timePassedCircle = 0;
     private float HPTimeAlpha = 50;
     private float HPTimePassedAlpha = 0;
     private bool InvertedGravity = false;
@@ -116,7 +116,7 @@ public class HellbotControllers : MonoBehaviour
         Aim = GetComponent<HellbotAim>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        BombOpacityCont = GranadeAnim.GetComponent<Image>();
+        circleValue = GranadeAnim.GetComponent<Image>().fillAmount;
         HPOpacity = HPAnim.GetComponent<Image>();
 
         CurrentScene = SceneManager.GetActiveScene().name;
@@ -582,27 +582,27 @@ public class HellbotControllers : MonoBehaviour
                 animator.SetTrigger("GThrow");
                 if (WaitedTimeG == 0)
                 {
-                    alpha = 1;
+                    circleValue = 1;
+                    GranadeBackground.SetActive(true);
                 }
             }
 
-            timePassedAlpha += delta;
-            if (timePassedAlpha > timetoPassAlpha)
+            timePassedCircle += delta;
+            if (timePassedCircle > timetoPassCircle)
             {
-                alpha -= 0.01f;
-                timePassedAlpha = 0;
+                circleValue -= 0.005f;
+                timePassedCircle = 0;
 
             }
-
-            BombOpacityCont.color = new Color(BombOpacityCont.color.r, BombOpacityCont.color.g, BombOpacityCont.color.b, alpha);
-
+            if (circleValue <= 0)
+            {
+                GranadeBackground.SetActive(false);
+            }
+            //set circle value
+            GranadeAnim.GetComponent<Image>().fillAmount = circleValue; 
             if (throwGranade)
             {
                 WaitedTimeG += delta;
-
-
-
-
 
                 if (WaitedTimeG >= AnimDurationG && TimePassedGCD > granadeCD)
                 {
@@ -918,6 +918,11 @@ public class HellbotControllers : MonoBehaviour
         {
             PlayerHit();
             ReturnLastJump();
+        }
+
+        if (collision.gameObject.tag == "TakeDamage" && !godmode)
+        {
+            PlayerHit();
         }
 
         if (collision.gameObject.tag == "CheckPoint")

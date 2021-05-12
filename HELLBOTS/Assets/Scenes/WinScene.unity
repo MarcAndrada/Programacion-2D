@@ -186,8 +186,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4292432723
-  m_fontColor: {r: 0.3244037, g: 0.32621923, b: 0.8490566, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -277,75 +277,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241430373}
   m_CullTransparentMesh: 0
---- !u!1001 &672304201
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738815679333470453, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6065632849507521560, guid: b99182946ba884449b02a138254d23ba,
-        type: 3}
-      propertyPath: m_Name
-      value: AudioManagers
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b99182946ba884449b02a138254d23ba, type: 3}
 --- !u!1 &684937713
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +336,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.3047348, g: 0.55365336, b: 0.6037736, a: 1}
+    m_NormalColor: {r: 0.48780704, g: 0.5370156, b: 0.5471698, a: 1}
     m_HighlightedColor: {r: 0.18623175, g: 0.3325513, b: 0.4245283, a: 1}
     m_PressedColor: {r: 0.054734774, g: 0.5795108, b: 0.7735849, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -959,8 +890,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283615963
+  m_fontColor: {r: 0.8584906, g: 0.7903888, b: 0.31990921, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -30,6 +30,7 @@ TagManager:
   - GravityDown
   - InverseDoor
   - SkeletonHand
+  - TakeDamage
   layers:
   - Default
   - TransparentFX
