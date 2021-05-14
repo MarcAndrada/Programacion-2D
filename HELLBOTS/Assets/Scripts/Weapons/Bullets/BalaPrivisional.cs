@@ -10,6 +10,7 @@ public class BalaPrivisional : MonoBehaviour
     public AudioClip EnemyHit;
     public GameObject EnemyParticles;
     public GameObject ShieldParticles;
+    public GameObject Light;
 
     private GameObject Crosshair;
     private GameObject Player;
@@ -64,6 +65,11 @@ public class BalaPrivisional : MonoBehaviour
         if (collision.gameObject.tag == "Enemy" && gameObject.tag != "Untagged" || collision.gameObject.tag == "SkeletonHand" && gameObject.tag != "Untagged")
         {
             Hit = true;
+            if (Light != null)
+            {
+                Light.SetActive(false);
+
+            }
             if (EnemyHit != null)
             {
                 audiosource.PlayOneShot(EnemyHit);
@@ -79,6 +85,10 @@ public class BalaPrivisional : MonoBehaviour
             HittedSurface = collision.gameObject;
             if (collision.gameObject.tag != "WallFloor" && collision.gameObject.tag != "Door" && collision.gameObject.tag != "InverseDoor")
             {
+                if (Light != null)
+                {
+                    Light.SetActive(false);
+                }
                 gameObject.tag = "Untagged";
                 Sprite.enabled = false;
                 bc2D.enabled = false;
@@ -88,13 +98,13 @@ public class BalaPrivisional : MonoBehaviour
                 }
             }
 
-            
-            
-            
-
         }
 
         if (collision.gameObject.tag == "Shield"){
+            if (Light != null)
+            {
+                Light.SetActive(false);
+            }
             Hit = true;
             if (ShieldHit != null)
             {

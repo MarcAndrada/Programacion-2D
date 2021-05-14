@@ -71,6 +71,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Bullets
+    uniqueID: 374956561
+    locked: 0
   - name: Particles
     uniqueID: 927535217
     locked: 0

@@ -130,18 +130,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476f37a991d5f52408f4e3f880fceaab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
+  speed: 400
   lineOfSite: 1500
-  shootingRange: 800
-  fireRate: 1200
+  shootingRange: 900
+  fireRate: 1100
   bulletPrefab: {fileID: 1288552800543150587, guid: 33356378cedede945a03d5d4b57a094a,
     type: 3}
   throwZone: {fileID: 84367837}
-  maxBorder: 600
+  maxBorder: 550
   MoveRight: 0
   alert: {fileID: 9117245709936404992}
   AlertSound: {fileID: 8300000, guid: f51ecfac8cf61d24ea5da8c159362731, type: 3}
-  WaitTime: 1200
+  WaitTime: 1100
   hitPoints: 4
 --- !u!61 &1869990457
 BoxCollider2D:

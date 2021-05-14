@@ -19,7 +19,9 @@ public class SFX_Controller : MonoBehaviour
     private AudioSource WeaponsS;
     private AudioSource CheckPointsS;
     private GameObject Door;
+    private GameObject InverseDoor;
     private AudioSource DoorS;
+    private AudioSource IDoorS;
     private SoundManager sound;
     private float Volume = 0.1f;
 
@@ -52,6 +54,15 @@ public class SFX_Controller : MonoBehaviour
             if (Door != null)
             {
                 DoorS = Door.GetComponent<AudioSource>();
+            }
+        }
+
+        if (InverseDoor == null)
+        {
+            InverseDoor = GameObject.FindGameObjectWithTag("InverseDoor");
+            if (InverseDoor != null)
+            {
+                IDoorS = InverseDoor.GetComponent<AudioSource>();
             }
         }
        
@@ -106,6 +117,10 @@ public class SFX_Controller : MonoBehaviour
             DoorS.volume = Volume;
         }
 
+        if (InverseDoor != null)
+        {
+            IDoorS.volume = Volume;
+        }
 
     }
 

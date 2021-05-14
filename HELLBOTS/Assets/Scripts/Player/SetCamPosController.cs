@@ -20,6 +20,34 @@ public class SetCamPosController : MonoBehaviour
         CamController = Cam.GetComponent<MoveCamera>();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Hellbot")
+        {
+            if (NewMaxY != 0)
+            {
+                CamController.SetMaxCamY(NewMaxY);
+            }
+
+            if (NewMaxX != 0)
+            {
+                CamController.SetMaxCamX(NewMaxX);
+            }
+
+            if (NewMinY != 0)
+            {
+                CamController.SetMinCamY(NewMinY);
+            }
+
+            if (NewMinX != 0)
+            {
+                CamController.SetMinCamX(NewMinX);
+            }
+
+            CamController.SetLookUp(LookUp);
+
+        }
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {

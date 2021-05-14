@@ -11,16 +11,24 @@ public class HandController : MonoBehaviour
         ParentContr = GetComponentInParent<boss_movement>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Playerbullet")
         {
+            ParentContr.TakeHit();
+        }
+
+        if (collision.gameObject.tag == "Explision")
+        {
+            ParentContr.TakeHit();
+            ParentContr.TakeHit();
+            ParentContr.TakeHit();
+            ParentContr.TakeHit();
+
+        }
+        if (collision.gameObject.tag == "SniperBullet")
+        {
+            ParentContr.TakeHit();
             ParentContr.TakeHit();
         }
     }

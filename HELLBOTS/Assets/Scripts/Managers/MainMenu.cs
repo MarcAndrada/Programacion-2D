@@ -40,10 +40,6 @@ public class MainMenu : MonoBehaviour
 
         }
 
-
-
-        
-
     }
 
     public void goLevelManager()
@@ -101,6 +97,7 @@ public class MainMenu : MonoBehaviour
 
     public void goMainMenu()
     {
+        Time.timeScale = 1;
         TransitionController.ChangeScene();
         getDark = true;
         nextScene = "MainMenu";

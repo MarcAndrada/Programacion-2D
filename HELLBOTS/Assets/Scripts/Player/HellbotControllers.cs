@@ -914,10 +914,14 @@ public class HellbotControllers : MonoBehaviour
             PlayerHit();
         }
 
-        if (collision.gameObject.tag == "Caida" && !godmode)
+        if (collision.gameObject.tag == "Caida")
         {
-            PlayerHit();
-            ReturnLastJump();
+            if (!GodModeOn)
+            {
+                PlayerHit();
+                ReturnLastJump();
+            }
+           
         }
 
         if (collision.gameObject.tag == "TakeDamage" && !godmode)

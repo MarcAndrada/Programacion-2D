@@ -14,6 +14,7 @@ public class MoveCamera : MonoBehaviour
     public bool LookingUp = false;
     public bool Right = false;
 
+    private float Speed;
     private bool GodModeOn;
     private bool godmode;
     private bool Menu;
@@ -32,6 +33,8 @@ public class MoveCamera : MonoBehaviour
             sound = Managers.GetComponent<SoundManager>();
         }
         Time.timeScale = 1;
+
+        Speed = camSpeed;
     }
 
     private void Update()
@@ -89,10 +92,17 @@ public class MoveCamera : MonoBehaviour
                 posX = Player.transform.position.x;
                 posY = Player.transform.position.y + 275;
             }
-            
-           
-            
 
+
+
+            if (transform.position.x < Player.transform.position.x - 2000 || transform.position.x > Player.transform.position.x + 2000)
+            {
+                camSpeed += 1500;
+            }
+            else
+            {
+                camSpeed = Speed;
+            }
             transform.position = Vector3.MoveTowards(
                 transform.position, 
                 new Vector3(Mathf.Clamp(posX, minCamPos.x, maxCamPos.x), Mathf.Clamp(posY, minCamPos.y, maxCamPos.y),transform.position.z),
