@@ -135,7 +135,10 @@ public class HellbotControllers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            //transform.position = new Vector2 (-80000, 4000);
+        }
         horizontal = HellbotInput.Horizontal;
         vertical = HellbotInput.Vertical;
         jump = HellbotInput.Jump;
@@ -146,9 +149,6 @@ public class HellbotControllers : MonoBehaviour
         granade = HellbotInput.Granade;
 
         float delta = Time.deltaTime * 1000;
-
-
-
 
         if (godmode && !GodModeOn)
         {
@@ -909,7 +909,7 @@ public class HellbotControllers : MonoBehaviour
             PlayerHit();
         }
 
-        if (collision.gameObject.tag == "SkeletonHand")
+        if (collision.gameObject.tag == "EnemyDamage")
         {
             PlayerHit();
         }
@@ -1059,7 +1059,7 @@ public class HellbotControllers : MonoBehaviour
     {
 
         transform.position = CheckpointPos;
-        HP = 4;
+        HP = 6;
         DieText.SetActive(false);
         sprite.enabled = true;
         Controlls.enabled = true;
@@ -1079,6 +1079,15 @@ public class HellbotControllers : MonoBehaviour
         else
         {
             GravityDown();
+        }
+
+        GameObject Boss3 = GameObject.Find("BossLvl3");
+
+        if (Boss3 != null)
+        {
+            BossLvl3 BossController = Boss3.GetComponent<BossLvl3>();
+
+            BossController.DesactivateLasers();
         }
 
     }

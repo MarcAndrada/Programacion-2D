@@ -29,6 +29,7 @@ TagManager:
   - GravityUp
   - GravityDown
   - InverseDoor
+  - EnemyDamage
   - SkeletonHand
   - TakeDamage
   layers:
@@ -68,11 +69,14 @@ TagManager:
   - name: Background
     uniqueID: 1498688419
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: Scenari
+    uniqueID: 1671164713
     locked: 0
   - name: Bullets
     uniqueID: 374956561
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Particles
     uniqueID: 927535217

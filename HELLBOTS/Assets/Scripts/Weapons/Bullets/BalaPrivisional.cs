@@ -62,7 +62,7 @@ public class BalaPrivisional : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" && gameObject.tag != "Untagged" || collision.gameObject.tag == "SkeletonHand" && gameObject.tag != "Untagged")
+        if (collision.gameObject.tag == "Enemy" && gameObject.tag != "Untagged" || collision.gameObject.tag == "EnemyDamage" && gameObject.tag != "Untagged")
         {
             Hit = true;
             if (Light != null)

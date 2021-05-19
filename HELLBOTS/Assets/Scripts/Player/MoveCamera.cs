@@ -118,7 +118,7 @@ public class MoveCamera : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.layer == 9)
         {
 
             Activator = collision.gameObject.GetComponent<EnemyActivator>();
@@ -129,7 +129,7 @@ public class MoveCamera : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" && collision.gameObject.name != "BossLvl3" || collision.gameObject.layer == 9 && collision.gameObject.name != "BossLvl3")
         {
             Activator = collision.gameObject.GetComponent<EnemyActivator>();
             Activator.DefuseEnemy();

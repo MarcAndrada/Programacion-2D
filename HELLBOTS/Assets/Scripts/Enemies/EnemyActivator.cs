@@ -11,11 +11,11 @@ public class EnemyActivator : MonoBehaviour
     private tank_controller tankController;
     private flying_enemy flyerController;
     private boss_movement SkullController;
-
+    private BossLvl3 EyeController;
     private SpriteRenderer Sprite;
     private Animator animator;
 
-    private enum Enemy_Type { GRUNT, SUICIDE, TURRET, TANK, FLYER, SKULL};
+    private enum Enemy_Type { GRUNT, SUICIDE, TURRET, TANK, FLYER, SKULL, EYE};
     private Enemy_Type CurrentEnemy;
 
     // Start is called before the first frame update
@@ -27,6 +27,7 @@ public class EnemyActivator : MonoBehaviour
         tankController = GetComponent<tank_controller>();
         flyerController = GetComponent<flying_enemy>();
         SkullController = GetComponent<boss_movement>();
+        EyeController = GetComponent<BossLvl3>();
 
         if (GruntController != null)
         {
@@ -52,6 +53,10 @@ public class EnemyActivator : MonoBehaviour
         {
             CurrentEnemy = Enemy_Type.SKULL;
         }
+        else if (EyeController != null)
+        {
+            CurrentEnemy = Enemy_Type.EYE;
+        }
 
         switch (CurrentEnemy)
         {
@@ -68,6 +73,8 @@ public class EnemyActivator : MonoBehaviour
             case Enemy_Type.FLYER:
                 break;
             case Enemy_Type.SKULL:
+                break;
+            case Enemy_Type.EYE:
                 break;
             default:
                 break;
@@ -109,6 +116,10 @@ public class EnemyActivator : MonoBehaviour
                 Sprite.enabled = true;
                 SkullController.enabled = true;
                 break;
+            case Enemy_Type.EYE:
+                Sprite.enabled = true;
+                EyeController.enabled = true;
+                break;
             default:
                 break;
         }
@@ -145,6 +156,11 @@ public class EnemyActivator : MonoBehaviour
                 Sprite.enabled = false;
                 SkullController.enabled = false;
                 break;
+            case Enemy_Type.EYE:
+                Sprite.enabled = false;
+                EyeController.enabled = false;
+                break;
+
             default:
                 break;
         }

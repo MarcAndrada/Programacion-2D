@@ -88,15 +88,20 @@ public class TeleportController : MonoBehaviour
 
         if (gameObject.name == "PortalInicio")
         {
-            if (transform.localScale.x >= 0.2f )
+            if (transform.localScale.x >= 0 )
             {
-                transform.localScale = new Vector3(transform.localScale.x - 0.01f, transform.localScale.y, 1);
+                transform.localScale = new Vector3(transform.localScale.x - 0.005f, transform.localScale.y, 1);
 
             }
 
-            if (transform.localScale.y >= 0.2f)
+            if (transform.localScale.y >= 0)
             {
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y - 0.01f, 1);
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y - 0.005f, 1);
+            }
+
+            if (transform.localScale.x <= 0 && transform.localScale.y <= 0 )
+            {
+                Destroy(gameObject);
             }
         }
 

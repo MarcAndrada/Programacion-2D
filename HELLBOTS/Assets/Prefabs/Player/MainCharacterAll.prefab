@@ -591,6 +591,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionMenuIngame
       objectReference: {fileID: 0}
+    - target: {fileID: 738044480795881121, guid: c482ea2f1bfcad445894cb76c87d9df4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 738044480795881125, guid: c482ea2f1bfcad445894cb76c87d9df4,
         type: 3}
       propertyPath: m_Pivot.x
