@@ -15,8 +15,8 @@ public class SoundManager : MonoBehaviour
     private Slider SFXSlider;
     private SFX_Controller SFX_Cont;
     private VolumeController Music_Cont;
-    private float Music = 0.1f;
-    private float SFX = 0.1f;
+    private float Music;
+    private float SFX;
     private bool FirstTime = true;
     private float WaitedTime;
     private float WaitTime = 10;
@@ -24,6 +24,8 @@ public class SoundManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start(){
+        Music = 0.1f;
+        SFX = 0.1f;
         BinaryReader reader;
         if (File.Exists("sound.sav"))
         {

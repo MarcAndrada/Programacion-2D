@@ -130,7 +130,7 @@ public class SFX_Controller : MonoBehaviour
 
     public void SetVolume(float vol)
     {
-        if (sound != null && sound.SliderUpdate())
+        if (sound != null)
         {
             Volume = vol;
         }

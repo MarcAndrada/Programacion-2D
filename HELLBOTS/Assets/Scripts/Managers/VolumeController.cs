@@ -112,7 +112,7 @@ public class VolumeController : MonoBehaviour
 
     public void SetVolume(float vol)
     {
-        if (sound != null && sound.SliderUpdate())
+        if (sound != null)
         {
             musicVolume = vol;
         }
