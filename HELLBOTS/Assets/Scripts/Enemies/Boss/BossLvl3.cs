@@ -11,8 +11,10 @@ public class BossLvl3 : MonoBehaviour
     public GameObject portal;
     public Slider HP_Bar;
     public Transform EyeTracker;
-    public float LaserSpeed;
-    
+    public float UpDownLaserSpeed;
+    public float RightLeftLaserSpeed;
+
+
 
     [Header("UpLaser")]
     public GameObject UpLaser;
@@ -45,7 +47,7 @@ public class BossLvl3 : MonoBehaviour
     private Vector3 StarterDownLaserPos;
     private Vector3 StarterRightLaserPos;
     private Vector3 StarterLeftLaserPos;
-    private float LaserActivatorTime = 1500;
+    private float LaserActivatorTime = 5000;
     private float LaserActivatorWaited = 0;
 
 
@@ -203,21 +205,21 @@ public class BossLvl3 : MonoBehaviour
             {
                 case NextAttackPos.NONE:
 
-                    UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, StarterUpLaserPos, LaserSpeed);
-                    DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, StarterDownLaserPos, LaserSpeed);
-                    RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, StarterRightLaserPos, LaserSpeed);
-                    LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, StarterLeftLaserPos, LaserSpeed);
+                    UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, StarterUpLaserPos, UpDownLaserSpeed);
+                    DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, StarterDownLaserPos, UpDownLaserSpeed);
+                    RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, StarterRightLaserPos, RightLeftLaserSpeed);
+                    LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, StarterLeftLaserPos, RightLeftLaserSpeed);
 
                     break;
                 case NextAttackPos.LEFT:
-                    RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTLeft, LaserSpeed);
+                    RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTLeft, RightLeftLaserSpeed);
                     if (RightLaser.transform.position.x == RIGHTLeft.x)
                     {
                        CurretAttack = NextAttackPos.NONE;
                     }
                     break;
                 case NextAttackPos.RIGHT:
-                    LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTRight, LaserSpeed);
+                    LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTRight, RightLeftLaserSpeed);
                     if (LeftLaser.transform.position.x == LEFTRight.x)
                     {
                         CurretAttack = NextAttackPos.NONE;
@@ -225,14 +227,14 @@ public class BossLvl3 : MonoBehaviour
                     break;
                 case NextAttackPos.MIDDLE:
 
-                    UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPMid, LaserSpeed);
+                    UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPMid, UpDownLaserSpeed);
 
-                    DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNMid, LaserSpeed);
+                    DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNMid, UpDownLaserSpeed);
 
 
-                    RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTMid, LaserSpeed);
+                    RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTMid, RightLeftLaserSpeed);
 
-                    LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTMid, LaserSpeed);
+                    LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTMid, RightLeftLaserSpeed);
                     
                     
                     if (UpLaser.transform.position.y == UPMid.y && DownLaser.transform.position.y == DOWNMid.y && RightLaser.transform.position.x == RIGHTMid.x && LeftLaser.transform.position.x == LEFTMid.x)
@@ -242,7 +244,7 @@ public class BossLvl3 : MonoBehaviour
 
                     break;
                 case NextAttackPos.UP:
-                    DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNUp, LaserSpeed);
+                    DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNUp, UpDownLaserSpeed);
 
                     if (DownLaser.transform.position.y == DOWNUp.y)
                     {
@@ -251,7 +253,7 @@ public class BossLvl3 : MonoBehaviour
 
                     break;
                 case NextAttackPos.DOWN:
-                    UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPDown, LaserSpeed);
+                    UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPDown, UpDownLaserSpeed);
 
                     if (UpLaser.transform.position.y == UPDown.y)
                     {
@@ -259,8 +261,8 @@ public class BossLvl3 : MonoBehaviour
                     }
                     break;
                 case NextAttackPos.LEFTUP:
-                    DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNUp, LaserSpeed);
-                    RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTLeft, LaserSpeed);
+                    DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNUp, UpDownLaserSpeed);
+                    RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTLeft, RightLeftLaserSpeed);
                     
                     if (DownLaser.transform.position.y == DOWNUp.y && RightLaser.transform.position.x == RIGHTLeft.x)
                     {
@@ -269,8 +271,8 @@ public class BossLvl3 : MonoBehaviour
 
                     break;
                 case NextAttackPos.RIGHTUP:
-                    DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNUp, LaserSpeed);
-                    LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTRight, LaserSpeed);
+                    DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNUp, UpDownLaserSpeed);
+                    LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTRight, RightLeftLaserSpeed);
                     
                     if (DownLaser.transform.position.y == DOWNUp.y && LeftLaser.transform.position.x == LEFTRight.x)
                     {
@@ -278,8 +280,8 @@ public class BossLvl3 : MonoBehaviour
                     }
                     break;
                 case NextAttackPos.LEFTDOWN:
-                    UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPDown, LaserSpeed);
-                    RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTLeft, LaserSpeed);
+                    UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPDown, UpDownLaserSpeed);
+                    RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTLeft, RightLeftLaserSpeed);
 
                     if (UpLaser.transform.position.y == UPDown.y && RightLaser.transform.position.x == RIGHTLeft.x)
                     {
@@ -288,8 +290,8 @@ public class BossLvl3 : MonoBehaviour
 
                     break;
                 case NextAttackPos.RIGHTDOWN:
-                    UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPDown, LaserSpeed);
-                    LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTRight, LaserSpeed);
+                    UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPDown, UpDownLaserSpeed);
+                    LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTRight, RightLeftLaserSpeed);
 
                     if (UpLaser.transform.position.y == UPDown.y && LeftLaser.transform.position.x == LEFTRight.x)
                     {
@@ -311,6 +313,7 @@ public class BossLvl3 : MonoBehaviour
         SetSliderValue();
         if (hitPoints <= 0)
         {
+            DesactivateLasers();
             Instantiate(portal, transform.position, transform.rotation);
             Destroy(gameObject);
         }

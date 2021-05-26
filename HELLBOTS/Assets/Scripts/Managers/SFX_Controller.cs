@@ -81,7 +81,11 @@ public class SFX_Controller : MonoBehaviour
         for (int i = 0; i < Enemies.Length; i++)
         {
             EnemiesS = Enemies[i].GetComponent<AudioSource>();
-            EnemiesS.volume = Volume;
+            if (EnemiesS != null)
+            {   
+                EnemiesS.volume = Volume;
+            }
+            
         }
 
         for (int i = 0; i < PlayerBullets.Length; i++)

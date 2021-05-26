@@ -152,16 +152,6 @@ PrefabInstance:
       propertyPath: CurrentBulletsT
       value: 
       objectReference: {fileID: 6993862801085632140}
-    - target: {fileID: 6660596505099027594, guid: ad2ecb09451eaee41969da7de7c7c2ff,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 86.92871
-      objectReference: {fileID: 0}
-    - target: {fileID: 6660596505099027594, guid: ad2ecb09451eaee41969da7de7c7c2ff,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 21.402145
-      objectReference: {fileID: 0}
     - target: {fileID: 8249591239883331832, guid: ad2ecb09451eaee41969da7de7c7c2ff,
         type: 3}
       propertyPath: m_Name
@@ -317,8 +307,7 @@ PrefabInstance:
       propertyPath: CurrentBulletsT
       value: 
       objectReference: {fileID: 6993862801085632140}
-    m_RemovedComponents:
-    - {fileID: 641021594375347891, guid: ad2ecb09451eaee41969da7de7c7c2ff, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad2ecb09451eaee41969da7de7c7c2ff, type: 3}
 --- !u!114 &1914478388845299021 stripped
 MonoBehaviour:

@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class HellbotControllers : MonoBehaviour
 {
 
@@ -47,7 +48,8 @@ public class HellbotControllers : MonoBehaviour
     private Animator animator;
     private BoxCollider2D box2d;
     private Image HPOpacity;
-
+    private Slider HPBoss;
+    private VolumeController musicCont;
 
     [Header("Config Player")]
     public bool GodModeOn;
@@ -57,7 +59,7 @@ public class HellbotControllers : MonoBehaviour
     public float granadeCD;
     public bool crouch = false;
 
-    public int jumpDone;
+    private int jumpDone;
     private int jumpLimit = 2;
     private float CurrentRunSpeed;
     private float NormalG;
@@ -93,7 +95,7 @@ public class HellbotControllers : MonoBehaviour
     private bool GravityInvertedCheckpoint;
     private string CurrentScene;
     private bool TurnRed = true;
-
+    private bool bossActive = false;
 
     private enum DirectionV { NONE, UP, DOWN };
     private enum DirectionH { NONE, LEFT, RIGHT }
@@ -137,8 +139,9 @@ public class HellbotControllers : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            //transform.position = new Vector2 (-80000, 4000);
+            transform.position = new Vector2 (-79000, 1400);
         }
+
         horizontal = HellbotInput.Horizontal;
         vertical = HellbotInput.Vertical;
         jump = HellbotInput.Jump;
@@ -236,6 +239,7 @@ public class HellbotControllers : MonoBehaviour
                     if (crouch)
                     {
                         jumpDone = 3;
+                        animator.SetBool("SuperJump", true);
                     }
                     //hacer sonido de salto
                     jumpDone++;
@@ -641,6 +645,25 @@ public class HellbotControllers : MonoBehaviour
                 }
             }
 
+            if (bossActive)
+            {
+                if (HPBoss == null)
+                {
+                    HPBoss = BossHPBar.GetComponentInChildren<Slider>();
+                }
+                else
+                {
+                    if (HPBoss.value <= 0)
+                    {
+                        if (musicCont != null)
+                        {
+                            musicCont.DesactiveBossMusic();
+                        }
+                    }
+                }
+                
+            }
+
 
         }
         else
@@ -820,6 +843,7 @@ public class HellbotControllers : MonoBehaviour
                 {
 
                     animator.SetBool("Jumping", false);
+                    animator.SetBool("SuperJump", false);
                     rb2d.drag = 3;
                     jumpDone = 0;
 
@@ -938,6 +962,15 @@ public class HellbotControllers : MonoBehaviour
         if (collision.gameObject.tag == "BossActivator")
         {
             BossHPBar.SetActive(true);
+
+            GameObject musicObject = GameObject.FindGameObjectWithTag("Music");
+            musicCont = musicObject.GetComponent<VolumeController>();
+
+            musicCont.ActiveBossMusic();
+
+            bossActive = true;
+
+
         }
 
         if (collision.gameObject.tag == "GravityUp")

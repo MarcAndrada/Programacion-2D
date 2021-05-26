@@ -9,11 +9,13 @@ public class VolumeController : MonoBehaviour
     public AudioClip Level1;
     public AudioClip Level2;
     public AudioClip Level3;
+    public AudioClip MusicBoss;
 
     private AudioSource audiosouce;
     private float musicVolume;
     private Scene ActiveScene;
     private SoundManager sound;
+    private bool boss = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,54 +36,72 @@ public class VolumeController : MonoBehaviour
             audiosouce.clip = null;
         }
 
-
-        if (ActiveScene.name == "Map1" || ActiveScene.name == "Tutorial")
+        if (boss)
         {
-            if (audiosouce.clip != Level1)
+            if (audiosouce.clip != MusicBoss)
             {
                 audiosouce.Stop();
-                audiosouce.PlayOneShot(Level1);
-                audiosouce.clip = Level1;
-            }
-
-            /*audiosouce.clip = Level1;
-            audiosouce.playOnAwake = Level1;*/
-
-        }
-        else if (ActiveScene.name == "Map2")
-        {
-            if (audiosouce.clip != Level2)
-            {
-                audiosouce.Stop();
-                audiosouce.PlayOneShot(Level2);
-                audiosouce.clip = Level2;
-            }
-            //audiosouce.clip = Level2;
-        }
-        else if (ActiveScene.name == "Map3")
-        {
-
-            if (audiosouce.clip != Level3)
-            {
-                audiosouce.Stop();
-                audiosouce.PlayOneShot(Level3);
-                audiosouce.clip = Level3;
-                //audiosouce.clip = Level3;
+                audiosouce.PlayOneShot(MusicBoss);
+                audiosouce.clip = MusicBoss;
             }
         }
         else
         {
 
-            if (audiosouce.clip != MainMenu)
+            if (ActiveScene.name == "Map1" || ActiveScene.name == "Tutorial")
+            {
+
+                if (audiosouce.clip != Level1)
+                {
+                    audiosouce.Stop();
+                    audiosouce.PlayOneShot(Level1);
+                    audiosouce.clip = Level1;
+                }
+                /*audiosouce.clip = Level1;
+                audiosouce.playOnAwake = Level1;*/
+
+            }
+            else if (ActiveScene.name == "Map2")
+            {
+                if (audiosouce.clip != Level2)
+                {
+                    audiosouce.Stop();
+                    audiosouce.PlayOneShot(Level2);
+                    audiosouce.clip = Level2;
+                }
+                //audiosouce.clip = Level2;
+            }
+            else if (ActiveScene.name == "Map3")
+            {
+
+                if (audiosouce.clip != Level3)
+                {
+                    audiosouce.Stop();
+                    audiosouce.PlayOneShot(Level3);
+                    audiosouce.clip = Level3;
+                    //audiosouce.clip = Level3;
+                }
+
+            }
+            else if (ActiveScene.name == "Map4")
             {
                 audiosouce.Stop();
-                audiosouce.PlayOneShot(MainMenu);
-                audiosouce.clip = MainMenu;
             }
+            else
+            {
 
-            //audiosouce.clip = MainMenu;
-            //audiosouce.playOnAwake = MainMenu;
+                if (audiosouce.clip != MainMenu)
+                {
+                    audiosouce.Stop();
+                    audiosouce.PlayOneShot(MainMenu);
+                    audiosouce.clip = MainMenu;
+                }
+
+                //audiosouce.clip = MainMenu;
+                //audiosouce.playOnAwake = MainMenu;
+            }
         }
+       
 
     }
     
@@ -98,4 +118,14 @@ public class VolumeController : MonoBehaviour
         }
         
     }
+
+    public void ActiveBossMusic()
+    {
+        boss = true;
+    }
+    public void DesactiveBossMusic()
+    {
+        boss = false;
+    }
+
 }

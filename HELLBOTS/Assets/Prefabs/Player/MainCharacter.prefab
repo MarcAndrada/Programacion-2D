@@ -609,7 +609,6 @@ GameObject:
   - component: {fileID: 890727812966049131}
   - component: {fileID: 3150145007177856401}
   - component: {fileID: 9047604455351471037}
-  - component: {fileID: 641021594375347891}
   m_Layer: 13
   m_Name: MainCharacter
   m_TagString: Hellbot
@@ -777,7 +776,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 11.740562, y: -53.71924}
+  m_Offset: {x: 21.402145, y: -53.71924}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -788,7 +787,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 78.876076, y: 391.04834}
+  m_Size: {x: 86.92871, y: 391.04834}
   m_EdgeRadius: 0
 --- !u!61 &7191030553921788187
 BoxCollider2D:
@@ -863,7 +862,6 @@ MonoBehaviour:
   HP: 6
   granadeCD: 10000
   crouch: 0
-  jumpDone: 0
 --- !u!114 &4809310203432927343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,32 +1015,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &641021594375347891
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8249591239883331832}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 17.316189, y: -245.74632}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 512, y: 512}
-    newSize: {x: 512, y: 512}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 112.02619, y: 2.4111633}
-  m_EdgeRadius: 0
 --- !u!1 &8249591240154314739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1680,7 +1652,7 @@ PrefabInstance:
     - target: {fileID: 6290507036174987920, guid: 233ff5cb9854b0c4d88619d7ce475856,
         type: 3}
       propertyPath: MaxAmmo
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6290507036174987920, guid: 233ff5cb9854b0c4d88619d7ce475856,
         type: 3}
@@ -1715,7 +1687,7 @@ PrefabInstance:
     - target: {fileID: 2323229473732530313, guid: 3cfe2cf63067c0244ad025a7a3959e06,
         type: 3}
       propertyPath: MaxAmmo
-      value: 70
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2323229473732530313, guid: 3cfe2cf63067c0244ad025a7a3959e06,
         type: 3}
@@ -1951,7 +1923,7 @@ PrefabInstance:
     - target: {fileID: -6306679828979340906, guid: 8f365cceb07006e48ab709400de373c5,
         type: 3}
       propertyPath: MaxAmmo
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -6306679828979340906, guid: 8f365cceb07006e48ab709400de373c5,
         type: 3}
