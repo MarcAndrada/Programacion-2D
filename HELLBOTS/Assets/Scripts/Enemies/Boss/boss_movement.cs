@@ -34,12 +34,12 @@ public class boss_movement : MonoBehaviour
     private bool damaged = false;
     private float TimeSinceDmg;
     private float changeSprite = 150;
-    private float HandOnTheFloorTime = 1500;
+    private float HandOnTheFloorTime = 800;
     private float TimePassedHandOnFloor;
-    private float HandAbovePlayer = 2000;
+    private float HandAbovePlayer = 1000;
     private float TimeAbovePlayer;
     private bool HitFloor;
-    private float LaughtTime = 5000;
+    private float LaughtTime = 8000;
     private float LaughtTimePassed;
     private Color SkullDamagedColor = new Color (0.51f, 0.35f, 0.32f);
     private Color SkullColor = new Color(0.75f, 0.75f, 0.75f);

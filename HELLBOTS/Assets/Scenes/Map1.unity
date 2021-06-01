@@ -12479,7 +12479,7 @@ PrefabInstance:
     - target: {fileID: 2693184051549620623, guid: c83439989f507bf458f5f345456d5ffb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2693184051549620623, guid: c83439989f507bf458f5f345456d5ffb,
         type: 3}
@@ -16752,7 +16752,7 @@ PrefabInstance:
     - target: {fileID: 2693184051549620623, guid: c83439989f507bf458f5f345456d5ffb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2693184051549620623, guid: c83439989f507bf458f5f345456d5ffb,
         type: 3}
@@ -19414,6 +19414,11 @@ PrefabInstance:
       propertyPath: HP_Bar
       value: 
       objectReference: {fileID: 1669179188}
+    - target: {fileID: 4595640407519634401, guid: f343941311745ab4e94f3828ba5d4e6c,
+        type: 3}
+      propertyPath: HandSpeed
+      value: 2300
+      objectReference: {fileID: 0}
     - target: {fileID: 4595640407519634402, guid: f343941311745ab4e94f3828ba5d4e6c,
         type: 3}
       propertyPath: m_RootOrder
