@@ -15,6 +15,8 @@ public class HellbotControllers : MonoBehaviour
     public Image GranadeAnim;
     public GameObject GranadeBackground;
     public GameObject HPAnim;
+    public Transform WeaponPos;
+    public Transform AmmoHudPos;
     [Header("Corazones Llenos")]
     public GameObject Heart1;
     public GameObject Heart2;
@@ -31,6 +33,8 @@ public class HellbotControllers : MonoBehaviour
     public GameObject Particulas;
     public GameObject HealParticles;
     public Transform barraHP;
+    public GameObject EatParticles;
+    public GameObject ChangeWeaponParticles;
     [Header("Audios")]
     public AudioClip WalkSound;
     public AudioClip JumpSound;
@@ -137,10 +141,10 @@ public class HellbotControllers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        /*if (Input.GetKeyDown(KeyCode.B))
         {
             transform.position = new Vector2 (-79000, 1400);
-        }
+        }*/
 
         horizontal = HellbotInput.Horizontal;
         vertical = HellbotInput.Vertical;
@@ -236,7 +240,7 @@ public class HellbotControllers : MonoBehaviour
                             }
                         }
                     }
-                    if (crouch)
+                    if (crouch && onFloor)
                     {
                         jumpDone = 3;
                         animator.SetBool("SuperJump", true);
@@ -254,6 +258,11 @@ public class HellbotControllers : MonoBehaviour
                         jumpHeight.y -= 50;
                     }
 
+                    if (jumpHeight.y > 1200)
+                    {
+                        animator.SetBool("SuperJump", true);
+                    }
+
                 }
                 //Crouch (Si presiono "S", el collider grande se desactiva)
                 if (crouch_keyD)
@@ -262,7 +271,7 @@ public class HellbotControllers : MonoBehaviour
                     if (onFloor)
                     {
                         GoDown = true;
-                    }
+                    }  
                     else
                     {
                         GoDown = false;
@@ -270,9 +279,10 @@ public class HellbotControllers : MonoBehaviour
                     animator.SetBool("Crouch", true);
                     Normalbc2D.enabled = false;
                     Crouchbc2D.enabled = true;
-                    if (jumpDone < 1 && jumpHeight.y < 1000)
+                    if (jumpDone < 1 && jumpHeight.y <= 1000)
                     {
                         jumpHeight += new Vector2(0, 700);
+
 
                     }
                     if (GoDown)
@@ -353,9 +363,11 @@ public class HellbotControllers : MonoBehaviour
                             }
                         }
                     }
-                    if (crouch)
+                    if (crouch && onFloor)
                     {
                         jumpDone = 3;
+                        animator.SetBool("SuperJump", true);
+
                     }
                     //hacer sonido de salto
                     jumpDone++;
@@ -554,6 +566,8 @@ public class HellbotControllers : MonoBehaviour
             {
                 //Hacer sonido de comer
                 audioSource.PlayOneShot(eat);
+                Instantiate(EatParticles, WeaponPos.position, Quaternion.identity);
+                Instantiate(ChangeWeaponParticles, AmmoHudPos.position, Quaternion.identity);
                 Aim.ResetWeapon();
                 healing();
                 healing();
