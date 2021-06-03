@@ -32,7 +32,11 @@ TagManager:
   - EnemyDamage
   - SkeletonHand
   - TakeDamage
+<<<<<<< Updated upstream
   - Music
+=======
+  - FinalBoss
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
