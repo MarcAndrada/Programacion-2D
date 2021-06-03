@@ -3,40 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-  - Crosshair
-  - CamUp
-  - WallFloor
-  - Floor
-  - Wall
-  - Weapon
-  - Caida
-  - Hellbot
-  - Enemybullet
-  - Playerbullet
-  - Explosion
-  - ActiveWeapon
-  - Shield
-  - SniperBullet
-  - CheckPoint
-  - Door
-  - Ramp
-  - BossActivator
-  - TurnPoint
-  - Music_Slider
-  - SFX_Slider
-  - GravityUp
-  - GravityDown
-  - InverseDoor
-  - EnemyDamage
-  - SkeletonHand
-  - TakeDamage
-<<<<<<< Updated upstream
-  - Music
-=======
-  - FinalBoss
->>>>>>> Stashed changes
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -46,12 +13,12 @@ TagManager:
   - UI
   - 
   - 
-  - scene
-  - enemy
-  - weapon_floor
-  - Shield
-  - EnemyBullets
-  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -71,18 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 1498688419
-    locked: 0
-  - name: Scenari
-    uniqueID: 1671164713
-    locked: 0
-  - name: Bullets
-    uniqueID: 374956561
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Particles
-    uniqueID: 927535217
     locked: 0
