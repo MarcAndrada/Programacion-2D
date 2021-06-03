@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 545939829939484368}
   - component: {fileID: 545939829939484370}
   - component: {fileID: 545939829939484371}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BlueParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4732,7 +4732,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 927535217
+  m_SortingLayerID: -412916931
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 0
