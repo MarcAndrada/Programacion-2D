@@ -32,7 +32,13 @@ public class TeleportController : MonoBehaviour
         }
         if (CurrentScene == "Map3")
         {
+            NextScene = "Map4";
+
+        }
+        if (CurrentScene == "Map4")
+        {
             NextScene = "WinScene";
+
         }
         transform.position = new Vector3(transform.position.x, transform.position.y, 65);
     }
@@ -79,6 +85,13 @@ public class TeleportController : MonoBehaviour
             TransitionController.ActiveLoadIcon();
         }
 
+        if (HellbotInput.GoLevel4)
+        {
+            TransitionController.ChangeScene();
+            getDark = true;
+            NextScene = "Map4";
+            TransitionController.ActiveLoadIcon();
+        }
         WaitedTime += delta;
         if (WaitTime < WaitedTime)
         {

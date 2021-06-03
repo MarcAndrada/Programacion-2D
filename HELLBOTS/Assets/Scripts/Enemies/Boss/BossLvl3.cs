@@ -32,7 +32,18 @@ public class BossLvl3 : MonoBehaviour
     public GameObject LeftLaser;
     public Vector3 LEFTRight;
     public Vector3 LEFTMid;
-           
+
+    [Header("Direcctions")]
+    public GameObject Middle;
+    public GameObject Up;
+    public GameObject Right;
+    public GameObject Down;
+    public GameObject Left;
+    public GameObject UpRight;
+    public GameObject UpLeft;
+    public GameObject DownRight;
+    public GameObject DownLeft;
+
 
     private SpriteRenderer sprite;
     private GameObject player;
@@ -209,10 +220,20 @@ public class BossLvl3 : MonoBehaviour
                     DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, StarterDownLaserPos, UpDownLaserSpeed);
                     RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, StarterRightLaserPos, RightLeftLaserSpeed);
                     LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, StarterLeftLaserPos, RightLeftLaserSpeed);
+                    Left.SetActive(false);
+                    Right.SetActive(false);
+                    Middle.SetActive(false);
+                    Up.SetActive(false);
+                    Down.SetActive(false);
+                    UpLeft.SetActive(false);
+                    UpRight.SetActive(false);
+                    DownLeft.SetActive(false);
+                    DownRight.SetActive(false);
 
                     break;
                 case NextAttackPos.LEFT:
                     RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTLeft, RightLeftLaserSpeed);
+                    Left.SetActive(true);
                     if (RightLaser.transform.position.x == RIGHTLeft.x)
                     {
                        CurretAttack = NextAttackPos.NONE;
@@ -220,6 +241,7 @@ public class BossLvl3 : MonoBehaviour
                     break;
                 case NextAttackPos.RIGHT:
                     LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTRight, RightLeftLaserSpeed);
+                    Right.SetActive(true);
                     if (LeftLaser.transform.position.x == LEFTRight.x)
                     {
                         CurretAttack = NextAttackPos.NONE;
@@ -235,8 +257,9 @@ public class BossLvl3 : MonoBehaviour
                     RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTMid, RightLeftLaserSpeed);
 
                     LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTMid, RightLeftLaserSpeed);
-                    
-                    
+
+                    Middle.SetActive(true);
+
                     if (UpLaser.transform.position.y == UPMid.y && DownLaser.transform.position.y == DOWNMid.y && RightLaser.transform.position.x == RIGHTMid.x && LeftLaser.transform.position.x == LEFTMid.x)
                     {
                         CurretAttack = NextAttackPos.NONE;
@@ -245,7 +268,7 @@ public class BossLvl3 : MonoBehaviour
                     break;
                 case NextAttackPos.UP:
                     DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNUp, UpDownLaserSpeed);
-
+                    Up.SetActive(true);
                     if (DownLaser.transform.position.y == DOWNUp.y)
                     {
                         CurretAttack = NextAttackPos.NONE;
@@ -254,7 +277,7 @@ public class BossLvl3 : MonoBehaviour
                     break;
                 case NextAttackPos.DOWN:
                     UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPDown, UpDownLaserSpeed);
-
+                    Down.SetActive(true);
                     if (UpLaser.transform.position.y == UPDown.y)
                     {
                         CurretAttack = NextAttackPos.NONE;
@@ -263,7 +286,7 @@ public class BossLvl3 : MonoBehaviour
                 case NextAttackPos.LEFTUP:
                     DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNUp, UpDownLaserSpeed);
                     RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTLeft, RightLeftLaserSpeed);
-                    
+                    UpLeft.SetActive(true);
                     if (DownLaser.transform.position.y == DOWNUp.y && RightLaser.transform.position.x == RIGHTLeft.x)
                     {
                         CurretAttack = NextAttackPos.NONE;
@@ -273,7 +296,7 @@ public class BossLvl3 : MonoBehaviour
                 case NextAttackPos.RIGHTUP:
                     DownLaser.transform.position = Vector3.MoveTowards(DownLaser.transform.position, DOWNUp, UpDownLaserSpeed);
                     LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTRight, RightLeftLaserSpeed);
-                    
+                    UpRight.SetActive(true);
                     if (DownLaser.transform.position.y == DOWNUp.y && LeftLaser.transform.position.x == LEFTRight.x)
                     {
                         CurretAttack = NextAttackPos.NONE;
@@ -282,7 +305,7 @@ public class BossLvl3 : MonoBehaviour
                 case NextAttackPos.LEFTDOWN:
                     UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPDown, UpDownLaserSpeed);
                     RightLaser.transform.position = Vector3.MoveTowards(RightLaser.transform.position, RIGHTLeft, RightLeftLaserSpeed);
-
+                    DownLeft.SetActive(true);
                     if (UpLaser.transform.position.y == UPDown.y && RightLaser.transform.position.x == RIGHTLeft.x)
                     {
                         CurretAttack = NextAttackPos.NONE;
@@ -292,7 +315,7 @@ public class BossLvl3 : MonoBehaviour
                 case NextAttackPos.RIGHTDOWN:
                     UpLaser.transform.position = Vector3.MoveTowards(UpLaser.transform.position, UPDown, UpDownLaserSpeed);
                     LeftLaser.transform.position = Vector3.MoveTowards(LeftLaser.transform.position, LEFTRight, RightLeftLaserSpeed);
-
+                    DownRight.SetActive(true);
                     if (UpLaser.transform.position.y == UPDown.y && LeftLaser.transform.position.x == LEFTRight.x)
                     {
                         CurretAttack = NextAttackPos.NONE;
@@ -314,6 +337,7 @@ public class BossLvl3 : MonoBehaviour
         if (hitPoints <= 0)
         {
             DesactivateLasers();
+            CurretAttack = NextAttackPos.NONE;
             Instantiate(portal, transform.position, transform.rotation);
             Destroy(gameObject);
         }

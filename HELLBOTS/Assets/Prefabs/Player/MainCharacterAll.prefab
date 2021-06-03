@@ -42,6 +42,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1605648366596875783}
     m_Modifications:
+    - target: {fileID: 293612153433443318, guid: ad2ecb09451eaee41969da7de7c7c2ff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 327311059916785278, guid: ad2ecb09451eaee41969da7de7c7c2ff,
         type: 3}
       propertyPath: Infinite1
@@ -82,6 +87,21 @@ PrefabInstance:
       propertyPath: CurrentBulletsT
       value: 
       objectReference: {fileID: 6993862801085632140}
+    - target: {fileID: 1358458732244950685, guid: ad2ecb09451eaee41969da7de7c7c2ff,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7240917
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358458732244950685, guid: ad2ecb09451eaee41969da7de7c7c2ff,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358458732244950685, guid: ad2ecb09451eaee41969da7de7c7c2ff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1423184629039935120, guid: ad2ecb09451eaee41969da7de7c7c2ff,
         type: 3}
       propertyPath: Infinite1
@@ -204,11 +224,6 @@ PrefabInstance:
       objectReference: {fileID: 6828275151576877176}
     - target: {fileID: 8249591239883331837, guid: ad2ecb09451eaee41969da7de7c7c2ff,
         type: 3}
-      propertyPath: WeaponPos
-      value: 
-      objectReference: {fileID: 5710593554237593796}
-    - target: {fileID: 8249591239883331837, guid: ad2ecb09451eaee41969da7de7c7c2ff,
-        type: 3}
       propertyPath: AmmoHudPos
       value: 
       objectReference: {fileID: 9138062826698899618}
@@ -234,21 +249,9 @@ PrefabInstance:
       objectReference: {fileID: 6527706085469256729}
     - target: {fileID: 8249591239883331837, guid: ad2ecb09451eaee41969da7de7c7c2ff,
         type: 3}
-      propertyPath: EatParticles
-      value: 
-      objectReference: {fileID: 5402009573859980726, guid: 50ea6d4673318cf40808dd19913e0fac,
-        type: 3}
-    - target: {fileID: 8249591239883331837, guid: ad2ecb09451eaee41969da7de7c7c2ff,
-        type: 3}
       propertyPath: GranadeBackground
       value: 
       objectReference: {fileID: 8019857253698148227}
-    - target: {fileID: 8249591239883331837, guid: ad2ecb09451eaee41969da7de7c7c2ff,
-        type: 3}
-      propertyPath: ChangeWeaponParticles
-      value: 
-      objectReference: {fileID: 545939829939484369, guid: aedad2959c3cef7498ef86014421e3af,
-        type: 3}
     - target: {fileID: 8249591239883331839, guid: ad2ecb09451eaee41969da7de7c7c2ff,
         type: 3}
       propertyPath: m_RootOrder
@@ -329,6 +332,11 @@ PrefabInstance:
       propertyPath: CurrentBulletsT
       value: 
       objectReference: {fileID: 6993862801085632140}
+    - target: {fileID: 8835545388105906018, guid: ad2ecb09451eaee41969da7de7c7c2ff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad2ecb09451eaee41969da7de7c7c2ff, type: 3}
 --- !u!114 &1914478388845299021 stripped
@@ -367,12 +375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43da1bf69461f3642afb552607490a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &5710593554237593796 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6452828535967463650, guid: ad2ecb09451eaee41969da7de7c7c2ff,
-    type: 3}
-  m_PrefabInstance: {fileID: 1642995593434341414}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2497572792442168219
 PrefabInstance:
   m_ObjectHideFlags: 0

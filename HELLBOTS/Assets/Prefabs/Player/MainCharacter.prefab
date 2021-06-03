@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293612153433443318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.8, y: -16.2, z: -1}
+  m_LocalPosition: {x: 55.8, y: -16.2, z: 1}
   m_LocalScale: {x: 1.4285712, y: 1.4285712, z: 1}
   m_Children:
   - {fileID: 7520495058445923602}
@@ -146,7 +146,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6663934916486719401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 84, y: -9, z: -1}
+  m_LocalPosition: {x: 84, y: -9, z: 1}
   m_LocalScale: {x: 1.4285711, y: 1.4285711, z: 1}
   m_Children:
   - {fileID: 6361785601931425937}
@@ -177,7 +177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7140277601371226691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 77, y: -10, z: -1}
+  m_LocalPosition: {x: 77, y: -10, z: 1}
   m_LocalScale: {x: 1.4285712, y: 1.4285712, z: 1}
   m_Children:
   - {fileID: 6988519416713130246}
@@ -837,6 +837,8 @@ MonoBehaviour:
   GranadeAnim: {fileID: 0}
   GranadeBackground: {fileID: 0}
   HPAnim: {fileID: 0}
+  WeaponPos: {fileID: 6452828535967463650}
+  AmmoHudPos: {fileID: 0}
   Heart1: {fileID: 0}
   Heart2: {fileID: 0}
   Heart3: {fileID: 0}
@@ -851,6 +853,10 @@ MonoBehaviour:
   HealParticles: {fileID: 8948401013286521644, guid: c5978488188efd749b3af128f53b2999,
     type: 3}
   barraHP: {fileID: 0}
+  EatParticles: {fileID: 5402009573859980726, guid: 50ea6d4673318cf40808dd19913e0fac,
+    type: 3}
+  ChangeWeaponParticles: {fileID: 545939829939484369, guid: aedad2959c3cef7498ef86014421e3af,
+    type: 3}
   WalkSound: {fileID: 8300000, guid: c5b3c12186444034ba12b0146fb6b3ed, type: 3}
   JumpSound: {fileID: 8300000, guid: dbdb12a83aa94184db95980527027bed, type: 3}
   pHit: {fileID: 8300000, guid: d806190db66a32444a02a9543673fe91, type: 3}
@@ -1418,7 +1424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8835545388105906018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 88, y: -11, z: -1}
+  m_LocalPosition: {x: 88, y: -11, z: 1}
   m_LocalScale: {x: 1.4285712, y: 1.4285712, z: 1}
   m_Children:
   - {fileID: 1358458732244950685}

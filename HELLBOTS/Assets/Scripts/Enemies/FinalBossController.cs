@@ -57,7 +57,7 @@ public class FinalBossController : MonoBehaviour
 
 
     private Rigidbody2D enemyRB;
-
+    private WeaponGenerator weaponContr;
     void Start()
     {
         
@@ -65,7 +65,7 @@ public class FinalBossController : MonoBehaviour
         attackMoveDirection.Normalize();
         enemyRB = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
-
+        weaponContr = GetComponent<WeaponGenerator>();
     }
 
     // Update is called once per frame
@@ -78,11 +78,6 @@ public class FinalBossController : MonoBehaviour
         isTouchingDown = Physics2D.OverlapCircle(groundCheckDown.position, groundCheckRadius, groundLayer);
         isTouchingWall = Physics2D.OverlapCircle(checkWall.position, groundCheckRadius, groundLayer);
         //IdleState();
-        AttackUpDown();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            AttackPlayer();
-        }
         //FlipTowardsPlayer();
         /*if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
         {
@@ -102,6 +97,22 @@ public class FinalBossController : MonoBehaviour
                 damaged = false;
                 TimeSinceDmg = 0;
             }
+
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        float distanceFromPlayer = Vector2.Distance(player.transform.position, transform.position);
+
+        if (distanceFromPlayer <= shootingRange)
+        {
+            AttackUpDown();
+            weaponContr.enabled = true;
+        }
+        else
+        {
+            weaponContr.enabled = false;
 
         }
     }
@@ -253,7 +264,7 @@ public class FinalBossController : MonoBehaviour
     public void Shoot()
     {
         Instantiate(projectile, projectileParent.transform.position, Quaternion.identity);
-        Instantiate(projectile, projectileParent2.transform.position, Quaternion.identity);
+        //Instantiate(projectile, projectileParent2.transform.position, Quaternion.identity);
         Instantiate(projectile, projectileParent3.transform.position, Quaternion.identity);
         nextFireTime = Time.time + fireRate;
 

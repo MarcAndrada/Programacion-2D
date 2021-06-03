@@ -87,6 +87,16 @@ public class MainMenu : MonoBehaviour
         TransitionController.ActiveLoadIcon();
     }
 
+    public void goMap4()
+    {
+        TransitionController.ChangeScene();
+        getDark = true;
+        nextScene = "Map4";
+        soundCont.Restart();
+        TransitionController.ActiveLoadIcon();
+    }
+
+
     public void goOptions()
     {
         TransitionController.ChangeScene();

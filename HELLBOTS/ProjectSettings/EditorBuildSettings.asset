@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Map3.unity
     guid: 598ea194ca3135841ace3f1f485e7af5
   - enabled: 1
+    path: Assets/Scenes/Map4.unity
+    guid: e30f7d9cd56385049baba807dbcd5fc3
+  - enabled: 1
     path: Assets/Scenes/WinScene.unity
     guid: cfe8423a25eaa3e4397c30ff32b4e727
   m_configObjects: {}

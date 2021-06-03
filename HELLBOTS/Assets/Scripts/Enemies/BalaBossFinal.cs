@@ -37,5 +37,17 @@ public class BalaBossFinal : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Playerbullet" || collision.gameObject.tag == "SniperBullet")
+        {
+            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+
+        }
+
+    }
     
 }
