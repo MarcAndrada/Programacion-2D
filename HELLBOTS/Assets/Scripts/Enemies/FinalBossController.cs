@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class FinalBossController : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class FinalBossController : MonoBehaviour
     public float groundCheckRadius;
     public float shootingRange;
     public float fireRate = 1f;
+    public float hitPoints;
 
     private float nextFireTime;
 
@@ -18,7 +21,10 @@ public class FinalBossController : MonoBehaviour
     public GameObject projectileParent;
     public GameObject projectileParent2;
     public GameObject projectileParent3;
+    public GameObject portal;
 
+
+    public Slider HP_Bar;
 
 
     public Vector2 idleMoveDirection;
@@ -38,6 +44,16 @@ public class FinalBossController : MonoBehaviour
     private bool isTouchingWall;
     private bool goingUp = true;
     private bool facingLeft = true;
+    private bool damaged = false;
+
+    private float changeSprite = 150;
+    private float TimeSinceDmg;
+
+    private Color SkullDamagedColor = new Color(0.51f, 0.35f, 0.32f);
+    private Color SkullColor = new Color(0.75f, 0.75f, 0.75f);
+
+    private SpriteRenderer sprite;
+
 
 
     private Rigidbody2D enemyRB;
@@ -48,11 +64,15 @@ public class FinalBossController : MonoBehaviour
         idleMoveDirection.Normalize();
         attackMoveDirection.Normalize();
         enemyRB = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        float delta = Time.deltaTime * 1000;
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
         isTouchingUp = Physics2D.OverlapCircle(groundCheckUp.position, groundCheckRadius, groundLayer);
         isTouchingDown = Physics2D.OverlapCircle(groundCheckDown.position, groundCheckRadius, groundLayer);
@@ -63,14 +83,26 @@ public class FinalBossController : MonoBehaviour
         {
             AttackPlayer();
         }
-        FlipTowardsPlayer();
-        if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
+        //FlipTowardsPlayer();
+        /*if (distanceFromPlayer <= shootingRange && nextFireTime < Time.time)
         {
             Instantiate(projectile, projectileParent.transform.position, Quaternion.identity);
             Instantiate(projectile, projectileParent2.transform.position, Quaternion.identity);
             Instantiate(projectile, projectileParent3.transform.position, Quaternion.identity);
 
             nextFireTime = Time.time + fireRate;
+        }*/
+        if (damaged)
+        {
+            TimeSinceDmg += delta;
+            sprite.color = SkullDamagedColor;
+            if (TimeSinceDmg > changeSprite)
+            {
+                sprite.color = SkullColor;
+                damaged = false;
+                TimeSinceDmg = 0;
+            }
+
         }
     }
 
@@ -85,12 +117,17 @@ public class FinalBossController : MonoBehaviour
         
         if (isTouchingWall)
         {
+            float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+
             if (facingLeft)
             {
                 Flip();
-            }else if (!facingLeft)
+                
+            }
+            else if (!facingLeft)
             {
                 Flip();
+                
             }
         }
         
@@ -113,10 +150,12 @@ public class FinalBossController : MonoBehaviour
             if (facingLeft)
             {
                 Flip();
+                Shoot();
             }
             else if (!facingLeft)
             {
                 Flip();
+                Shoot();
             }
         }
 
@@ -139,7 +178,9 @@ public class FinalBossController : MonoBehaviour
         if (playerDirection > 0 && facingLeft)
         {
             Flip();
-        }else if (playerDirection < 0 && !facingLeft)
+            
+        }
+        else if (playerDirection < 0 && !facingLeft)
         {
             Flip();
         }
@@ -167,4 +208,57 @@ public class FinalBossController : MonoBehaviour
         Gizmos.DrawWireSphere(checkWall.position, groundCheckRadius);
         Gizmos.DrawWireSphere(transform.position, shootingRange);
     }
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+
+        if (collider.gameObject.tag == "Playerbullet")
+        {
+            TakeHit();
+        }
+
+        if (collider.gameObject.tag == "SniperBullet")
+        {
+            TakeHit();
+            TakeHit();
+            TakeHit();
+        }
+
+        if (collider.gameObject.tag == "Explosion")
+        {
+            TakeHit();
+            TakeHit();
+            TakeHit();
+            TakeHit();
+
+        }
+
+
+    }
+    public void TakeHit()
+    {
+        hitPoints = hitPoints - 1;
+        damaged = true;
+        SetSliderValue();
+        if (hitPoints <= 0)
+        {
+            Instantiate(portal, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+    }
+    public void SetSliderValue()
+    {
+        HP_Bar.value = hitPoints;
+    }
+
+    public void Shoot()
+    {
+        Instantiate(projectile, projectileParent.transform.position, Quaternion.identity);
+        Instantiate(projectile, projectileParent2.transform.position, Quaternion.identity);
+        Instantiate(projectile, projectileParent3.transform.position, Quaternion.identity);
+        nextFireTime = Time.time + fireRate;
+
+
+    }
+
+    
 }

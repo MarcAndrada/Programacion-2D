@@ -55,12 +55,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BalaBossFinal.cs" />
-     <Compile Include="Assets\FinalBossController.cs" />
-     <Compile Include="Assets\FinalBossIdle.cs" />
+     <Compile Include="Assets\Scripts\Enemies\BalaBossFinal.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Boss\BossLvl3.cs" />
      <Compile Include="Assets\Scripts\Enemies\Boss\HandController.cs" />
      <Compile Include="Assets\Scripts\Enemies\Boss\boss_movement.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyActivator.cs" />
+     <Compile Include="Assets\Scripts\Enemies\FinalBossController.cs" />
+     <Compile Include="Assets\Scripts\Enemies\FinalBossIdle.cs" />
      <Compile Include="Assets\Scripts\Enemies\Flyer\GranadeFlayerScript.cs" />
      <Compile Include="Assets\Scripts\Enemies\Flyer\flying_enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies\Grunt\grunt_movement.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\Scripts\Enemies\tank\tank_controller.cs" />
      <Compile Include="Assets\Scripts\Managers\CheckPointController.cs" />
      <Compile Include="Assets\Scripts\Managers\DoorCloseController.cs" />
+     <Compile Include="Assets\Scripts\Managers\ElevatorController.cs" />
      <Compile Include="Assets\Scripts\Managers\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Managers\ManagersControllers.cs" />
      <Compile Include="Assets\Scripts\Managers\MenuSceneController.cs" />

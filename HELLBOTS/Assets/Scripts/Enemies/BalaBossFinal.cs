@@ -6,9 +6,7 @@ public class BalaBossFinal : MonoBehaviour
 {
     Transform player;
     public float speed;
-    public GameObject ExplosionPrefab;
 
-    private GameObject CurrentExplosion;
     private Rigidbody2D rigidB;
 
 
@@ -28,20 +26,16 @@ public class BalaBossFinal : MonoBehaviour
 
     void OnCollisionEnter2D (Collision2D collision)
     {
-        if (collision.gameObject.tag == "Playerbullet")
-        {
-            Explosion();
-        }
+        
         if (collision.gameObject.layer == 8)
         {
-            Explosion();
+            Destroy(this.gameObject);
+            
+        }
+        if (collision.gameObject.tag == "Hellbot")
+        {
+            Destroy(this.gameObject);
         }
     }
-    public void Explosion()
-    {
-        //Hacer sonido de explosion
-        rigidB.velocity = new Vector2(0, 0);
-        CurrentExplosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-        Destroy(gameObject);
-    }
+    
 }
