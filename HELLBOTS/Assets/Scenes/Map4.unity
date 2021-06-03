@@ -2716,7 +2716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490187f08c64b0747a4a7400ae5c8d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToGenerateWeapons: 5000
+  TimeToGenerateWeapons: 13000
   Shotgun: {fileID: 8808253974342745321, guid: f49bed5b79ea845479d51c9ec1471d77, type: 3}
   MachineGun: {fileID: 8543318897839617856, guid: c03f572cf30dfe744b73f9d1fa275d77,
     type: 3}

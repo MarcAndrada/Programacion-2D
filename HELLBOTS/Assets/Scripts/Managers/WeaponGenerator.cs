@@ -21,6 +21,12 @@ public class WeaponGenerator : MonoBehaviour
     private enum CurrentWeapons { SNIPER, SHOOTGUN, MACHINEHGUN, NONE}
     private CurrentWeapons WeaponGenerated;
     private GameObject NewWeapon;
+
+    private void Start()
+    {
+        TimeToGenerateWeapons = 10000;
+    }
+
     // Update is called once per frame
     void Update()
     {
